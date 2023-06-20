@@ -26,13 +26,13 @@ To use the application, you need to obtain an API key from AEMET (Agencia Estata
 
 ## Contribution
 
-Contributions are welcome! If you would like to contribute to the Weather Forecast App, please follow these steps:
+Contributions are welcome! If you would like to contribute to the Weather App, please follow these steps:
 
-    Fork the repository.
-    Create a new branch: git checkout -b feature/your-feature
-    Make your changes and commit them: git commit -m 'Add your feature'
-    Push to the branch: git push origin feature/your-feature
-    Submit a pull request.
+1. Fork the repository.
+2. Create a new branch: git checkout -b feature/your-feature
+3. Make your changes and commit them: git commit -m 'Add your feature'
+4. Push to the branch: git push origin feature/your-feature
+5. Submit a pull request.
 
 ## License
 
