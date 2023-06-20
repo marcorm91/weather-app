@@ -1,0 +1,19 @@
+{
+    "HEADER": {
+        "TITLE": "Weather app"
+    },
+    "FOOTER": {
+        "COPYRIGHT": "WEATHER APP. Todos los derechos reservados."
+    },
+    "HOME": {
+        "WELCOME_MSG": "Bienvenido, hoy es {{day}}",
+        "TABLE": {
+            "SEARCH": "Buscar...",
+            "NAME": "Nombre",
+            "PAGE": "Página",
+            "GO_PAGE": "Ir a página",
+            "SHOW": "Mostrar",
+            "OF": "de"
+        }
+    }
+}
