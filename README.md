@@ -1,8 +1,9 @@
-# Weather Data Application
+# Weather App
 
 ## Description
 
-The Weather Data Application is a non-profit project developed for educational purposes. It allows users to retrieve weather data for various municipalities by utilizing the AEMET API. The application provides real-time weather information, including temperature, humidity, wind speed, and more.
+The Weather App is a non-profit project developed for educational purposes. It allows users to retrieve weather data for various municipalities by utilizing the AEMET API. The application provides real-time weather information, including temperature, humidity, wind speed, and more.
+This project is a app built with React.
 
 ## Features
 
@@ -25,7 +26,13 @@ To use the application, you need to obtain an API key from AEMET (Agencia Estata
 
 ## Contribution
 
-This project is intended for learning purposes and does not accept contributions at the moment.
+Contributions are welcome! If you would like to contribute to the Weather Forecast App, please follow these steps:
+
+    Fork the repository.
+    Create a new branch: git checkout -b feature/your-feature
+    Make your changes and commit them: git commit -m 'Add your feature'
+    Push to the branch: git push origin feature/your-feature
+    Submit a pull request.
 
 ## License
 
