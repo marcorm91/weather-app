@@ -7,7 +7,7 @@ const WeatherLoader = () => {
     <WeatherLoaderStyled>
         <FontAwesomeIcon icon={faSpinner} spin style={{ color: 'var(--wa-deep-blue)' }} />
     </WeatherLoaderStyled>
-  );
+  )
 }
 
-export default WeatherLoader;
+export default WeatherLoader

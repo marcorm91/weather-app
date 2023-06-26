@@ -6,9 +6,9 @@ import { useTable, useGlobalFilter, usePagination } from 'react-table'
 import { useTranslation } from 'react-i18next'
 
 const WeatherTable = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
-  const data = codeTownsData;
+  const data = codeTownsData
 
   const columns = [
     { Header: 'CODAUTO', accessor: 'CODAUTO' },
@@ -17,7 +17,7 @@ const WeatherTable = () => {
     { Header: 'DC', accessor: 'DC' },
     { Header: t("HOME.TABLE.NAME").toUpperCase(), accessor: 'NAME' },
     { Header: '', accessor: 'ACTIONS' },
-  ];
+  ]
 
   const Table = () => {
     const tableInstance = useTable(
@@ -28,7 +28,7 @@ const WeatherTable = () => {
       },
       useGlobalFilter,
       usePagination
-    );
+    )
   
     const {
       getTableProps,
@@ -38,7 +38,7 @@ const WeatherTable = () => {
       prepareRow,
       state,
       setGlobalFilter,
-    } = tableInstance;
+    } = tableInstance
   
     return (
       <>
@@ -61,24 +61,24 @@ const WeatherTable = () => {
             </thead>
             <tbody {...getTableBodyProps()}>
               {page.map(row => {
-                prepareRow(row);
+                prepareRow(row)
                 return (
                   <WeatherTableRow key={row.id} row={row} />
-                );
+                )
               })}
             </tbody>
           </table>
         </div>
         <TablePaginator tableInstance={tableInstance} />
       </>
-    );
-  };
+    )
+  }
   
   return (
     <WeatherTableStyled>
       <Table />
     </WeatherTableStyled>
-  );
-};
+  )
+}
 
-export default WeatherTable;
+export default WeatherTable

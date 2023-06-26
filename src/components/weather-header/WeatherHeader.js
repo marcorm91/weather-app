@@ -3,7 +3,7 @@ import { WeatherHeaderStyled } from './WeatherHeaderStyled'
 import WeatherLangSelector from '../weather-lang-selector/WeatherLangSelector'
 
 const WeatherHeader = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
   return (
     <WeatherHeaderStyled>
       <div className="title__wrapper">
@@ -12,7 +12,7 @@ const WeatherHeader = () => {
       </div>
       <WeatherLangSelector></WeatherLangSelector>
     </WeatherHeaderStyled>
-  );
+  )
 }
 
-export default WeatherHeader;
+export default WeatherHeader

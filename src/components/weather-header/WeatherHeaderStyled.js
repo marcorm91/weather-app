@@ -27,6 +27,4 @@ export const WeatherHeaderStyled = styled.header`
       text-transform: uppercase;
       letter-spacing: 2px;
     }
-  }
-
-`;
+  }`

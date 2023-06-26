@@ -8,12 +8,15 @@
     "HOME": {
         "WELCOME_MSG": "Bienvenido, hoy es {{day}}",
         "TABLE": {
-            "SEARCH": "Buscar...",
+            "SEARCH": "Buscar municipio...",
             "NAME": "Nombre",
             "PAGE": "Página",
             "GO_PAGE": "Ir a página",
             "SHOW": "Mostrar",
             "OF": "de"
+        },
+        "PANEL_INFO": {
+            "MORE_INFO": "Más información"
         }
     }
 }

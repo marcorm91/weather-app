@@ -12,4 +12,4 @@ export const WeatherFooterStyled = styled.footer`
     margin: 0;
     font-size: 12px;
   }
-`;
+`

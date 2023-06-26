@@ -8,12 +8,15 @@
     "HOME": {
         "WELCOME_MSG": "Welcome, today is {{day}}",
         "TABLE": {
-            "SEARCH": "Search...",
+            "SEARCH": "Search municipality...",
             "NAME": "Name",
             "PAGE": "Page",
             "GO_PAGE": "Go to page",
             "SHOW": "Show",
             "OF": "of"
+        },
+        "PANEL_INFO": {
+            "MORE_INFO": "More information"
         }
     }
 }

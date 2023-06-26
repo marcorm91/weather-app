@@ -20,4 +20,4 @@ export const WeatherTableRowPaginatorStyled = styled.div`
         gap: 8px;
     }
   }
-`;
+`
