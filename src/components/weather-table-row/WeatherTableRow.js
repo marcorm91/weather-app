@@ -3,7 +3,7 @@ import { WeatherTableRowStyled } from './WeatherTableRowStyled'
 import Actions from '../weather-table-row-actions/WeatherTableRowActions'
 
 const WeatherTableRow = ({ row }) => {
-  const { CODAUTO, CPRO, CMUN, DC, NAME } = row.original;
+  const { CODAUTO, CPRO, CMUN, DC, NAME } = row.original
 
   return (
     <WeatherTableRowStyled>
@@ -14,7 +14,7 @@ const WeatherTableRow = ({ row }) => {
         <td>{NAME}</td>
         <td><Actions row={row} /></td>
     </WeatherTableRowStyled>
-  );
-};
+  )
+}
 
-export default WeatherTableRow;
+export default WeatherTableRow

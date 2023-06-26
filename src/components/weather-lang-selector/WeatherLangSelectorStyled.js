@@ -13,4 +13,4 @@ export const WeatherLangSelectorStyled = styled.select`
   option{
     color: var(--wa-black);
   }
-`;
+`

@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 const TablePaginator = ({ tableInstance }) => {
 
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   const {
     canPreviousPage,
@@ -18,7 +18,7 @@ const TablePaginator = ({ tableInstance }) => {
     previousPage,
     setPageSize,
     state: { pageIndex, pageSize }
-  } = tableInstance;
+  } = tableInstance
 
   return (
     <WeatherTableRowPaginatorStyled>
@@ -40,7 +40,7 @@ const TablePaginator = ({ tableInstance }) => {
         <select
           value={pageSize}
           onChange={e => {
-            setPageSize(Number(e.target.value));
+            setPageSize(Number(e.target.value))
           }}
         >
           {[10, 20, 30, 40, 50].map(pageSize => (
@@ -50,7 +50,7 @@ const TablePaginator = ({ tableInstance }) => {
           ))}
         </select>
     </WeatherTableRowPaginatorStyled>
-  );
-};
+  )
+}
 
-export default TablePaginator;
+export default TablePaginator
