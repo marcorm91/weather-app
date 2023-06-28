@@ -3,7 +3,8 @@ import { WeatherSlidingPanelStyled } from './WeatherSlidingPanelStyled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
-import WeatherCurrentSunset from '../weather-current-sunset/WeatherCurrentSunset'
+import WeatherCurrentSunsetTemp from '../weather-current-sunset-temp/WeatherCurrentSunsetTemp'
+import WeatherCurrentSky from '../weather-current-sky/WeatherCurrentSky'
 
 const WeatherSlidingPanel = ({ data, onClose, isOpen }) => {
   const { t } = useTranslation()
@@ -36,7 +37,8 @@ const WeatherSlidingPanel = ({ data, onClose, isOpen }) => {
         <h2>{`${nombre} (${provincia})`}</h2>
       </header>
       <div className="content__wrapper">
-        <WeatherCurrentSunset data={data} />
+        <WeatherCurrentSunsetTemp data={data} />
+        <WeatherCurrentSky data={data} />
       </div>
       <div className="footer__wrapper">
         <button className="btn btn-primary">{t('HOME.PANEL_INFO.MORE_INFO')}</button>
