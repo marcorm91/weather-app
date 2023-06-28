@@ -48,6 +48,9 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
     padding: 24px;
     box-sizing: border-box;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
     h3{
       font-weight: normal;
       margin: 0;
