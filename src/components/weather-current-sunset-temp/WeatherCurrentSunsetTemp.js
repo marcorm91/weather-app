@@ -16,6 +16,8 @@ const WeatherCurrentSunsetTemp = ({ hourlyData, diaryData }) => {
   let currentTemp
 
   // Diary data
+  const temperatureMin = diaryData?.data[0]?.prediccion?.dia[0]?.temperatura.minima || ''
+  const temperatureMax = diaryData?.data[0]?.prediccion?.dia[0]?.temperatura.maxima || ''
 
   // The data handling is performed to control 2 arrays within the hourlyData object
   const findValueByPeriodo = (list, currentHour) => {
@@ -28,14 +30,20 @@ const WeatherCurrentSunsetTemp = ({ hourlyData, diaryData }) => {
   return (
     <WeatherCurrentSunsetTempStyled>
       <div>
-        <WiSunrise size={28} color='var(--wa-deep-blue)' />
-        <span>{sunriseTime}</span>
+        <div>
+          <WiSunrise size={28} color='var(--wa-deep-blue)' />
+          <span>{sunriseTime}</span>
+        </div>
+        <span>{currentTemp}</span>
+        <div>
+          <WiSunset size={28} color='var(--wa-deep-blue)' />
+          <span>{sunsetTime}</span>
+        </div>
       </div>
-      <span>{currentTemp}</span>
       <div>
-        <WiSunset size={28} color='var(--wa-deep-blue)' />
-        <span>{sunsetTime}</span>
+        <span>{temperatureMax}</span>/<span>{temperatureMin}</span>
       </div>
+      
     </WeatherCurrentSunsetTempStyled>
   );
 }
