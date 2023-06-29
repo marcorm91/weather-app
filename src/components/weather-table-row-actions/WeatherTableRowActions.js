@@ -4,7 +4,8 @@ import WeatherLoader from '../weather-loader/WeatherLoader'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 import WeatherSlidingPanel from '../weather-sliding-panel/WeatherSlidingPanel'
-import { fetchPredictionData } from '../../resources/services/APIs/predictionAPI'
+import { fetchHourlyPrediction } from '../../resources/services/APIs/hourlyPrediction'
+import { fetchDiaryPrediction } from '../../resources/services/APIs/diaryPrediction'
 
 const Actions = ({ row }) => {
 
@@ -22,8 +23,9 @@ const Actions = ({ row }) => {
     const code = `${CPRO}${CMUN}`
     setIsLoading(true)
     try{
-      const predictionData = await fetchPredictionData(code)
-      setPanelData(predictionData)
+      const hourlyPredictionData = await fetchHourlyPrediction(code)
+      const diaryPredictionData = await fetchDiaryPrediction(code)
+      setPanelData({hourlyPredictionData, diaryPredictionData})
       setIsPanelOpen(true)
     }catch (e){
       console.error(e)
