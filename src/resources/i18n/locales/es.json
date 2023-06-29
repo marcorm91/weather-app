@@ -9,7 +9,9 @@
         "WELCOME_MSG": "Bienvenido, hoy es {{day}}",
         "TABLE": {
             "SEARCH": "Buscar municipio...",
-            "NAME": "Nombre",
+            "MUNICIPALITY": "Municipio",
+            "PROVINCE": "Provincia",
+            "COMUNITY": "Comunidad",
             "PAGE": "Página",
             "GO_PAGE": "Ir a página",
             "SHOW": "Mostrar",

@@ -3,15 +3,14 @@ import { WeatherTableRowStyled } from './WeatherTableRowStyled'
 import Actions from '../weather-table-row-actions/WeatherTableRowActions'
 
 const WeatherTableRow = ({ row }) => {
-  const { CODAUTO, CPRO, CMUN, DC, NAME } = row.original
+  const { CODAUTO, CPRO, CMUN, DC, NAME, PROV, COMUNIDAD } = row.original
 
   return (
     <WeatherTableRowStyled>
-        <td>{CODAUTO}</td>
-        <td>{CPRO}</td>
-        <td>{CMUN}</td>
-        <td>{DC}</td>
+        <td style={{maxWidth: "180px", width: "180px"}}>{CODAUTO}-{CPRO}-{CMUN}-{DC}</td>
         <td>{NAME}</td>
+        <td>{PROV}</td>
+        <td>{COMUNIDAD}</td>
         <td><Actions row={row} /></td>
     </WeatherTableRowStyled>
   )

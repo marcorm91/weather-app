@@ -9,7 +9,9 @@
         "WELCOME_MSG": "Welcome, today is {{day}}",
         "TABLE": {
             "SEARCH": "Search municipality...",
-            "NAME": "Name",
+            "MUNICIPALITY": "Municipality",
+            "PROVINCE": "Province",
+            "COMUNITY": "Comunity",
             "PAGE": "Page",
             "GO_PAGE": "Go to page",
             "SHOW": "Show",

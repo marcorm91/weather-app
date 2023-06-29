@@ -11,11 +11,10 @@ const WeatherTable = () => {
   const data = codeTownsData
 
   const columns = [
-    { Header: 'CODAUTO', accessor: 'CODAUTO' },
-    { Header: 'CPRO', accessor: 'CPRO' },
-    { Header: 'CMUN', accessor: 'CMUN' },
-    { Header: 'DC', accessor: 'DC' },
-    { Header: t("HOME.TABLE.NAME").toUpperCase(), accessor: 'NAME' },
+    { Header: 'COM-PROV-MUN-DC', accessor: 'CODE' },
+    { Header: t("HOME.TABLE.MUNICIPALITY").toUpperCase(), accessor: 'NAME' },
+    { Header: t("HOME.TABLE.PROVINCE").toUpperCase(), accessor: 'PROV' },
+    { Header: t("HOME.TABLE.COMUNITY").toUpperCase(), accessor: 'COMUNIDAD' },
     { Header: '', accessor: 'ACTIONS' },
   ]
 
@@ -54,7 +53,7 @@ const WeatherTable = () => {
               {headerGroups.map(headerGroup => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map(column => (
-                    <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                    <th{...column.getHeaderProps()}>{column.render('Header')}</th>
                   ))}
                 </tr>
               ))}
