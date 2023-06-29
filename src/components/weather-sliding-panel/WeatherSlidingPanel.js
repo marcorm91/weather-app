@@ -7,9 +7,17 @@ import WeatherCurrentSunsetTemp from '../weather-current-sunset-temp/WeatherCurr
 import WeatherCurrentSky from '../weather-current-sky/WeatherCurrentSky'
 
 const WeatherSlidingPanel = ({ data, onClose, isOpen }) => {
+  
   const { t } = useTranslation()
-  const infoData = data?.data[0] || {}
-  const { nombre = '', provincia = '' } = infoData
+
+  const hourlyPredictionData = data?.hourlyPredictionData
+  const diaryPredictionData = data?.diaryPredictionData
+
+  // Hourly data
+  const hourlyData = hourlyPredictionData?.data[0] || {}
+  const { nombre = '', provincia = '' } = hourlyData
+
+  // Diary data
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -37,8 +45,11 @@ const WeatherSlidingPanel = ({ data, onClose, isOpen }) => {
         <h2>{`${nombre} (${provincia})`}</h2>
       </header>
       <div className="content__wrapper">
-        <WeatherCurrentSunsetTemp data={data} />
-        <WeatherCurrentSky data={data} />
+        <WeatherCurrentSunsetTemp 
+          hourlyData={hourlyPredictionData} 
+          diaryData={diaryPredictionData} />
+        <WeatherCurrentSky 
+          hourlyData={hourlyPredictionData} />
       </div>
       <div className="footer__wrapper">
         <button className="btn btn-primary">{t('HOME.PANEL_INFO.MORE_INFO')}</button>
