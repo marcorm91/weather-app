@@ -39,6 +39,7 @@ export const WeatherCurrentPredictionStyled = styled.div`
         list-style: none;
         li{
           display: flex;
+          align-items: center;
           gap: 4px;
           &.temperature__wrapper{
             display: flex;
@@ -63,6 +64,14 @@ export const WeatherCurrentPredictionStyled = styled.div`
               &:after{
                 content: "%";
               }
+            }
+          }
+          &.wind__wrapper{
+            > span{
+              display: flex;
+              gap: 2px;
+              font-size: 16px;
+              font-weight: 700;
             }
           }
           &:not(:last-child):after{
