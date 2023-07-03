@@ -67,11 +67,17 @@ export const WeatherCurrentPredictionStyled = styled.div`
             }
           }
           &.wind__wrapper{
+            gap: 12px;
             > span{
               display: flex;
               gap: 2px;
               font-size: 16px;
               font-weight: 700;
+              &:last-child{
+                font-size: 12px;
+                gap: 0;
+                align-items: center;
+              }
             }
           }
           &:not(:last-child):after{
