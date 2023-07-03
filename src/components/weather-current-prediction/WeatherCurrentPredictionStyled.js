@@ -74,7 +74,23 @@ export const WeatherCurrentPredictionStyled = styled.div`
               font-size: 16px;
               font-weight: 700;
               &:last-child{
-                font-size: 12px;
+                line-height: 0;
+                font-size: 14px;
+                gap: 0;
+                align-items: center;
+              }
+            }
+          }
+          &.precipitation__wrapper{
+            gap: 12px;
+            > span{
+              display: flex;
+              gap: 2px;
+              font-size: 16px;
+              font-weight: 700;
+              &:last-child{
+                line-height: 0;
+                font-size: 14px;
                 gap: 0;
                 align-items: center;
               }

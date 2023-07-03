@@ -18,7 +18,8 @@
             "OF": "de"
         },
         "PANEL_INFO": {
-            "MORE_INFO": "Más información"
+            "MORE_INFO": "Más información",
+            "PREDICTON_NEXT_HOURS": "Previsión para las próximas horas:"
         }
     }
 }
