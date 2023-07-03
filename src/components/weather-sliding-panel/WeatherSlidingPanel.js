@@ -5,6 +5,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
 import WeatherCurrentPrediction from '../weather-current-prediction/WeatherCurrentPrediction'
 import WeatherCurrentSky from '../weather-current-sky/WeatherCurrentSky'
+import WeatherTodayPrediction from '../weather-today-prediction/WeatherTodayPrediction'
 
 const WeatherSlidingPanel = ({ data, onClose, isOpen }) => {
   
@@ -49,6 +50,8 @@ const WeatherSlidingPanel = ({ data, onClose, isOpen }) => {
           hourlyData={hourlyPredictionData} 
           diaryData={diaryPredictionData} />
         <WeatherCurrentSky 
+          hourlyData={hourlyPredictionData} />
+        <WeatherTodayPrediction 
           hourlyData={hourlyPredictionData} />
       </div>
       <div className="footer__wrapper">

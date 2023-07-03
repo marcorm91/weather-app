@@ -1,7 +1,7 @@
 import React from 'react'
 import {  WiDaySunny, WiCloud, WiShowers, WiDayRain, WiNightAltStormShowers, WiDust, WiFog,
     WiNightClear, WiDayCloudyHigh, WiNightAltRain, WiDayHaze, WiStormShowers,
-    WiDaySunnyOvercast, WiNightAltCloudyHigh, WiRain, WiSnow,
+    WiDaySunnyOvercast, WiNightAltCloudyHigh, WiRain, WiSnow, WiNightFog,
     WiNightAltPartlyCloudy, WiNightAltCloudy, WiDaySnow, WiNightAltSnow,
     WiDayCloudy, WiDayShowers, WiNightAltShowers, WiDayStormShowers,
     WiCloudy } from "weather-icons-react"
@@ -16,7 +16,9 @@ export const skyIconMap = {
     "14":   (size, color) => <WiDayCloudy size={size} color={color} />,
     "14n":  (size, color) => <WiNightAltCloudy size={size} color={color} />,
     "15":   (size, color) => <WiCloudy size={size} color={color} />,
+    "15n":   (size, color) => <WiCloudy size={size} color={color} />,
     "16":   (size, color) => <WiCloud size={size} color={color} />,
+    "16n":   (size, color) => <WiCloud size={size} color={color} />,
     "17":   (size, color) => <WiDayCloudyHigh size={size} color={color} />,
     "17n":  (size, color) => <WiNightAltCloudyHigh size={size} color={color} />,
     "43":   (size, color) => <WiDayShowers size={size} color={color} />,
@@ -56,6 +58,8 @@ export const skyIconMap = {
     "63":   (size, color) => <WiStormShowers size={size} color={color} />,
     "64":   (size, color) => <WiStormShowers size={size} color={color} />,
     "81":   (size, color) => <WiFog size={size} color={color} />,
+    "81n":   (size, color) => <WiNightFog size={size} color={color} />,
     "82":   (size, color) => <WiDayHaze size={size} color={color} />,
+    "82n":   (size, color) => <WiNightFog size={size} color={color} />,
     "83":   (size, color) => <WiDust size={size} color={color} />,
 };

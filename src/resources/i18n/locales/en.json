@@ -18,7 +18,8 @@
             "OF": "of"
         },
         "PANEL_INFO": {
-            "MORE_INFO": "More information"
+            "MORE_INFO": "More information",
+            "PREDICTON_NEXT_HOURS": "Prediction for the next hours:"
         }
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import { WeatherCurrentPredictionStyled } from './WeatherCurrentPredictionStyled'
-import { WiSunset, WiSunrise, WiHumidity } from 'weather-icons-react'
+import { WiSunset, WiSunrise, WiHumidity, WiRaindrop } from 'weather-icons-react'
 import { windDirectionIconMap } from '../../utils/js/windDirectionIcons'
 import { findPropertyValueByPeriod, getCurrentHour } from '../../utils/js/helpers'
 
@@ -22,6 +22,12 @@ const WeatherCurrentPrediction = ({ hourlyData, diaryData }) => {
   const temperatureList2 = hourlyData?.data[0]?.prediccion?.dia[1]?.temperatura || []
   const currentTemp = findPropertyValueByPeriod(temperatureList1, currentHour, ['value']) 
                       || findPropertyValueByPeriod(temperatureList2, currentHour, ['value'])
+
+  // Get the value closest to the current precipitation
+  const precipitationList1 = hourlyData?.data[0]?.prediccion?.dia[0]?.precipitacion || []
+  const precipitationList2 = hourlyData?.data[0]?.prediccion?.dia[1]?.precipitacion || []
+  const currentPrecipitation = findPropertyValueByPeriod(precipitationList1, currentHour, ['value']) 
+                      || findPropertyValueByPeriod(precipitationList2, currentHour, ['value'])
 
   // Get the value closest to the current relative humidity from the lists
   const currentHumidityList1 = hourlyData?.data[0]?.prediccion?.dia[0]?.humedadRelativa || []
@@ -73,6 +79,9 @@ const WeatherCurrentPrediction = ({ hourlyData, diaryData }) => {
                 </>
               )}
               </span>
+          </li>
+          <li className='precipitation__wrapper'>
+            <span>{currentPrecipitation.value} mm. <WiRaindrop size={28} color='var(--wa-deep-blue)' /></span>
           </li>
         </ul>
       </div>
