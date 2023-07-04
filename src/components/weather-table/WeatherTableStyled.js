@@ -12,7 +12,7 @@ export const WeatherTableStyled = styled.div`
   }
   .table__wrapper{
     width: 100%;
-    max-height: calc(100vh - 300px);
+    max-height: calc(100vh - 375px);
     overflow: auto;
     table{
         width: 100%;

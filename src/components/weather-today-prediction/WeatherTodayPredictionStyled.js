@@ -33,7 +33,7 @@ gap: 32px;
         padding-left: 16px;
       }
     > time, > span{
-      font-size: 12px;
+      font-size: 14px;
     }
     > span{
       font-weight: 700;

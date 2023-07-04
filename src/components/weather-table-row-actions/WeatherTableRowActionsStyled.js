@@ -10,5 +10,6 @@ export const WeatherTableRowActions = styled.div`
     cursor: pointer;
     font-size: 18px;
     width: 32px;
+    outline: none;
   }
 `

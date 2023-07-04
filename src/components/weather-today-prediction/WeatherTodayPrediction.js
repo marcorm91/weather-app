@@ -62,9 +62,7 @@ const WeatherTodayPrediction = ({ hourlyData }) => {
       <span>{t('HOME.PANEL_INFO.PREDICTON_NEXT_HOURS')}</span>
       <ul>
         {nextHours.map((item, i) => (
-
           <li key={i}>
-                      {console.log(item.value)}
             <time>{item.hour}</time>
             {skyIconMap[item.value] && skyIconMap[item.value](58, 'var(--wa-deep-blue)')}
             <span>{item.temp}º</span>
