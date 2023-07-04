@@ -74,7 +74,7 @@ const WeatherCurrentPrediction = ({ hourlyData, diaryData }) => {
             <span>
               {currentIcon && (
                 <>
-                  {currentIcon(22, 'var(--wa-deep-blue)')}
+                  {currentIcon(28, 'var(--wa-deep-blue)')}
                   {direccion}
                 </>
               )}

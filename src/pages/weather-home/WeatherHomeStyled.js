@@ -7,8 +7,11 @@ export const WeatherHomeStyled = styled.main`
   background-color: var(--wa-dr-white);
   padding: 16px;
   box-sizing: border-box;
-  h1{
+  > h1{
     margin: 0;
     font-size: 24px;
+  }
+  > ul{
+    margin: 32px 0;
   }
 `;

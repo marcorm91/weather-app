@@ -7,6 +7,10 @@
     },
     "HOME": {
         "WELCOME_MSG": "Bienvenido, hoy es {{day}}",
+        "TABS": {
+            "ALL": "Todos",
+            "FAV": "Favoritos"
+        },
         "TABLE": {
             "SEARCH": "Buscar municipio...",
             "MUNICIPALITY": "Municipio",
