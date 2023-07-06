@@ -12,7 +12,7 @@ const WeatherHome = () => {
   const dateOptions = {
     day: 'numeric',
     month: 'long',
-    year: 'numeric'
+    year: 'numeric',
   }
   const day = date.toLocaleDateString(i18n.language, dateOptions)
   const [activeTab, setActiveTab] = useState('tab1')
@@ -22,8 +22,18 @@ const WeatherHome = () => {
   }
 
   const tabs = [
-    { id: 'tab1', label: `${t("HOME.TABS.ALL")}` },
-    { id: 'tab2', label: `${t("HOME.TABS.FAV")}`, icon: <FontAwesomeIcon icon={faStar} size='s' style={{color: "var(--wa-green)",}} /> },
+    { id: 'tab1', label: `${t('HOME.TABS.ALL')}` },
+    {
+      id: 'tab2',
+      label: `${t('HOME.TABS.FAV')}`,
+      icon: (
+        <FontAwesomeIcon
+          icon={faStar}
+          size='sm'
+          style={{ color: 'var(--wa-green)' }}
+        />
+      ),
+    },
   ]
 
   return (
@@ -35,7 +45,11 @@ const WeatherHome = () => {
           key={tab.id}
           className={activeTab === tab.id ? 'tab-content__wrapper' : 'tab-content__wrapper hidden'}
         >
-          {tab.id === 'tab1' ? <WeatherTable /> : 'Contenido 2'}
+          {tab.id === 'tab1' ? (
+            <WeatherTable />
+          ) : (
+            <WeatherTable showFavoritesOnly={activeTab === 'tab2'} />
+          )}
         </div>
       ))}
     </WeatherHomeStyled>

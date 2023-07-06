@@ -2,7 +2,7 @@ import React from 'react'
 import { WeatherTableRowStyled } from './WeatherTableRowStyled'
 import Actions from '../weather-table-row-actions/WeatherTableRowActions'
 
-const WeatherTableRow = ({ row }) => {
+const WeatherTableRow = ({ row, onDeleteRow }) => {
   const { CODAUTO, CPRO, CMUN, DC, NAME, PROV, COMUNIDAD } = row.original
 
   return (
@@ -11,7 +11,7 @@ const WeatherTableRow = ({ row }) => {
         <td>{NAME}</td>
         <td>{PROV}</td>
         <td>{COMUNIDAD}</td>
-        <td><Actions row={row} /></td>
+        <td><Actions row={row} onDeleteRow={onDeleteRow} /></td>
     </WeatherTableRowStyled>
   )
 }

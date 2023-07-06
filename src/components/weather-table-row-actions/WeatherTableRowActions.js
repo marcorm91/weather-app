@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { WeatherTableRowActions } from './WeatherTableRowActionsStyled'
 import WeatherLoader from '../weather-loader/WeatherLoader'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,29 +7,58 @@ import WeatherSlidingPanel from '../weather-sliding-panel/WeatherSlidingPanel'
 import { fetchHourlyPrediction } from '../../resources/services/APIs/hourlyPrediction'
 import { fetchDiaryPrediction } from '../../resources/services/APIs/diaryPrediction'
 
-const Actions = ({ row }) => {
-
+const Actions = ({ row, onDeleteRow }) => {
+  const rowId = `${row.original.CODAUTO}-${row.original.CPRO}-${row.original.CMUN}-${row.original.DC}`
   const [isLoading, setIsLoading] = useState(false)
   const [isPanelOpen, setIsPanelOpen] = useState(false)
   const [panelData, setPanelData] = useState(null)
+  const [isFavorite, setIsFavorite] = useState(false) 
+  const favoritesKey = 'favorites'
 
+  // Get items from local storage
+  useEffect(() => {
+    const favorites = JSON.parse(localStorage.getItem(favoritesKey)) || []
+    const isFavorite = favorites.includes(rowId)
+    setIsFavorite(isFavorite)
+  }, [rowId])
+
+  // Add item to fav list table.  Check if exists and delete from list.
   const handleAddToFavorites = () => {
-    // Lógica para añadir a favoritos
-    console.log('Añadir a favoritos', row.original)
+    const favorites = JSON.parse(localStorage.getItem(favoritesKey)) || []
+    const isFavorite = favorites.includes(rowId)
+
+    let updatedFavorites = [...favorites]
+
+    if (isFavorite) {
+      const index = updatedFavorites.indexOf(rowId)
+      if (index !== -1) {
+        updatedFavorites.splice(index, 1)
+      }
+      if (onDeleteRow) {
+        onDeleteRow(rowId);
+      }
+    } else {
+      updatedFavorites.push(rowId)
+    }
+
+    localStorage.setItem(favoritesKey, JSON.stringify(updatedFavorites))
+    setIsFavorite(!isFavorite)
+
   }
 
+  // Get more info from component by CPRO and CMUN codes.
   const handleMoreInfo = async () => {
     const { CPRO, CMUN } = row.original
     const code = `${CPRO}${CMUN}`
     setIsLoading(true)
-    try{
+    try {
       const hourlyPredictionData = await fetchHourlyPrediction(code)
       const diaryPredictionData = await fetchDiaryPrediction(code)
-      setPanelData({hourlyPredictionData, diaryPredictionData})
+      setPanelData({ hourlyPredictionData, diaryPredictionData })
       setIsPanelOpen(true)
-    }catch (e){
+    } catch (e) {
       console.error(e)
-    }finally{
+    } finally {
       setIsLoading(false)
     }
   }
@@ -42,24 +71,29 @@ const Actions = ({ row }) => {
   return (
     <WeatherTableRowActions>
       <button onClick={handleAddToFavorites}>
-        <FontAwesomeIcon 
-          icon={faStar} 
-          style={{color: "var(--wa-leadbelcher)"}} />
+        <FontAwesomeIcon
+          icon={faStar}
+          style={{
+            color: isFavorite ? 'var(--wa-green)' : 'var(--wa-leadbelcher)',
+          }}
+        />
       </button>
       <button onClick={handleMoreInfo}>
         {isLoading ? (
           <WeatherLoader />
         ) : (
-          <FontAwesomeIcon 
-            icon={faCircleInfo} 
-            style={{ color: 'var(--wa-deep-blue)' }} />
+          <FontAwesomeIcon
+            icon={faCircleInfo}
+            style={{ color: 'var(--wa-deep-blue)' }}
+          />
         )}
       </button>
       {isPanelOpen && (
-        <WeatherSlidingPanel 
-          data={panelData} 
-          onClose={closePanel} 
-          isOpen={isPanelOpen} />
+        <WeatherSlidingPanel
+          data={panelData}
+          onClose={closePanel}
+          isOpen={isPanelOpen}
+        />
       )}
     </WeatherTableRowActions>
   )

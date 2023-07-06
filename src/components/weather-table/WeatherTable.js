@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from 'react'
 import { WeatherTableStyled } from './WeatherTableStyled'
 import WeatherTableRow from '../weather-table-row/WeatherTableRow'
 import TablePaginator from '../weather-table-row-paginator/WeatherTableRowPaginator'
@@ -5,16 +6,40 @@ import codeTownsData from '../../resources/services/code_towns.json'
 import { useTable, useGlobalFilter, usePagination } from 'react-table'
 import { useTranslation } from 'react-i18next'
 
-const WeatherTable = () => {
+const WeatherTable = ({ showFavoritesOnly }) => {
+
   const { t } = useTranslation()
 
-  const data = codeTownsData
+  const [data, setData] = useState(showFavoritesOnly ? [] : codeTownsData)
+
+  useEffect(() => {
+    // Update data when showFavoritesOnly changes
+    if (showFavoritesOnly) {
+      const favorites = JSON.parse(localStorage.getItem('favorites')) || []
+      // Filter codeTownsData based on favorites
+      setData(codeTownsData.filter((row) =>
+        favorites.includes(`${row.CODAUTO}-${row.CPRO}-${row.CMUN}-${row.DC}`)
+      ))
+    } else {
+      setData(codeTownsData)
+    }
+  }, [showFavoritesOnly])
+
+  // Remove from list table the row if this is check as fav
+  const handleDeleteRow = (rowId) => {
+    setData((prevData) =>
+      prevData.filter((row) => {
+        const currentRowId = `${row.CODAUTO}-${row.CPRO}-${row.CMUN}-${row.DC}`;
+        return currentRowId !== rowId;
+      })
+    );
+  };
 
   const columns = [
     { Header: 'COM-PROV-MUN-DC', accessor: 'CODE' },
-    { Header: t("HOME.TABLE.MUNICIPALITY").toUpperCase(), accessor: 'NAME' },
-    { Header: t("HOME.TABLE.PROVINCE").toUpperCase(), accessor: 'PROV' },
-    { Header: t("HOME.TABLE.COMUNITY").toUpperCase(), accessor: 'COMUNIDAD' },
+    { Header: t('HOME.TABLE.MUNICIPALITY').toUpperCase(), accessor: 'NAME' },
+    { Header: t('HOME.TABLE.PROVINCE').toUpperCase(), accessor: 'PROV' },
+    { Header: t('HOME.TABLE.COMUNITY').toUpperCase(), accessor: 'COMUNIDAD' },
     { Header: '', accessor: 'ACTIONS' },
   ]
 
@@ -22,13 +47,13 @@ const WeatherTable = () => {
     const tableInstance = useTable(
       {
         columns,
-        data, 
+        data,
         initialState: { pageIndex: 0, pageSize: 20 },
       },
       useGlobalFilter,
       usePagination
     )
-  
+
     const {
       getTableProps,
       getTableBodyProps,
@@ -38,7 +63,7 @@ const WeatherTable = () => {
       state,
       setGlobalFilter,
     } = tableInstance
-  
+
     return (
       <>
         <input
@@ -50,20 +75,18 @@ const WeatherTable = () => {
         <div className="table__wrapper">
           <table {...getTableProps()}>
             <thead>
-              {headerGroups.map(headerGroup => (
+              {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
-                  {headerGroup.headers.map(column => (
-                    <th{...column.getHeaderProps()}>{column.render('Header')}</th>
+                  {headerGroup.headers.map((column) => (
+                    <th {...column.getHeaderProps()}>{column.render('Header')}</th>
                   ))}
                 </tr>
               ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-              {page.map(row => {
+              {page.map((row) => {
                 prepareRow(row)
-                return (
-                  <WeatherTableRow key={row.id} row={row} />
-                )
+                return <WeatherTableRow key={row.id} row={row} onDeleteRow={handleDeleteRow}/>
               })}
             </tbody>
           </table>
@@ -72,7 +95,7 @@ const WeatherTable = () => {
       </>
     )
   }
-  
+
   return (
     <WeatherTableStyled>
       <Table />
