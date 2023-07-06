@@ -18,14 +18,14 @@ const Actions = ({ row, onDeleteRow }) => {
   // Get items from local storage
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem(favoritesKey)) || []
-    const isFavorite = favorites.includes(rowId)
+    const isFavorite = Array.isArray(favorites) && favorites.includes(rowId)
     setIsFavorite(isFavorite)
   }, [rowId])
 
   // Add item to fav list table.  Check if exists and delete from list.
   const handleAddToFavorites = () => {
     const favorites = JSON.parse(localStorage.getItem(favoritesKey)) || []
-    const isFavorite = favorites.includes(rowId)
+    const isFavorite = Array.isArray(favorites) && favorites.includes(rowId)
 
     let updatedFavorites = [...favorites]
 
@@ -46,7 +46,7 @@ const Actions = ({ row, onDeleteRow }) => {
 
   }
 
-  // Get more info from component by CPRO and CMUN codes.
+  // Get more info from component by CPRO and CMUN.
   const handleMoreInfo = async () => {
     const { CPRO, CMUN } = row.original
     const code = `${CPRO}${CMUN}`

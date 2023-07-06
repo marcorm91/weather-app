@@ -17,9 +17,11 @@ const WeatherTable = ({ showFavoritesOnly }) => {
     if (showFavoritesOnly) {
       const favorites = JSON.parse(localStorage.getItem('favorites')) || []
       // Filter codeTownsData based on favorites
-      setData(codeTownsData.filter((row) =>
-        favorites.includes(`${row.CODAUTO}-${row.CPRO}-${row.CMUN}-${row.DC}`)
-      ))
+      setData(
+        codeTownsData.filter((row) => {
+          const favoriteId = `${row.CODAUTO}-${row.CPRO}-${row.CMUN}-${row.DC}`
+          return Array.isArray(favorites) && favorites.includes(favoriteId)
+        }))
     } else {
       setData(codeTownsData)
     }
@@ -86,7 +88,7 @@ const WeatherTable = ({ showFavoritesOnly }) => {
             <tbody {...getTableBodyProps()}>
               {page.map((row) => {
                 prepareRow(row)
-                return <WeatherTableRow key={row.id} row={row} onDeleteRow={handleDeleteRow}/>
+                return <WeatherTableRow key={row.id} row={row} handleDeleteRow={handleDeleteRow}/>
               })}
             </tbody>
           </table>
