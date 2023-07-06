@@ -19,7 +19,8 @@
             "PAGE": "Page",
             "GO_PAGE": "Go to page",
             "SHOW": "Show",
-            "OF": "of"
+            "OF": "of",
+            "EMPTY_FAV": "You have no municipalities selected as favorites."
         },
         "PANEL_INFO": {
             "MORE_INFO": "More information",

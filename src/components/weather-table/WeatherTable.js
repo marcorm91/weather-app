@@ -88,7 +88,7 @@ const WeatherTable = ({ showFavoritesOnly }) => {
             <tbody {...getTableBodyProps()}>
               {page.map((row) => {
                 prepareRow(row)
-                return <WeatherTableRow key={row.id} row={row} handleDeleteRow={handleDeleteRow}/>
+                return <WeatherTableRow key={row.id} row={row} onDeleteRow={handleDeleteRow}/>
               })}
             </tbody>
           </table>
