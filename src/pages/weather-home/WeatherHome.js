@@ -7,7 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 const WeatherHome = () => {
+
   const { t, i18n } = useTranslation()
+  
   const date = new Date()
   const dateOptions = {
     day: 'numeric',
@@ -16,6 +18,9 @@ const WeatherHome = () => {
   }
   const day = date.toLocaleDateString(i18n.language, dateOptions)
   const [activeTab, setActiveTab] = useState('tab1')
+
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || []
+  const hasFavorites = favorites.length > 0
 
   const handleTabClick = (tab) => {
     setActiveTab(tab)
@@ -48,7 +53,9 @@ const WeatherHome = () => {
           {tab.id === 'tab1' ? (
             <WeatherTable />
           ) : (
-            <WeatherTable showFavoritesOnly={activeTab === 'tab2'} />
+            hasFavorites > 0 ? (
+              <WeatherTable showFavoritesOnly={activeTab === 'tab2'} />
+            ) : <span>{t('HOME.TABLE.EMPTY_FAV')}</span>
           )}
         </div>
       ))}
