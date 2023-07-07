@@ -6,9 +6,13 @@ export const WeatherTableStyled = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
-  > input{
+  .table-top__wrapper{
+    display: flex;
     align-self: flex-end;
-    min-width: 340px;
+    gap: 32px;
+    > input{
+      min-width: 340px;
+    }
   }
   .table__wrapper{
     width: 100%;

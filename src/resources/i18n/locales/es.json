@@ -20,7 +20,8 @@
             "GO_PAGE": "Ir a página",
             "SHOW": "Mostrar",
             "OF": "de",
-            "EMPTY_FAV": "No tienes ningún municipio seleccionado como favorito."
+            "EMPTY_FAV": "No tienes ningún municipio seleccionado como favorito.",
+            "REMOVE_FAV": "Borrar favoritos"
         },
         "PANEL_INFO": {
             "MORE_INFO": "Más información",

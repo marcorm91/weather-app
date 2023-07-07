@@ -9,33 +9,58 @@ import { useTranslation } from 'react-i18next'
 const WeatherTable = ({ showFavoritesOnly }) => {
 
   const { t } = useTranslation()
-
-  const [data, setData] = useState(showFavoritesOnly ? [] : codeTownsData)
+  const [favorites, setFavorites] = useState([])
+  const [filteredData, setFilteredData] = useState([])
 
   useEffect(() => {
-    // Update data when showFavoritesOnly changes
-    if (showFavoritesOnly) {
-      const favorites = JSON.parse(localStorage.getItem('favorites')) || []
-      // Filter codeTownsData based on favorites
-      setData(
-        codeTownsData.filter((row) => {
-          const favoriteId = `${row.CODAUTO}-${row.CPRO}-${row.CMUN}-${row.DC}`
-          return Array.isArray(favorites) && favorites.includes(favoriteId)
-        }))
-    } else {
-      setData(codeTownsData)
-    }
-  }, [showFavoritesOnly])
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || []
+    setFavorites(storedFavorites)
+  }, [])
 
-  // Remove from list table the row if this is check as fav
-  const handleDeleteRow = (rowId) => {
-    setData((prevData) =>
-      prevData.filter((row) => {
-        const currentRowId = `${row.CODAUTO}-${row.CPRO}-${row.CMUN}-${row.DC}`;
-        return currentRowId !== rowId;
+  useEffect(() => {
+    if (showFavoritesOnly) {
+      const filteredData = codeTownsData.filter((row) => {
+        const favoriteId = `${row.CODAUTO}-${row.CPRO}-${row.CMUN}-${row.DC}`
+        return favorites.includes(favoriteId)
       })
-    );
-  };
+      setFilteredData(filteredData)
+    } else {
+      setFilteredData(codeTownsData)
+    }
+  }, [showFavoritesOnly, favorites])
+
+  const handleDeleteRow = (rowId) => {
+    if (showFavoritesOnly) {
+      setFilteredData((prevData) =>
+        prevData.filter((row) => {
+          const currentRowId = `${row.CODAUTO}-${row.CPRO}-${row.CMUN}-${row.DC}`
+          return currentRowId !== rowId
+        })
+      )
+    }
+  }
+
+  const handleToggleFavorite = (rowId) => {
+    const isFavorite = favorites.includes(rowId)
+    let updatedFavorites = [...favorites]
+
+    if (isFavorite) {
+      updatedFavorites = updatedFavorites.filter(
+        (favorite) => favorite !== rowId
+      )
+    } else {
+      updatedFavorites.push(rowId)
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
+    setFavorites(updatedFavorites)
+  }
+
+  const handleDeleteFavorites = () => {
+    localStorage.removeItem('favorites')
+    setFavorites([])
+    setFilteredData(showFavoritesOnly ? [] : codeTownsData)
+  }
 
   const columns = [
     { Header: 'COM-PROV-MUN-DC', accessor: 'CODE' },
@@ -49,7 +74,7 @@ const WeatherTable = ({ showFavoritesOnly }) => {
     const tableInstance = useTable(
       {
         columns,
-        data,
+        data: filteredData,
         initialState: { pageIndex: 0, pageSize: 20 },
       },
       useGlobalFilter,
@@ -66,14 +91,26 @@ const WeatherTable = ({ showFavoritesOnly }) => {
       setGlobalFilter,
     } = tableInstance
 
+    if (favorites.length === 0 && showFavoritesOnly) {
+      return <span>{t('HOME.TABLE.EMPTY_FAV')}</span>
+    }
+
     return (
       <>
-        <input
-          type="text"
-          value={state.globalFilter || ''}
-          onChange={(e) => setGlobalFilter(e.target.value)}
-          placeholder={t('HOME.TABLE.SEARCH')}
-        />
+        <div className="table-top__wrapper">
+          <button
+            onClick={handleDeleteFavorites}
+            className="btn btn-small btn-primary"
+          >
+            {t('HOME.TABLE.REMOVE_FAV')}
+          </button>
+          <input
+            type="text"
+            value={state.globalFilter || ''}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            placeholder={t('HOME.TABLE.SEARCH')}
+          />
+        </div>
         <div className="table__wrapper">
           <table {...getTableProps()}>
             <thead>
@@ -88,7 +125,17 @@ const WeatherTable = ({ showFavoritesOnly }) => {
             <tbody {...getTableBodyProps()}>
               {page.map((row) => {
                 prepareRow(row)
-                return <WeatherTableRow key={row.id} row={row} onDeleteRow={handleDeleteRow}/>
+                const favoriteId = `${row.original.CODAUTO}-${row.original.CPRO}-${row.original.CMUN}-${row.original.DC}`
+                const isFavorite = favorites.includes(favoriteId)
+                return (
+                  <WeatherTableRow
+                    key={row.id}
+                    row={row}
+                    onDeleteRow={handleDeleteRow}
+                    onToggleFavorite={handleToggleFavorite}
+                    isFavorite={isFavorite}
+                  />
+                )
               })}
             </tbody>
           </table>

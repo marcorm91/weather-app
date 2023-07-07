@@ -7,7 +7,7 @@ import WeatherSlidingPanel from '../weather-sliding-panel/WeatherSlidingPanel'
 import { fetchHourlyPrediction } from '../../resources/services/APIs/hourlyPrediction'
 import { fetchDiaryPrediction } from '../../resources/services/APIs/diaryPrediction'
 
-const Actions = ({ row, onDeleteRow }) => {
+const Actions = ({ row, onDeleteRow  }) => {
   const rowId = `${row.original.CODAUTO}-${row.original.CPRO}-${row.original.CMUN}-${row.original.DC}`
   const [isLoading, setIsLoading] = useState(false)
   const [isPanelOpen, setIsPanelOpen] = useState(false)
@@ -21,6 +21,7 @@ const Actions = ({ row, onDeleteRow }) => {
     const isFavorite = Array.isArray(favorites) && favorites.includes(rowId)
     setIsFavorite(isFavorite)
   }, [rowId])
+  
 
   // Add item to fav list table.  Check if exists and delete from list.
   const handleAddToFavorites = () => {
@@ -70,12 +71,11 @@ const Actions = ({ row, onDeleteRow }) => {
 
   return (
     <WeatherTableRowActions>
-      <button onClick={handleAddToFavorites}>
+      <button 
+        onClick={handleAddToFavorites}
+        className={isFavorite ? 'fav-button checked' : 'fav-button'}>
         <FontAwesomeIcon
           icon={faStar}
-          style={{
-            color: isFavorite ? 'var(--wa-green)' : 'var(--wa-leadbelcher)',
-          }}
         />
       </button>
       <button onClick={handleMoreInfo}>

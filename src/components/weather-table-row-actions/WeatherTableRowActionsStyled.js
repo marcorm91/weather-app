@@ -11,5 +11,11 @@ export const WeatherTableRowActions = styled.div`
     font-size: 18px;
     width: 32px;
     outline: none;
+    &.fav-button{
+      color: var(--wa-leadbelcher);
+      &.checked{
+        color: var(--wa-green);
+      }
+    }
   }
 `

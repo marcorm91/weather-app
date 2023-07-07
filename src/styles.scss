@@ -52,10 +52,19 @@ button{
         min-height: 42px;
         border: none;
         cursor: pointer;
+        font-size: 16px;
+        transition: all .5s ease;
         &.btn-primary{
             background-color: var(--wa-deep-blue);
             color: var(--wa-white);
-            font-size: 16px;
+            &:hover{
+                opacity: .85;
+            }
         }
+    }
+    &.btn-small{
+        font-size: 14px;
+        min-height: auto;
+        padding: 0;
     }
 }
