@@ -22,7 +22,6 @@ const Actions = ({ row, onDeleteRow  }) => {
     setIsFavorite(isFavorite)
   }, [rowId])
   
-
   // Add item to fav list table.  Check if exists and delete from list.
   const handleAddToFavorites = () => {
     const favorites = JSON.parse(localStorage.getItem(favoritesKey)) || []
@@ -36,7 +35,7 @@ const Actions = ({ row, onDeleteRow  }) => {
         updatedFavorites.splice(index, 1)
       }
       if (onDeleteRow) {
-        onDeleteRow(rowId);
+        onDeleteRow(rowId)
       }
     } else {
       updatedFavorites.push(rowId)
@@ -44,7 +43,6 @@ const Actions = ({ row, onDeleteRow  }) => {
 
     localStorage.setItem(favoritesKey, JSON.stringify(updatedFavorites))
     setIsFavorite(!isFavorite)
-
   }
 
   // Get more info from component by CPRO and CMUN.
