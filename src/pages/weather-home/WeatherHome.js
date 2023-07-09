@@ -20,6 +20,7 @@ const WeatherHome = () => {
   const favorites = JSON.parse(localStorage.getItem('favorites')) || []
   const hasFavorites = favorites.length > 0
 
+  // Handle click for tabs (all and favs)
   const handleTabClick = (tab) => {
     setActiveTab(tab)
   }
@@ -49,10 +50,10 @@ const WeatherHome = () => {
           className={activeTab === tab.id ? 'tab-content__wrapper' : 'tab-content__wrapper hidden'}
         >
           {tab.id === 'tab1' ? (
-            <WeatherTable showFavoritesOnly={false} />
+            <WeatherTable key="all" showFavoritesOnly={false} />
           ) : (
             hasFavorites > 0 ? (
-              <WeatherTable showFavoritesOnly={true} />
+              <WeatherTable key="favorites" showFavoritesOnly={true} arrayFavorites={favorites} />
             ) : <span>{t('HOME.TABLE.EMPTY_FAV')}</span>
           )}
         </div>

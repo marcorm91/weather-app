@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { WeatherTableStyled } from './WeatherTableStyled'
 import WeatherTableRow from '../weather-table-row/WeatherTableRow'
 import TablePaginator from '../weather-table-row-paginator/WeatherTableRowPaginator'
@@ -6,60 +6,61 @@ import codeTownsData from '../../resources/services/code_towns.json'
 import { useTable, useGlobalFilter, usePagination } from 'react-table'
 import { useTranslation } from 'react-i18next'
 
-const WeatherTable = ({ showFavoritesOnly }) => {
-
+const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
   const { t } = useTranslation()
   const [favorites, setFavorites] = useState([])
   const [filteredData, setFilteredData] = useState([])
+  const [isTableVisible, setIsTableVisible] = useState(true)
 
+  // Get local storage favorites.
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || []
     setFavorites(storedFavorites)
   }, [])
 
-  useEffect(() => {
+  // Callback function to update filtered data based on favs and showFavoritesOnly flag
+  const updateFilteredData = useCallback(() => {
     if (showFavoritesOnly) {
+      const favoriteSet = new Set(favorites)
       const filteredData = codeTownsData.filter((row) => {
         const favoriteId = `${row.CODAUTO}-${row.CPRO}-${row.CMUN}-${row.DC}`
-        return favorites.includes(favoriteId)
+        return favoriteSet.has(favoriteId)
       })
       setFilteredData(filteredData)
     } else {
       setFilteredData(codeTownsData)
     }
-  }, [showFavoritesOnly, favorites])
+  }, [favorites, showFavoritesOnly])
 
+  // Update favorites state when arrayFavorites changes
+  useEffect(() => {
+    if (arrayFavorites) {
+      setFavorites(arrayFavorites)
+    }
+    updateFilteredData()
+  }, [arrayFavorites, updateFilteredData])
+
+  // Remove items 1 by 1 from tab2 (favs table). If there is 1 item the table will be removed.
   const handleDeleteRow = (rowId) => {
     if (showFavoritesOnly) {
-      setFilteredData((prevData) =>
-        prevData.filter((row) => {
-          const currentRowId = `${row.CODAUTO}-${row.CPRO}-${row.CMUN}-${row.DC}`
-          return currentRowId !== rowId
-        })
-      )
+      if(filteredData.length === 1) {
+        setIsTableVisible(false)
+      }else{
+        setFilteredData((prevData) =>
+          prevData.filter((row) => {
+            const currentRowId = `${row.CODAUTO}-${row.CPRO}-${row.CMUN}-${row.DC}`
+            return currentRowId !== rowId
+          })
+        )
+      } 
     }
   }
 
-  const handleToggleFavorite = (rowId) => {
-    const isFavorite = favorites.includes(rowId)
-    let updatedFavorites = [...favorites]
-
-    if (isFavorite) {
-      updatedFavorites = updatedFavorites.filter(
-        (favorite) => favorite !== rowId
-      )
-    } else {
-      updatedFavorites.push(rowId)
-    }
-
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
-    setFavorites(updatedFavorites)
-  }
-
+  // Delete all stored favorites.  If it's in tab2 (favs table), the table will be removed. 
   const handleDeleteFavorites = () => {
     localStorage.removeItem('favorites')
     setFavorites([])
-    setFilteredData(showFavoritesOnly ? [] : codeTownsData)
+    if(showFavoritesOnly) setIsTableVisible(false)
   }
 
   const columns = [
@@ -91,10 +92,6 @@ const WeatherTable = ({ showFavoritesOnly }) => {
       setGlobalFilter,
     } = tableInstance
 
-    if (favorites.length === 0 && showFavoritesOnly) {
-      return <span>{t('HOME.TABLE.EMPTY_FAV')}</span>
-    }
-
     return (
       <>
         <div className="table-top__wrapper">
@@ -117,7 +114,9 @@ const WeatherTable = ({ showFavoritesOnly }) => {
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
-                    <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                    <th {...column.getHeaderProps()}>
+                      {column.render('Header')}
+                    </th>
                   ))}
                 </tr>
               ))}
@@ -132,7 +131,6 @@ const WeatherTable = ({ showFavoritesOnly }) => {
                     key={row.id}
                     row={row}
                     onDeleteRow={handleDeleteRow}
-                    onToggleFavorite={handleToggleFavorite}
                     isFavorite={isFavorite}
                   />
                 )
@@ -147,7 +145,11 @@ const WeatherTable = ({ showFavoritesOnly }) => {
 
   return (
     <WeatherTableStyled>
-      <Table />
+      {isTableVisible ? (
+        <Table />
+      ) : (
+        <span>{t('HOME.TABLE.EMPTY_FAV')}</span>
+      )}
     </WeatherTableStyled>
   )
 }
