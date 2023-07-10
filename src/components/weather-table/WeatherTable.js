@@ -125,7 +125,7 @@ const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
               {page.length === 0 && (
                 <tr>
                   <td colSpan={columns.length}>
-                    <span class="no-results-text">{t('HOME.TABLE.NO_RESULTS')}</span>
+                    <span className='no-results-text'>{t('HOME.TABLE.NO_RESULTS')}</span>
                   </td>
                 </tr>
               )}
