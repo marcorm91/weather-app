@@ -21,7 +21,8 @@
             "SHOW": "Show",
             "OF": "of",
             "EMPTY_FAV": "You have no municipalities selected as favorites.",
-            "REMOVE_FAV": "Delete favorites"
+            "REMOVE_FAV": "Delete favorites",
+            "NO_RESULTS": "No results found."
         },
         "PANEL_INFO": {
             "MORE_INFO": "More information",

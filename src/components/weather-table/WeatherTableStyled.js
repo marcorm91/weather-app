@@ -33,6 +33,20 @@ export const WeatherTableStyled = styled.div`
                 }
             }
         }
+        tbody{
+          tr{
+            td{
+              span{
+                &.no-results-text{
+                    display: block;
+                    font-weight: 700;
+                    font-size: 400;
+                    margin: 16px 0;
+                }
+              }
+            }
+          }
+        }
     }
   }
 `

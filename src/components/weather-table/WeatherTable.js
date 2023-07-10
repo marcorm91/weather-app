@@ -122,6 +122,13 @@ const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
               ))}
             </thead>
             <tbody {...getTableBodyProps()}>
+              {page.length === 0 && (
+                <tr>
+                  <td colSpan={columns.length}>
+                    <span class="no-results-text">{t('HOME.TABLE.NO_RESULTS')}</span>
+                  </td>
+                </tr>
+              )}
               {page.map((row) => {
                 prepareRow(row)
                 const favoriteId = `${row.original.CODAUTO}-${row.original.CPRO}-${row.original.CMUN}-${row.original.DC}`
@@ -138,7 +145,9 @@ const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
             </tbody>
           </table>
         </div>
-        <TablePaginator tableInstance={tableInstance} />
+        {page.length > 0 && (
+          <TablePaginator tableInstance={tableInstance} />
+        )}
       </>
     )
   }

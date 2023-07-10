@@ -19,16 +19,16 @@ const WeatherTodayPrediction = ({ hourlyData }) => {
   const nextHours = []
   const maxHoursToShow = 6
 
-  let isSecondSkyList = false // Flag to indicate if we should switch to the second skyList
-  let isSecondTempList = false // Flag to indicate if we should switch to the second tempList
+  let isSecondSkyList = false
+  let isSecondTempList = false
 
   let skyListIndex = 0
   let tempListIndex = 0
 
   // Iterate over skyList1 and skyList2 to find the next hours
   while (nextHours.length < maxHoursToShow) {
-    const skyItem = isSecondSkyList ? skyList2[skyListIndex] : skyList1[skyListIndex]
-    const tempItem = isSecondTempList ? tempList2[tempListIndex] : tempList1[tempListIndex]
+    const skyItem = isSecondSkyList ? skyList1[skyListIndex] : skyList2[skyListIndex]
+    const tempItem = isSecondTempList ? tempList1[tempListIndex] : tempList2[tempListIndex]
 
     if (!skyItem || !tempItem) {
       break
