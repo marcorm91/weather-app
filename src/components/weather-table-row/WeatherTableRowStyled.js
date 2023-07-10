@@ -6,6 +6,7 @@ export const WeatherTableRowStyled = styled.tr`
         user-select: none;
         td{
             padding: 6px 4px;
+            border-bottom: 1px solid var(--wa-platinum);
             &:last-child{
                 text-align: right;
             }
