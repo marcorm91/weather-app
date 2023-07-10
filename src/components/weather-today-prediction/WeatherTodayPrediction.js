@@ -13,28 +13,42 @@ const WeatherTodayPrediction = ({ hourlyData }) => {
   // Get info next hours prediction
   const skyList1 = hourlyData?.data[0]?.prediccion?.dia[0]?.estadoCielo
   const skyList2 = hourlyData?.data[0]?.prediccion?.dia[1]?.estadoCielo
+  const skyList3 = hourlyData?.data[0]?.prediccion?.dia[2]?.estadoCielo
   const tempList1 = hourlyData?.data[0]?.prediccion?.dia[0]?.temperatura
   const tempList2 = hourlyData?.data[0]?.prediccion?.dia[1]?.temperatura
+  const tempList3 = hourlyData?.data[0]?.prediccion?.dia[2]?.temperatura
 
   const nextHours = []
   const maxHoursToShow = 6
 
   let isSecondSkyList = false
   let isSecondTempList = false
+  let isThirdSkyList = false
+  let isThirdTempList = false
 
   let skyListIndex = 0
   let tempListIndex = 0
 
-  // Iterate over skyList1 and skyList2 to find the next hours
+  // Iterate over skyList1, skyList2, and skyList3 to find the next hours
   while (nextHours.length < maxHoursToShow) {
-    const skyItem = isSecondSkyList ? skyList1[skyListIndex] : skyList2[skyListIndex]
-    const tempItem = isSecondTempList ? tempList1[tempListIndex] : tempList2[tempListIndex]
+    let skyItem, tempItem
+
+    if (isThirdSkyList) {
+      skyItem = skyList3[skyListIndex]
+      tempItem = tempList3[tempListIndex]
+    } else if (isSecondSkyList) {
+      skyItem = skyList2[skyListIndex]
+      tempItem = tempList2[tempListIndex]
+    } else {
+      skyItem = skyList1[skyListIndex]
+      tempItem = tempList1[tempListIndex]
+    }
 
     if (!skyItem || !tempItem) {
       break
     }
 
-    if (isSecondSkyList || skyItem.periodo > currentHour) {
+    if ((isSecondSkyList || isThirdSkyList) || skyItem.periodo > currentHour) {
       const hour = skyItem.periodo + ':00'
       const value = skyItem.value
       const description = skyItem.descripcion
@@ -45,6 +59,9 @@ const WeatherTodayPrediction = ({ hourlyData }) => {
     if (!isSecondSkyList && skyItem.periodo === '23') {
       isSecondSkyList = true
       skyListIndex = 0 // Reset skyListIndex for the second list
+    } else if (isSecondSkyList && skyListIndex === skyList2.length - 1 && !isThirdSkyList) {
+      isThirdSkyList = true
+      skyListIndex = 0 // Reset skyListIndex for the third list
     } else {
       skyListIndex++
     }
@@ -52,16 +69,24 @@ const WeatherTodayPrediction = ({ hourlyData }) => {
     if (!isSecondTempList && tempItem.periodo === '23') {
       isSecondTempList = true
       tempListIndex = 0 // Reset tempListIndex for the second list
+    } else if (isSecondTempList && tempListIndex === tempList2.length - 1 && !isThirdTempList) {
+      isThirdTempList = true
+      tempListIndex = 0 // Reset tempListIndex for the third list
     } else {
       tempListIndex++
     }
+  }
+
+  // Remove the first element if it matches the current hour
+  if (nextHours.length > 0 && nextHours[0].hour === currentHour + ':00') {
+    nextHours.shift()
   }
 
   return (
     <WeatherTodayPredictionStyled>
       <span>{t('HOME.PANEL_INFO.PREDICTON_NEXT_HOURS')}</span>
       <ul>
-        {nextHours.map((item, i) => (
+        {nextHours.slice(0, maxHoursToShow).map((item, i) => (
           <li key={i}>
             <time>{item.hour}</time>
             {skyIconMap[item.value] && skyIconMap[item.value](58, 'var(--wa-deep-blue)')}
