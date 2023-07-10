@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import WeatherTabs from '../../components/weather-tabs/WeatherTabs'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
+import WeatherAd from '../../components/weather-ad/WeatherAd'
 
 const WeatherHome = () => {
   
@@ -42,6 +43,7 @@ const WeatherHome = () => {
 
   return (
     <WeatherHomeStyled>
+      <WeatherAd />
       <h1>{t('HOME.WELCOME_MSG', { day })}</h1>
       <WeatherTabs activeTab={activeTab} handleTabClick={handleTabClick} tabs={tabs} />
       {tabs.map((tab) => (

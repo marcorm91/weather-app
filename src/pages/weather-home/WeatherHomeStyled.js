@@ -14,4 +14,18 @@ export const WeatherHomeStyled = styled.main`
   > ul{
     margin: 32px 0;
   }
+  > .weather-ad__wrapper{
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    & ~ h1{
+      margin-top: 32px;
+    }
+    & ~ .tab-content__wrapper{
+      .table__wrapper{
+        max-height: calc(100vh - 410px);
+      }
+    }
+  }
 `;
