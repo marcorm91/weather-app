@@ -31,7 +31,7 @@ const WeatherTodayPrediction = ({ hourlyData }) => {
   }
 
   if (startIndex !== -1) {
-    for (let i = startIndex; i < skyList.length; i++) {
+    for (let i = startIndex+1; i < skyList.length; i++) {
       const hour = skyList[i].periodo + ':00'
       const value = skyList[i].value
       const description = skyList[i].descripcion
