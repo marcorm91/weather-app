@@ -11,12 +11,12 @@ const WeatherTodayPrediction = ({ hourlyData }) => {
   const currentHour = getCurrentHour()
 
   // Get info next hours prediction
-  const skyList1 = hourlyData?.data[0]?.prediccion?.dia[0]?.estadoCielo
-  const skyList2 = hourlyData?.data[0]?.prediccion?.dia[1]?.estadoCielo
-  const skyList3 = hourlyData?.data[0]?.prediccion?.dia[2]?.estadoCielo
-  const tempList1 = hourlyData?.data[0]?.prediccion?.dia[0]?.temperatura
-  const tempList2 = hourlyData?.data[0]?.prediccion?.dia[1]?.temperatura
-  const tempList3 = hourlyData?.data[0]?.prediccion?.dia[2]?.temperatura
+  const skyList1 = hourlyData?.data[0]?.prediccion?.dia[0]?.estadoCielo || []
+  const skyList2 = hourlyData?.data[0]?.prediccion?.dia[1]?.estadoCielo || []
+  const skyList3 = hourlyData?.data[0]?.prediccion?.dia[2]?.estadoCielo || []
+  const tempList1 = hourlyData?.data[0]?.prediccion?.dia[0]?.temperatura || []
+  const tempList2 = hourlyData?.data[0]?.prediccion?.dia[1]?.temperatura || []
+  const tempList3 = hourlyData?.data[0]?.prediccion?.dia[2]?.temperatura || []
 
   const nextHours = []
   const maxHoursToShow = 6
@@ -48,30 +48,39 @@ const WeatherTodayPrediction = ({ hourlyData }) => {
       break
     }
 
-    if ((isSecondSkyList || isThirdSkyList) || skyItem.periodo > currentHour) {
+    if ((isSecondSkyList || isThirdSkyList) && skyItem.periodo > currentHour) {
       const hour = skyItem.periodo + ':00'
       const value = skyItem.value
       const description = skyItem.descripcion
       const temp = tempItem.value
       nextHours.push({ hour, value, description, temp })
+
+
+    } else if (!isSecondSkyList && !isThirdSkyList && skyItem.periodo === currentHour) {
+      const hour = skyItem.periodo + ':00'
+      const value = skyItem.value
+      const description = skyItem.descripcion
+      const temp = tempItem.value
+      nextHours.push({ hour, value, description, temp })
+      console.log(skyItem.periodo)
     }
 
     if (!isSecondSkyList && skyItem.periodo === '23') {
       isSecondSkyList = true
-      skyListIndex = 0 // Reset skyListIndex for the second list
-    } else if (isSecondSkyList && skyListIndex === skyList2.length - 1 && !isThirdSkyList) {
+      skyListIndex = 0
+    } else if (isSecondSkyList && skyItem.periodo === '23' && !isThirdSkyList) {
       isThirdSkyList = true
-      skyListIndex = 0 // Reset skyListIndex for the third list
+      skyListIndex = 0
     } else {
       skyListIndex++
     }
 
     if (!isSecondTempList && tempItem.periodo === '23') {
       isSecondTempList = true
-      tempListIndex = 0 // Reset tempListIndex for the second list
-    } else if (isSecondTempList && tempListIndex === tempList2.length - 1 && !isThirdTempList) {
+      tempListIndex = 0
+    } else if (isSecondTempList && tempItem.periodo === '23' && !isThirdTempList) {
       isThirdTempList = true
-      tempListIndex = 0 // Reset tempListIndex for the third list
+      tempListIndex = 0
     } else {
       tempListIndex++
     }
