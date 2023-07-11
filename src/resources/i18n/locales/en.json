@@ -27,6 +27,7 @@
         "PANEL_INFO": {
             "MORE_INFO": "More information",
             "PREDICTON_NEXT_HOURS": "Prediction for the next hours:"
-        }
+        },
+        "AD_PREDICTION": "Notice:"
     }
 }
