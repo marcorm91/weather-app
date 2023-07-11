@@ -9,12 +9,12 @@ const WeatherTodayPrediction = ({ hourlyData }) => {
 
   const currentHour = getCurrentHour()
 
-  const skyList = [];
-  const tempList = [];
+  const skyList = []
+  const tempList = []
   
   for (let i = 0; i < 3; i++) {
-    skyList.push(...(hourlyData?.data[0]?.prediccion?.dia[i]?.estadoCielo || []));
-    tempList.push(...(hourlyData?.data[0]?.prediccion?.dia[i]?.temperatura || []));
+    skyList.push(...(hourlyData?.data[0]?.prediccion?.dia[i]?.estadoCielo || []))
+    tempList.push(...(hourlyData?.data[0]?.prediccion?.dia[i]?.temperatura || []))
   } 
 
   const nextHours = []
