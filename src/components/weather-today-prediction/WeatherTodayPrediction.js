@@ -7,95 +7,47 @@ import { useTranslation } from 'react-i18next'
 const WeatherTodayPrediction = ({ hourlyData }) => {
   const { t } = useTranslation()
 
-  // Getting current date and hour for making later comparisons
   const currentHour = getCurrentHour()
 
-  // Get info next hours prediction
-  const skyList1 = hourlyData?.data[0]?.prediccion?.dia[0]?.estadoCielo || []
-  const skyList2 = hourlyData?.data[0]?.prediccion?.dia[1]?.estadoCielo || []
-  const skyList3 = hourlyData?.data[0]?.prediccion?.dia[2]?.estadoCielo || []
-  const tempList1 = hourlyData?.data[0]?.prediccion?.dia[0]?.temperatura || []
-  const tempList2 = hourlyData?.data[0]?.prediccion?.dia[1]?.temperatura || []
-  const tempList3 = hourlyData?.data[0]?.prediccion?.dia[2]?.temperatura || []
+  const skyList = [];
+  const tempList = [];
+  
+  for (let i = 0; i < 3; i++) {
+    skyList.push(...(hourlyData?.data[0]?.prediccion?.dia[i]?.estadoCielo || []));
+    tempList.push(...(hourlyData?.data[0]?.prediccion?.dia[i]?.temperatura || []));
+  } 
 
   const nextHours = []
   const maxHoursToShow = 6
 
-  let isSecondSkyList = false
-  let isSecondTempList = false
-  let isThirdSkyList = false
-  let isThirdTempList = false
+  let startIndex = -1
 
-  let skyListIndex = 0
-  let tempListIndex = 0
-
-  // Iterate over skyList1, skyList2, and skyList3 to find the next hours
-  while (nextHours.length < maxHoursToShow) {
-    let skyItem, tempItem
-
-    if (isThirdSkyList) {
-      skyItem = skyList3[skyListIndex]
-      tempItem = tempList3[tempListIndex]
-    } else if (isSecondSkyList) {
-      skyItem = skyList2[skyListIndex]
-      tempItem = tempList2[tempListIndex]
-    } else {
-      skyItem = skyList1[skyListIndex]
-      tempItem = tempList1[tempListIndex]
-    }
-
-    if (!skyItem || !tempItem) {
+  // Find the index of the matching period
+  for (let i = 0; i < skyList.length; i++) {
+    if (skyList[i].periodo === currentHour) {
+      startIndex = i
       break
-    }
-
-    if ((isSecondSkyList || isThirdSkyList) && skyItem.periodo > currentHour) {
-      const hour = skyItem.periodo + ':00'
-      const value = skyItem.value
-      const description = skyItem.descripcion
-      const temp = tempItem.value
-      nextHours.push({ hour, value, description, temp })
-
-
-    } else if (!isSecondSkyList && !isThirdSkyList && skyItem.periodo === currentHour) {
-      const hour = skyItem.periodo + ':00'
-      const value = skyItem.value
-      const description = skyItem.descripcion
-      const temp = tempItem.value
-      nextHours.push({ hour, value, description, temp })
-      console.log(skyItem.periodo)
-    }
-
-    if (!isSecondSkyList && skyItem.periodo === '23') {
-      isSecondSkyList = true
-      skyListIndex = 0
-    } else if (isSecondSkyList && skyItem.periodo === '23' && !isThirdSkyList) {
-      isThirdSkyList = true
-      skyListIndex = 0
-    } else {
-      skyListIndex++
-    }
-
-    if (!isSecondTempList && tempItem.periodo === '23') {
-      isSecondTempList = true
-      tempListIndex = 0
-    } else if (isSecondTempList && tempItem.periodo === '23' && !isThirdTempList) {
-      isThirdTempList = true
-      tempListIndex = 0
-    } else {
-      tempListIndex++
     }
   }
 
-  // Remove the first element if it matches the current hour
-  if (nextHours.length > 0 && nextHours[0].hour === currentHour + ':00') {
-    nextHours.shift()
+  if (startIndex !== -1) {
+    for (let i = startIndex; i < skyList.length; i++) {
+      const hour = skyList[i].periodo + ':00'
+      const value = skyList[i].value
+      const description = skyList[i].descripcion
+      const temp = tempList[i].value
+      nextHours.push({ hour, value, description, temp })
+      if (nextHours.length === maxHoursToShow) {
+        break
+      }
+    }
   }
 
   return (
     <WeatherTodayPredictionStyled>
       <span>{t('HOME.PANEL_INFO.PREDICTON_NEXT_HOURS')}</span>
       <ul>
-        {nextHours.slice(0, maxHoursToShow).map((item, i) => (
+        {nextHours.map((item, i) => (
           <li key={i}>
             <time>{item.hour}</time>
             {skyIconMap[item.value] && skyIconMap[item.value](58, 'var(--wa-deep-blue)')}
