@@ -2,12 +2,13 @@ import React from 'react'
 import { WeatherCurrentPredictionStyled } from './WeatherCurrentPredictionStyled'
 import { WiSunset, WiSunrise, WiHumidity, WiRaindrop } from 'weather-icons-react'
 import { windDirectionIconMap } from '../../utils/js/windDirectionIcons'
-import { findPropertyValueByPeriod, getCurrentHour } from '../../utils/js/helpers'
+import { findPropertyValueByPeriod, getCurrentHour, getCurrentDate } from '../../utils/js/helpers'
 
 const WeatherCurrentPrediction = ({ hourlyData, diaryData }) => {
   
   // Getting current date and hour for making later comparisons
   const currentHour = getCurrentHour()
+  const currentDate = getCurrentDate()
 
   /**
    * HOURLY DATA
@@ -49,8 +50,9 @@ const WeatherCurrentPrediction = ({ hourlyData, diaryData }) => {
    */
 
   // Get max and min temperature
-  const temperatureMin = diaryData?.data[0]?.prediccion?.dia[0]?.temperatura.minima || ''
-  const temperatureMax = diaryData?.data[0]?.prediccion?.dia[0]?.temperatura.maxima || ''
+  const matchingDay = diaryData?.data[0]?.prediccion?.dia.find((day) => day.fecha === currentDate)
+  const temperatureMin = matchingDay?.temperatura?.minima || ''
+  const temperatureMax = matchingDay?.temperatura?.maxima || ''
 
   return (
     <WeatherCurrentPredictionStyled>
