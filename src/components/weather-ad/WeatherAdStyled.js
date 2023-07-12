@@ -10,8 +10,12 @@ export const WeatherAdStyled = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  > div{
+    flex: 1; // Loading
+  }
   > .ad-text-title{
-    display: contents;
+    white-space: nowrap;
+    display: block;
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 700;
@@ -21,6 +25,7 @@ export const WeatherAdStyled = styled.div`
     > span{
       user-select: none;
       display: inline-block;
+      line-height: 22px;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
