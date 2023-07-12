@@ -19,12 +19,22 @@ export const findPropertyValueByPeriod = (list, currentHour, properties) => {
 
 /**
  * Current hour
- * @returns Get current hour (format 01, 02, 03, 21, 22, ...)
+ * @returns Return current hour (format 01, 02, 03, 21, 22, ...)
  */
 export const getCurrentHour = () => {
-    const currentDate = new Date();
-    return currentDate.getHours().toString().padStart(2, '0');
+    const currentDate = new Date()
+    return currentDate.getHours().toString().padStart(2, '0')
 }
   
-  
-  
+/**
+ * Current date
+ * @returns Return current date (format YYYY-MM-DDTHH:MM:SS)
+ */
+export const getCurrentDate = () => {
+    const currentDate = new Date()
+    const year = currentDate.getFullYear()
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0')
+    const day = String(currentDate.getDate()).padStart(2, '0')
+    const formattedDate = `${year}-${month}-${day}T00:00:00`
+    return formattedDate
+}
