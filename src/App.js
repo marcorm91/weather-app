@@ -1,16 +1,21 @@
 
-import WeatherHeader from "./components/weather-header/WeatherHeader";
-import WeatherFooter from "./components/weather-footer/WeatherFooter";
-import WeatherHome from "./pages/weather-home/WeatherHome";
+import WeatherHeader from "./components/weather-header/WeatherHeader"
+import WeatherFooter from "./components/weather-footer/WeatherFooter"
+import WeatherHome from "./pages/weather-home/WeatherHome"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
-    <>
-      <WeatherHeader></WeatherHeader>
-      <WeatherHome></WeatherHome>
-      <WeatherFooter></WeatherFooter>
-    </>
-  );
+    <Router>
+        <WeatherHeader />
+        <Routes>
+          <Route path="/" element={<WeatherHome/>} />
+          <Route path="/about" element={''} />
+          <Route path="/contact" element={''} />
+        </Routes>
+        <WeatherFooter />
+    </Router>
+  )
 }
 
-export default App;
+export default App

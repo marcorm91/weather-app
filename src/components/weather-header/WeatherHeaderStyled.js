@@ -27,4 +27,17 @@ export const WeatherHeaderStyled = styled.header`
       text-transform: uppercase;
       letter-spacing: 2px;
     }
-  }`
+  }
+  .actions__wrapper{
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      > button{
+        background-color: transparent;
+        border: none;
+        color: var(--wa-white);
+        font-size: 26px;
+        cursor: pointer;
+      }
+  }
+`
