@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { WeatherHeaderStyled } from './WeatherHeaderStyled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faTimes, faHome } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faTimes, faHome, faIdBadge, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import WeatherLangSelector from '../weather-lang-selector/WeatherLangSelector'
 import WeatherNavbar from '../weather-navbar/WeatherNavbar'
 
@@ -15,9 +15,9 @@ const WeatherHeader = () => {
   }
 
   const navItems = [
-    { label: 'Home', path: '/', block: 1, icon: faHome },
-    { label: 'About', path: '/about', block: 2 },
-    { label: 'Contact', path: '/contact', block: 2 },
+    { label: `${t('NAVBAR.HOME_PAGE')}`, path: '/', block: 1, icon: faHome },
+    { label: `${t('NAVBAR.ALERTS')}`, path: '/', block: 1, icon: faTriangleExclamation },
+    { label: `${t('NAVBAR.CONTACT')}`, path: '/contact', block: 2, icon: faIdBadge },
   ]
 
   const handleMenuClose = () => {

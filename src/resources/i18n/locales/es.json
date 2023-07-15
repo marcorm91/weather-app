@@ -5,6 +5,11 @@
     "FOOTER": {
         "COPYRIGHT": "WEATHER APP. Todos los derechos reservados."
     },
+    "NAVBAR": {
+        "HOME_PAGE": "Página de inicio",
+        "CONTACT": "Contacto",
+        "ALERTS": "Alertas"
+    },
     "HOME": {
         "WELCOME_MSG": "Bienvenido, hoy es {{day}}",
         "TABS": {

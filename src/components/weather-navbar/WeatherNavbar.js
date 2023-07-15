@@ -3,9 +3,16 @@ import { Link } from 'react-router-dom'
 import { WeatherNavbarStyled } from './WeatherNavbarStyled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { useTranslation } from 'react-i18next'
 
 const WeatherNavbar = ({ items, onClose }) => {
+  const { t } = useTranslation()
+
   const handleMenuClose = () => {
+    onClose()
+  }
+
+  const handleMenuItemClick = () => {
     onClose()
   }
 
@@ -16,7 +23,7 @@ const WeatherNavbar = ({ items, onClose }) => {
     <WeatherNavbarStyled>
       <div className="logo__wrapper">
         <div className="wa-icon-logo-blue"></div>
-        <span>Weather app</span>
+        <span>{t('HEADER.TITLE')}</span>
       </div>
       <button className="button-close" onClick={handleMenuClose}>
         <FontAwesomeIcon icon={faTimes} />
@@ -26,8 +33,8 @@ const WeatherNavbar = ({ items, onClose }) => {
           <ul className="block-1__wrapper">
             {block1Items.map((item, index) => (
               <li key={index}>
-                <Link to={item.path}>
-                    <FontAwesomeIcon icon={item.icon} /> {item.label}
+                <Link to={item.path} onClick={handleMenuItemClick}>
+                  <FontAwesomeIcon icon={item.icon} /> {item.label}
                 </Link>
               </li>
             ))}
@@ -37,8 +44,8 @@ const WeatherNavbar = ({ items, onClose }) => {
           <ul className="block-2__wrapper">
             {block2Items.map((item, index) => (
               <li key={index}>
-                <Link to={item.path}>
-                  <FontAwesomeIcon icon={item.icon} /> {item.label} 
+                <Link to={item.path} onClick={handleMenuItemClick}>
+                  <FontAwesomeIcon icon={item.icon} /> {item.label}
                 </Link>
               </li>
             ))}
