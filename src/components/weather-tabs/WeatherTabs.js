@@ -1,4 +1,3 @@
-// WeatherTabs.js
 import React from 'react'
 import { WeatherTabsStyled } from './WeatherTabsStyled'
 
