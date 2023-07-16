@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes, faHome, faIdBadge, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons'
 import WeatherLangSelector from '../weather-lang-selector/WeatherLangSelector'
 import WeatherNavbar from '../weather-navbar/WeatherNavbar'
+import { Link } from 'react-router-dom'
 
 const WeatherHeader = () => {
   const { t } = useTranslation()
@@ -40,10 +41,10 @@ const WeatherHeader = () => {
 
   return (
     <WeatherHeaderStyled>
-      <div className="title__wrapper">
+      <Link to={'/'} className="title__wrapper">
         <div className="wa-icon-logo-white"></div>
         <h1>{t('HEADER.TITLE')}</h1>
-      </div>
+      </Link>
       <div className="actions__wrapper">
         <WeatherLangSelector />
         <button onClick={toggleMenu}>

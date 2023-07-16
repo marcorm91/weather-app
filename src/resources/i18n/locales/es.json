@@ -34,5 +34,8 @@
             "PREDICTON_NEXT_HOURS": "Previsión para las próximas horas:"
         },
         "AD_PREDICTION": "Aviso"
+    },
+    "ALERTS": {
+        "INFO": "Consulta de alertas y peligros meteorológicos para las Comunidades Autónomas en fechas específicas. Ten en cuenta que puede haber información desactualizada para algunas Comunidades."
     }
 }

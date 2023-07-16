@@ -3,41 +3,22 @@ import { WeatherAccordionStyled } from './WeatherAccordionStyled'
 import { Accordion, AccordionItem, AccordionItemHeading, AccordionItemButton, AccordionItemPanel } from 'react-accessible-accordion'
 import 'react-accessible-accordion/dist/fancy-example.css'
 
-const WeatherAccordion = () => {
-
+const WeatherAccordion = ({ weatherData }) => {
   return (
     <WeatherAccordionStyled>
       <Accordion>
-        <AccordionItem>
-          <AccordionItemHeading>
-            <AccordionItemButton>
-              Item 1
-            </AccordionItemButton>
-          </AccordionItemHeading>
-          <AccordionItemPanel>
-            Contenido del Item 1
-          </AccordionItemPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionItemHeading>
-            <AccordionItemButton>
-              Item 2
-            </AccordionItemButton>
-          </AccordionItemHeading>
-          <AccordionItemPanel>
-            Contenido del Item 2
-          </AccordionItemPanel>
-        </AccordionItem>
-        <AccordionItem>
-          <AccordionItemHeading>
-            <AccordionItemButton>
-              Item 3
-            </AccordionItemButton>
-          </AccordionItemHeading>
-          <AccordionItemPanel>
-            Contenido del Item 3
-          </AccordionItemPanel>
-        </AccordionItem>
+        {weatherData.map(region => (
+          <AccordionItem key={region.code}>
+            <AccordionItemHeading>
+              <AccordionItemButton>
+                {region.community}
+              </AccordionItemButton>
+            </AccordionItemHeading>
+            <AccordionItemPanel>
+              {region.weather}
+            </AccordionItemPanel>
+          </AccordionItem>
+        ))}
       </Accordion>
     </WeatherAccordionStyled>
   )

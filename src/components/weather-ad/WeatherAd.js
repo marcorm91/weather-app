@@ -6,6 +6,7 @@ import { fetchAdPrediction } from '../../resources/services/APIs/adPrediction'
 import WeatherLoader from '../weather-loader/WeatherLoader'
 import { useTranslation } from 'react-i18next'
 import regionCodes from '../../utils/js/regionCodes'
+import { Link } from 'react-router-dom'
 
 // Get code of a region randomly to display its info
 const getRandomRegion = () => {
@@ -59,9 +60,9 @@ const WeatherAd = () => {
           </div>
         </>
       )}
-      <button>
+      <Link to={'/alerts'}>
         <FontAwesomeIcon icon={faList} size='sm' />
-      </button>
+      </Link>
       <button onClick={onClose}>
         <FontAwesomeIcon icon={faTimes} />
       </button>

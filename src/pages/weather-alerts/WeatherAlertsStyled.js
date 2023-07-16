@@ -7,4 +7,9 @@ export const WeatherAlertsStyled = styled.main`
   background-color: var(--wa-dr-white);
   padding: 16px;
   box-sizing: border-box;
+  > span{
+    display: block;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
 `;

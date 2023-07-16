@@ -25,7 +25,7 @@ export const WeatherAdStyled = styled.div`
     > span{
       user-select: none;
       display: inline-block;
-      line-height: 22px;
+      line-height: normal;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
@@ -34,12 +34,14 @@ export const WeatherAdStyled = styled.div`
       animation: scrollText 100s linear infinite;
     }
   }
-  > button{
+  > button, > a{
     background-color: transparent;
     border: none;
     font-size: 22px;
     padding: 0;
     cursor: pointer;
+    line-height: 0;
+    color: var(--wa-black);
   }
 
 @keyframes scrollText {

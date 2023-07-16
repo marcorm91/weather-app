@@ -34,5 +34,8 @@
             "PREDICTON_NEXT_HOURS": "Prediction for the next hours:"
         },
         "AD_PREDICTION": "Notice"
+    },
+    "ALERTS": {
+        "INFO": "Weather alerts and hazards query for the Autonomous Communities on specific dates. Please note that there may be outdated information for certain Communities."
     }
 }

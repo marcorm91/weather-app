@@ -16,6 +16,8 @@ export const WeatherHeaderStyled = styled.header`
     align-items: center;
     gap: 16px;
     user-select: none;
+    color: var(--wa-white);
+    text-decoration: none;
     > div{
       width: 36px;
       height: 36px;
