@@ -69,11 +69,13 @@ export const WeatherNavbarStyled = styled.nav`
             a{
                 color: var(--wa-deep-blue);
                 font-size: 16px;
-                font-weight: 700;
                 text-decoration: none;
                 display: inline-flex;
                 align-items: center;
                 gap: 8px;
+                &.active{
+                    font-weight: 700;
+                }
             }
             &.block-2__wrapper{
                 padding-top: 16px;

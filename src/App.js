@@ -2,6 +2,7 @@
 import WeatherHeader from "./components/weather-header/WeatherHeader"
 import WeatherFooter from "./components/weather-footer/WeatherFooter"
 import WeatherHome from "./pages/weather-home/WeatherHome"
+import WeatherAlerts from "./pages/weather-alerts/WeatherAlerts"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -10,7 +11,7 @@ function App() {
         <WeatherHeader />
         <Routes>
           <Route path="/" element={<WeatherHome/>} />
-          <Route path="/about" element={''} />
+          <Route path="/alerts" element={<WeatherAlerts/>} />
           <Route path="/contact" element={''} />
         </Routes>
         <WeatherFooter />

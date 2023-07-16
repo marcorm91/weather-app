@@ -16,7 +16,7 @@ const WeatherHeader = () => {
 
   const navItems = [
     { label: `${t('NAVBAR.HOME_PAGE')}`, path: '/', block: 1, icon: faHome },
-    { label: `${t('NAVBAR.ALERTS')}`, path: '/', block: 1, icon: faTriangleExclamation },
+    { label: `${t('NAVBAR.ALERTS')}`, path: '/alerts', block: 1, icon: faTriangleExclamation },
     { label: `${t('NAVBAR.CONTACT')}`, path: '/contact', block: 2, icon: faIdBadge },
   ]
 
