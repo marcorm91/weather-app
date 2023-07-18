@@ -17,6 +17,9 @@ export const WeatherTabsStyled = styled.ul`
     display: flex;
     align-items: center;
     gap: 6px;
+    @media (max-width: 767px){
+      font-size: 14px;
+    }
     &.active{
         color: var(--wa-black);
         opacity: 1;

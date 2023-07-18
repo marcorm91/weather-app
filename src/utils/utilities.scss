@@ -24,3 +24,12 @@
       opacity: 1;
     }
 }
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

@@ -5,6 +5,12 @@ html, body{
     padding: 0;
 }
 
+@media (min-width: 768px){
+    .hide-desktop{
+        display: none;
+    }
+}
+
 .hidden{
     display: none;
 }
@@ -64,7 +70,7 @@ button{
     }
     &.btn-small{
         font-size: 14px;
-        min-height: auto;
+        min-height: 32px;
         padding: 0 8px;
     }
 }

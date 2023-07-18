@@ -11,6 +11,9 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
   top: 0;
   right: 0;
   z-index: 999;
+  @media (max-width: 767px){
+    width: 100%;
+  }
   &:after{
     content: "";
     position: fixed;
@@ -19,6 +22,9 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
     right: calc(100% - var(--width-panel));
     width: var(--width-panel);
     background-color: #00000050;
+    @media (max-width: 767px){
+      display: none;
+    }
   }
   header{
     background-color: var(--wa-dr-white);

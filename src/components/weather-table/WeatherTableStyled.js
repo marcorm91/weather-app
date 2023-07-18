@@ -6,18 +6,30 @@ export const WeatherTableStyled = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+  @media (max-width: 767px){
+    margin: 24px 0 0 0;
+  }
   .table-top__wrapper{
     display: flex;
     align-self: flex-end;
     gap: 32px;
+    @media (max-width: 767px){
+      flex-direction: column;
+      gap: 16px;
+      align-self: auto;
+      width: 100%;
+    }
     > input{
       min-width: 340px;
     }
   }
   .table__wrapper{
     width: 100%;
-    max-height: calc(100vh - 375px);
+    max-height: calc(100vh - 380px);
     overflow: auto;
+    @media (max-width: 767px){
+      max-height: calc(100vh - 420px);
+    }
     table{
         width: 100%;
         text-align: left;
@@ -32,10 +44,28 @@ export const WeatherTableStyled = styled.div`
                     padding: 6px 4px;
                 }
             }
+            @media (max-width: 767px){
+              display: none;
+            }
         }
         tbody{
           tr{
+            @media (max-width: 767px){
+              display: flex;
+              flex-direction: column;
+            }
             td{
+              @media (max-width: 767px){
+                min-width: 100%;
+                border-bottom: none;
+                padding: 4px;
+                box-sizing: border-box;
+                font-size: 13px;
+                label{
+                  font-weight: 700;
+                  margin-right: 4px;
+                }
+              }
               span{
                 &.no-results-text{
                     display: block;

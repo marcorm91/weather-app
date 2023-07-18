@@ -10,6 +10,9 @@ export const WeatherAdStyled = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  @media (max-width: 767px){
+    gap: 8px;
+  }
   > div{
     flex: 1; // Loading
   }
@@ -19,6 +22,9 @@ export const WeatherAdStyled = styled.div`
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 700;
+    @media (max-width: 767px){
+      font-size: 13px;
+    }
   }
   .ad-text__wrapper{
     overflow: hidden;
@@ -44,11 +50,9 @@ export const WeatherAdStyled = styled.div`
     color: var(--wa-black);
   }
 
-@keyframes scrollText {
-  0% {
-    transform: translateX(0);
+  @media (max-width: 767px){
+    > a{
+      display: none;
+    }
   }
-  100% {
-    transform: translateX(-100%);
-  }
-}`
+`

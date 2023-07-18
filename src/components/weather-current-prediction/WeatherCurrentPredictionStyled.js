@@ -37,10 +37,23 @@ export const WeatherCurrentPredictionStyled = styled.div`
         margin: 0;
         padding: 0;
         list-style: none;
+        @media (max-width: 767px){
+          flex-wrap: wrap;
+          gap: 16px 48px;
+        }
         li{
           display: flex;
           align-items: center;
           gap: 4px;
+          @media (max-width: 767px){
+            flex: 1 1 calc(50% - 24px);
+            &:nth-child(odd){
+              justify-content: flex-end;
+            }
+            &:nth-child(even){
+              justify-content: flex-start;
+            }
+          }
           &.temperature__wrapper{
             display: flex;
             gap: 8px;
@@ -100,6 +113,9 @@ export const WeatherCurrentPredictionStyled = styled.div`
             content: "|";
             display: inline-flex;
             margin-left: 28px;
+            @media (max-width: 767px){
+              display: none;
+            }
           }
         }
       }

@@ -10,9 +10,15 @@ export const WeatherHomeStyled = styled.main`
   > h1{
     margin: 0;
     font-size: 24px;
+    @media (max-width: 767px){
+      font-size: 18px;
+    }
   }
   > ul{
     margin: 32px 0;
+    @media (max-width: 767px){
+      margin: 16px 0;
+    }
   }
   > .weather-ad__wrapper{
     position: fixed;

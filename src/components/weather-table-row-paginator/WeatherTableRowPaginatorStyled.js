@@ -19,5 +19,11 @@ export const WeatherTableRowPaginatorStyled = styled.div`
         align-items: center;
         gap: 8px;
     }
+    @media (max-width: 767px){
+      button, span, select{
+        font-size: 13px;
+        text-align: center;
+      }
+    }
   }
 `

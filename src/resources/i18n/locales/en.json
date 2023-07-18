@@ -18,6 +18,7 @@
         },
         "TABLE": {
             "SEARCH": "Search municipality...",
+            "CODE": "Code",
             "MUNICIPALITY": "Municipality",
             "PROVINCE": "Province",
             "COMUNITY": "Comunity",

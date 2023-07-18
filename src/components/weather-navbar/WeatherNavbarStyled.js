@@ -73,6 +73,9 @@ export const WeatherNavbarStyled = styled.nav`
                 display: inline-flex;
                 align-items: center;
                 gap: 8px;
+                @media (max-width: 767px){
+                    font-size: 14px;
+                }
                 &.active{
                     font-weight: 700;
                 }

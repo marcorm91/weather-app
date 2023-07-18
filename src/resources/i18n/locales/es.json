@@ -18,6 +18,7 @@
         },
         "TABLE": {
             "SEARCH": "Buscar municipio...",
+            "CODE": "Código",
             "MUNICIPALITY": "Municipio",
             "PROVINCE": "Provincia",
             "COMUNITY": "Comunidad",
