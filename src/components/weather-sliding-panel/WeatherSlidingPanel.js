@@ -6,9 +6,9 @@ import { useTranslation } from 'react-i18next'
 import WeatherCurrentPrediction from '../weather-current-prediction/WeatherCurrentPrediction'
 import WeatherCurrentSky from '../weather-current-sky/WeatherCurrentSky'
 import WeatherTodayPrediction from '../weather-today-prediction/WeatherTodayPrediction'
+import { Link } from 'react-router-dom'
 
-const WeatherSlidingPanel = ({ data, onClose, isOpen }) => {
-  
+const WeatherSlidingPanel = ({ data, onClose, isOpen, code }) => {
   const { t } = useTranslation()
 
   const hourlyPredictionData = data?.hourlyPredictionData
@@ -17,8 +17,6 @@ const WeatherSlidingPanel = ({ data, onClose, isOpen }) => {
   // Hourly data
   const hourlyData = hourlyPredictionData?.data[0] || {}
   const { nombre = '', provincia = '' } = hourlyData
-
-  // Diary data
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -46,16 +44,18 @@ const WeatherSlidingPanel = ({ data, onClose, isOpen }) => {
         <h2>{`${nombre} (${provincia})`}</h2>
       </header>
       <div className="content__wrapper">
-        <WeatherCurrentPrediction
-          hourlyData={hourlyPredictionData} 
-          diaryData={diaryPredictionData} />
-        <WeatherCurrentSky 
-          hourlyData={hourlyPredictionData} />
-        <WeatherTodayPrediction 
-          hourlyData={hourlyPredictionData} />
+        <WeatherCurrentPrediction hourlyData={hourlyPredictionData} diaryData={diaryPredictionData} />
+        <WeatherCurrentSky hourlyData={hourlyPredictionData} />
+        <WeatherTodayPrediction hourlyData={hourlyPredictionData} />
       </div>
       <div className="footer__wrapper">
-        <button className="btn btn-primary">{t('HOME.PANEL_INFO.MORE_INFO')}</button>
+        <Link
+          className="btn btn-primary"
+          to="/more-info"
+          state={{data: code}}
+        >
+          {t('HOME.PANEL_INFO.MORE_INFO')}
+        </Link>
       </div>
     </WeatherSlidingPanelStyled>
   )

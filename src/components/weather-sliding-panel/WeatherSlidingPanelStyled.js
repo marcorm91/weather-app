@@ -46,6 +46,13 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
       color: var(--wa-black);
       margin: 0;
       font-size: 16px;
+      @media (max-width: 767px){
+        font-size: 14px;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
     }
   }
   .content__wrapper{
@@ -68,5 +75,8 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
     display: flex;
     justify-content: flex-end;
     padding: 24px;
+    @media (max-width: 767px){
+      padding: 24px 16px;
+    }
   }
 `

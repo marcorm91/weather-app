@@ -15,6 +15,10 @@ const Actions = ({ row, onDeleteRow  }) => {
   const [isFavorite, setIsFavorite] = useState(false) 
   const favoritesKey = 'favorites'
 
+  // Format code for get info api
+  const { CPRO, CMUN } = row.original
+  const code = `${CPRO}${CMUN}`
+
   // Get items from local storage
   useEffect(() => {
     const favorites = JSON.parse(localStorage.getItem(favoritesKey)) || []
@@ -47,8 +51,6 @@ const Actions = ({ row, onDeleteRow  }) => {
 
   // Get more info from component by CPRO and CMUN.
   const handleMoreInfo = async () => {
-    const { CPRO, CMUN } = row.original
-    const code = `${CPRO}${CMUN}`
     setIsLoading(true)
     try {
       const hourlyPredictionData = await fetchHourlyPrediction(code)
@@ -91,6 +93,7 @@ const Actions = ({ row, onDeleteRow  }) => {
           data={panelData}
           onClose={closePanel}
           isOpen={isPanelOpen}
+          code={code}
         />
       )}
     </WeatherTableRowActions>
