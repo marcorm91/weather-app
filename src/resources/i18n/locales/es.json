@@ -37,5 +37,27 @@
     },
     "ALERTS": {
         "INFO": "Consulta de alertas y peligros meteorológicos para las Comunidades Autónomas en fechas específicas. Ten en cuenta que puede haber información desactualizada para algunas Comunidades."
+    },
+    "ABOUTME": {
+        "COL1": {
+            "COL1_1": {
+                "TITLE": "Acerca de mí",
+                "P1": "Mi nombre es Marco y desde 2017 trabajo como Maquetador / Frontend Web en ATSistemas, donde he adquirido experiencia en diferentes entornos de desarrollo desde el lado Front. He participado en proyectos integrados con tecnologías DXP como Liferay y Magnolia, así como en la realización de librerías de componentes utilizando Storybook en Frameworks Front para Angular, React y VueJS.",
+                "P2": "Metodología y definición en el desarrollo de interfaces utilizando los sistemas de diseño 'Design Tokens' y 'Atomic Design'.",
+                "P3": "Amplia experiencia trabajando con metodologías de trabajo Agile. También estoy familiarizado con herramientas de trabajo en equipo, como los sistemas de control de versiones GIT, que son esenciales para el desarrollo de software colaborativo.",
+                "P4": "Servicios destacados:"
+            },
+            "COL1_2": {
+                "TITLE": "Acerca de Weather APP",
+                "P1": "En nuestra aplicación web de previsión meteorológica, hemos diseñado una interfaz intuitiva y amigable que te permite explorar de manera sencilla y rápida la información meteorológica de diferentes ubicaciones. Para lograrlo, hemos utilizado React, un framework de JavaScript altamente eficiente y popular.",
+                "P2": "Nos hemos enfocado en optimizar la velocidad de carga de la aplicación, asegurándonos de que la información meteorológica se actualice rápidamente y que los usuarios puedan obtener datos precisos y actualizados en tiempo real. Esto nos permite brindarte una experiencia de usuario fluida y una sensación de inmediatez al acceder a la previsión meteorológica.",
+                "P3": "En nuestra aplicación web de previsión meteorológica, recopilamos datos de la API de la AEMET exclusivamente con fines informativos. Nuestra principal prioridad es proporcionar a los usuarios información precisa y actualizada sobre las condiciones climáticas en diferentes ubicaciones.",
+                "P4": "A través de la integración de la API de la AEMET, podemos acceder a datos confiables y completos sobre temperaturas, humedad, velocidad del viento, precipitaciones y más. Utilizamos estos datos para presentar una previsión meteorológica detallada y ayudarte a tomar decisiones informadas basadas en las condiciones climáticas."
+    
+            }
+        },
+        "COL2": {
+            "TITLE": "Contacto"
+        }
     }
 }

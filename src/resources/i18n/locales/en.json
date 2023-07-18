@@ -37,5 +37,27 @@
     },
     "ALERTS": {
         "INFO": "Weather alerts and hazards query for the Autonomous Communities on specific dates. Please note that there may be outdated information for certain Communities."
+    },
+    "ABOUTME": {
+        "COL1": {
+            "COL1_1": {
+                "TITLE": "About Me",
+                "P1": "My name is Marco and since 2017, I have been working as a Frontend Web Developer at ATSistemas, where I have gained experience in various frontend development environments. I have participated in projects integrated with DXP technologies such as Liferay and Magnolia, as well as building component libraries using Storybook with frontend frameworks like Angular, React, and VueJS.",
+                "P2": "I have a strong understanding of interface development methodologies, including 'Design Tokens' and 'Atomic Design'.",
+                "P3": "I have extensive experience working with Agile methodologies and I am familiar with collaboration tools such as GIT version control systems, which are essential for collaborative software development.",
+                "P4": "Highlighted Services:"
+            },
+            "COL1_2": {
+                "TITLE": "About Weather APP",
+                "P1": "In our web application for weather forecasting, we have designed an intuitive and user-friendly interface that allows you to easily and quickly explore weather information for different locations. To achieve this, we have utilized React, a highly efficient and popular JavaScript framework.",
+                "P2": "We have focused on optimizing the application's loading speed, ensuring that weather information is quickly updated and users can obtain accurate and real-time data. This provides a seamless user experience and a sense of immediacy when accessing weather forecasts.",
+                "P3": "In our web application for weather forecasting, we collect data from the AEMET API solely for informative purposes. Our main priority is to provide users with precise and up-to-date information about weather conditions in different locations.",
+                "P4": "Through integration with the AEMET API, we can access reliable and comprehensive data on temperatures, humidity, wind speed, precipitation, and more. We utilize this data to present detailed weather forecasts and assist you in making informed decisions based on weather conditions."
+            }
+        },
+        "COL2": {
+            "TITLE": "Contact"
+        }
     }
+    
 }
