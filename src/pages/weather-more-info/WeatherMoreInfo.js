@@ -1,16 +1,14 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
 import { WeatherMoreInfoStyled } from './WeatherMoreInfoStyled'
+import WeatherMap from '../../components/weather-map/WeatherMap'
 
 const WeatherMoreInfo = () => {
   const location = useLocation()
   const { data } = location.state || {}
-
-  console.log(data)
-
   return (
     <WeatherMoreInfoStyled>
-      More info page
+      <WeatherMap municipalityObject={data} />
     </WeatherMoreInfoStyled>
   )
 }

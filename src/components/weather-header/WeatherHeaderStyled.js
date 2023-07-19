@@ -28,6 +28,9 @@ export const WeatherHeaderStyled = styled.header`
       margin: 0;
       text-transform: uppercase;
       letter-spacing: 2px;
+      @media (max-width: 767px){
+        display: none;
+      }
     }
   }
   .actions__wrapper{

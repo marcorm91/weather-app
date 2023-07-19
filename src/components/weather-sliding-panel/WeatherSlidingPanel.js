@@ -8,7 +8,7 @@ import WeatherCurrentSky from '../weather-current-sky/WeatherCurrentSky'
 import WeatherTodayPrediction from '../weather-today-prediction/WeatherTodayPrediction'
 import { Link } from 'react-router-dom'
 
-const WeatherSlidingPanel = ({ data, onClose, isOpen, code }) => {
+const WeatherSlidingPanel = ({ data, onClose, isOpen, municipalityObject }) => {
   const { t } = useTranslation()
 
   const hourlyPredictionData = data?.hourlyPredictionData
@@ -52,7 +52,7 @@ const WeatherSlidingPanel = ({ data, onClose, isOpen, code }) => {
         <Link
           className="btn btn-primary"
           to="/more-info"
-          state={{data: code}}
+          state={{data: municipalityObject}}
         >
           {t('HOME.PANEL_INFO.MORE_INFO')}
         </Link>
