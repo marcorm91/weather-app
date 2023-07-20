@@ -74,3 +74,26 @@ button, a{
         padding: 0 8px;
     }
 }
+
+hr{
+    &.separator{
+        height: 1px;
+        background-color: var(--wa-leadbelcher);
+        border: none;
+        width: 100%;
+    }
+}
+
+.loading-skeleton{
+    overflow: hidden;
+    background: #D0D0D0;
+    border-radius: 4px;
+    &:before{
+        content: "";
+        display: block;
+        height: 100%;
+        width: 100%;
+        animation: loadingSkeleton 1s infinite;
+        background: linear-gradient(to right, transparent,#D9D9D9,transparent);
+    }
+}

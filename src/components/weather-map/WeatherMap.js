@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { renderToString } from 'react-dom/server'
+import { WeatherMapStyled } from './WeatherMapStyled'
 import mapService from '../../resources/services/APIs/mapService'
 
 const WeatherMap = ({ municipalityObject }) => {
@@ -29,7 +30,12 @@ const WeatherMap = ({ municipalityObject }) => {
       })
   }, [NAME, PROV])
 
-  return <div id="map" style={{ height: '400px', width: '400px' }} />
+  return (
+      <WeatherMapStyled className='map__wrapper'>
+        <div id="map"></div>
+      </WeatherMapStyled>
+  )
+
 }
 
 export default WeatherMap

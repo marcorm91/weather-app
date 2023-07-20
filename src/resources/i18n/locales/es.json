@@ -60,5 +60,12 @@
         "COL2": {
             "TITLE": "Contacto"
         }
+    },
+    "MORE_INFO": {
+        "PANEL_RIGHT_INFO": {
+            "MUNICIPALITY": "Municipio",
+            "PROVINCE": "Provincia",
+            "COMUNITY": "Comunidad"
+        }
     }
 }

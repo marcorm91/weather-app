@@ -33,3 +33,12 @@
     transform: translateX(-100%);
   }
 }
+
+@keyframes loadingSkeleton {
+  0%{
+      transform: translateX(-100%);
+  }
+  100%{
+      transform: translateX(100%);
+  }
+}
