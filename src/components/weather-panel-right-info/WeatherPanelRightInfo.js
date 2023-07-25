@@ -4,10 +4,12 @@ import { WeatherPanelRightInfoStyled,
          WeatherMapSkeletonStyled, 
          WeatherListSkeletonStyled,
          WeatherCurrentPredictionSkeletonStyled } from './WeatherPanelRightInfoStyled'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faAnglesRight } from '@fortawesome/free-solid-svg-icons'
 import { useTranslation } from 'react-i18next'
 import WeatherCurrentPrediction from '../weather-current-prediction/WeatherCurrentPrediction'
 
-const WeatherPanelRightInfo = ({ municipalityObject, hourlyPredictionData, diaryPredictionData }) => {
+const WeatherPanelRightInfo = ({ municipalityObject, hourlyPredictionData, diaryPredictionData, onMinimize }) => {
   const { t } = useTranslation()
 
   if (!hourlyPredictionData || !diaryPredictionData) {
@@ -33,6 +35,9 @@ const WeatherPanelRightInfo = ({ municipalityObject, hourlyPredictionData, diary
 
   return (
     <WeatherPanelRightInfoStyled>
+      <button className='btn-minimized-panel' onClick={onMinimize}>
+        <FontAwesomeIcon icon={faAnglesRight} size='3x' color='var(--wa-deep-blue)' />
+      </button>
       <WeatherMap municipalityObject={municipalityObject} />
       <ul className='info__wrapper'>
         <li><span>{t('MORE_INFO.PANEL_RIGHT_INFO.MUNICIPALITY')}: </span>{municipalityObject.NAME}</li>

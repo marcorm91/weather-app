@@ -1,6 +1,16 @@
 import styled from "styled-components";
 
 export const WeatherPanelRightInfoStyled = styled.div`
+    .btn-minimized-panel{
+        position: absolute;
+        background-color: transparent;
+        border: none;
+        left: -24px;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        cursor: pointer;
+    }
     ul{
         &.info__wrapper{
             list-style: none;
@@ -22,7 +32,7 @@ export const WeatherPanelRightInfoStyled = styled.div`
         ul{
             flex-direction: row;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 0;
             margin: 16px 0;
             > li{
                 max-width: calc(50% - 16px);

@@ -23,9 +23,11 @@ export const WeatherMoreInfoStyled = styled.main`
       box-sizing: border-box;
       border-radius: 8px;
       position: sticky;
-      overflow: auto;
       max-height: 100%;
       border-right: 8px solid var(--wa-deep-blue);
+      @media (max-width: 767px){
+        display: none;
+      }
       &:after{
         content: "";
         position: absolute;
@@ -42,6 +44,60 @@ export const WeatherMoreInfoStyled = styled.main`
         display: flex;
         flex-direction: column;
         height: 100%;
+      }
+    }
+  }
+  /** Minimized panel */
+  &.minimized-panel{
+    > .col__wrapper:last-child{
+      max-width: 140px;
+      flex: 1;
+      padding: 16px 0;
+      .btn-minimized-panel{
+        transform: rotate(180deg);
+      }
+      .map__wrapper, .info__wrapper, .separator{
+        display: none;
+      }
+      .separator + div{
+        > div:first-child{ // Current temp
+          flex-direction: column;
+          gap: 0;
+          > span{
+            font-size: 36px;
+          }
+        }
+        > div:last-child{ // Current values (humidity, wind, ...)
+          ul{
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin: 32px 0;
+            li{
+              margin: 0px;
+              width: 100%;
+              max-width: 100%;
+              flex: 1 1 100%;
+              &.wind__wrapper{
+                > span:last-child{
+                  display: none;
+                }
+              }
+              &.precipitation__wrapper{
+                > span{
+                  display: block;
+                  margin-top: 12px;
+                }
+              }
+              span{
+                font-size: 14px;
+              }
+              svg{
+                display: none;
+              }
+            }
+          }
+        }
       }
     }
   }

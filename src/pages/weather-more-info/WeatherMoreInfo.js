@@ -7,11 +7,16 @@ import { fetchDiaryPrediction } from '../../resources/services/APIs/diaryPredict
 
 const WeatherMoreInfo = () => {
   const location = useLocation()
+  const [isMinimized, setIsMinimized] = useState(false)
   const { data } = location.state || {}
   const { CPRO, CMUN } = data
   const code = `${CPRO}${CMUN}`
   const [hourlyPredictionData, setHourlyPredictionData] = useState(null)
   const [diaryPredictionData, setDiaryPredictionData] = useState(null)
+
+  const handleMinimizeClick = () => {
+    setIsMinimized(prevState => !prevState);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,16 +33,17 @@ const WeatherMoreInfo = () => {
   }, [code])
 
   return (
-    <WeatherMoreInfoStyled>
+    <WeatherMoreInfoStyled className={isMinimized ? 'minimized-panel' : ''}>
       <div className='col__wrapper'>
         <h2>{data.NAME}, {data.PROV}, {data.COMUNIDAD}</h2>
       </div>
       <div className='col__wrapper'>
-          <WeatherPanelRightInfo
-            municipalityObject={data}
-            hourlyPredictionData={hourlyPredictionData}
-            diaryPredictionData={diaryPredictionData}
-          />
+        <WeatherPanelRightInfo
+          municipalityObject={data}
+          hourlyPredictionData={hourlyPredictionData}
+          diaryPredictionData={diaryPredictionData}
+          onMinimize={handleMinimizeClick}
+        />
       </div>
     </WeatherMoreInfoStyled>
   )
