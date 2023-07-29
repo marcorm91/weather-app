@@ -12,7 +12,7 @@ export const WeatherCurrentPredictionStyled = styled.div`
       gap: 21px;
       > span{
         font-size: 48px;
-        font-weight: 700;
+        font-family: var(--wa-font-family-semibold);
         position: relative;
         &:after{
           content: 'º';
@@ -59,7 +59,7 @@ export const WeatherCurrentPredictionStyled = styled.div`
             gap: 8px;
             > span{
               font-size: 16px;
-              font-weight: 700;
+              font-family: var(--wa-font-family-semibold);
               position: relative;
               &:after{
                 content: 'º';
@@ -73,7 +73,7 @@ export const WeatherCurrentPredictionStyled = styled.div`
               display: flex;
               gap: 2px;
               font-size: 16px;
-              font-weight: 700;
+              font-family: var(--wa-font-family-semibold);
               &:after{
                 content: "%";
               }
@@ -85,7 +85,7 @@ export const WeatherCurrentPredictionStyled = styled.div`
               display: flex;
               gap: 2px;
               font-size: 16px;
-              font-weight: 700;
+              font-family: var(--wa-font-family-semibold);
               &:last-child{
                 line-height: 0;
                 font-size: 14px;
@@ -100,7 +100,7 @@ export const WeatherCurrentPredictionStyled = styled.div`
               display: flex;
               gap: 2px;
               font-size: 16px;
-              font-weight: 700;
+              font-family: var(--wa-font-family-semibold);
               &:last-child{
                 line-height: 0;
                 font-size: 14px;

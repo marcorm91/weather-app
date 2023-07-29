@@ -31,7 +31,7 @@ export const WeatherContactStyled = styled.main`
         a{
           text-decoration: none;
           color: var(--wa-black);
-          font-weight: 700;
+          font-family: var(--wa-font-family-medium);
           display: flex;
           align-items: center;
           gap: 8px;

@@ -22,7 +22,7 @@ export const WeatherPanelRightInfoStyled = styled.div`
             > li{
                 font-size: 14px;
                 > span{
-                    font-weight: 700;
+                    font-family: var(--wa-font-family-semibold);
                 }
             }
         }

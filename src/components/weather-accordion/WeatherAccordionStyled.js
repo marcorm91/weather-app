@@ -9,10 +9,11 @@ export const WeatherAccordionStyled = styled.div`
         padding: 0;
         display: inline-flex;
         align-items: center;
-        font-weight: 700;
+        font-family: var(--wa-font-family-bold);
         background-color: transparent;
         border-radius: 0;
         margin: 10px 0;
+        color: var(--wa-black);
         &:before{
           width: 7px;
           height: 7px;

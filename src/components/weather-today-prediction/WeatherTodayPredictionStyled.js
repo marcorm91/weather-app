@@ -6,7 +6,7 @@ flex-direction: column;
 gap: 32px;
 > span{
   font-size: 14px;
-  font-weight: 700;
+  font-family: var(--wa-font-family-semibold);
 }
 > ul{
   display: flex;
@@ -36,7 +36,7 @@ gap: 32px;
       font-size: 14px;
     }
     > span{
-      font-weight: 700;
+      font-family: var(--wa-font-family-semibold);
     }
   }
 }

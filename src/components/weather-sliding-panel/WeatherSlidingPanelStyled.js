@@ -41,7 +41,7 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
       cursor: pointer;
     }
     h2{
-      font-weight: 700;
+      font-family: var(--wa-font-family-semibold);
       text-transform: uppercase;
       color: var(--wa-black);
       margin: 0;
@@ -66,7 +66,6 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
     justify-content: center;
     gap: 32px;
     h3{
-      font-weight: normal;
       margin: 0;
       font-size: 16px;
     }

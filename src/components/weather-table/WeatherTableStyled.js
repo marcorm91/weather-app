@@ -42,6 +42,8 @@ export const WeatherTableStyled = styled.div`
                 th{
                     border-bottom: 2px solid var(--wa-leadbelcher);
                     padding: 6px 4px;
+                    font-weight: normal;
+                    font-family: var(--wa-font-family-semibold);
                 }
             }
             @media (max-width: 767px){
@@ -62,14 +64,14 @@ export const WeatherTableStyled = styled.div`
                 box-sizing: border-box;
                 font-size: 13px;
                 label{
-                  font-weight: 700;
+                  font-family: var(--wa-font-family-semibold);
                   margin-right: 4px;
                 }
               }
               span{
                 &.no-results-text{
                     display: block;
-                    font-weight: 700;
+                    font-family: var(--wa-font-family-semibold);
                     font-size: 400;
                     margin: 16px 0;
                 }

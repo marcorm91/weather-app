@@ -11,5 +11,6 @@ export const WeatherFooterStyled = styled.footer`
   p{
     margin: 0;
     font-size: 12px;
+    font-family: var(--wa-font-family-light);
   }
 `

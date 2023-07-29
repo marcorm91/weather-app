@@ -43,7 +43,7 @@ export const WeatherNavbarStyled = styled.nav`
         }
         > span{
             color: var(--wa-deep-blue);
-            font-weight: 700;
+            font-family: var(--wa-font-family-semibold);
             font-size: 14px;
             margin: 0;
             text-transform: uppercase;
@@ -77,7 +77,7 @@ export const WeatherNavbarStyled = styled.nav`
                     font-size: 14px;
                 }
                 &.active{
-                    font-weight: 700;
+                    font-family: var(--wa-font-family-semibold);
                 }
             }
             &.block-2__wrapper{

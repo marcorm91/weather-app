@@ -7,7 +7,7 @@ export const WeatherCurrentSkyStyled = styled.div`
   align-items: center;
   > span{
     font-size: 14px;
-    font-weight: 700;
+    font-family: var(--wa-font-family-semibold);
     text-transform: uppercase;
   }
 `

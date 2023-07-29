@@ -21,7 +21,7 @@ export const WeatherAdStyled = styled.div`
     display: block;
     text-transform: uppercase;
     font-size: 14px;
-    font-weight: 700;
+    font-family: var(--wa-font-family-bold);
     @media (max-width: 767px){
       font-size: 13px;
     }

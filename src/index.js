@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import './utils/fonts.scss'
 import './utils/variables.scss'
 import './utils/utilities.scss'
 import './utils/icons.scss'

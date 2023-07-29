@@ -13,7 +13,7 @@ export const WeatherTabsStyled = styled.ul`
     position: relative;
     cursor: pointer;
     opacity: .6;
-    font-weight: 700;
+    font-family: var(--wa-font-family-semibold);
     display: flex;
     align-items: center;
     gap: 6px;

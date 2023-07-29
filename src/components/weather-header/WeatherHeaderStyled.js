@@ -23,7 +23,6 @@ export const WeatherHeaderStyled = styled.header`
       height: 36px;
     }
     > h1{
-      font-weight: 700;
       font-size: 16px;
       margin: 0;
       text-transform: uppercase;
