@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { media } from '../../utils/mediaqueries';
 
 export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: props.isOpen}))`
   display: ${props => (props.isOpen ? 'block' : 'none')};
@@ -11,9 +12,9 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
   top: 0;
   right: 0;
   z-index: 999;
-  @media (max-width: 767px){
+  ${media('mobile')`
     width: 100%;
-  }
+  `}
   &:after{
     content: "";
     position: fixed;
@@ -22,9 +23,9 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
     right: calc(100% - var(--width-panel));
     width: var(--width-panel);
     background-color: #00000050;
-    @media (max-width: 767px){
+    ${media('mobile')`
       display: none;
-    }
+    `}
   }
   header{
     background-color: var(--wa-dr-white);
@@ -46,13 +47,13 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
       color: var(--wa-black);
       margin: 0;
       font-size: 16px;
-      @media (max-width: 767px){
+      ${media('mobile')`
         font-size: 14px;
         max-width: 100%;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
-      }
+      `}
     }
   }
   .content__wrapper{
@@ -74,8 +75,8 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
     display: flex;
     justify-content: flex-end;
     padding: 24px;
-    @media (max-width: 767px){
+    ${media('mobile')`
       padding: 24px 16px;
-    }
+    `}
   }
 `

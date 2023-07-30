@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components'
+import { media } from '../../utils/mediaqueries'
 
 export const WeatherContactStyled = styled.main`
   min-height: calc(100vh - 68px - 30px);
@@ -9,10 +10,10 @@ export const WeatherContactStyled = styled.main`
   box-sizing: border-box;
   display: flex;
   gap: 32px;
-  @media (max-width: 767px){
+  ${media('mobile')`
     flex-direction: column-reverse;
     gap: 16px;
-  }
+  `}
   > .col__wrapper{
     h2, p{
       margin: 0 0 18px 0;
@@ -43,9 +44,9 @@ export const WeatherContactStyled = styled.main`
     }
     &:first-child{
       flex: 1 1 75%;
-      @media (max-width: 767px){
+      ${media('mobile')`
         flex: 1 1 100%;
-      }
+      `}
     }
     &:last-child{
       flex: 1 1 25%;
@@ -53,12 +54,12 @@ export const WeatherContactStyled = styled.main`
       top: 0;
       padding-left: 32px;
       border-left: 1px solid var(--wa-leadbelcher);
-      @media (max-width: 767px){
+      ${media('mobile')`
         flex: 1 1 100%;
         border-left: 0;
         padding-left: 0;
         position: static;
-      }
+      `}
     }
   }
 `;

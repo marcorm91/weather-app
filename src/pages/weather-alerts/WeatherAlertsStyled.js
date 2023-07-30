@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const WeatherAlertsStyled = styled.main`
   min-height: calc(100vh - 68px - 30px);

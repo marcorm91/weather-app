@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { media } from '../../utils/mediaqueries'
 
 export const WeatherTabsStyled = styled.ul`
   margin: 0;
@@ -17,9 +18,9 @@ export const WeatherTabsStyled = styled.ul`
     display: flex;
     align-items: center;
     gap: 6px;
-    @media (max-width: 767px){
+    ${media('mobile')`
       font-size: 14px;
-    }
+    `}
     &.active{
         color: var(--wa-black);
         opacity: 1;

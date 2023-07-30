@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { media } from '../../utils/mediaqueries';
 
 export const WeatherNavbarStyled = styled.nav`
     --width-navbar: 360px;
@@ -73,9 +74,9 @@ export const WeatherNavbarStyled = styled.nav`
                 display: inline-flex;
                 align-items: center;
                 gap: 8px;
-                @media (max-width: 767px){
+                ${media('mobile')`
                     font-size: 14px;
-                }
+                `}
                 &.active{
                     font-family: var(--wa-font-family-semibold);
                 }

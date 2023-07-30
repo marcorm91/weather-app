@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components'
+import { media } from '../../utils/mediaqueries'
 
 export const WeatherMoreInfoStyled = styled.main`
   min-height: calc(100vh - 68px - 30px);
@@ -25,9 +26,9 @@ export const WeatherMoreInfoStyled = styled.main`
       position: sticky;
       max-height: 100%;
       border-right: 8px solid var(--wa-deep-blue);
-      @media (max-width: 767px){
+      ${media('mobile')`
         display: none;
-      }
+      `}
       &:after{
         content: "";
         position: absolute;

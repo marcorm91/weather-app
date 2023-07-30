@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components'
+import { media } from '../../utils/mediaqueries'
 
 export const WeatherHomeStyled = styled.main`
   min-height: calc(100vh - 68px - 30px);
@@ -10,15 +11,15 @@ export const WeatherHomeStyled = styled.main`
   > h1{
     margin: 0;
     font-size: 24px;
-    @media (max-width: 767px){
+    ${media('mobile')`
       font-size: 18px;
-    }
+    `}
   }
   > ul{
     margin: 32px 0;
-    @media (max-width: 767px){
+    ${media('mobile')`
       margin: 16px 0;
-    }
+    `}
   }
   > .weather-ad__wrapper{
     position: fixed;

@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components'
+import { media } from '../../utils/mediaqueries'
 
 export const WeatherTableStyled = styled.div`
   margin: 14px 0;
@@ -6,19 +7,19 @@ export const WeatherTableStyled = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
-  @media (max-width: 767px){
+  ${media('mobile')`
     margin: 24px 0 0 0;
-  }
+  `}
   .table-top__wrapper{
     display: flex;
     align-self: flex-end;
     gap: 32px;
-    @media (max-width: 767px){
+    ${media('mobile')`
       flex-direction: column;
       gap: 16px;
       align-self: auto;
       width: 100%;
-    }
+    `}
     > input{
       min-width: 340px;
     }
@@ -27,9 +28,9 @@ export const WeatherTableStyled = styled.div`
     width: 100%;
     max-height: calc(100vh - 380px);
     overflow: auto;
-    @media (max-width: 767px){
+    ${media('mobile')`
       max-height: calc(100vh - 420px);
-    }
+    `}
     table{
         width: 100%;
         text-align: left;
@@ -46,18 +47,18 @@ export const WeatherTableStyled = styled.div`
                     font-family: var(--wa-font-family-semibold);
                 }
             }
-            @media (max-width: 767px){
+            ${media('mobile')`
               display: none;
-            }
+            `}
         }
         tbody{
           tr{
-            @media (max-width: 767px){
+            ${media('mobile')`
               display: flex;
               flex-direction: column;
-            }
+            `}
             td{
-              @media (max-width: 767px){
+              ${media('mobile')`
                 min-width: 100%;
                 border-bottom: none;
                 padding: 4px;
@@ -67,7 +68,7 @@ export const WeatherTableStyled = styled.div`
                   font-family: var(--wa-font-family-semibold);
                   margin-right: 4px;
                 }
-              }
+              `}
               span{
                 &.no-results-text{
                     display: block;

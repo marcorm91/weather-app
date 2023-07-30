@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { media } from '../../utils/mediaqueries';
 
 export const WeatherCurrentPredictionStyled = styled.div`
   display: flex;
@@ -37,15 +38,15 @@ export const WeatherCurrentPredictionStyled = styled.div`
         margin: 0;
         padding: 0;
         list-style: none;
-        @media (max-width: 767px){
+        ${media('mobile')`
           flex-wrap: wrap;
           gap: 16px 48px;
-        }
+        `}
         li{
           display: flex;
           align-items: center;
           gap: 4px;
-          @media (max-width: 767px){
+          ${media('mobile')`
             flex: 1 1 calc(50% - 24px);
             &:nth-child(odd){
               justify-content: flex-end;
@@ -53,7 +54,7 @@ export const WeatherCurrentPredictionStyled = styled.div`
             &:nth-child(even){
               justify-content: flex-start;
             }
-          }
+          `}
           &.temperature__wrapper{
             display: flex;
             gap: 8px;
@@ -113,9 +114,9 @@ export const WeatherCurrentPredictionStyled = styled.div`
             content: "|";
             display: inline-flex;
             margin-left: 28px;
-            @media (max-width: 767px){
+            ${media('mobile')`
               display: none;
-            }
+            `}
           }
         }
       }

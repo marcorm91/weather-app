@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const WeatherLoaderFullStyled = styled.div`
     animation: fadeIn 1s;

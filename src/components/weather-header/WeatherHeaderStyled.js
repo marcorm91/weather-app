@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components'
+import { media } from '../../utils/mediaqueries'
 
 export const WeatherHeaderStyled = styled.header`
   height: 60px;
@@ -27,9 +28,9 @@ export const WeatherHeaderStyled = styled.header`
       margin: 0;
       text-transform: uppercase;
       letter-spacing: 2px;
-      @media (max-width: 767px){
+      ${media('mobile')`
         display: none;
-      }
+      `}
     }
   }
   .actions__wrapper{

@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components'
+import { media } from '../../utils/mediaqueries'
 
 export const WeatherAdStyled = styled.div`
   height: 40px;
@@ -10,9 +11,9 @@ export const WeatherAdStyled = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  @media (max-width: 767px){
+  ${media('mobile')`
     gap: 8px;
-  }
+  `}
   > div{
     flex: 1; // Loading
   }
@@ -22,9 +23,9 @@ export const WeatherAdStyled = styled.div`
     text-transform: uppercase;
     font-size: 14px;
     font-family: var(--wa-font-family-bold);
-    @media (max-width: 767px){
+    ${media('mobile')`
       font-size: 13px;
-    }
+    `}
   }
   .ad-text__wrapper{
     overflow: hidden;
@@ -49,10 +50,9 @@ export const WeatherAdStyled = styled.div`
     line-height: 0;
     color: var(--wa-black);
   }
-
-  @media (max-width: 767px){
+  ${media('mobile')`
     > a{
       display: none;
     }
-  }
+  `}
 `
