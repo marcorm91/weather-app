@@ -1,8 +1,8 @@
 html, body{
     font-family: var(--wa-font-family-regular);
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
+    font-size: var(--wa-font-size-md);
+    margin: var(--wa-spacing-00);
+    padding: var(--wa-spacing-00);
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -25,13 +25,13 @@ input{
     background-color: transparent;
     border: none;
     border-bottom: 2px solid #00000040;
-    padding: 0;
+    padding: var(--wa-spacing-00);
     box-shadow: none;
     outline: none;
     transition: all .8s ease-in-out;
-    font-size: 16px;
+    font-size: var(--wa-font-size-md);
     box-sizing: border-box;
-    padding: 4px 0;
+    padding: var(--wa-spacing-02) var(--wa-spacing-00);
     &:focus{
         border-bottom: 2px solid var(--wa-deep-blue);
     }
@@ -44,11 +44,11 @@ select{
     background-color: transparent;
     border: none;
     border-bottom: 2px solid #00000040;
-    padding: 0;
+    padding: var(--wa-spacing-00);
     box-shadow: none;
     outline: none;
     transition: all .8s ease-in-out;
-    font-size: 16px;
+    font-size: var(--wa-font-size-md);
     box-sizing: border-box;
     &:focus{
         border-bottom: 2px solid var(--wa-deep-blue);
@@ -58,12 +58,12 @@ select{
 button, a{
     &.btn{
         min-width: 150px;
-        padding: 8px 16px;
+        padding: var(--wa-spacing-03) var(--wa-spacing-04);
         text-transform: uppercase;
-        border-radius: 4px;
+        border-radius: var(--wa-size-border-radius-01);
         border: none;
         cursor: pointer;
-        font-size: 16px;
+        font-size: var(--wa-font-size-md);
         transition: all .5s ease;
         text-decoration: none;
         &.btn-primary{
@@ -77,7 +77,7 @@ button, a{
     &.btn-small{
         font-size: 14px;
         min-height: 32px;
-        padding: 0 8px;
+        padding: var(--wa-spacing-00) var(--wa-spacing-03);
     }
 }
 
@@ -92,8 +92,8 @@ hr{
 
 .loading-skeleton{
     overflow: hidden;
-    background: #D0D0D0;
-    border-radius: 4px;
+    background: var(--wa-leadbelcher);
+    border-radius: var(--wa-size-border-radius-01);
     &:before{
         content: "";
         display: block;

@@ -5,22 +5,22 @@ export const WeatherPanelRightInfoStyled = styled.div`
         position: absolute;
         background-color: transparent;
         border: none;
-        left: -24px;
+        left: calc(-1 * var(--wa-spacing-05));
         width: 48px;
         height: 48px;
-        padding: 0;
+        padding: var(--wa-spacing-00);
         cursor: pointer;
     }
     ul{
         &.info__wrapper{
             list-style: none;
-            padding: 0;
-            margin: 16px 0;
+            padding: var(--wa-spacing-00);
+            margin: var(--wa-spacing-04) var(--wa-spacing-00);
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: var(--wa-spacing-03);
             > li{
-                font-size: 14px;
+                font-size: var(--wa-font-size-sm);
                 > span{
                     font-family: var(--wa-font-family-semibold);
                 }
@@ -32,11 +32,11 @@ export const WeatherPanelRightInfoStyled = styled.div`
         ul{
             flex-direction: row;
             flex-wrap: wrap;
-            gap: 0;
-            margin: 16px 0;
+            gap: var(--wa-spacing-00);
+            margin: var(--wa-spacing-04) var(--wa-spacing-00);
             > li{
-                max-width: calc(50% - 16px);
-                flex: 1 1 calc(50% - 16px);
+                max-width: calc(50% - var(--wa-spacing-04));
+                flex: 1 1 calc(50% - var(--wa-spacing-04));
                 display: flex;
                 justify-content: center;
                 &:not(:last-child):after{
@@ -65,12 +65,12 @@ export const WeatherListSkeletonStyled = styled.div`
 export const WeatherCurrentPredictionSkeletonStyled = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    margin-top: 16px;
+    gap: var(--wa-spacing-04);
+    margin-top: var(--wa-spacing-04);
     > div:first-child{
         width: 120px;
         height: 120px;
-        margin: 0 auto;
+        margin: var(--wa-spacing-00) auto;
     }
     > div:last-child{
         flex: 1;

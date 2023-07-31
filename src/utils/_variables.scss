@@ -26,5 +26,52 @@
     --wa-font-family-bold: 'OpenSans-Bold';
     --wa-font-family-bolditalic: 'OpenSans-BoldItalic';
 
+    --wa-font-size-2xs: 0.625rem;
+    --wa-font-size-xs: 0.75rem;
+    --wa-font-size-sm: 0.875rem;
+    --wa-font-size-md: 1rem;
+    --wa-font-size-lg: 1.125rem;
+    --wa-font-size-xl: 1.25rem;
+    --wa-font-size-2xl: 1.5rem;
+    --wa-font-size-3xl: 1.75rem;
+    --wa-font-size-4xl: 2rem; 
+    --wa-font-size-5xl: 2.25rem;
+    --wa-font-size-6xl: 2.5rem;
+    --wa-font-size-7xl: 3rem;
+
+    --wa-line-height-0: 0;
+    --wa-line-height-1: 1.5;
+    --wa-line-height-2: 1.4;
+    --wa-line-height-3: 1.2;
+
+    --wa-size-border-radius-00: 0;
+    --wa-size-border-radius-01: 0.25rem;
+    --wa-size-border-radius-02: 0.5rem;
+    --wa-size-border-radius-03: 1rem;
+
+    --wa-border-width-00: 0;
+    --wa-border-width-01: 0.0625rem;
+    --wa-border-width-02: 0.125rem;
+    --wa-border-width-03: 0.25rem;
+    --wa-border-width-03: 0.5rem;
+
+    --wa-space-unit: 0.5rem;
+    --wa-spacing-00: calc(var(--wa-space-unit) * 0); // 0
+    --wa-spacing-01: calc(var(--wa-space-unit) / 4); // 0.125
+    --wa-spacing-02: calc(var(--wa-space-unit) / 2); // 0.25
+    --wa-spacing-03: calc(var(--wa-space-unit) * 1); // 0.5
+    --wa-spacing-04: calc(var(--wa-space-unit) * 2); // 1
+    --wa-spacing-05: calc(var(--wa-space-unit) * 3); // 1.5
+    --wa-spacing-06: calc(var(--wa-space-unit) * 4); // 2
+    --wa-spacing-07: calc(var(--wa-space-unit) * 5); // 2.5
+    --wa-spacing-08: calc(var(--wa-space-unit) * 6); // 3
+    --wa-spacing-09: calc(var(--wa-space-unit) * 12); // 6
+    --wa-spacing-10: calc(var(--wa-space-unit) * 24); // 12
+
+    --wa-footer-height: 1.875rem;
+    --wa-header-height: calc(3.125rem + 0.5rem); // Header + box-shadow
+    --wa-width-main-navbar: 22.5rem;
+    --wa-width-panel-right: 16rem;
+
 }
 

@@ -3,12 +3,12 @@ import styled from 'styled-components'
 export const WeatherTableRowActions = styled.div`
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  gap: var(--wa-spacing-03);
   > button{
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 18px;
+    font-size: var(--wa-font-size-lg);
     width: 32px;
     outline: none;
     &.fav-button{

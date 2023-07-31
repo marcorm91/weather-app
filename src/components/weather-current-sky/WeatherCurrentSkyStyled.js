@@ -6,7 +6,7 @@ export const WeatherCurrentSkyStyled = styled.div`
   flex-direction: column;
   align-items: center;
   > span{
-    font-size: 14px;
+    font-size: var(--wa-font-size-sm);
     font-family: var(--wa-font-family-semibold);
     text-transform: uppercase;
   }

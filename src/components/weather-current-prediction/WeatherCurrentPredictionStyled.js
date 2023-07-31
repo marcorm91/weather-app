@@ -5,20 +5,20 @@ export const WeatherCurrentPredictionStyled = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--wa-spacing-02);
     > div:first-child{
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 21px;
+      gap: var(--wa-spacing-05);
       > span{
-        font-size: 48px;
+        font-size: var(--wa-font-size-7xl);
         font-family: var(--wa-font-family-semibold);
         position: relative;
         &:after{
           content: 'º';
           position: absolute;
-          font-size: 26px;
+          font-size: var(--wa-font-size-2xl);
         }
       }
       > div{
@@ -26,7 +26,7 @@ export const WeatherCurrentPredictionStyled = styled.div`
         align-items: center;
         flex-direction: column;
         > span{
-          font-size: 12px;
+          font-size: var(--wa-font-size-xs);
         }
       }
     }
@@ -34,18 +34,18 @@ export const WeatherCurrentPredictionStyled = styled.div`
       ul{
         display: flex;
         justify-content: center;
-        gap: 32px;
-        margin: 0;
+        gap: var(--wa-spacing-06);
+        margin: var(--wa-spacing-00);
         padding: 0;
         list-style: none;
         ${media('mobile')`
           flex-wrap: wrap;
-          gap: 16px 48px;
+          gap: var(--wa-spacing-04) var(--wa-spacing-08);
         `}
         li{
           display: flex;
           align-items: center;
-          gap: 4px;
+          gap: var(--wa-spacing-02);
           ${media('mobile')`
             flex: 1 1 calc(50% - 24px);
             &:nth-child(odd){
@@ -57,23 +57,23 @@ export const WeatherCurrentPredictionStyled = styled.div`
           `}
           &.temperature__wrapper{
             display: flex;
-            gap: 8px;
+            gap: var(--wa-spacing-03);
             > span{
-              font-size: 16px;
+              font-size: var(--wa-font-size-md);
               font-family: var(--wa-font-family-semibold);
               position: relative;
               &:after{
                 content: 'º';
                 position: absolute;
-                font-size: 12px;
+                font-size: var(--wa-font-size-xs);
               }
             }
           }
           &.humidity__wrapper{
             > span{
               display: flex;
-              gap: 2px;
-              font-size: 16px;
+              gap: var(--wa-spacing-01);
+              font-size: var(--wa-font-size-md);
               font-family: var(--wa-font-family-semibold);
               &:after{
                 content: "%";
@@ -81,31 +81,31 @@ export const WeatherCurrentPredictionStyled = styled.div`
             }
           }
           &.wind__wrapper{
-            gap: 12px;
+            gap: var(--wa-spacing-03);
             > span{
               display: flex;
-              gap: 2px;
-              font-size: 16px;
+              gap: var(--wa-spacing-01);
+              font-size: var(--wa-font-size-md);
               font-family: var(--wa-font-family-semibold);
               &:last-child{
-                line-height: 0;
-                font-size: 14px;
-                gap: 0;
+                line-height: var(--wa-line-height-0);
+                font-size: var(--wa-font-size-sm);
+                gap: var(--wa-spacing-00);
                 align-items: center;
               }
             }
           }
           &.precipitation__wrapper{
-            gap: 12px;
+            gap: var(--wa-spacing-03);
             > span{
               display: flex;
-              gap: 2px;
-              font-size: 16px;
+              gap: var(--wa-spacing-01);
+              font-size: var(--wa-font-size-md);
               font-family: var(--wa-font-family-semibold);
               &:last-child{
-                line-height: 0;
-                font-size: 14px;
-                gap: 0;
+                line-height: var(--wa-line-height-0);
+                font-size: var(--wa-font-size-sm);
+                gap: var(--wa-spacing-00);
                 align-items: center;
               }
             }
@@ -113,7 +113,7 @@ export const WeatherCurrentPredictionStyled = styled.div`
           &:not(:last-child):after{
             content: "|";
             display: inline-flex;
-            margin-left: 28px;
+            margin-left: var(--wa-spacing-05);
             ${media('mobile')`
               display: none;
             `}

@@ -2,24 +2,24 @@ import styled from 'styled-components'
 import { media } from '../../utils/mediaqueries'
 
 export const WeatherContactStyled = styled.main`
-  min-height: calc(100vh - 68px - 30px);
-  max-height: calc(100vh - 68px - 30px);
+  min-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
+  max-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
   overflow: auto;
   background-color: var(--wa-dr-white);
-  padding: 16px;
+  padding: var(--wa-spacing-04);
   box-sizing: border-box;
   display: flex;
-  gap: 32px;
+  gap: var(--wa-spacing-06);
   ${media('mobile')`
     flex-direction: column-reverse;
-    gap: 16px;
+    gap: var(--wa-spacing-04);
   `}
   > .col__wrapper{
     h2, p{
-      margin: 0 0 18px 0;
+      margin: var(--wa-spacing-00) 0 var(--wa-spacing-04) 0;
     }
     p, a, ul{
-      font-size: 14px;
+      font-size: var(--wa-font-size-sm);
     }
     ul{
       list-style: square;
@@ -27,15 +27,15 @@ export const WeatherContactStyled = styled.main`
         list-style: none;
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        padding: 0;
+        gap: var(--wa-spacing-03);
+        padding: var(--wa-spacing-00);
         a{
           text-decoration: none;
           color: var(--wa-black);
           font-family: var(--wa-font-family-medium);
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: var(--wa-spacing-03);
           svg{
             color: var(--wa-deep-blue);
           }
@@ -51,13 +51,13 @@ export const WeatherContactStyled = styled.main`
     &:last-child{
       flex: 1 1 25%;
       position: sticky;
-      top: 0;
-      padding-left: 32px;
-      border-left: 1px solid var(--wa-leadbelcher);
+      top: var(--wa-spacing-00);
+      padding-left: var(--wa-spacing-06);
+      border-left: var(--wa-border-width-01) solid var(--wa-leadbelcher);
       ${media('mobile')`
         flex: 1 1 100%;
         border-left: 0;
-        padding-left: 0;
+        padding-left: var(--wa-spacing-00);
         position: static;
       `}
     }

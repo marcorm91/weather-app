@@ -2,42 +2,45 @@ import styled from 'styled-components'
 import { media } from '../../utils/mediaqueries'
 
 export const WeatherMoreInfoStyled = styled.main`
-  min-height: calc(100vh - 68px - 30px);
-  max-height: calc(100vh - 68px - 30px);
+  min-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
+  max-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
   overflow: auto;
   background-color: var(--wa-dr-white);
-  padding: 16px;
+  padding: var(--wa-spacing-04);
   box-sizing: border-box;
   display: flex;
-  gap: 16px;
+  gap: var(--wa-spacing-04);
   > .col__wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: var(--wa-spacing-04);
     &:first-child{
       flex: 1 1 60%;
       > h2{
-        margin: 0;
+        margin: var(--wa-spacing-00);
       }
     }
     &:last-child{
       flex: 1 1 40%;
       background-color: var(--wa-deep-blue-op10);
-      padding: 16px 32px;
+      padding: var(--wa-spacing-04) var(--wa-spacing-06);
       box-sizing: border-box;
-      border-radius: 8px;
+      border-radius: var(--wa-size-border-radius-02);
       position: sticky;
       max-height: 100%;
-      border-right: 8px solid var(--wa-deep-blue);
+      border-right: var(--wa-border-width-03) solid var(--wa-deep-blue);
       ${media('mobile')`
         display: none;
       `}
       &:after{
         content: "";
         position: absolute;
-        left: -8px;
-        bottom: 0;
-        top: 0;
+        left: calc(-1 * var(--wa-spacing-03));
+        bottom: var(--wa-spacing-00);
+        top: var(--wa-spacing-00);
         margin: auto;
-        width: 16px;
-        height: 16px;
+        width: var(--wa-spacing-04);
+        height: var(--wa-spacing-04);
         background-color: var(--wa-dr-white);
         transform: rotate(45deg);
       }
@@ -53,7 +56,7 @@ export const WeatherMoreInfoStyled = styled.main`
     > .col__wrapper:last-child{
       max-width: 140px;
       flex: 1;
-      padding: 16px 0;
+      padding: var(--wa-spacing-04) var(--wa-spacing-00);
       .btn-minimized-panel{
         transform: rotate(180deg);
       }
@@ -63,19 +66,19 @@ export const WeatherMoreInfoStyled = styled.main`
       .separator + div{
         > div:first-child{ // Current temp
           flex-direction: column;
-          gap: 0;
+          gap: var(--wa-spacing-00);
           > span{
-            font-size: 36px;
+            font-size: var(--wa-font-size-5xl);
           }
         }
         > div:last-child{ // Current values (humidity, wind, ...)
           ul{
             flex-direction: column;
             align-items: center;
-            gap: 8px;
-            margin: 32px 0;
+            gap: var(--wa-spacing-03);
+            margin: var(--wa-spacing-06) var(--wa-spacing-00);
             li{
-              margin: 0px;
+              margin: var(--wa-spacing-00);
               width: 100%;
               max-width: 100%;
               flex: 1 1 100%;
@@ -87,11 +90,11 @@ export const WeatherMoreInfoStyled = styled.main`
               &.precipitation__wrapper{
                 > span{
                   display: block;
-                  margin-top: 12px;
+                  margin-top: var(--wa-spacing-03);
                 }
               }
               span{
-                font-size: 14px;
+                font-size: var(--wa-font-size-sm);
               }
               svg{
                 display: none;

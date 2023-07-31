@@ -2,15 +2,13 @@ import styled from 'styled-components'
 import { media } from '../../utils/mediaqueries'
 
 export const WeatherTabsStyled = styled.ul`
-  margin: 0;
-  padding: 0;
   list-style: none;
   display: flex;
-  border-bottom: 4px solid var(--wa-platinum);
-  padding-bottom: 8px;
+  border-bottom: var(--wa-border-width-03) solid var(--wa-platinum);
+  padding: var(--wa-spacing-00) var(--wa-spacing-00) var(--wa-spacing-03) var(--wa-spacing-00);
   user-select: none;
   > li{
-    padding: 0 16px;
+    padding: var(--wa-spacing-00) var(--wa-spacing-04);
     position: relative;
     cursor: pointer;
     opacity: .6;
@@ -19,7 +17,7 @@ export const WeatherTabsStyled = styled.ul`
     align-items: center;
     gap: 6px;
     ${media('mobile')`
-      font-size: 14px;
+      font-size: var(--wa-font-size-sm);
     `}
     &.active{
         color: var(--wa-black);
@@ -28,9 +26,9 @@ export const WeatherTabsStyled = styled.ul`
         &:after{
             content: "";
             position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -12px;
+            left: var(--wa-spacing-00);
+            right: var(--wa-spacing-00);
+            bottom: calc(-1 * var(--wa-spacing-04));
             height: 8px;
             background-color: var(--wa-deep-blue);
         }

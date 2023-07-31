@@ -5,14 +5,14 @@ export const WeatherAdStyled = styled.div`
   height: 40px;
   background-color: var(--wa-ad);
   box-shadow: 0px 1px 8px 1px var(--wa-gray);
-  padding: 8px 16px;
+  padding: var(--wa-spacing-03) var(--wa-spacing-04);
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: var(--wa-spacing-04);
   ${media('mobile')`
-    gap: 8px;
+    gap: var(--wa-spacing-03);
   `}
   > div{
     flex: 1; // Loading
@@ -21,10 +21,10 @@ export const WeatherAdStyled = styled.div`
     white-space: nowrap;
     display: block;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: var(--wa-font-size-sm);
     font-family: var(--wa-font-family-bold);
     ${media('mobile')`
-      font-size: 13px;
+      font-size: var(--wa-font-size-xs);
     `}
   }
   .ad-text__wrapper{
@@ -32,11 +32,11 @@ export const WeatherAdStyled = styled.div`
     > span{
       user-select: none;
       display: inline-block;
-      line-height: normal;
+      line-height: var(--wa-line-height-2);
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
-      font-size: 13px;
+      font-size: var(--wa-font-size-sm);
       vertical-align: middle;
       animation: scrollText 100s linear infinite;
     }
@@ -44,10 +44,10 @@ export const WeatherAdStyled = styled.div`
   > button, > a{
     background-color: transparent;
     border: none;
-    font-size: 22px;
-    padding: 0;
+    font-size: var(--wa-font-size-xl);
+    padding: var(--wa-spacing-00);
     cursor: pointer;
-    line-height: 0;
+    line-height: var(--wa-line-height-0);
     color: var(--wa-black);
   }
   ${media('mobile')`

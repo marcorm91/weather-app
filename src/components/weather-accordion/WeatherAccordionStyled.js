@@ -6,13 +6,13 @@ export const WeatherAccordionStyled = styled.div`
     .accordion__item{
       .accordion__button{
         width: auto;
-        padding: 0;
+        padding: var(--wa-spacing-00);
         display: inline-flex;
         align-items: center;
         font-family: var(--wa-font-family-bold);
         background-color: transparent;
-        border-radius: 0;
-        margin: 10px 0;
+        border-radius: var(--wa-size-border-radius-00);
+        margin: var(--wa-spacing-03) var(--wa-spacing-00);
         color: var(--wa-black);
         &:before{
           width: 7px;
@@ -24,11 +24,11 @@ export const WeatherAccordionStyled = styled.div`
       }
     }
     .accordion__panel{
-      font-size: 14px;
-      line-height: 1.5;
-      padding: 0 16px;
-      margin: 8px 4px;
-      border-left: 1px solid var(--wa-leadbelcher);
+      font-size: var(--wa-font-size-sm);
+      line-height: var(--wa-line-height-1);
+      padding: var(--wa-spacing-00) var(--wa-spacing-04);
+      margin: var(--wa-spacing-03) var(--wa-spacing-02);
+      border-left: var(--wa-border-width-01) solid var(--wa-leadbelcher);
       text-align: justify;
     }
   }

@@ -3,14 +3,13 @@ import { media } from '../../utils/mediaqueries';
 
 export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: props.isOpen}))`
   display: ${props => (props.isOpen ? 'block' : 'none')};
-  --width-panel: 256px;
-  width: calc(100% - var(--width-panel));
+  width: calc(100% - var(--wa-width-panel-right));
   box-shadow: -2px 0px 2px 1px #00000020;
   height: 100vh;
-  background-color: #fff;
+  background-color: var(--wa-white);
   position: fixed;
-  top: 0;
-  right: 0;
+  top: var(--wa-spacing-00);
+  right: var(--wa-spacing-00);
   z-index: 999;
   ${media('mobile')`
     width: 100%;
@@ -18,10 +17,10 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
   &:after{
     content: "";
     position: fixed;
-    top: 0;
-    bottom: 0;
-    right: calc(100% - var(--width-panel));
-    width: var(--width-panel);
+    top: var(--wa-spacing-00);
+    bottom: var(--wa-spacing-00);
+    right: calc(100% - var(--wa-width-panel-right));
+    width: var(--wa-width-panel-right);
     background-color: #00000050;
     ${media('mobile')`
       display: none;
@@ -29,14 +28,14 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
   }
   header{
     background-color: var(--wa-dr-white);
-    padding: 16px;
+    padding: var(--wa-spacing-04);
     box-shadow: 1px 3px 2px 0px var(--wa-leadbelcher);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 32px;
+    gap: var(--wa-spacing-06);
     > button{
-      font-size: 22px;
+      font-size: var(--wa-font-size-2xl);
       background-color: transparent;
       border: none;
       cursor: pointer;
@@ -45,10 +44,10 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
       font-family: var(--wa-font-family-semibold);
       text-transform: uppercase;
       color: var(--wa-black);
-      margin: 0;
-      font-size: 16px;
+      margin: var(--wa-spacing-00);
+      font-size: var(--wa-font-size-md);
       ${media('mobile')`
-        font-size: 14px;
+        font-size: var(--wa-font-size-sm);
         max-width: 100%;
         text-overflow: ellipsis;
         overflow: hidden;
@@ -59,24 +58,24 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
   .content__wrapper{
     height: calc(100% - 150px);
     overflow: auto;
-    padding: 24px;
+    padding: var(--wa-spacing-05);
     box-sizing: border-box;
     text-align: left;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 32px;
+    gap: var(--wa-spacing-06);
     h3{
-      margin: 0;
-      font-size: 16px;
+      margin: var(--wa-spacing-00);
+      font-size: var(--wa-font-size-md);
     }
   }
   .footer__wrapper{
     display: flex;
     justify-content: flex-end;
-    padding: 24px;
+    padding: var(--wa-spacing-05);
     ${media('mobile')`
-      padding: 24px 16px;
+      padding: 24px var(--wa-spacing-04);
     `}
   }
 `

@@ -4,6 +4,7 @@ import { WeatherMoreInfoStyled } from './WeatherMoreInfoStyled'
 import WeatherPanelRightInfo from '../../components/weather-panel-right-info/WeatherPanelRightInfo'
 import { fetchHourlyPrediction } from '../../resources/services/APIs/hourlyPrediction'
 import { fetchDiaryPrediction } from '../../resources/services/APIs/diaryPrediction'
+import WeatherDetailInfo from '../../components/weather-detail-info/WeatherDetailInfo'
 
 const WeatherMoreInfo = () => {
   const location = useLocation()
@@ -36,6 +37,7 @@ const WeatherMoreInfo = () => {
     <WeatherMoreInfoStyled className={isMinimized ? 'minimized-panel' : ''}>
       <div className='col__wrapper'>
         <h2>{data.NAME}, {data.PROV}, {data.COMUNIDAD}</h2>
+        <WeatherDetailInfo />
       </div>
       <div className='col__wrapper'>
         <WeatherPanelRightInfo

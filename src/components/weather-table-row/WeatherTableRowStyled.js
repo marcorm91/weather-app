@@ -5,8 +5,8 @@ export const WeatherTableRowStyled = styled.tr`
         transition: ease-in .2s;
         user-select: none;
         td{
-            padding: 6px 4px;
-            border-bottom: 1px solid var(--wa-platinum);
+            padding: var(--wa-spacing-03) var(--wa-spacing-02);
+            border-bottom: var(--wa-border-width-01) solid var(--wa-platinum);
             &:last-child{
                 text-align: right;
             }
@@ -14,7 +14,7 @@ export const WeatherTableRowStyled = styled.tr`
         &:nth-child(even){
             background-color: #CACACA25;
             td{
-                border-bottom: 1px solid var(--wa-leadbelcher);
+                border-bottom: var(--wa-border-width-01) solid var(--wa-leadbelcher);
             }
         }
         &:hover{
