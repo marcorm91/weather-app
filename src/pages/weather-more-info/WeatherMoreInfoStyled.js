@@ -18,6 +18,9 @@ export const WeatherMoreInfoStyled = styled.main`
       flex: 1 1 60%;
       > h2{
         margin: var(--wa-spacing-00);
+        ${media('mobile')`
+          font-size: var(--wa-font-size-lg);
+        `}
       }
     }
     &:last-child{
@@ -28,7 +31,7 @@ export const WeatherMoreInfoStyled = styled.main`
       border-radius: var(--wa-size-border-radius-02);
       position: sticky;
       max-height: 100%;
-      border-right: var(--wa-border-width-03) solid var(--wa-deep-blue);
+      border-right: var(--wa-border-width-04) solid var(--wa-deep-blue);
       ${media('mobile')`
         display: none;
       `}

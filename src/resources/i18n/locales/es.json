@@ -66,6 +66,12 @@
             "MUNICIPALITY": "Municipio",
             "PROVINCE": "Provincia",
             "COMUNITY": "Comunidad"
+        },
+        "MAIN": {
+            "TABS": {
+                "HOURLY_FORECAST": "Predicción por horas",
+                "DAILY_FORECAST": "Predicción por días"
+            }
         }
     }
 }
