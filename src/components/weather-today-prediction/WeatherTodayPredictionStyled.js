@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const WeatherTodayPredictionStyled = styled.div`
 display: flex;
 flex-direction: column;
-gap: 32px;
+gap: var(--wa-spacing-06);
 > span{
   font-size: var(--wa-font-size-sm);
   font-family: var(--wa-font-family-semibold);
@@ -12,7 +12,7 @@ gap: 32px;
   display: flex;
   align-items: center;
   margin: var(--wa-spacing-00);
-  padding: 0;
+  padding: var(--wa-spacing-00);
   list-style: none;
   gap: var(--wa-spacing-04);
   max-width: 100%;

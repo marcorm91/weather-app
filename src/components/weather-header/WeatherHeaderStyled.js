@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { media } from '../../utils/mediaqueries'
 
 export const WeatherHeaderStyled = styled.header`
-  height: 50px;
+  height: var(--wa-header-height);
   background-color: var(--wa-deep-blue);
   color: #ffffff;
   padding: var(--wa-spacing-00) var(--wa-spacing-04);
@@ -10,7 +10,7 @@ export const WeatherHeaderStyled = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0px 1px 8px 1px var(--wa-gray);
+  box-shadow: var(--wa-box-shadow-01);
   margin-bottom: var(--wa-spacing-03);
   .title__wrapper{
     display: flex;
@@ -20,14 +20,14 @@ export const WeatherHeaderStyled = styled.header`
     color: var(--wa-white);
     text-decoration: none;
     > div{
-      width: 36px;
-      height: 36px;
+      width: 2.25rem;
+      height: 2.25rem;
     }
     > h1{
       font-size: var(--wa-font-size-md);
       margin: var(--wa-spacing-00);
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 0.125rem;
       ${media('mobile')`
         display: none;
       `}

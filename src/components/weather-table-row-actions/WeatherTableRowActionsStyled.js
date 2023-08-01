@@ -9,7 +9,7 @@ export const WeatherTableRowActions = styled.div`
     border: none;
     cursor: pointer;
     font-size: var(--wa-font-size-lg);
-    width: 32px;
+    width: 2rem;
     outline: none;
     &.fav-button{
       color: var(--wa-leadbelcher);

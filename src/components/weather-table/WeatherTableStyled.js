@@ -13,7 +13,7 @@ export const WeatherTableStyled = styled.div`
   .table-top__wrapper{
     display: flex;
     align-self: flex-end;
-    gap: 32px;
+    gap: var(--wa-spacing-06);
     ${media('mobile')`
       flex-direction: column;
       gap: var(--wa-spacing-04);
@@ -21,7 +21,7 @@ export const WeatherTableStyled = styled.div`
       width: 100%;
     `}
     > input{
-      min-width: 340px;
+      min-width: 21.25rem;
     }
   }
   .table__wrapper{

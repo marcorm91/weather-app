@@ -11,7 +11,7 @@ export const WeatherNavbarStyled = styled.nav`
     min-width: var(--wa-width-main-navbar);
     width: var(--wa-width-main-navbar);
     max-width: var(--wa-width-main-navbar);
-    box-shadow: 0 1px 8px var(--wa-gray);
+    box-shadow: var(--wa-box-shadow-01);
     &:after{
         content: "";
         position: fixed;
@@ -38,8 +38,8 @@ export const WeatherNavbarStyled = styled.nav`
         left: var(--wa-spacing-04);
         top: var(--wa-spacing-04);
         > div{
-            width: 36px;
-            height: 36px;
+            width: 2.25rem;
+            height: 2.25rem;
         }
         > span{
             color: var(--wa-deep-blue);

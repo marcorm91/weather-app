@@ -2,11 +2,15 @@
 
     --wa-white: #FFFFFF;
     --wa-black: #000000;
+    --wa-black-op20: #00000020;
+    --wa-black-op30: #00000030;
     --wa-deep-blue: #000271;
     --wa-deep-blue-op10: #00027110;
     --wa-gray: #808080;
     --wa-dr-white: #FAFAFA;
     --wa-leadbelcher: #CACACA;
+    --wa-leadbelcher-op25: #CACACA25;
+    --wa-leadbelcher-op50: #CACACA50;
     --wa-platinum: #E8E8E8;
     --wa-cold-blue: #565791;
     --wa-red: #FF0000;
@@ -55,6 +59,10 @@
     --wa-border-width-03: 0.25rem;
     --wa-border-width-03: 0.5rem;
 
+    --wa-box-shadow-01: 0 0.0625rem 0.5rem 0.0625rem var(--wa-gray);
+    --wa-box-shadow-02: 0.0625rem 0.1875rem 0.125rem 0 var(--wa-leadbelcher);
+    --wa-box-shadow-03: -0.125rem 0 0.125rem 0.0625rem var(---wa-black-op20);
+
     --wa-space-unit: 0.5rem;
     --wa-spacing-00: calc(var(--wa-space-unit) * 0); // 0
     --wa-spacing-01: calc(var(--wa-space-unit) / 4); // 0.125
@@ -69,7 +77,8 @@
     --wa-spacing-10: calc(var(--wa-space-unit) * 24); // 12
 
     --wa-footer-height: 1.875rem;
-    --wa-header-height: calc(3.125rem + 0.5rem); // Header + box-shadow
+    --wa-header-height: 3.125rem;
+    --wa-header-box-height: calc(var(--wa-header-height) + 0.5rem); // Header + box-shadow
     --wa-width-main-navbar: 22.5rem;
     --wa-width-panel-right: 16rem;
 

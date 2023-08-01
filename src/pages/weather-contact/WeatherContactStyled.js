@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { media } from '../../utils/mediaqueries'
 
 export const WeatherContactStyled = styled.main`
-  min-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
-  max-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
+  min-height: calc(100vh - var(--wa-header-box-height) - var(--wa-footer-height));
+  max-height: calc(100vh - var(--wa-header-box-height) - var(--wa-footer-height));
   overflow: auto;
   background-color: var(--wa-dr-white);
   padding: var(--wa-spacing-04);
@@ -16,7 +16,7 @@ export const WeatherContactStyled = styled.main`
   `}
   > .col__wrapper{
     h2, p{
-      margin: var(--wa-spacing-00) 0 var(--wa-spacing-04) 0;
+      margin: var(--wa-spacing-00) var(--wa-spacing-00) var(--wa-spacing-04) var(--wa-spacing-00);
     }
     p, a, ul{
       font-size: var(--wa-font-size-sm);
@@ -56,7 +56,7 @@ export const WeatherContactStyled = styled.main`
       border-left: var(--wa-border-width-01) solid var(--wa-leadbelcher);
       ${media('mobile')`
         flex: 1 1 100%;
-        border-left: 0;
+        border-left: var(--wa-border-width-00);
         padding-left: var(--wa-spacing-00);
         position: static;
       `}

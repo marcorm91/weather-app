@@ -6,8 +6,8 @@ export const WeatherPanelRightInfoStyled = styled.div`
         background-color: transparent;
         border: none;
         left: calc(-1 * var(--wa-spacing-05));
-        width: 48px;
-        height: 48px;
+        width: 3rem;
+        height: 3rem;
         padding: var(--wa-spacing-00);
         cursor: pointer;
     }
@@ -49,14 +49,14 @@ export const WeatherPanelRightInfoStyled = styled.div`
 
 export const WeatherMapSkeletonStyled = styled.div`
     width: 100%;
-    height: 300px;
+    height: 18.75rem;
 `
 
 export const WeatherListSkeletonStyled = styled.div`
     ul{
         display: flex;
         li{
-            height: 20px;
+            height: 1.25rem;
             position: relative;
         }
     }
@@ -68,13 +68,13 @@ export const WeatherCurrentPredictionSkeletonStyled = styled.div`
     gap: var(--wa-spacing-04);
     margin-top: var(--wa-spacing-04);
     > div:first-child{
-        width: 120px;
-        height: 120px;
+        width: 7.5rem;
+        height: 7.5rem;
         margin: var(--wa-spacing-00) auto;
     }
     > div:last-child{
         flex: 1;
         width: 100%;
-        height: 80px;
+        height: 5rem;
     }
 `

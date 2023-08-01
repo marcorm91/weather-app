@@ -15,7 +15,7 @@ export const WeatherTabsStyled = styled.ul`
     font-family: var(--wa-font-family-semibold);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--wa-spacing-03);
     ${media('mobile')`
       font-size: var(--wa-font-size-sm);
     `}
@@ -29,7 +29,7 @@ export const WeatherTabsStyled = styled.ul`
             left: var(--wa-spacing-00);
             right: var(--wa-spacing-00);
             bottom: calc(-1 * var(--wa-spacing-04));
-            height: 8px;
+            height: 0.5rem;
             background-color: var(--wa-deep-blue);
         }
     }

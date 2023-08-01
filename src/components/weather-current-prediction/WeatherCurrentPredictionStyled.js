@@ -36,7 +36,7 @@ export const WeatherCurrentPredictionStyled = styled.div`
         justify-content: center;
         gap: var(--wa-spacing-06);
         margin: var(--wa-spacing-00);
-        padding: 0;
+        padding: var(--wa-spacing-00);
         list-style: none;
         ${media('mobile')`
           flex-wrap: wrap;

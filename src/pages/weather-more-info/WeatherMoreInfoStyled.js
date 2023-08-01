@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { media } from '../../utils/mediaqueries'
 
 export const WeatherMoreInfoStyled = styled.main`
-  min-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
-  max-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
+  min-height: calc(100vh - var(--wa-header-box-height) - var(--wa-footer-height));
+  max-height: calc(100vh - var(--wa-header-box-height) - var(--wa-footer-height));
   overflow: auto;
   background-color: var(--wa-dr-white);
   padding: var(--wa-spacing-04);
@@ -54,7 +54,7 @@ export const WeatherMoreInfoStyled = styled.main`
   /** Minimized panel */
   &.minimized-panel{
     > .col__wrapper:last-child{
-      max-width: 140px;
+      max-width: 8.75rem;
       flex: 1;
       padding: var(--wa-spacing-04) var(--wa-spacing-00);
       .btn-minimized-panel{

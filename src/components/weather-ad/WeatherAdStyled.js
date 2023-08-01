@@ -2,9 +2,9 @@ import styled from 'styled-components'
 import { media } from '../../utils/mediaqueries'
 
 export const WeatherAdStyled = styled.div`
-  height: 40px;
+  height: 2.5rem;
   background-color: var(--wa-ad);
-  box-shadow: 0px 1px 8px 1px var(--wa-gray);
+  box-shadow: var(--wa-box-shadow-01);
   padding: var(--wa-spacing-03) var(--wa-spacing-04);
   box-sizing: border-box;
   display: flex;

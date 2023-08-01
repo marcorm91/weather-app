@@ -15,8 +15,8 @@ export const WeatherAccordionStyled = styled.div`
         margin: var(--wa-spacing-03) var(--wa-spacing-00);
         color: var(--wa-black);
         &:before{
-          width: 7px;
-          height: 7px;
+          width: 0.4375rem;
+          height: 0.4375rem;
         }
       }
       & + .accordion__item{

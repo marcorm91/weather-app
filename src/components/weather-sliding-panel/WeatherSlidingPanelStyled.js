@@ -4,7 +4,7 @@ import { media } from '../../utils/mediaqueries';
 export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: props.isOpen}))`
   display: ${props => (props.isOpen ? 'block' : 'none')};
   width: calc(100% - var(--wa-width-panel-right));
-  box-shadow: -2px 0px 2px 1px #00000020;
+  box-shadow: var(--wa-box-shadow-03);
   height: 100vh;
   background-color: var(--wa-white);
   position: fixed;
@@ -29,7 +29,7 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
   header{
     background-color: var(--wa-dr-white);
     padding: var(--wa-spacing-04);
-    box-shadow: 1px 3px 2px 0px var(--wa-leadbelcher);
+    box-shadow: var(--wa-box-shadow-02);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -75,7 +75,7 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
     justify-content: flex-end;
     padding: var(--wa-spacing-05);
     ${media('mobile')`
-      padding: 24px var(--wa-spacing-04);
+      padding: var(--wa-spacing-05) var(--wa-spacing-04);
     `}
   }
 `

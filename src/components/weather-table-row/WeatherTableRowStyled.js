@@ -12,13 +12,13 @@ export const WeatherTableRowStyled = styled.tr`
             }
         }
         &:nth-child(even){
-            background-color: #CACACA25;
+            background-color: var(--wa-leadbelcher-op25);
             td{
                 border-bottom: var(--wa-border-width-01) solid var(--wa-leadbelcher);
             }
         }
         &:hover{
-            background-color: #CACACA50;
+            background-color: var(--wa-leadbelcher-op50);
         }
     }
 `;

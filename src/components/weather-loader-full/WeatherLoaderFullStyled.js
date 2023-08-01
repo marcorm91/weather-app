@@ -5,14 +5,14 @@ export const WeatherLoaderFullStyled = styled.div`
     position: fixed;
     inset: var(--wa-spacing-08) 0 var(--wa-spacing-06);
     z-index: 9999;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: var(--wa-black-op30);
     display: flex;
     justify-content: center;
     align-items: center;
     margin: calc(-1 * var(--wa-spacing-01));
     > div{
-        width: 150px;
-        height: 150px;
+        width: 9.375rem;
+        height: 9.375rem;
         animation: rotation 2s infinite linear;
     }
 `

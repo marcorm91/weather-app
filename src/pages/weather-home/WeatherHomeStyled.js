@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { media } from '../../utils/mediaqueries'
 
 export const WeatherHomeStyled = styled.main`
-  min-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
-  max-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
+  min-height: calc(100vh - var(--wa-header-box-height) - var(--wa-footer-height));
+  max-height: calc(100vh - var(--wa-header-box-height) - var(--wa-footer-height));
   overflow: auto;
   background-color: var(--wa-dr-white);
   padding: var(--wa-spacing-04);
@@ -31,7 +31,7 @@ export const WeatherHomeStyled = styled.main`
     }
     & ~ .tab-content__wrapper{
       .table__wrapper{
-        max-height: calc(100vh - 410px);
+        max-height: calc(100vh - 25.625rem);
       }
     }
   }
