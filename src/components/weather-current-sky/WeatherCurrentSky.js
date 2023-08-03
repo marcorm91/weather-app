@@ -1,28 +1,26 @@
 import React from 'react'
 import { WeatherCurrentSkyStyled } from './WeatherCurrentSkyStyled'
 import { skyIconMap } from '../../utils/js/skyIcons'
-import { findPropertyValueByPeriod, getCurrentHour } from '../../utils/js/helpers'
+import { findPropertyValueByPeriod, getCurrentHour, getCurrentDate } from '../../utils/js/helpers'
 
 const WeatherCurrentSky = ({ hourlyData }) => {
 
-  // Getting current date and hour for making later comparisons
   const currentHour = getCurrentHour()
+  const currentDate = getCurrentDate()
 
-  /**
-   * HOURLY DATA
-   */
+  // Use .find() to search for the current day in the array
+  const currentDay = hourlyData?.data[0]?.prediccion?.dia.find(day => day.fecha === currentDate)
 
-  const skyList1 = hourlyData?.data[0].prediccion?.dia[0]?.estadoCielo
-  const skyList2 = hourlyData?.data[0].prediccion?.dia[1]?.estadoCielo
-  const currentSky = findPropertyValueByPeriod(skyList1, currentHour, ['value', 'descripcion']) 
-                    || findPropertyValueByPeriod(skyList2, currentHour, ['value', 'descripcion'])
+  // Then, if currentDay exists, we extract the sky information for that day
+  const skyList = currentDay?.estadoCielo
+  const currentSky = findPropertyValueByPeriod(skyList, currentHour, ['value', 'descripcion'])
 
   const { value = '', descripcion = '' } = currentSky || {}
   const currentIcon = skyIconMap[value] || null
     
   return (
     <WeatherCurrentSkyStyled>
-      {currentIcon(128, "var(--wa-deep-blue)")}
+      {currentIcon && currentIcon(128, "var(--wa-deep-blue)")}
       <span>{descripcion}</span>
     </WeatherCurrentSkyStyled>
   )

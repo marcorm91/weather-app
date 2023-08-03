@@ -37,7 +37,9 @@ const WeatherMoreInfo = () => {
     <WeatherMoreInfoStyled className={isMinimized ? 'minimized-panel' : ''}>
       <div className='col__wrapper'>
         <h2>{data.NAME}, {data.PROV}, {data.COMUNIDAD}</h2>
-        <WeatherDetailInfo />
+        <WeatherDetailInfo 
+          hourlyPredictionData={hourlyPredictionData} 
+          diaryPredictionData={diaryPredictionData} />
       </div>
       <div className='col__wrapper'>
         <WeatherPanelRightInfo

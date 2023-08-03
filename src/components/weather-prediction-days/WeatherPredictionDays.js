@@ -1,6 +1,6 @@
 import { WeatherPredictionDaysStyled } from './WeatherPredictionDaysStyled'
 
-const WeatherPredictionDays = () => {
+const WeatherPredictionDays = ( { diaryPredictionData } ) => {
   return (
     <WeatherPredictionDaysStyled>
         Predicción días

@@ -1,28 +1,28 @@
 import React from 'react'
 import { WeatherTodayPredictionStyled } from './WeatherTodayPredictionStyled'
 import { skyIconMap } from '../../utils/js/skyIcons'
-import { getCurrentHour } from '../../utils/js/helpers'
+import { getCurrentHour, getCurrentDate } from '../../utils/js/helpers'
 import { useTranslation } from 'react-i18next'
 
 const WeatherTodayPrediction = ({ hourlyData }) => {
   const { t } = useTranslation()
 
   const currentHour = getCurrentHour()
+  const currentDate = getCurrentDate()
 
-  const skyList = []
-  const tempList = []
-  
-  for (let i = 0; i < 3; i++) {
-    skyList.push(...(hourlyData?.data[0]?.prediccion?.dia[i]?.estadoCielo || []))
-    tempList.push(...(hourlyData?.data[0]?.prediccion?.dia[i]?.temperatura || []))
-  } 
+  // Find the current day in the data.  If the array ends and there are still elements to display, it should
+  // jump to the next list.
+  const currentDayIndex = hourlyData?.data[0]?.prediccion?.dia.findIndex(day => day.fecha === currentDate)
+  const currentDay = hourlyData?.data[0]?.prediccion?.dia[currentDayIndex]
+  const nextDay = hourlyData?.data[0]?.prediccion?.dia[currentDayIndex + 1]
+
+  const skyList = [...(currentDay?.estadoCielo || []), ...(nextDay?.estadoCielo || [])]
+  const tempList = [...(currentDay?.temperatura || []), ...(nextDay?.temperatura || [])]
 
   const nextHours = []
   const maxHoursToShow = 6
 
   let startIndex = -1
-
-  // Find the index of the matching period
   for (let i = 0; i < skyList.length; i++) {
     if (skyList[i].periodo === currentHour) {
       startIndex = i
@@ -35,7 +35,7 @@ const WeatherTodayPrediction = ({ hourlyData }) => {
       const hour = skyList[i].periodo + ':00'
       const value = skyList[i].value
       const description = skyList[i].descripcion
-      const temp = tempList[i].value
+      const temp = tempList[i]?.value
       nextHours.push({ hour, value, description, temp })
       if (nextHours.length === maxHoursToShow) {
         break

@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { faCalendarDays, faClock } from '@fortawesome/free-solid-svg-icons'
 import { WeatherDetailInfoStyled } from './WeatherDetailInfoStyled'
 
-const WeatherDetailInfo = () => {
+const WeatherDetailInfo = ( { hourlyPredictionData, diaryPredictionData } ) => {
 
   const [activeTab, setActiveTab] = useState('tab1')
   const { t } = useTranslation()
@@ -50,9 +50,9 @@ const WeatherDetailInfo = () => {
           className={activeTab === tab.id ? 'tab-content__wrapper' : 'tab-content__wrapper hidden'}
         >
           {tab.id === 'tab1' ? (
-            <WeatherPredictionHours />
+            <WeatherPredictionHours hourlyPredictionData={hourlyPredictionData} />
           ) : (
-            <WeatherPredictionDays />
+            <WeatherPredictionDays diaryPredictionData={diaryPredictionData} />
           )}
         </div>
       ))}
