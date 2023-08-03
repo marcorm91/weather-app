@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import { WeatherAlertsStyled } from './WeatherAlertsStyled'
+import { WeatherAlertsStyled, WeatherAccordionSkeletonStyled } from './WeatherAlertsStyled'
 import WeatherAccordion from '../../components/weather-accordion/WeatherAccordion'
 import { fetchAdPrediction } from '../../resources/services/APIs/adPrediction'
-import WeatherLoaderFull from '../../components/weather-loader-full/WeatherLoaderFull'
 import regionCodes from '../../utils/js/regionCodes'
 import { useTranslation } from 'react-i18next'
 
@@ -37,11 +36,14 @@ const WeatherAlerts = () => {
 
   return (
     <WeatherAlertsStyled>
-      {isLoading ? <WeatherLoaderFull /> : 
-        <>
-          <span>{t('ALERTS.INFO')}</span>
+      <span>{t('ALERTS.INFO')}</span>
+      {isLoading ? 
+        <WeatherAccordionSkeletonStyled>
+          {Array(10).fill().map((_, i) => (
+            <div key={i} className='loading-skeleton'></div>
+          ))}
+        </WeatherAccordionSkeletonStyled> :
           <WeatherAccordion weatherData={weatherData} />
-        </>
       }
     </WeatherAlertsStyled>
   )

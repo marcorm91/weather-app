@@ -3,10 +3,10 @@ import styled from 'styled-components';
 export const WeatherPredictionHoursStyled = styled.div`
   > ul{
     list-style: none;
-    margin: 32px 0;
-    padding: 0;
+    margin: var(--wa-spacing-06) var(--wa-spacing-00);
+    padding: var(--wa-spacing-00);
     display: grid;
-    gap: 4px;
+    gap: var(--wa-spacing-03);
     grid-template-columns: repeat(14, 1fr);
     > li{
         display: flex;
@@ -14,8 +14,8 @@ export const WeatherPredictionHoursStyled = styled.div`
         justify-content: center;
         align-items: center;
         > div{
-            width: 70px;
-            height: 70px;
+            width: 4.375rem;
+            height: 4.375rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -42,10 +42,10 @@ export const WeatherPredictionHoursStyled = styled.div`
 
 export const WeatherPredictionHoursSkeletonStyled = styled.ul`
     list-style: none;
-    margin: 32px 0;
-    padding: 0;
+    margin: var(--wa-spacing-06) var(--wa-spacing-00);
+    padding: var(--wa-spacing-00);
     display: grid;
-    gap: 4px;
+    gap: var(--wa-spacing-03);
     grid-template-columns: repeat(14, 1fr);
     > li{
         > div{

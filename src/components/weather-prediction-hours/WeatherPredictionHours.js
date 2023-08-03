@@ -107,7 +107,6 @@ const WeatherPredictionHours = ( { hourlyPredictionData } ) => {
                 color='var(--wa-deep-blue)' />
             </div>
           </li>
-
           {Array(numHours).fill().map((_, i) => {
             const nextHour = (parseInt(currentHour, 10) + i) % 24
             return ( 
