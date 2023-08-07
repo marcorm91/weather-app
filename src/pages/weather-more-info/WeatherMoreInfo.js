@@ -8,7 +8,6 @@ import WeatherDetailInfo from '../../components/weather-detail-info/WeatherDetai
 
 const WeatherMoreInfo = () => {
   const location = useLocation()
-  const [isMinimized, setIsMinimized] = useState(false)
   const { data } = location.state || {}
   const { CPRO, CMUN } = data
   const code = `${CPRO}${CMUN}`
@@ -16,8 +15,23 @@ const WeatherMoreInfo = () => {
   const [diaryPredictionData, setDiaryPredictionData] = useState(null)
 
   const handleMinimizeClick = () => {
-    setIsMinimized(prevState => !prevState);
+    if(window.innerWidth > 1024) {
+      setIsMinimized(prevState => !prevState);
+    }
   }
+
+  const [isMinimized, setIsMinimized] = useState(window.innerWidth <= 1024);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMinimized(window.innerWidth <= 1024);
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {

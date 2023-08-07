@@ -1,9 +1,8 @@
 import { css } from 'styled-components'
-import { between } from 'polished'
 
 export const breakpoints = {
   mobile: '767px',
-  tablet: '768px',
+  tablet: '1024px',
   desktop: '1200px',
 }
 
@@ -15,9 +14,15 @@ export const media = (breakpoint) => {
           ${css(...args)}
         }
       `
+    } else if (breakpoint === 'tablet') {
+      return (...args) => css`
+        @media (max-width: ${breakpoints[breakpoint]}) {
+          ${css(...args)}
+        }
+      `
     } else {
       return (...args) => css`
-        @media ${between(breakpoints[breakpoint], breakpoints.desktop)} {
+        @media (min-width: ${breakpoints[breakpoint]}) {
           ${css(...args)}
         }
       `

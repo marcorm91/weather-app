@@ -103,3 +103,29 @@ hr{
         background: linear-gradient(to right, transparent,#D9D9D9,transparent);
     }
 }
+
+div.react-tooltip[role='tooltip']{
+    font-family: var(--wa-font-family-regular);
+    background-color: var(--wa-deep-blue);
+    font-size: var(--wa-font-size-xs) !important;
+    padding: var(--wa-spacing-03);
+    height: fit-content;
+    max-height: fit-content;
+    max-width: 9.375rem;
+    text-align: center;
+    z-index: 11;
+}
+
+.wa-custom-tooltip__wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: var(--wa-spacing-01);
+    background-color: var(--wa-deep-blue-light);
+    padding: var(--wa-spacing-02);
+    border-radius: var(--wa-size-border-radius-01);
+    font-size: var(--wa-font-size-sm);
+    b{
+        font-weight: normal;
+        font-family: var(--wa-font-family-semibold);
+    }
+}
