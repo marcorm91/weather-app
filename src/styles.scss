@@ -129,3 +129,15 @@ div.react-tooltip[role='tooltip']{
         font-family: var(--wa-font-family-semibold);
     }
 }
+
+.recharts-wrapper{
+    .recharts-layer{
+        text{
+            font-family: var(--wa-font-family-bold);
+            font-size: var(--wa-font-size-xs);
+        }
+        &.recharts-xAxis text{
+            font-family: var(--wa-font-family-light);
+        }
+    }
+}

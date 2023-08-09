@@ -27,6 +27,7 @@ const WeatherChart = ({
   labelFormatter = (value) => value, 
   type = 'monotone',
   showLabels,
+  mt, ml, mr, mb
 }) => {
 
   const dataAsNumbers = data.map(item => ({
@@ -78,11 +79,11 @@ const WeatherChart = ({
   return (
     <WeatherChartStyled className={className}>
       <ResponsiveContainer width="100%" aspect={aspect}>
-        <LineChart data={dataAsNumbers} margin={{ top: 32, left: 16, right: 16, bottom: 32 }}>
+        <LineChart data={dataAsNumbers} margin={{ top: mt, left: ml, right: mr, bottom: mb }}>
           {showXAxis && (
             <XAxis
               unit={unitX}
-              dataKey="name"
+              dataKey="x_value"
               stroke="var(--wa-black)"
             />
           )}
@@ -93,7 +94,7 @@ const WeatherChart = ({
             />
           )}
           {tooltip && ( <Tooltip content={<CustomTooltip />} /> )}
-          {legend && ( <Legend formatter={labelFormatter} align='left' verticalAlign='top' /> )}
+          {legend && ( <Legend formatter={labelFormatter} align='left' verticalAlign='top' iconSize={0} /> )}
           <Line
             label={showLabels ? <CustomizedLabel /> : undefined}
             type={type}
