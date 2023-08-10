@@ -37,11 +37,11 @@ const WeatherNavbar = ({ items, onClose }) => {
         {block1Items.length > 0 && (
           <ul className="block-1__wrapper">
             {block1Items.map((item, index) => (
-              <li key={index}>
+              <li key={index}
+                  className={isCurrentPage(item.path) ? 'active' : ''}>
                 <Link
                   to={item.path}
                   onClick={handleMenuItemClick}
-                  className={isCurrentPage(item.path) ? 'active' : ''}
                 >
                   <FontAwesomeIcon icon={item.icon} /> {item.label}
                 </Link>
@@ -52,11 +52,11 @@ const WeatherNavbar = ({ items, onClose }) => {
         {block2Items.length > 0 && (
           <ul className="block-2__wrapper">
             {block2Items.map((item, index) => (
-              <li key={index}>
+              <li key={index}
+                  className={isCurrentPage(item.path) ? 'active' : ''} >
                 <Link
                   to={item.path}
                   onClick={handleMenuItemClick}
-                  className={isCurrentPage(item.path) ? 'active' : ''}
                 >
                   <FontAwesomeIcon icon={item.icon} /> {item.label}
                 </Link>

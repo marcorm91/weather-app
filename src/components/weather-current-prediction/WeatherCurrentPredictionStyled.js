@@ -47,7 +47,7 @@ export const WeatherCurrentPredictionStyled = styled.div`
           align-items: center;
           gap: var(--wa-spacing-02);
           ${media('mobile')`
-            flex: 1 1 calc(50% - 24px);
+            flex: 1 1 calc(50% - var(--wa-spacing-05));
             &:nth-child(odd){
               justify-content: flex-end;
             }

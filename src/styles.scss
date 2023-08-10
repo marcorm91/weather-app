@@ -24,7 +24,7 @@ h1, h2, h3, h4, h5, h6{
 input{
     background-color: transparent;
     border: none;
-    border-bottom: 2px solid #00000040;
+    border-bottom: var(--wa-border-width-02) solid #00000040;
     padding: var(--wa-spacing-00);
     box-shadow: none;
     outline: none;
@@ -33,7 +33,7 @@ input{
     box-sizing: border-box;
     padding: var(--wa-spacing-02) var(--wa-spacing-00);
     &:focus{
-        border-bottom: 2px solid var(--wa-deep-blue);
+        border-bottom: var(--wa-border-width-02) solid var(--wa-deep-blue);
     }
     &::placeholder{
         color: #00000070;
@@ -43,7 +43,7 @@ input{
 select{
     background-color: transparent;
     border: none;
-    border-bottom: 2px solid #00000040;
+    border-bottom: var(--wa-border-width-02) solid #00000040;
     padding: var(--wa-spacing-00);
     box-shadow: none;
     outline: none;
@@ -51,7 +51,7 @@ select{
     font-size: var(--wa-font-size-md);
     box-sizing: border-box;
     &:focus{
-        border-bottom: 2px solid var(--wa-deep-blue);
+        border-bottom: var(--wa-border-width-02) solid var(--wa-deep-blue);
     }
 }
 
@@ -75,15 +75,15 @@ button, a{
         }
     }
     &.btn-small{
-        font-size: 14px;
-        min-height: 32px;
+        font-size: var(--wa-font-size-sm);
+        min-height: 2rem;
         padding: var(--wa-spacing-00) var(--wa-spacing-03);
     }
 }
 
 hr{
     &.separator{
-        height: 1px;
+        height: 0.0625rem;
         background-color: var(--wa-leadbelcher);
         border: none;
         width: 100%;

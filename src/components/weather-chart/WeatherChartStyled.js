@@ -6,7 +6,7 @@ export const WeatherChartStyled = styled.div`
     .recharts-legend-wrapper{
         top: var(--wa-spacing-00) !important;
         .recharts-surface{
-            display: none;
+            display: none !important;
         }
         .recharts-legend-item-text{
             font-family: var(--wa-font-family-semibold);

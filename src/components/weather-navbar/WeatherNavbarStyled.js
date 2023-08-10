@@ -47,7 +47,7 @@ export const WeatherNavbarStyled = styled.nav`
             font-size: var(--wa-font-size-sm);
             margin: var(--wa-spacing-00);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.0625rem;
             user-select: none;
         }
     }
@@ -66,18 +66,36 @@ export const WeatherNavbarStyled = styled.nav`
             display: flex;
             flex-direction: column;
             gap: var(--wa-spacing-03);
-            a{
-                color: var(--wa-deep-blue);
-                font-size: var(--wa-font-size-md);
-                text-decoration: none;
-                display: inline-flex;
-                align-items: center;
-                gap: var(--wa-spacing-03);
-                ${media('mobile')`
-                    font-size: var(--wa-font-size-sm);
-                `}
+            > li{
+                margin: var(--wa-spacing-00) calc(-1 * var(--wa-spacing-04));
+                padding: var(--wa-spacing-02) var(--wa-spacing-05);
+                position: relative;
                 &.active{
-                    font-family: var(--wa-font-family-semibold);
+                    background-color: var(--wa-deep-blue-op20);
+                    &:after{
+                        content: "";
+                        position: absolute;
+                        left: var(--wa-spacing-00);
+                        top: var(--wa-spacing-00);
+                        bottom: var(--wa-spacing-00);
+                        width: 0.5rem;
+                        background-color: var(--wa-deep-blue);
+                    }
+                    a{
+                        font-family: var(--wa-font-family-semibold);
+                        padding: var(--wa-spacing-03) var(--wa-spacing-00);
+                    }
+                }
+                a{
+                    color: var(--wa-deep-blue);
+                    font-size: var(--wa-font-size-md);
+                    text-decoration: none;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: var(--wa-spacing-03);
+                    ${media('mobile')`
+                        font-size: var(--wa-font-size-sm);
+                    `}
                 }
             }
             &.block-2__wrapper{

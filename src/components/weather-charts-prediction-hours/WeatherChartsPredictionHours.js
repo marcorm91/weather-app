@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import WeatherChart from '../weather-chart/WeatherChart'
 import WeatherDetailChart from '../weather-detail-chart/WeatherDetailChart'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlassPlus } from '@fortawesome/free-solid-svg-icons'
 import { WeatherChartsPredictionHoursStyled } from './WeatherChartsPredictionHoursStyled'
 import { getCurrentHour } from '../../utils/js/helpers'
 
@@ -122,7 +122,7 @@ const WeatherChartsPredictionHours = ( { chartTempData, chartWindData, chartRain
           <li key={index}>
             <WeatherChart {...chartData} />
             <button onClick={() => handleClick(chartData)}>
-              <FontAwesomeIcon icon={faMagnifyingGlass} color='var(--wa-deep-blue)' size='lg'/>
+              <FontAwesomeIcon icon={faMagnifyingGlassPlus} color='var(--wa-deep-blue)' size='lg'/>
             </button>
           </li>
         ))}
