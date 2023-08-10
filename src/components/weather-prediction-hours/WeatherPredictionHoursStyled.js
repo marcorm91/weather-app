@@ -15,8 +15,9 @@ export const WeatherPredictionHoursStyled = styled.div`
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
             > div{
-                &:not(.react-tooltip){
+                &:not(.react-tooltip, .ad-warning__wrapper){
                     width: 4.375rem;
                     height: 4.375rem;
                     display: flex;
@@ -25,6 +26,10 @@ export const WeatherPredictionHoursStyled = styled.div`
                     text-align: center;
                     user-select: none;
                 }
+            }
+            &.ad-warning__wrapper{
+                position: absolute;
+                top: var(--wa-spacing-00);
             }
             &:first-child{
                 background-color: var(--wa-deep-blue-light);

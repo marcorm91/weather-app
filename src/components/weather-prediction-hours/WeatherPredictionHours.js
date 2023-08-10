@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClock, faCloudRain, faCloudSunRain, faSnowflake, faTemperatureQuarter, faWind } from '@fortawesome/free-solid-svg-icons'
 import { getCurrentHour, getCurrentDate } from '../../utils/js/helpers'
 import WeatherChartsPredictionHours from '../weather-charts-prediction-hours/WeatherChartsPredictionHours'
+import WeatherAdWarning from '../weather-ad-warning/WeatherAdWarning'
 
 const WeatherPredictionHours = ( { hourlyPredictionData } ) => {
 
@@ -43,7 +44,6 @@ const WeatherPredictionHours = ( { hourlyPredictionData } ) => {
     }
     return nextData
   }
-
 
   const getWeatherData = () => {
     if (predictionData) {
@@ -143,6 +143,7 @@ const WeatherPredictionHours = ( { hourlyPredictionData } ) => {
             const nextHour = (parseInt(currentHour, 10) + i) % 24
             return ( 
               <li key={i}>
+                <WeatherAdWarning data={weatherData} index={i} />
                 <div>
                   <time>{`${nextHour < 10 ? '0' : ''}${nextHour}h`}</time>
                 </div>

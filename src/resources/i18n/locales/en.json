@@ -71,6 +71,12 @@
                 "HOURLY_FORECAST": "Hourly forecast",
                 "DAILY_FORECAST": "Daily forecast"
             }
+        },
+        "AD": {
+            "AD_HIGH_TEMP": "High temperature alerts",
+            "AD_HIGH_PREC": "Heavy rainfall alerts",
+            "AD_HIGH_WIND": "Strong wind gust alerts",
+            "AD_HIGH_SNOW": "Snow alerts"
         }
     }
 }

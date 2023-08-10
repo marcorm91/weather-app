@@ -39,7 +39,7 @@ const WeatherSlidingPanel = ({ data, onClose, isOpen, municipalityObject }) => {
     <WeatherSlidingPanelStyled isOpen={isOpen}>
       <header>
         <button onClick={onClose}>
-          <FontAwesomeIcon icon={faTimes} />
+          <FontAwesomeIcon icon={faTimes} color='var(--wa-deep-blue)' />
         </button>
         <h2>{`${nombre} (${provincia})`}</h2>
       </header>

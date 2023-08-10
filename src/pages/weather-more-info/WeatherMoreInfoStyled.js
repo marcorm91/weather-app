@@ -21,11 +21,16 @@ export const WeatherMoreInfoStyled = styled.main`
           flex: 1 1 100%;
           max-width: 100%;
       `}
-      > h2{
-        margin: var(--wa-spacing-00);
-        ${media('mobile')`
-          font-size: var(--wa-font-size-lg);
-        `}
+      .title__wrapper{
+        display: flex;
+        align-items: center;
+        gap: var(--wa-spacing-04);
+        h2{
+          margin: var(--wa-spacing-00);
+          ${media('mobile')`
+            font-size: var(--wa-font-size-lg);
+          `}
+        }
       }
       > div > ul{
         position: sticky;

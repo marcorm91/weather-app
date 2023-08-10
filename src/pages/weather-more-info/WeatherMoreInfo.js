@@ -5,6 +5,9 @@ import WeatherPanelRightInfo from '../../components/weather-panel-right-info/Wea
 import { fetchHourlyPrediction } from '../../resources/services/APIs/hourlyPrediction'
 import { fetchDiaryPrediction } from '../../resources/services/APIs/diaryPrediction'
 import WeatherDetailInfo from '../../components/weather-detail-info/WeatherDetailInfo'
+import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 const WeatherMoreInfo = () => {
   const location = useLocation()
@@ -50,7 +53,11 @@ const WeatherMoreInfo = () => {
   return (
     <WeatherMoreInfoStyled className={isMinimized ? 'minimized-panel' : ''}>
       <div className='col__wrapper'>
-        <h2>{data.NAME}, {data.PROV}, {data.COMUNIDAD}</h2>
+        <div className='title__wrapper'>
+          <Link to={'/'}>
+            <FontAwesomeIcon icon={faChevronLeft} color='var(--wa-deep-blue)' size='lg'/></Link>
+            <h2>{data.NAME}, {data.PROV}, {data.COMUNIDAD}</h2>
+        </div>
         <WeatherDetailInfo 
           hourlyPredictionData={hourlyPredictionData} 
           diaryPredictionData={diaryPredictionData} />

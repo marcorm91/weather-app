@@ -72,6 +72,12 @@
                 "HOURLY_FORECAST": "Predicción por horas",
                 "DAILY_FORECAST": "Predicción por días"
             }
+        },
+        "AD": {
+            "AD_HIGH_TEMP": "Avisos por altas temperaturas",
+            "AD_HIGH_PREC": "Avisos por lluvia intensa",
+            "AD_HIGH_WIND": "Avisos por rachas de viento",
+            "AD_HIGH_SNOW": "Avisos por nieve"
         }
     }
 }
