@@ -7,7 +7,7 @@ export const WeatherAdWarningStyled = styled.div`
     left: var(--wa-spacing-00);
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     padding: var(--wa-spacing-01) var(--wa-spacing-02);
     box-sizing: border-box;
     background-color: var(--wa-orange);
@@ -29,5 +29,6 @@ export const WeatherAdWarningStyled = styled.div`
     }
     > svg{
         font-size: var(--wa-font-size-lg);
+        width: 100%;
     }
 `
