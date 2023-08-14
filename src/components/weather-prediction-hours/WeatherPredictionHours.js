@@ -142,7 +142,7 @@ const WeatherPredictionHours = ( { hourlyPredictionData } ) => {
           {Array(numHours).fill().map((_, i) => {
             const nextHour = (parseInt(currentHour, 10) + i) % 24
             return ( 
-              <li key={i}>
+              <li key={i} className={nextHour === 0 ? 'limit-day' : undefined}>
                 <WeatherAdWarning data={weatherData} index={i} />
                 <div>
                   <time>{`${nextHour < 10 ? '0' : ''}${nextHour}h`}</time>

@@ -57,6 +57,24 @@ export const WeatherPredictionHoursStyled = styled.div`
                     background-color: var(--wa-deep-blue-op20);
                 }
             }
+            &.limit-day{
+                &:after{
+                    content: "";
+                    position: absolute;
+                    right: calc(-1 * var(--wa-spacing-03));
+                    top: var(--wa-spacing-00);
+                    bottom: var(--wa-spacing-00);
+                    width: 0.25rem;
+                    background: repeating-linear-gradient(
+                        325deg,
+                        var(--wa-deep-blue-op10),
+                        var(--wa-deep-blue-op10) 0.625rem,
+                        var(--wa-deep-blue-light) 0.625rem,
+                        var(--wa-deep-blue-light) 1.25rem);
+                    border-left: var(--wa-border-width-03) solid var(--wa-white);
+                    border-right: var(--wa-border-width-03) solid var(--wa-white);
+                }
+            }
         }
     }  
   }
