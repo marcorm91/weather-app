@@ -31,9 +31,7 @@ const WeatherHeader = () => {
         setIsMenuOpen(false)
       }
     }
-
     document.addEventListener('keydown', handleKeyPress)
-
     return () => {
       document.removeEventListener('keydown', handleKeyPress)
     }
@@ -51,7 +49,7 @@ const WeatherHeader = () => {
           <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
         </button>
       </div>
-      {isMenuOpen && <WeatherNavbar items={navItems} onClose={handleMenuClose} />}
+      {isMenuOpen && <WeatherNavbar items={navItems} onClose={handleMenuClose} isOpen={isMenuOpen} />}
     </WeatherHeaderStyled>
   )
 }

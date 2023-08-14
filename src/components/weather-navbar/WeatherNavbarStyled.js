@@ -1,24 +1,18 @@
 import styled from 'styled-components'
-import { media } from '../../utils/mediaqueries';
+import { media } from '../../utils/mediaqueries'
+import { motion } from 'framer-motion'
 
-export const WeatherNavbarStyled = styled.nav`
+export const WeatherNavbarStyled = styled(motion.nav)`
     position: fixed;
     right: var(--wa-spacing-00);
     top: var(--wa-spacing-00);
     bottom: var(--wa-spacing-00);
-    background: #fff;
-    z-index: 11;
+    background: var(--wa-white);
+    z-index: 999;
     min-width: var(--wa-width-main-navbar);
     width: var(--wa-width-main-navbar);
     max-width: var(--wa-width-main-navbar);
     box-shadow: var(--wa-box-shadow-01);
-    &:after{
-        content: "";
-        position: fixed;
-        inset: var(--wa-spacing-00);
-        width: calc(100% - var(--wa-width-main-navbar));
-        background-color: #00000050;
-    }
     .button-close{
         position: absolute;
         top: var(--wa-spacing-04);

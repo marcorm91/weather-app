@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import { media } from '../../utils/mediaqueries';
+import styled from 'styled-components'
+import { media } from '../../utils/mediaqueries'
+import { motion } from 'framer-motion'
 
-export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: props.isOpen}))`
-  display: ${props => (props.isOpen ? 'block' : 'none')};
+export const WeatherSlidingPanelStyled = styled(motion.div)`
   width: calc(100% - var(--wa-width-panel-right));
   box-shadow: var(--wa-box-shadow-03);
   height: 100vh;
@@ -14,18 +14,6 @@ export const WeatherSlidingPanelStyled = styled.div.attrs(props => ({isOpen: pro
   ${media('mobile')`
     width: 100%;
   `}
-  &:after{
-    content: "";
-    position: fixed;
-    top: var(--wa-spacing-00);
-    bottom: var(--wa-spacing-00);
-    right: calc(100% - var(--wa-width-panel-right));
-    width: var(--wa-width-panel-right);
-    background-color: #00000050;
-    ${media('mobile')`
-      display: none;
-    `}
-  }
   header{
     background-color: var(--wa-dr-white);
     padding: var(--wa-spacing-04);
