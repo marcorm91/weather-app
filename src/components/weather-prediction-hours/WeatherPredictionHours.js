@@ -15,6 +15,7 @@ const WeatherPredictionHours = ( { hourlyPredictionData } ) => {
   const currentDate = getCurrentDate()
   const numHours = 25
   const predictionData = hourlyPredictionData?.data[0]?.prediccion?.dia
+
   const dataTypes = ['temperatura', 'estadoCielo', 'nieve', 'precipitacion', 'vientoAndRachaMax']
 
   // Return the values following the current one, set by the constant numHours, to store them in an array for later processing.
@@ -149,6 +150,10 @@ const WeatherPredictionHours = ( { hourlyPredictionData } ) => {
                 </div>
                 <div>
                   <span data-tooltip-id={`tooltip-sky-${i}`}>{skyIconMap[weatherData.estadoCielo?.[i]?.value]("36", "var(--wa-deep-blue)")}</span>
+                  <ReactTooltip
+                    id={`tooltip-sky-${i}`}
+                    place='bottom'
+                    content={`${weatherData.estadoCielo?.[i]?.descripcion}`} />
                 </div>
                 <div>
                   <span data-tooltip-id={`tooltip-wind-${i}`}>
@@ -157,42 +162,35 @@ const WeatherPredictionHours = ( { hourlyPredictionData } ) => {
                       {windDirectionIconMap[weatherData.vientoAndRachaMax?.[i]?.direccion]("18", "var(--wa-deep-blue)")}
                     </div>
                     {weatherData.vientoAndRachaMax?.[i]?.velocidad} Km/h
+                    <ReactTooltip
+                      id={`tooltip-wind-${i}`}
+                      place='bottom'
+                      content={
+                        `Viento de componente ${weatherData.vientoAndRachaMax?.[i]?.direccion} 
+                        con rachas de ${weatherData.vientoAndRachaMax?.[i]?.velocidad} Km/h`} />
                   </span>                  
                 </div>
                 <div>
                   <span data-tooltip-id={`tooltip-rain-${i}`}>{weatherData.precipitacion?.[i]?.value} mm.</span>
+                  <ReactTooltip
+                    id={`tooltip-rain-${i}`}
+                    place='bottom'
+                    content={`Lluvia acumulada de ${weatherData.precipitacion?.[i]?.value} mm.`} />
                 </div>
                 <div>
                   <span data-tooltip-id={`tooltip-snow-${i}`}>{weatherData.nieve?.[i]?.value} cm.</span>
+                  <ReactTooltip
+                    id={`tooltip-snow-${i}`}
+                    place='bottom'
+                    content={`Grosor nieve de ${weatherData.nieve?.[i]?.value} cm.`} />
                 </div>
                 <div>
                   <span data-tooltip-id={`tooltip-temp-${i}`}>{weatherData.temperatura?.[i]?.value}º</span>
+                  <ReactTooltip
+                    id={`tooltip-temp-${i}`}
+                    place='bottom'
+                    content={`Temperatura de ${weatherData.temperatura?.[i]?.value}º`} />
                 </div>
-                <ReactTooltip
-                  id={`tooltip-temp-${i}`}
-                  place='bottom'
-                  content={
-                    `Temperatura de ${weatherData.temperatura?.[i]?.value}º`} />
-                <ReactTooltip
-                  id={`tooltip-snow-${i}`}
-                  place='bottom'
-                  content={
-                    `Grosor nieve de ${weatherData.nieve?.[i]?.value} cm.`} />
-                <ReactTooltip
-                  id={`tooltip-rain-${i}`}
-                  place='bottom'
-                  content={
-                    `Lluvia acumulada de ${weatherData.precipitacion?.[i]?.value} mm.`} />
-                <ReactTooltip
-                  id={`tooltip-wind-${i}`}
-                  place='bottom'
-                  content={
-                    `Viento de componente ${weatherData.vientoAndRachaMax?.[i]?.direccion} 
-                     con rachas de ${weatherData.vientoAndRachaMax?.[i]?.velocidad} Km/h`} />
-                <ReactTooltip
-                  id={`tooltip-sky-${i}`}
-                  place='bottom'
-                  content={`${weatherData.estadoCielo?.[i]?.descripcion}`} />
               </li>
             )
           })}

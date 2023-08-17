@@ -1,3 +1,6 @@
+import moment from 'moment'
+import 'moment/locale/es'
+
 /**
  * Finds the value of a given property for a specific period in a list of items
  * @param {Array} list - The list of items to search in
@@ -37,4 +40,34 @@ export const getCurrentDate = () => {
     const day = String(currentDate.getDate()).padStart(2, '0')
     const formattedDate = `${year}-${month}-${day}T00:00:00`
     return formattedDate
+}
+
+/**
+ * Convert a date string from format "YYYY-MM-DDTHH:MM:SS" to "DD-MM-YYYY"
+ * @param {string} dateString The date string in "YYYY-MM-DDTHH:MM:SS" format
+ * @returns {string} The reformatted date string in "DD-MM-YYYY" format.
+ */
+export const formatDate = (dateString) => {
+    const date = new Date(dateString)
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = String(date.getMonth() + 1).padStart(2, '0') // +1 because months are 0-indexed
+    const year = date.getFullYear()
+    return `${day}-${month}-${year}`
+}
+
+/**
+ * Transforms a date string from 'DD-MM-YYYY' format into a localized format.
+ *
+ * @param {string} dateStr - The date string in 'DD-MM-YYYY' format.
+ * @param {string} language - The current language (e.g., 'en', 'es').
+ * @returns {string} - The localized date string.
+ */
+export const transformDate = (dateStr, language) => {
+    const formats = {
+        'es': 'DD [de] MMMM [de] YYYY',
+        'en': 'MMMM DD, YYYY'
+    }
+    const format = formats[language] || formats['es']
+    moment.locale(language) 
+    return moment(dateStr, 'DD-MM-YYYY').format(format)
 }

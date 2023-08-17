@@ -6,7 +6,7 @@ import 'react-accessible-accordion/dist/fancy-example.css'
 const WeatherAccordion = ({ weatherData }) => {
   return (
     <WeatherAccordionStyled>
-      <Accordion>
+      <Accordion allowZeroExpanded>
         {weatherData.map(region => (
           <AccordionItem key={region.code}>
             <AccordionItemHeading>
