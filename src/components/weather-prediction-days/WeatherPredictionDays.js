@@ -7,6 +7,7 @@ import { faCalendar, faClock, faCloudRain, faCloudSunRain, faSnowflake, faTemper
 import { getCurrentHour, getCurrentDate, transformDate, formatDate } from '../../utils/js/helpers'
 import { WeatherPredictionHoursSkeletonStyled, WeatherPredictionHoursStyled } from '../weather-prediction-hours/WeatherPredictionHoursStyled'
 import { Tooltip as ReactTooltip } from 'react-tooltip'
+import WeatherAdWarningDays from '../weather-ad-warning/WeatherAdWarning'
 
 const WeatherPredictionDays = ({ diaryPredictionData }) => {
 
@@ -118,17 +119,18 @@ const WeatherPredictionDays = ({ diaryPredictionData }) => {
 
                 return (
                   <li key={i}>
+                      <WeatherAdWarningDays data={obj} index={i} type='day'/>
                       <div>
                           <time>{transformDate(formatDate(obj.fecha))}</time>
                       </div>
                       <div>
                       {renderPeriods(relevantPeriods, (ele, j) => 
-                        <time>{formatTimePeriod(ele.periodo)}</time>
+                        <time key={j}>{formatTimePeriod(ele.periodo)}</time>
                       )}
                       </div>
                       <div>
                       {renderPeriods(relevantPeriods, (ele, j) => 
-                          <span data-tooltip-id={`tooltip-sky-${i}-${j}`}>
+                          <span data-tooltip-id={`tooltip-sky-${i}-${j}`} key={j}>
                             {skyIconMap[ele?.value]("36", "var(--wa-deep-blue)")}
                             <ReactTooltip
                               id={`tooltip-sky-${i}-${j}`}
@@ -139,7 +141,7 @@ const WeatherPredictionDays = ({ diaryPredictionData }) => {
                       </div>
                       <div>
                       {renderPeriods(relevantWindPeriods, (ele, j) => 
-                        <span data-tooltip-id={`tooltip-wind-${i}-${j}`}>
+                        <span data-tooltip-id={`tooltip-wind-${i}-${j}`} key={j}>
                           <div>
                             {ele?.direccion}
                             {windDirectionIconMap[ele?.direccion]("18", "var(--wa-deep-blue)")}
@@ -156,7 +158,7 @@ const WeatherPredictionDays = ({ diaryPredictionData }) => {
                       </div>
                       <div>
                       {renderPeriods(relevantPrecPeriods, (ele, j) => 
-                        <span data-tooltip-id={`tooltip-prec-${i}-${j}`}>
+                        <span data-tooltip-id={`tooltip-prec-${i}-${j}`} key={j}>
                           {ele?.value} %
                           <ReactTooltip
                             id={`tooltip-prec-${i}-${j}`}
@@ -167,7 +169,7 @@ const WeatherPredictionDays = ({ diaryPredictionData }) => {
                       </div>
                       <div>
                       {renderPeriods(relevantSnowPeriods, (ele, j) => 
-                        <span data-tooltip-id={`tooltip-snow-${i}-${j}`}>
+                        <span data-tooltip-id={`tooltip-snow-${i}-${j}`} key={j}>
                           {ele?.value ? `${ele.value} m.` : '-'}
                           {ele?.value &&
                             <ReactTooltip
@@ -179,12 +181,14 @@ const WeatherPredictionDays = ({ diaryPredictionData }) => {
                       )}
                       </div>
                       <div>
-                          <span data-tooltip-id={`tooltip-temp-${i}`}>{obj.temperatura.maxima}º / {obj.temperatura.minima}º </span>
-                          <ReactTooltip
+                          <span data-tooltip-id={`tooltip-temp-${i}`}>
+                            {obj.temperatura.maxima}º / {obj.temperatura.minima}º 
+                            <ReactTooltip
                               id={`tooltip-temp-${i}`}
                               place='bottom'
                               content={`Temperatura máxima: ${obj.temperatura.maxima}º Temperatura mínima: ${obj.temperatura.minima}º`} />
-                      </div>
+                          </span>
+                        </div>
                   </li>
                 )
             })}
