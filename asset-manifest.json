@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/weather-app/static/css/main.ca94485d.css",
-    "main.js": "/weather-app/static/js/main.cbe00924.js",
+    "main.js": "/weather-app/static/js/main.bf2c7274.js",
     "static/media/OpenSans-ExtraBoldItalic.ttf": "/weather-app/static/media/OpenSans-ExtraBoldItalic.ccded2e3be52d35f2ab9.ttf",
     "static/media/OpenSans-BoldItalic.ttf": "/weather-app/static/media/OpenSans-BoldItalic.9e53ccce0cab7c189c4d.ttf",
     "static/media/OpenSans-LightItalic.ttf": "/weather-app/static/media/OpenSans-LightItalic.d8b2e4e074f9d75b1b14.ttf",
@@ -40,10 +40,10 @@
     "static/media/OpenSans-Bold.woff2": "/weather-app/static/media/OpenSans-Bold.f3e79b3d83d8a599df08.woff2",
     "index.html": "/weather-app/index.html",
     "main.ca94485d.css.map": "/weather-app/static/css/main.ca94485d.css.map",
-    "main.cbe00924.js.map": "/weather-app/static/js/main.cbe00924.js.map"
+    "main.bf2c7274.js.map": "/weather-app/static/js/main.bf2c7274.js.map"
   },
   "entrypoints": [
     "static/css/main.ca94485d.css",
-    "static/js/main.cbe00924.js"
+    "static/js/main.bf2c7274.js"
   ]
 }
