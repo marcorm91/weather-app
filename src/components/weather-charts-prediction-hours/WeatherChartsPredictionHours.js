@@ -11,13 +11,13 @@ const WeatherChartsPredictionHours = ( { chartTempData, chartWindData, chartRain
   const [chartProps, setChartProps] = useState(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
+  // Modify properties when clicking the chart for a medium fullscreen view.
   const handleClick = (props) => {
     const newProps = {
       ...props,
       showXAxis: true,
       showYAxis: false,
       showLabels: true,
-      dot: true,
       tooltip: false,
       ml: 32,
       mr: 32,
@@ -32,6 +32,10 @@ const WeatherChartsPredictionHours = ( { chartTempData, chartWindData, chartRain
           x_value: formattedHour,
         }
       }),
+      lines: props.lines.map(line => ({
+        ...line,
+        dot: true 
+      }))
     }
     setChartProps(newProps)
     setIsModalOpen(true)
@@ -41,78 +45,95 @@ const WeatherChartsPredictionHours = ( { chartTempData, chartWindData, chartRain
     setIsModalOpen(false)
   }
   
+  // Define props charts
   const chartsData = [
     {
-      colorLine: 'var(--wa-deep-blue)',
       data: chartTempData,
       aspect: 5,
       unitY: 'º',
       unitX: 'h',
-      dataKey: 'Temperatura',
-      legend: 'Temperatura',
       showXAxis: false,
       showYAxis: false,
       showLabels: false,
       tooltip: true,
-      dot: false,
       ml: 16,
       mr: 16,
       mt: 32, 
-      mb: 32
+      mb: 32,
+      lines: [
+        {
+          dataKey: 'Temperatura',
+          colorLine: 'var(--wa-deep-blue)',
+          legend: 'Temperatura',
+          dot: false,
+        },
+      ]
     },
     {
-      colorLine: 'var(--wa-deep-blue)',
       data: chartWindData,
       unitY: ' Km/h',
       unitX: 'h',
       aspect: 5,
-      dataKey: 'Viento',
-      legend: 'Viento',
       showXAxis: false,
       showYAxis: false,
       showLabels: false,
       tooltip: true,
-      dot: false,
       ml: 16,
       mr: 16,
       mt: 32, 
-      mb: 32
+      mb: 32,
+      lines: [
+        {
+          dataKey: 'Viento',
+          colorLine: 'var(--wa-deep-blue)',
+          legend: 'Viento',
+          dot: false
+        },
+      ]
     },
     {
-      colorLine: 'var(--wa-deep-blue)',
       data: chartRainData,
       aspect: 5,
       unitY: ' mm.',
       unitX: 'h',
-      dataKey: 'Precipitacion',
-      legend: 'Precipitacion',
       showXAxis: false,
       showYAxis: false,
       showLabels: false,
       tooltip: true,
-      dot: false,
       ml: 16,
       mr: 16,
       mt: 32, 
-      mb: 32
+      mb: 32,
+      lines: [
+        {
+          dataKey: 'Precipitacion',
+          colorLine: 'var(--wa-deep-blue)',
+          legend: 'Precipitación',
+          dot: false,
+        },
+      ]
     },
     {
-      colorLine: 'var(--wa-deep-blue)',
       data: chartSnowData,
       aspect: 5,
       unitY: ' cm.',
       unitX: 'h',
-      dataKey: 'Nieve',
-      legend: 'Nieve',
       showXAxis: false,
       showYAxis: false,
       showLabels: false,
       tooltip: true,
-      dot: false,
       ml: 16,
       mr: 16,
       mt: 32, 
-      mb: 32
+      mb: 32,
+      lines: [
+        {
+          dataKey: 'Nieve',
+          colorLine: 'var(--wa-deep-blue)',
+          legend: 'Nieve',
+          dot: false,
+        },
+      ]
     }
   ]
 

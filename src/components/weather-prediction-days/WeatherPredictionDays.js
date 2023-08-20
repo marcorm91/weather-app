@@ -8,6 +8,7 @@ import { getCurrentHour, getCurrentDate, transformDate, formatDate } from '../..
 import { WeatherPredictionHoursSkeletonStyled, WeatherPredictionHoursStyled } from '../weather-prediction-hours/WeatherPredictionHoursStyled'
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import WeatherAdWarningDays from '../weather-ad-warning/WeatherAdWarning'
+import WeatherChartsPredictionDays from '../weather-charts-prediction-days/WeatherChartsPredictionDays'
 
 const WeatherPredictionDays = ({ diaryPredictionData }) => {
 
@@ -57,6 +58,11 @@ const WeatherPredictionDays = ({ diaryPredictionData }) => {
       </WeatherPredictionHoursStyled>
     )
   }
+
+  // Get min and max temperatures by days
+  let temperatures = predictionData.map(obj => {
+    return { day: obj.fecha, maxTemperature: obj.temperatura.maxima, minTemperature: obj.temperatura.minima }
+  })
 
   return (
     <WeatherPredictionDaysStyled>
@@ -188,11 +194,13 @@ const WeatherPredictionDays = ({ diaryPredictionData }) => {
                               place='bottom'
                               content={`Temperatura máxima: ${obj.temperatura.maxima}º Temperatura mínima: ${obj.temperatura.minima}º`} />
                           </span>
-                        </div>
+                      </div>
                   </li>
                 )
             })}
         </ul>
+        <WeatherChartsPredictionDays 
+          chartTempData={temperatures} />
     </WeatherPredictionDaysStyled>
   )
 }

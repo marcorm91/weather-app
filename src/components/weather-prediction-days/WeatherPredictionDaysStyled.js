@@ -69,6 +69,11 @@ export const WeatherPredictionDaysStyled = styled.div`
                             display: none;
                         }
                     }
+                    > .ad-warning__wrapper + div{
+                        > *:first-child {
+                            display: block;
+                        }
+                    }
                 }
             }
         }  
