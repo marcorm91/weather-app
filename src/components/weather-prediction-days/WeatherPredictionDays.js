@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { skyIconMap } from '../../utils/js/skyIcons'
 import { windDirectionIconMap } from '../../utils/js/windDirectionIcons'
 import { faCalendar, faClock, faCloudRain, faCloudSunRain, faSnowflake, faTemperatureQuarter, faWind } from '@fortawesome/free-solid-svg-icons'
-import { getCurrentHour, getCurrentDate, transformDate, formatDate } from '../../utils/js/helpers'
+import { getCurrentHour, getCurrentDate, getDayOfWeek, transformDate, formatDate } from '../../utils/js/helpers'
 import { WeatherPredictionHoursSkeletonStyled, WeatherPredictionHoursStyled } from '../weather-prediction-hours/WeatherPredictionHoursStyled'
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import WeatherAdWarningDays from '../weather-ad-warning/WeatherAdWarning'
@@ -122,12 +122,14 @@ const WeatherPredictionDays = ({ diaryPredictionData }) => {
                 const relevantWindPeriods = filterRelevantPeriods(obj.viento, relevantPeriods)
                 const relevantPrecPeriods = filterRelevantPeriods(obj.probPrecipitacion, relevantPeriods)
                 const relevantSnowPeriods = filterRelevantPeriods(obj.cotaNieveProv, relevantPeriods)                   
-
                 return (
                   <li key={i}>
                       <WeatherAdWarningDays data={obj} index={i} type='day'/>
                       <div>
-                          <time>{transformDate(formatDate(obj.fecha))}</time>
+                          <time>
+                            {getDayOfWeek(obj.fecha)} <br/>
+                            {transformDate(formatDate(obj.fecha))}
+                          </time>
                       </div>
                       <div>
                       {renderPeriods(relevantPeriods, (ele, j) => 

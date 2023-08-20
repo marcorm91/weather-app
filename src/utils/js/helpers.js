@@ -57,7 +57,6 @@ export const formatDate = (dateString) => {
 
 /**
  * Transforms a date string from 'DD-MM-YYYY' format into a localized format.
- *
  * @param {string} dateStr - The date string in 'DD-MM-YYYY' format.
  * @param {string} language - The current language (e.g., 'en', 'es').
  * @returns {string} - The localized date string.
@@ -70,4 +69,13 @@ export const transformDate = (dateStr, language) => {
     const format = formats[language] || formats['es']
     moment.locale(language) 
     return moment(dateStr, 'DD-MM-YYYY').format(format)
+}
+
+/**
+ * Get the name of the day of the week for a given date string.
+ * @param {string} dateString - A date in the format "YYYY-MM-DDTHH:mm:ss".
+ * @returns {string} - The name of the day of the week.
+ */
+export const getDayOfWeek = (dateString) => {
+    return moment(dateString).format('dddd');
 }
