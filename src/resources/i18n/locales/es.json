@@ -17,7 +17,8 @@
             "FAV": "Favoritos"
         },
         "TABLE": {
-            "SEARCH": "Buscar municipio...",
+            "FILTERBY": "Filtrar por:",
+            "SEARCH": "Buscar...",
             "CODE": "Código",
             "MUNICIPALITY": "Municipio",
             "PROVINCE": "Provincia",
@@ -28,7 +29,9 @@
             "OF": "de",
             "EMPTY_FAV": "No tienes ningún municipio seleccionado como favorito.",
             "REMOVE_FAV": "Borrar favoritos",
-            "NO_RESULTS": "No se encontraron resultados."
+            "NO_RESULTS": "No se encontraron resultados.",
+            "SELECT_COMMUNITY": "Selecciona una Comunidad",
+            "SELECT_PROVINCE": "Selecciona una Provincia"
         },
         "PANEL_INFO": {
             "MORE_INFO": "Más información",

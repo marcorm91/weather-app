@@ -17,7 +17,8 @@
             "FAV": "Favorites"
         },
         "TABLE": {
-            "SEARCH": "Search municipality...",
+            "FILTERBY": "Filter by:",
+            "SEARCH": "Search...",
             "CODE": "Code",
             "MUNICIPALITY": "Municipality",
             "PROVINCE": "Province",
@@ -28,7 +29,9 @@
             "OF": "of",
             "EMPTY_FAV": "You have no municipalities selected as favorites.",
             "REMOVE_FAV": "Delete favorites",
-            "NO_RESULTS": "No results found."
+            "NO_RESULTS": "No results found.",
+            "SELECT_COMMUNITY": "Select a Community",
+            "SELECT_PROVINCE": "Select a Province"
         },
         "PANEL_INFO": {
             "MORE_INFO": "More information",

@@ -12,16 +12,43 @@ export const WeatherTableStyled = styled.div`
   `}
   .table-top__wrapper{
     display: flex;
-    align-self: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     gap: var(--wa-spacing-06);
-    ${media('mobile')`
+    ${media('tablet')`
       flex-direction: column;
-      gap: var(--wa-spacing-04);
-      align-self: auto;
-      width: 100%;
     `}
-    > input{
-      min-width: 21.25rem;
+    > div{
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      > select{
+        padding: var(--wa-spacing-02) var(--wa-spacing-00);
+      }
+      > span{
+        font-family: var(--wa-font-family-semibold);
+      }
+      > input{
+        min-width: 16rem;
+      }
+      ${media('tablet')`
+        flex-direction: column;
+        gap: var(--wa-spacing-04);
+        align-items: flex-start;
+        align-self: auto;
+        width: 100%;
+        > span{
+          display: none;
+        }
+        > input, select{
+          min-width: 100%;
+          font-size: var(--wa-font-size-sm);
+        }
+        > button{
+          align-self: flex-end;
+        }
+    `}
     }
   }
   .table__wrapper{

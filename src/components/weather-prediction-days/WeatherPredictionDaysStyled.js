@@ -25,6 +25,11 @@ export const WeatherPredictionDaysStyled = styled.div`
                         text-align: center;
                         user-select: none;
                     }
+                    &.ad-warning__wrapper + div, &:first-child:not(.ad-warning__wrapper){
+                        > time{
+                           padding-top: var(--wa-spacing-03);
+                        }
+                    }
                 }
                 .react-tooltip{
                     white-space: normal !important;
