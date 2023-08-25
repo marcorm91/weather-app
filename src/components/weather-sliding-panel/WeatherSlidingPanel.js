@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { WeatherSlidingPanelStyled } from './WeatherSlidingPanelStyled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -7,20 +7,31 @@ import WeatherCurrentPrediction from '../weather-current-prediction/WeatherCurre
 import WeatherCurrentSky from '../weather-current-sky/WeatherCurrentSky'
 import WeatherTodayPrediction from '../weather-today-prediction/WeatherTodayPrediction'
 import WeatherBackdrop from '../weather-backdrop/WeatherBackdrop'
+import RecentSearchesContext from '../../utils/js/RecentSearchesContext'
 import { AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-
+import { storeSearchItem } from '../../utils/js/localStorageUtils';
 
 const WeatherSlidingPanel = ({ data, onClose, isOpen, municipalityObject }) => {
   const { t } = useTranslation()
-
   const hourlyPredictionData = data?.hourlyPredictionData
   const diaryPredictionData = data?.diaryPredictionData
+  const { setRecentSearches } = useContext(RecentSearchesContext)
 
   // Hourly data
   const hourlyData = hourlyPredictionData?.data[0] || {}
   const { nombre = '', provincia = '' } = hourlyData
 
+  // Stores the current search (`nombre`) to the local storage. Max. 5 values, and reorder last search
+  const storeRecentSearch = () => {
+    const newItem = {
+      nombre,
+      state: municipalityObject,
+    }
+    const newSearches = storeSearchItem(newItem)
+    setRecentSearches(newSearches)
+  }
+  
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
@@ -65,6 +76,7 @@ const WeatherSlidingPanel = ({ data, onClose, isOpen, municipalityObject }) => {
           </div>
           <div className="footer__wrapper">
             <Link
+              onClick={() => storeRecentSearch(municipalityObject)}
               className="btn btn-primary"
               to="/more-info"
               state={{data: municipalityObject}}

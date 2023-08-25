@@ -8,7 +8,8 @@
     "NAVBAR": {
         "HOME_PAGE": "Home page",
         "CONTACT": "Contact",
-        "ALERTS": "Alerts"
+        "ALERTS": "Alerts",
+        "LAST_SEARCH": "Last search"
     },
     "HOME": {
         "WELCOME_MSG": "Welcome, today is {{day}}",

@@ -75,9 +75,16 @@ export const WeatherNavbarStyled = styled(motion.nav)`
                         width: 0.5rem;
                         background-color: var(--wa-deep-blue);
                     }
-                    a{
+                    > a{
                         font-family: var(--wa-font-family-semibold);
                         padding: var(--wa-spacing-03) var(--wa-spacing-00);
+                        &.last-searches{
+                            & + ul{
+                                > li:first-child > a{
+                                    font-family: var(--wa-font-family-semibold);
+                                }
+                            }
+                        }
                     }
                 }
                 a{
@@ -87,9 +94,24 @@ export const WeatherNavbarStyled = styled(motion.nav)`
                     display: inline-flex;
                     align-items: center;
                     gap: var(--wa-spacing-03);
+                    &.no-link{
+                        cursor: default;
+                    }
                     ${media('mobile')`
                         font-size: var(--wa-font-size-sm);
                     `}
+                }
+                > ul{
+                    list-style: none;
+                    padding: var(--wa-spacing-00) var(--wa-spacing-00) var(--wa-spacing-00) var(--wa-spacing-07);
+                    margin: var(--wa-spacing-00);
+                    > li {
+                        > a{
+                            font-family: var(--wa-font-family-regular);
+                            margin: var(--wa-spacing-02) var(--wa-spacing-00);
+                            font-size: var(--wa-font-size-sm);
+                        }
+                    }
                 }
             }
             &.block-2__wrapper{
