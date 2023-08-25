@@ -35,6 +35,7 @@ export const skyIconMap = {
     "24n":  (size, color) => <WiNightAltRain size={size} color={color} />,
     "25":   (size, color) => <WiShowers size={size} color={color} />,
     "26":   (size, color) => <WiRain size={size} color={color} />,
+    "26n":   (size, color) => <WiRain size={size} color={color} />,
     "71":   (size, color) => <WiDaySnow size={size} color={color} />,
     "71n":  (size, color) => <WiNightAltSnow size={size} color={color} />,
     "72":   (size, color) => <WiDaySnow size={size} color={color} />,
