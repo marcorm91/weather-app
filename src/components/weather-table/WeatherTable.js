@@ -5,6 +5,7 @@ import TablePaginator from '../weather-table-row-paginator/WeatherTableRowPagina
 import codeTownsData from '../../resources/services/code_towns.json'
 import { useTable, useGlobalFilter, usePagination } from 'react-table'
 import { useTranslation } from 'react-i18next'
+import { getFavorites, removeAllFavorites } from '../../utils/js/localStorageUtils'
 
 const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
   const { t } = useTranslation()
@@ -20,9 +21,9 @@ const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
 
   // Get local storage favorites.
   useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || []
-    setFavorites(storedFavorites)
-  }, [])
+    const storedFavorites = getFavorites();
+    setFavorites(storedFavorites);
+  }, []);
 
   // Callback function to update filtered data based on favs and showFavoritesOnly flag
   const updateFilteredData = useCallback(() => {
@@ -41,7 +42,6 @@ const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
         return favoriteSet.has(favoriteId)
       })
     }
-
     setFilteredData(tempData)
   }, [favorites, showFavoritesOnly, selectedCommunity, selectedProvince])
 
@@ -76,9 +76,9 @@ const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
 
   // Delete all stored favorites.  If it's in tab2 (favs table), the table will be removed. 
   const handleDeleteFavorites = () => {
-    localStorage.removeItem('favorites')
+    removeAllFavorites()
     setFavorites([])
-    if(showFavoritesOnly) setIsTableVisible(false)
+    if (showFavoritesOnly) setIsTableVisible(false)
   }
 
   const columns = [

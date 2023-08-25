@@ -6,6 +6,7 @@ import WeatherTabs from '../../components/weather-tabs/WeatherTabs'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import WeatherAd from '../../components/weather-ad/WeatherAd'
+import { getFavorites } from '../../utils/js/localStorageUtils'
 
 const WeatherHome = () => {
   
@@ -18,7 +19,7 @@ const WeatherHome = () => {
   }
   const day = date.toLocaleDateString(i18n.language, dateOptions)
   const [activeTab, setActiveTab] = useState('tab1')
-  const favorites = JSON.parse(localStorage.getItem('favorites')) || []
+  const favorites = getFavorites()
   const hasFavorites = favorites.length > 0
 
   // Handle click for tabs (all and favs)

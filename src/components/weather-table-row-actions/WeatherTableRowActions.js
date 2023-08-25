@@ -6,6 +6,7 @@ import { faStar, faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 import WeatherSlidingPanel from '../weather-sliding-panel/WeatherSlidingPanel'
 import { fetchHourlyPrediction } from '../../resources/services/APIs/hourlyPrediction'
 import { fetchDiaryPrediction } from '../../resources/services/APIs/diaryPrediction'
+import { getFavorites, removeFavorite, addFavorite } from '../../utils/js/localStorageUtils'
 
 const Actions = ({ row, onDeleteRow  }) => {
   const rowId = `${row.original.CODAUTO}-${row.original.CPRO}-${row.original.CMUN}-${row.original.DC}`
@@ -13,37 +14,26 @@ const Actions = ({ row, onDeleteRow  }) => {
   const [isPanelOpen, setIsPanelOpen] = useState(false)
   const [panelData, setPanelData] = useState(null)
   const [isFavorite, setIsFavorite] = useState(false) 
-  const favoritesKey = 'favorites'
   const municipalityObject = row.original
-
+    
   // Get items from local storage
   useEffect(() => {
-    const favorites = JSON.parse(localStorage.getItem(favoritesKey)) || []
-    const isFavorite = Array.isArray(favorites) && favorites.includes(rowId)
-    setIsFavorite(isFavorite)
+    const favorites = getFavorites();
+    setIsFavorite(favorites.includes(rowId))
   }, [rowId])
   
   // Add item to fav list table.  Check if exists and delete from list.
   const handleAddToFavorites = () => {
-    const favorites = JSON.parse(localStorage.getItem(favoritesKey)) || []
-    const isFavorite = Array.isArray(favorites) && favorites.includes(rowId)
-
-    let updatedFavorites = [...favorites]
-
-    if (isFavorite) {
-      const index = updatedFavorites.indexOf(rowId)
-      if (index !== -1) {
-        updatedFavorites.splice(index, 1)
-      }
+    const isCurrentFavorite = getFavorites().includes(rowId)
+    if (isCurrentFavorite) {
+      removeFavorite(rowId)
       if (onDeleteRow) {
         onDeleteRow(rowId)
       }
     } else {
-      updatedFavorites.push(rowId)
+      addFavorite(rowId)
     }
-
-    localStorage.setItem(favoritesKey, JSON.stringify(updatedFavorites))
-    setIsFavorite(!isFavorite)
+    setIsFavorite(!isCurrentFavorite)
   }
 
   // Get more info from component by CPRO and CMUN.
