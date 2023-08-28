@@ -7,6 +7,9 @@ export const WeatherTableRowStyled = styled.tr`
         td{
             padding: var(--wa-spacing-03) var(--wa-spacing-02);
             border-bottom: var(--wa-border-width-01) solid var(--wa-platinum);
+            &.hide-column{
+                display: none;
+            }
             &:last-child{
                 text-align: right;
             }

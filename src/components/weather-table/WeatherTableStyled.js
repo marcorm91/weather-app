@@ -16,44 +16,62 @@ export const WeatherTableStyled = styled.div`
     align-items: center;
     width: 100%;
     gap: var(--wa-spacing-06);
-    ${media('tablet')`
+    ${media('mobile')`
       flex-direction: column;
+      align-items: flex-start;
+      gap: var(--wa-spacing-04);
     `}
     > div{
       display: flex;
-      align-items: center;
-      gap: 24px;
-      > select{
-        padding: var(--wa-spacing-02) var(--wa-spacing-00);
-      }
-      > span{
-        font-family: var(--wa-font-family-semibold);
-      }
-      > input{
-        min-width: 16rem;
-      }
-      ${media('tablet')`
-        flex-direction: column;
-        gap: var(--wa-spacing-04);
-        align-items: flex-start;
-        align-self: auto;
-        width: 100%;
-        > span{
-          display: none;
+      flex-wrap: wrap;
+      column-gap: 24px;
+      row-gap: 16px;
+      &:first-child{
+        ${media('mobile')`
+          width: 100%;
+        `}
+        > input{
+          ${media('mobile')`
+            flex: 1 1 auto;
+          `}
         }
-        > input, select{
-          min-width: 100%;
-          font-size: var(--wa-font-size-sm);
-        }
-        > button{
+      }
+      &:last-child{
+        ${media('mobile')`
           align-self: flex-end;
+        `}
+      }
+      .overlay-panel__wrapper{
+        position: relative;
+        > button{
+          background-color: transparent;
+          border: var(--wa-border-width-01) solid var(--wa-deep-blue);
+          width: 2rem;
+          height: 2rem;
+          border-radius: var(--wa-size-border-radius-01);
+          cursor: pointer;
+          font-size: var(--wa-font-size-xl);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: var(--wa-deep-blue);
         }
-    `}
+        .overlay-panel{
+          position: absolute;
+          background: var(--wa-white);
+          z-index: 11;
+          padding: var(--wa-spacing-05);
+          box-shadow: 0 0 0.25rem 0 var(--wa-black-op50);
+          border-radius: var(--wa-size-border-radius-02);
+          top: calc(100% + var(--wa-spacing-02));
+          gap: var(--wa-spacing-05);
+        }
+      }
     }
   }
   .table__wrapper{
     width: 100%;
-    max-height: calc(100vh - 380px);
+    max-height: calc(100vh - 385px);
     overflow: auto;
     ${media('mobile')`
       max-height: calc(100vh - 420px);
@@ -72,6 +90,9 @@ export const WeatherTableStyled = styled.div`
                     padding: var(--wa-spacing-03) var(--wa-spacing-02);
                     font-weight: normal;
                     font-family: var(--wa-font-family-semibold);
+                    &.hide-column{
+                      display: none;
+                    }
                 }
             }
             ${media('mobile')`

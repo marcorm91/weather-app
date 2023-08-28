@@ -46,21 +46,28 @@ const WeatherHome = () => {
     <WeatherHomeStyled>
       <WeatherAd />
       <h1>{t('HOME.WELCOME_MSG', { day })}</h1>
-      <WeatherTabs activeTab={activeTab} handleTabClick={handleTabClick} tabs={tabs} />
-      {tabs.map((tab) => (
-        <div
-          key={tab.id}
-          className={activeTab === tab.id ? 'tab-content__wrapper' : 'tab-content__wrapper hidden'}
-        >
-          {tab.id === 'tab1' ? (
-            <WeatherTable key="all" showFavoritesOnly={false} />
-          ) : (
-            hasFavorites > 0 ? (
-              <WeatherTable key="favorites" showFavoritesOnly={true} arrayFavorites={favorites} />
-            ) : <span>{t('HOME.TABLE.EMPTY_FAV')}</span>
-          )}
+      <div className='content__wrapper'>
+        <div>
+          <WeatherTabs activeTab={activeTab} handleTabClick={handleTabClick} tabs={tabs} />
+          {tabs.map((tab) => (
+            <div
+              key={tab.id}
+              className={activeTab === tab.id ? 'tab-content__wrapper' : 'tab-content__wrapper hidden'}
+            >
+              {tab.id === 'tab1' ? (
+                <WeatherTable key="all" showFavoritesOnly={false} />
+              ) : (
+                hasFavorites > 0 ? (
+                  <WeatherTable key="favorites" showFavoritesOnly={true} arrayFavorites={favorites} />
+                ) : <span>{t('HOME.TABLE.EMPTY_FAV')}</span>
+              )}
+            </div>
+          ))}
         </div>
-      ))}
+        <div>
+          col 2
+        </div>
+      </div>
     </WeatherHomeStyled>
   )
 }

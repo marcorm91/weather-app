@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState, useCallback, useRef } from 'react'
 import { WeatherTableStyled } from './WeatherTableStyled'
 import WeatherTableRow from '../weather-table-row/WeatherTableRow'
 import TablePaginator from '../weather-table-row-paginator/WeatherTableRowPaginator'
@@ -6,6 +6,8 @@ import codeTownsData from '../../resources/services/code_towns.json'
 import { useTable, useGlobalFilter, usePagination } from 'react-table'
 import { useTranslation } from 'react-i18next'
 import { getFavorites, removeAllFavorites } from '../../utils/js/localStorageUtils'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 
 const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
   const { t } = useTranslation()
@@ -14,6 +16,7 @@ const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
   const [isTableVisible, setIsTableVisible] = useState(true)
   const [selectedCommunity, setSelectedCommunity] = useState('')
   const [selectedProvince, setSelectedProvince] = useState('')
+  const [isFilterPanelVisible, setIsFilterPanelVisible] = useState(false)
   const uniqueCommunities = [...new Set(codeTownsData.map(item => item.COMUNIDAD))].sort()
   const uniqueProvinces = selectedCommunity 
       ? [...new Set(codeTownsData.filter(item => item.COMUNIDAD === selectedCommunity).map(item => item.PROV))].sort() 
@@ -21,9 +24,9 @@ const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
 
   // Get local storage favorites.
   useEffect(() => {
-    const storedFavorites = getFavorites();
-    setFavorites(storedFavorites);
-  }, []);
+    const storedFavorites = getFavorites()
+    setFavorites(storedFavorites)
+  }, [])
 
   // Callback function to update filtered data based on favs and showFavoritesOnly flag
   const updateFilteredData = useCallback(() => {
@@ -81,8 +84,26 @@ const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
     if (showFavoritesOnly) setIsTableVisible(false)
   }
 
+  // Close overlay panel when you click outside panel
+  const buttonRef = useRef(null)
+  const containerRef = useRef(null)
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+        if (buttonRef.current && buttonRef.current.contains(event.target)) {
+            return
+        }
+        if (isFilterPanelVisible && containerRef.current && !containerRef.current.contains(event.target)) {
+            setIsFilterPanelVisible(false)
+        }
+    }
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+        document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [isFilterPanelVisible])
+
   const columns = [
-    { Header: 'COM-PROV-MUN-DC', accessor: 'CODE' },
+    { Header: 'COM-PROV-MUN-DC', accessor: 'CODE', className: 'hide-column' },
     { Header: t('HOME.TABLE.MUNICIPALITY').toUpperCase(), accessor: 'NAME' },
     { Header: t('HOME.TABLE.PROVINCE').toUpperCase(), accessor: 'PROV' },
     { Header: t('HOME.TABLE.COMUNITY').toUpperCase(), accessor: 'COMUNIDAD' },
@@ -114,21 +135,29 @@ const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
       <>
         <div className="table-top__wrapper">
           <div>
-            <span>{t('HOME.TABLE.FILTERBY')}</span>
-            <select
-              value={selectedCommunity}
-              onChange={(e) => {
-                setSelectedCommunity(e.target.value)
-                setSelectedProvince('') }}>
-                <option value="">{t('HOME.TABLE.SELECT_COMMUNITY')}</option>
-                {uniqueCommunities.map(community => <option key={community} value={community}>{community}</option>)}
-            </select>
-            <select
-              value={selectedProvince}
-              onChange={(e) => setSelectedProvince(e.target.value)} >
-                <option value="">{t('HOME.TABLE.SELECT_PROVINCE')}</option>
-                {uniqueProvinces.map(province => <option key={province} value={province}>{province}</option>)}
-            </select>
+            <div className='overlay-panel__wrapper' ref={containerRef}>
+              <button ref={buttonRef} onClick={(e) => {
+                  e.stopPropagation()
+                  setIsFilterPanelVisible(!isFilterPanelVisible)}} >
+                  <FontAwesomeIcon icon={faEllipsisVertical} />
+              </button>
+              <div className='overlay-panel' style={{ display: isFilterPanelVisible ? 'flex' : 'none' }}>
+                  <select
+                    value={selectedCommunity}
+                    onChange={(e) => {
+                      setSelectedCommunity(e.target.value)
+                      setSelectedProvince('') }}>
+                      <option value="">{t('HOME.TABLE.SELECT_COMMUNITY')}</option>
+                        {uniqueCommunities.map(community => <option key={community} value={community}>{community}</option>)}
+                  </select>
+                  <select
+                    value={selectedProvince}
+                    onChange={(e) => setSelectedProvince(e.target.value)} >
+                      <option value="">{t('HOME.TABLE.SELECT_PROVINCE')}</option>
+                      {uniqueProvinces.map(province => <option key={province} value={province}>{province}</option>)}
+                  </select>
+                </div>
+            </div>
             <input
               type="text"
               value={state.globalFilter || ''}
@@ -151,7 +180,7 @@ const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
               {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
-                    <th {...column.getHeaderProps()}>
+                    <th {...column.getHeaderProps()} className={column.className}>
                       {column.render('Header')}
                     </th>
                   ))}

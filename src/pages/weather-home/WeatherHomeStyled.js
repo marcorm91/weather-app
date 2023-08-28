@@ -35,4 +35,21 @@ export const WeatherHomeStyled = styled.main`
       }
     }
   }
+  > .content__wrapper{
+    display: flex;
+    gap: var(--wa-spacing-05);
+    > div{
+      flex: 1 1 50%;
+      max-width: 50%;
+      width: 50%;
+      ${media('tablet')`
+        flex: 1 1 100%;
+        max-width: 100%;
+        width: 100%;
+      `}
+    }
+    ${media('tablet')`
+        flex-direction: column;
+    `}
+  }
 `;

@@ -10,7 +10,7 @@ const WeatherTableRow = ({ row, onDeleteRow  }) => {
 
   return (
     <WeatherTableRowStyled>
-        <td style={{maxWidth: "180px", width: "180px"}}>
+        <td className='hide-column'>
           <label className='hide-desktop'>{t('HOME.TABLE.CODE')}:</label>{CODAUTO}-{CPRO}-{CMUN}-{DC}
         </td>
         <td>
