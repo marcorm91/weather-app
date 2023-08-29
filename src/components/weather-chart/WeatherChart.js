@@ -29,11 +29,12 @@ const WeatherChart = ({
   const dataAsNumbers = data.map(item => {
     let transformedItem = { ...item }
     lines.forEach(line => {
-      transformedItem[line.dataKey] = Number(item[line.dataKey])
-    })
+      let numberValue = Number(item[line.dataKey]);
+      transformedItem[line.dataKey] = isNaN(numberValue) ? 0 : numberValue
+    });
     return transformedItem
   })
-  
+
   // This function calculates the X unit if it's based on hourly data. 
   // If it is an hour, it converts it to HH format and returns the subsequent hour.
   const calculateXValue = (unitX, label, payload) => {
