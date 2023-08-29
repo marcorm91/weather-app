@@ -72,7 +72,7 @@ const WeatherChartsPredictionDays = ( { chartTempData } ) => {
         },
         {
           dataKey: 'minTemperature',
-          colorLine: 'var(--wa-cold-blue)',
+          colorLine: 'var(--wa-deep-blue)',
           legend: 'Temperatura mínima',
           dot: false,
         }

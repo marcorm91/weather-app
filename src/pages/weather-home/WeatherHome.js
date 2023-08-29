@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import WeatherAd from '../../components/weather-ad/WeatherAd'
 import { getFavorites } from '../../utils/js/localStorageUtils'
+// import backgroundImage from '../../resources/assets/images/background.jpg' 
 
 const WeatherHome = () => {
   
@@ -43,7 +44,7 @@ const WeatherHome = () => {
   ]
 
   return (
-    <WeatherHomeStyled>
+    <WeatherHomeStyled className='background-main-image'>
       <WeatherAd />
       <h1>{t('HOME.WELCOME_MSG', { day })}</h1>
       <div className='content__wrapper'>

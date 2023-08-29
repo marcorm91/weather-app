@@ -141,3 +141,10 @@ div.react-tooltip[role='tooltip']{
         }
     }
 }
+
+.background-main-image{
+    background: url("../src/resources/assets/images/background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}

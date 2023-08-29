@@ -8,15 +8,7 @@ export const WeatherTabsStyled = styled.ul`
   padding: var(--wa-spacing-00) var(--wa-spacing-00) var(--wa-spacing-03) var(--wa-spacing-00);
   user-select: none;
   position: relative;
-  &:after{
-    content: "";
-    position: absolute;
-    right: var(--wa-spacing-00);
-    bottom: calc(-1 * var(--wa-spacing-03));
-    height: 0.5rem;
-    width: 10%;
-    background: linear-gradient(to left, rgb(255, 255, 255) 0%,rgba(255,255,255,0) 100%);
-  }
+  margin-top: var(--wa-spacing-00);
   > li{
     padding: var(--wa-spacing-00) var(--wa-spacing-04);
     position: relative;

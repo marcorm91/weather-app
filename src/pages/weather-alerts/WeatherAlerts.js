@@ -35,16 +35,18 @@ const WeatherAlerts = () => {
   }, [])
 
   return (
-    <WeatherAlertsStyled>
-      <span>{t('ALERTS.INFO')}</span>
-      {isLoading ? 
-        <WeatherAccordionSkeletonStyled>
-          {Array(10).fill().map((_, i) => (
-            <div key={i} className='loading-skeleton'></div>
-          ))}
-        </WeatherAccordionSkeletonStyled> :
-          <WeatherAccordion weatherData={weatherData} />
-      }
+    <WeatherAlertsStyled className='background-main-image'>
+      <div>
+        <span>{t('ALERTS.INFO')}</span>
+        {isLoading ? 
+          <WeatherAccordionSkeletonStyled>
+            {Array(10).fill().map((_, i) => (
+              <div key={i} className='loading-skeleton'></div>
+            ))}
+          </WeatherAccordionSkeletonStyled> :
+            <WeatherAccordion weatherData={weatherData} />
+        }
+      </div>
     </WeatherAlertsStyled>
   )
 }

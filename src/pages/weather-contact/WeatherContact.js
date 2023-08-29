@@ -23,7 +23,7 @@ const WeatherContact = () => {
   ]
   
   return (
-    <WeatherContactStyled>
+    <WeatherContactStyled className='background-main-image'>
       <div className='col__wrapper'>
         <h2>{t("ABOUTME.COL1.COL1_1.TITLE")}</h2>
         <p>{t("ABOUTME.COL1.COL1_1.P1")}</p>

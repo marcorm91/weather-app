@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { media } from '../../utils/mediaqueries'
 
 export const WeatherMoreInfoStyled = styled.main`
-  min-height: calc(100vh - var(--wa-header-box-height) - var(--wa-footer-height));
-  max-height: calc(100vh - var(--wa-header-box-height) - var(--wa-footer-height));
+  min-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
+  max-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
   overflow: auto;
   background-color: var(--wa-dr-white);
   padding: var(--wa-spacing-04);
@@ -14,9 +14,15 @@ export const WeatherMoreInfoStyled = styled.main`
     display: flex;
     flex-direction: column;
     gap: var(--wa-spacing-04);
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: var(--wa-size-border-radius-03);
+    border: var(--wa-border-width-01) solid rgba(209, 213, 219, 0.3);
+    padding: var(--wa-spacing-04);
+    box-sizing: border-box;
     &:first-child{
       flex: 1 1 70%;
       max-width: 70%;
+      height: 100%;
       ${media('mobile')`
           flex: 1 1 100%;
           max-width: 100%;
@@ -42,7 +48,6 @@ export const WeatherMoreInfoStyled = styled.main`
     &:last-child{
       flex: 1 1 30%;
       max-width: 30%;
-      background-color: var(--wa-deep-blue-op10);
       padding: var(--wa-spacing-04) var(--wa-spacing-06);
       box-sizing: border-box;
       border-radius: var(--wa-size-border-radius-02);

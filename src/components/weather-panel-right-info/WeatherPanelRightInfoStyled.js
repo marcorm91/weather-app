@@ -55,8 +55,11 @@ export const WeatherMapSkeletonStyled = styled.div`
 export const WeatherListSkeletonStyled = styled.div`
     ul{
         display: flex;
+        flex-direction: column;
+        margin: var(--wa-spacing-00);
         li{
             height: 1.25rem;
+            width: 4rem;
             position: relative;
         }
     }

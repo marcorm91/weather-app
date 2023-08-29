@@ -19,22 +19,22 @@ const WeatherMoreInfo = () => {
 
   const handleMinimizeClick = () => {
     if(window.innerWidth > 1024) {
-      setIsMinimized(prevState => !prevState);
+      setIsMinimized(prevState => !prevState)
     }
   }
 
-  const [isMinimized, setIsMinimized] = useState(window.innerWidth <= 1024);
+  const [isMinimized, setIsMinimized] = useState(window.innerWidth <= 1024)
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMinimized(window.innerWidth <= 1024);
+      setIsMinimized(window.innerWidth <= 1024)
     }
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize)
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', handleResize)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,7 +51,7 @@ const WeatherMoreInfo = () => {
   }, [code])
 
   return (
-    <WeatherMoreInfoStyled className={isMinimized ? 'minimized-panel' : ''}>
+    <WeatherMoreInfoStyled className={`background-main-image ${isMinimized ? 'minimized-panel' : ''}`}>
       <div className='col__wrapper'>
         <div className='title__wrapper'>
           <Link to={'/'}>

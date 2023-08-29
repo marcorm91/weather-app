@@ -11,7 +11,6 @@ export const WeatherHeaderStyled = styled.header`
   align-items: center;
   justify-content: space-between;
   box-shadow: var(--wa-box-shadow-01);
-  margin-bottom: var(--wa-spacing-03);
   .title__wrapper{
     display: flex;
     align-items: center;

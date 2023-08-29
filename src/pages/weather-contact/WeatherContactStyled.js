@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { media } from '../../utils/mediaqueries'
 
 export const WeatherContactStyled = styled.main`
-  min-height: calc(100vh - var(--wa-header-box-height) - var(--wa-footer-height));
-  max-height: calc(100vh - var(--wa-header-box-height) - var(--wa-footer-height));
+  min-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
+  max-height: calc(100vh - var(--wa-header-height) - var(--wa-footer-height));
   overflow: auto;
   background-color: var(--wa-dr-white);
   padding: var(--wa-spacing-04);
@@ -15,6 +15,11 @@ export const WeatherContactStyled = styled.main`
     gap: var(--wa-spacing-04);
   `}
   > .col__wrapper{
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: var(--wa-size-border-radius-03);
+    border: var(--wa-border-width-01) solid rgba(209, 213, 219, 0.3);
+    padding: var(--wa-spacing-04);
     h2, p{
       margin: var(--wa-spacing-00) var(--wa-spacing-00) var(--wa-spacing-04) var(--wa-spacing-00);
     }
@@ -52,12 +57,8 @@ export const WeatherContactStyled = styled.main`
       flex: 1 1 25%;
       position: sticky;
       top: var(--wa-spacing-00);
-      padding-left: var(--wa-spacing-06);
-      border-left: var(--wa-border-width-01) solid var(--wa-leadbelcher);
       ${media('mobile')`
         flex: 1 1 100%;
-        border-left: var(--wa-border-width-00);
-        padding-left: var(--wa-spacing-00);
         position: static;
       `}
     }

@@ -2,20 +2,17 @@ import styled from 'styled-components'
 import { media } from '../../utils/mediaqueries'
 
 export const WeatherTableStyled = styled.div`
-  margin: var(--wa-spacing-04) var(--wa-spacing-00);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--wa-spacing-04);
-  ${media('mobile')`
-    margin: var(--wa-spacing-05) var(--wa-spacing-00) var(--wa-spacing-00) var(--wa-spacing-00);
-  `}
   .table-top__wrapper{
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     gap: var(--wa-spacing-06);
+    margin: var(--wa-spacing-04) var(--wa-spacing-00) var(--wa-spacing-03) var(--wa-spacing-00);
     ${media('mobile')`
       flex-direction: column;
       align-items: flex-start;
@@ -71,10 +68,10 @@ export const WeatherTableStyled = styled.div`
   }
   .table__wrapper{
     width: 100%;
-    max-height: calc(100vh - 385px);
+    max-height: calc(100vh - 24.6875rem);
     overflow: auto;
     ${media('mobile')`
-      max-height: calc(100vh - 420px);
+      max-height: calc(100vh - 26.25rem);
     `}
     table{
         width: 100%;
