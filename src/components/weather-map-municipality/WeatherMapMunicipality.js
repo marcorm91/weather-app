@@ -4,10 +4,10 @@ import 'leaflet/dist/leaflet.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { renderToString } from 'react-dom/server'
-import { WeatherMapStyled } from './WeatherMapStyled'
+import { WeatherMapMunicipalityStyled } from './WeatherMapMunicipalityStyled'
 import mapService from '../../resources/services/APIs/mapService'
 
-const WeatherMap = ({ municipalityObject }) => {
+const WeatherMapMunicipality = ({ municipalityObject }) => {
   const { NAME, PROV } = municipalityObject
   const mapRef = useRef(null);
   const markerRef = useRef(null);
@@ -35,11 +35,11 @@ const WeatherMap = ({ municipalityObject }) => {
   }, [NAME, PROV]);
 
   return (
-      <WeatherMapStyled className='map__wrapper'>
+      <WeatherMapMunicipalityStyled className='map__wrapper'>
         <div id="map"></div>
-      </WeatherMapStyled>
+      </WeatherMapMunicipalityStyled>
   )
 
 }
 
-export default WeatherMap
+export default WeatherMapMunicipality

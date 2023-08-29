@@ -1,5 +1,5 @@
 import React from 'react'
-import WeatherMap from '../weather-map/WeatherMap'
+import WeatherMapMunicipality from '../weather-map-municipality/WeatherMapMunicipality'
 import { WeatherPanelRightInfoStyled, 
          WeatherMapSkeletonStyled, 
          WeatherListSkeletonStyled,
@@ -38,7 +38,7 @@ const WeatherPanelRightInfo = ({ municipalityObject, hourlyPredictionData, diary
       <button className='btn-minimized-panel' onClick={onMinimize}>
         <FontAwesomeIcon icon={faAnglesRight} size='3x' color='var(--wa-deep-blue)' />
       </button>
-      <WeatherMap municipalityObject={municipalityObject} />
+      <WeatherMapMunicipality municipalityObject={municipalityObject} />
       <ul className='info__wrapper'>
         <li><span>{t('MORE_INFO.PANEL_RIGHT_INFO.MUNICIPALITY')}: </span>{municipalityObject.NAME}</li>
         <li><span>{t('MORE_INFO.PANEL_RIGHT_INFO.PROVINCE')}: </span>{municipalityObject.PROV}</li>
