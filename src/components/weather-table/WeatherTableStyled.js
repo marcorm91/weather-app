@@ -62,6 +62,9 @@ export const WeatherTableStyled = styled.div`
           border-radius: var(--wa-size-border-radius-02);
           top: calc(100% + var(--wa-spacing-02));
           gap: var(--wa-spacing-05);
+          ${media('tablet')`
+            flex-direction: column;
+          `}
         }
       }
     }

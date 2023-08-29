@@ -56,10 +56,11 @@ export const WeatherListSkeletonStyled = styled.div`
     ul{
         display: flex;
         flex-direction: column;
-        margin: var(--wa-spacing-00);
+        gap: var(--wa-spacing-03); 
+        padding: var(--wa-spacing-00);
+        margin: var(--wa-spacing-03) var(--wa-spacing-00);
         li{
             height: 1.25rem;
-            width: 4rem;
             position: relative;
         }
     }
