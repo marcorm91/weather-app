@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import WeatherAd from '../../components/weather-ad/WeatherAd'
 import { getFavorites } from '../../utils/js/localStorageUtils'
+import WeatherMapHome from '../../components/weather-map-home/WeatherMapHome'
 // import backgroundImage from '../../resources/assets/images/background.jpg' 
 
 const WeatherHome = () => {
@@ -66,7 +67,7 @@ const WeatherHome = () => {
           ))}
         </div>
         <div>
-          col 2
+          <WeatherMapHome />
         </div>
       </div>
     </WeatherHomeStyled>
