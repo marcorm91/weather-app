@@ -38,7 +38,10 @@
             "MORE_INFO": "Más información",
             "PREDICTON_NEXT_HOURS": "Previsión para las próximas horas:"
         },
-        "AD_PREDICTION": "Aviso"
+        "AD_PREDICTION": "Aviso",
+        "MAP": {
+            "PROVINCE_OF": "Provincia de"
+        }
     },
     "ALERTS": {
         "INFO": "Consulta de alertas y peligros meteorológicos para las Comunidades Autónomas en fechas específicas. Ten en cuenta que puede haber información desactualizada para algunas Comunidades."

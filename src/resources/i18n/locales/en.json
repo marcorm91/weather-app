@@ -38,7 +38,10 @@
             "MORE_INFO": "More information",
             "PREDICTON_NEXT_HOURS": "Prediction for the next hours:"
         },
-        "AD_PREDICTION": "Notice"
+        "AD_PREDICTION": "Notice",
+        "MAP": {
+            "PROVINCE_OF": "Province of"
+        }
     },
     "ALERTS": {
         "INFO": "Weather alerts and hazards query for the Autonomous Communities on specific dates. Please note that there may be outdated information for certain Communities."

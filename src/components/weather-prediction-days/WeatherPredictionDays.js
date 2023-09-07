@@ -138,13 +138,13 @@ const WeatherPredictionDays = ({ diaryPredictionData }) => {
                       </div>
                       <div>
                       {renderPeriods(relevantPeriods, (ele, j) => 
-                          <span data-tooltip-id={`tooltip-sky-${i}-${j}`} key={j}>
-                            {skyIconMap[ele?.value]("36", "var(--wa-deep-blue)")}
-                            <ReactTooltip
-                              id={`tooltip-sky-${i}-${j}`}
-                              place='bottom'
-                              content={`${ele?.descripcion}`} />
-                          </span>
+                        <span data-tooltip-id={`tooltip-sky-${i}-${j}`} key={j}>
+                          {skyIconMap[ele?.value]("36", "var(--wa-deep-blue)")}
+                          <ReactTooltip
+                            id={`tooltip-sky-${i}-${j}`}
+                            place='bottom'
+                            content={`${ele?.descripcion}`} />
+                        </span>
                       )}
                       </div>
                       <div>
