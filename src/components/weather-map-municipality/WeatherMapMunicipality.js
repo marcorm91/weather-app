@@ -5,34 +5,34 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { renderToString } from 'react-dom/server'
 import { WeatherMapMunicipalityStyled } from './WeatherMapMunicipalityStyled'
-import mapService from '../../resources/services/APIs/mapService'
+import { getCoordinatesByLocation } from '../../resources/services/APIs/geoService'
 
 const WeatherMapMunicipality = ({ municipalityObject }) => {
   const { NAME, PROV } = municipalityObject
-  const mapRef = useRef(null);
-  const markerRef = useRef(null);
+  const mapRef = useRef(null)
+  const markerRef = useRef(null)
 
   useEffect(() => {
-    const location = `${NAME}, ${PROV}, Spain`;
-    mapService.getCoordinatesByLocation(location)
+    const location = `${NAME}, ${PROV}, Spain`
+    getCoordinatesByLocation(location)
       .then(data => {
         if (data.length > 0) {
-          const { lat, lon } = data[0];
+          const { lat, lon } = data[0]
           if (!mapRef.current) {
-            mapRef.current = L.map('map').setView([lat, lon], 10);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapRef.current);
+            mapRef.current = L.map('map').setView([lat, lon], 10)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapRef.current)
           } else {
-            mapRef.current.setView([lat, lon], 10);
+            mapRef.current.setView([lat, lon], 10)
           }
           if (markerRef.current) {
-            markerRef.current.remove();
+            markerRef.current.remove()
           }
-          const iconHtml = renderToString(<FontAwesomeIcon icon={faLocationDot} color='var(--wa-deep-blue)' size='2x' />);
-          const customIcon = L.divIcon({ html: iconHtml, iconAnchor: [16, 32] });
-          markerRef.current = L.marker([lat, lon], { icon: customIcon }).addTo(mapRef.current);
+          const iconHtml = renderToString(<FontAwesomeIcon icon={faLocationDot} color='var(--wa-deep-blue)' size='2x' />)
+          const customIcon = L.divIcon({ html: iconHtml, iconAnchor: [16, 32] })
+          markerRef.current = L.marker([lat, lon], { icon: customIcon }).addTo(mapRef.current)
         }
-      });
-  }, [NAME, PROV]);
+      })
+  }, [NAME, PROV])
 
   return (
       <WeatherMapMunicipalityStyled className='map__wrapper'>

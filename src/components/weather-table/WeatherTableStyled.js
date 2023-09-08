@@ -6,6 +6,10 @@ export const WeatherTableStyled = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: var(--wa-spacing-04);
+  > .loading-skeleton{
+    width: 100%;
+    height: 50vh;
+  }
   .table-top__wrapper{
     display: flex;
     justify-content: space-between;

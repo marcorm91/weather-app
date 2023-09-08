@@ -11,6 +11,8 @@ import FuzzySet from 'fuzzyset.js'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapLocationDot, faSlash } from '@fortawesome/free-solid-svg-icons'
+import { getNameFromCoordinates, getCoordinatesFromName } from '../../resources/services/APIs/geoService'
+import { fetchProvinceGeoData } from '../../resources/services/APIs/provinceService'
 
 const WeatherMapHome = () => {
   const mapRef = useRef(null)
@@ -18,7 +20,7 @@ const WeatherMapHome = () => {
   const [location, setLocation] = useState(null)
   const [provincia, setProvincia] = useState('')
   const { t } = useTranslation()
-  const mapContainerRef = useRef(null);
+  const mapContainerRef = useRef(null)
   
   const currentDate = getCurrentDate()
   const currentHour = getCurrentHour()
@@ -74,39 +76,22 @@ const WeatherMapHome = () => {
    * Get the current date and time values of the passed type and object
    */
   const getCurrentWeatherData = useCallback((properties, sourceData) => {
-    if (!sourceData) return null;
-    const currentDayData = sourceData.data[0].prediccion.dia.find(day => day.fecha === currentDate);
-    if (!currentDayData) return null;
-    const result = {};
+    if (!sourceData) return null
+    const currentDayData = sourceData.data[0].prediccion.dia.find(day => day.fecha === currentDate)
+    if (!currentDayData) return null
+    const result = {}
     properties.forEach(property => {
-        const propData = currentDayData[property];
+        const propData = currentDayData[property]
         if (propData) {
-            const propValue = propData.find(data => data.periodo === currentHour);
-            result[property] = propValue ? propValue.value : null;
+            const propValue = propData.find(data => data.periodo === currentHour)
+            result[property] = propValue ? propValue.value : null
         } else {
-            result[property] = null;
+            result[property] = null
         }
-    });
-    return result;
-  }, [currentDate, currentHour]);
+    })
+    return result
+  }, [currentDate, currentHour])
 
-
-  /**
-   * Get coordinates from municipality name (Inverse nominatim)
-   * @param {*} municipalityName 'municipality name'
-   * @returns coords
-   */
-  const getCoordinatesFromName = async (municipalityName) => {
-    const url = `https://nominatim.openstreetmap.org/search?q=${municipalityName},Spain&format=json&limit=1`
-    try {
-        const response = await fetch(url)
-        const data = await response.json()
-        return [data[0].lat, data[0].lon]
-    } catch (error) {
-        console.error('Coordinates error:', error)
-        return null
-    }
-  }
 
   /**
    * Return main municipalities from province
@@ -133,23 +118,6 @@ const WeatherMapHome = () => {
         fillOpacity: .1
       }
     }).addTo(mapRef.current)
-  }
-
-  /**
-    Retrieve data results from OpenDataSoft for map-related operations, 
-    including setting limits, positions, and other configurations.   
-   * @param {string} provinceName 
-   * @returns data province 
-   */
-  const fetchProvinciaGeoData = async (provinceName) => {
-    const url = "https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/provincias-espanolas/records?limit=60"
-    try {
-      const response = await fetch(url)
-      const data = await response.json()
-      return data.results.find(prov => prov.provincia === provinceName)
-    } catch (error) {
-      console.error("Error fetching province data:", error)
-    }
   }
 
   /**
@@ -186,11 +154,9 @@ const WeatherMapHome = () => {
    * Additionally, we fetch current weather data (such as temperatures, snow, etc.) to be displayed on the map as well.
    */
   const fetchLocationInfo = useCallback(async (latitude, longitude) => {
-    const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
-    
+        
     try {
-        const response = await fetch(url)
-        const data = await response.json()
+        const data = await getNameFromCoordinates(latitude, longitude)
         const municipalityName = data.address.city || data.address.town || data.address.village || 'Unknown'
         const provinceName = data.address.province || data.address.state_district || 'Unknown'
 
@@ -211,9 +177,9 @@ const WeatherMapHome = () => {
 
         // Draw the status of the found municipalities on the map
         mainTownsCoords.forEach((coords, index) => {
-          const mainWeatherData = getCurrentWeatherData(['estadoCielo', 'temperatura'], mainTownsResults[index]);
-          const mainWeatherSky = mainWeatherData?.estadoCielo;
-          const mainTemperature = mainWeatherData?.temperatura;
+          const mainWeatherData = getCurrentWeatherData(['estadoCielo', 'temperatura'], mainTownsResults[index])
+          const mainWeatherSky = mainWeatherData?.estadoCielo
+          const mainTemperature = mainWeatherData?.temperatura
           const mainIconComponent = getWeatherIconComponent(mainWeatherSky, '100%', 'var(--wa-deep-blue)')
           const mainIconHtml = renderToString(mainIconComponent)
           const mainCustomIcon = L.divIcon({ 
@@ -227,7 +193,7 @@ const WeatherMapHome = () => {
         setProvincia(provinceName)     
 
         // From the detected coordinates and it's province, draw the province boundaries on the map to highlight it on the page 
-        const provinceData = await fetchProvinciaGeoData(provinceName)
+        const provinceData = await fetchProvinceGeoData(provinceName)
         if (provinceData?.geo_shape) {
             drawProvinceOnMap(provinceData.geo_shape)
             if (provinceData?.geo_shape && mapRef.current) {
@@ -240,7 +206,7 @@ const WeatherMapHome = () => {
         }  
 
     } catch (error) {
-        console.error('Error al obtener la información:', error)
+        console.error('Error getting location:', error)
     }
   }, [getCurrentWeatherData])
 
@@ -294,7 +260,7 @@ const WeatherMapHome = () => {
           mapRef.current.remove()
           mapRef.current = null
       }
-    };
+    }
   }, [loading, location, fetchLocationInfo])
 
   // ------------------ Render ------------------
