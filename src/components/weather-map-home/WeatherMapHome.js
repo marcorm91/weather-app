@@ -73,12 +73,23 @@ const WeatherMapHome = () => {
   /**
    * Get the current date and time values of the passed type and object
    */
-  const getCurrentWeatherData = useCallback((property, sourceData) => {
-    if (!sourceData) return null
-    const currentDayData = sourceData.data[0].prediccion.dia.find(day => day.fecha === currentDate)
-    if (!currentDayData || !currentDayData[property]) return null
-    return currentDayData[property].find(data => data.periodo === currentHour)
-  }, [currentDate, currentHour])
+  const getCurrentWeatherData = useCallback((properties, sourceData) => {
+    if (!sourceData) return null;
+    const currentDayData = sourceData.data[0].prediccion.dia.find(day => day.fecha === currentDate);
+    if (!currentDayData) return null;
+    const result = {};
+    properties.forEach(property => {
+        const propData = currentDayData[property];
+        if (propData) {
+            const propValue = propData.find(data => data.periodo === currentHour);
+            result[property] = propValue ? propValue.value : null;
+        } else {
+            result[property] = null;
+        }
+    });
+    return result;
+  }, [currentDate, currentHour]);
+
 
   /**
    * Get coordinates from municipality name (Inverse nominatim)
@@ -117,7 +128,9 @@ const WeatherMapHome = () => {
       style: {
         color: 'var(--wa-deep-blue)',
         weight: 2,
-        fillColor: 'transparent'
+        opacity: .2,
+        fillColor: 'var(--wa-deep-blue)',
+        fillOpacity: .1
       }
     }).addTo(mapRef.current)
   }
@@ -198,10 +211,16 @@ const WeatherMapHome = () => {
 
         // Draw the status of the found municipalities on the map
         mainTownsCoords.forEach((coords, index) => {
-          const mainWeatherValue = getCurrentWeatherData('estadoCielo', mainTownsResults[index])?.value
-          const mainIconComponent = getWeatherIconComponent(mainWeatherValue, '100%', 'var(--wa-deep-blue)')
+          const mainWeatherData = getCurrentWeatherData(['estadoCielo', 'temperatura'], mainTownsResults[index]);
+          const mainWeatherSky = mainWeatherData?.estadoCielo;
+          const mainTemperature = mainWeatherData?.temperatura;
+          const mainIconComponent = getWeatherIconComponent(mainWeatherSky, '100%', 'var(--wa-deep-blue)')
           const mainIconHtml = renderToString(mainIconComponent)
-          const mainCustomIcon = L.divIcon({ html: `${mainIconHtml}`, className: 'custom-icon', iconAnchor: [16, 32], iconSize: [48, 48] })
+          const mainCustomIcon = L.divIcon({ 
+                                    html: `${mainIconHtml} <span>${mainTemperature ? `${mainTemperature}°C` : ''}</span>`,
+                                    className: 'custom-marker', 
+                                    iconAnchor: [24, 58], 
+                                    iconSize: [54, 54] })
           L.marker(coords, { icon: mainCustomIcon }).addTo(mapRef.current)
         })
 
@@ -272,7 +291,8 @@ const WeatherMapHome = () => {
     }
     return () => {
       if (mapRef.current) {
-          mapRef.current.remove();
+          mapRef.current.remove()
+          mapRef.current = null
       }
     };
   }, [loading, location, fetchLocationInfo])

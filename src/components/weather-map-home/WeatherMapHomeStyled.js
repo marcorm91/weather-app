@@ -15,15 +15,14 @@ export const WeatherMapHomeStyled = styled.div`
           background-color: transparent;
           border: none;
         }
-        &.custom-icon{
-          &:after{
-            content: "";
-            position: absolute;
-            inset: var(--wa-spacing-00);
-            z-index: -1;
-            filter: blur(0.0625rem);
-            background: radial-gradient(ellipse 50% 50% at 50% 50%, var(--wa-white), var(--wa-white-op50), transparent);         
-          }
+      }
+      .custom-marker{
+        > span{
+          background-color: var(--wa-deep-blue);
+          color: #fff;
+          font-family: var(--wa-font-family-semibold);
+          padding: var(--wa-spacing-01) var(--wa-spacing-02);
+          border-radius: var(--wa-size-border-radius-01);
         }
       }
     }
