@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const WeatherMapHomeStyled = styled.div`
     position: relative;
     height: 100%;
-    div[ref="mapContainerRef"], .loading-skeleton{
+    > div, .loading-skeleton{
       width: 100%;
       height: 100%;
       z-index: 0;
@@ -51,6 +51,27 @@ export const WeatherMapHomeStyled = styled.div`
         color: var(--wa-white);
         position: relative;
         z-index: 1;
+      }
+    }
+    > .denied-map{
+      position: absolute;
+      inset: var(--wa-spacing-00);
+      margin: auto;
+      > svg {
+        width: 50%;
+        height: 50%;
+        position: absolute;
+        inset: var(--wa-spacing-00);
+        margin: auto;
+        color: var(--wa-deep-blue);
+        &.fa-map-location-dot{
+          opacity: .2;
+        }
+        &.fa-slash{
+          opacity: .8;
+          width: 60%;
+          height: 50%;
+        }
       }
     }
 `

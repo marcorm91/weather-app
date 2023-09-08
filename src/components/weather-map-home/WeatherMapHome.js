@@ -9,14 +9,16 @@ import { getCurrentDate, getCurrentHour } from '../../utils/js/helpers'
 import { renderToString } from 'react-dom/server'
 import FuzzySet from 'fuzzyset.js'
 import { useTranslation } from 'react-i18next'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMapLocationDot, faSlash } from '@fortawesome/free-solid-svg-icons'
 
 const WeatherMapHome = () => {
   const mapRef = useRef(null)
   const [loading, setLoading] = useState(true)
   const [location, setLocation] = useState(null)
   const [provincia, setProvincia] = useState('')
-  const [noLocationClass, setNoLocationClass] = useState('')
   const { t } = useTranslation()
+  const mapContainerRef = useRef(null);
   
   const currentDate = getCurrentDate()
   const currentHour = getCurrentHour()
@@ -236,11 +238,11 @@ const WeatherMapHome = () => {
           longitude: position.coords.longitude,
           zoom: 9
         })
-        setNoLocationClass('no-location')
         setLoading(false)
       },
       error => {
         console.error('Error getting location:', error)
+        setLocation(null)
         setLoading(false)
       }
     )
@@ -253,7 +255,7 @@ const WeatherMapHome = () => {
   useEffect(() => {
     const initMap = (latitude, longitude, zoomLevel) => {
       if (!mapRef.current) {
-        mapRef.current = L.map('map', {
+        mapRef.current = L.map(mapContainerRef.current, {
           zoomControl: true,
           scrollWheelZoom: true,
           doubleClickZoom: true,
@@ -267,27 +269,36 @@ const WeatherMapHome = () => {
     if (location) {
       initMap(location.latitude, location.longitude, location.zoom)
       fetchLocationInfo(location.latitude, location.longitude)
-    } else if (!loading && !location) {
-      initMap(39.963667, -2.74922, 6)
     }
+    return () => {
+      if (mapRef.current) {
+          mapRef.current.remove();
+      }
+    };
   }, [loading, location, fetchLocationInfo])
 
   // ------------------ Render ------------------
 
   return (
-    <WeatherMapHomeStyled className={`map__wrapper ${noLocationClass}`}>
-      {loading ? (
-        <div className='loading-skeleton'></div>
-      ) : (
-        <>
-          <div id="map"></div>
-          <ul>
-            <li>{t('HOME.MAP.PROVINCE_OF')} {provincia}</li>
-          </ul>
-        </>
-      )}
+    <WeatherMapHomeStyled className='map__wrapper'>
+        {loading ? (
+            <div className='loading-skeleton'></div>
+        ) : location ? (
+            <>
+              <div ref={mapContainerRef}></div>
+              <ul>
+                  <li>{t('HOME.MAP.PROVINCE_OF')} {provincia}</li>
+              </ul>
+            </>
+        ) : (
+            <div className='denied-map'>
+              <FontAwesomeIcon icon={faMapLocationDot} />
+              <FontAwesomeIcon icon={faSlash} />
+            </div>
+        )}
     </WeatherMapHomeStyled>
   )
+
 }
 
 export default WeatherMapHome
