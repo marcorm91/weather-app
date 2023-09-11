@@ -13,14 +13,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapLocationDot, faSlash } from '@fortawesome/free-solid-svg-icons'
 import { getNameFromCoordinates, getCoordinatesFromName } from '../../resources/services/APIs/geoService'
 import { fetchProvinceGeoData } from '../../resources/services/APIs/provinceService'
+import { useLocation } from '../../utils/js/LocationContext'
 
 const WeatherMapHome = () => {
   const mapRef = useRef(null)
   const [loading, setLoading] = useState(true)
-  const [location, setLocation] = useState(null)
+  // const [location, setLocation] = useState(null)
   const [provincia, setProvincia] = useState('')
   const { t } = useTranslation()
   const mapContainerRef = useRef(null)
+  const { location, geoError } = useLocation();
   
   const currentDate = getCurrentDate()
   const currentHour = getCurrentHour()
@@ -213,33 +215,12 @@ const WeatherMapHome = () => {
   // ------------------ useEffect Hooks ------------------
 
   /**
-   * Get current position coordinates user
-   */
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        setLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          zoom: 9
-        })
-        setLoading(false)
-      },
-      error => {
-        console.error('Error getting location:', error)
-        setLocation(null)
-        setLoading(false)
-      }
-    )
-  }, [])
-
-  /**
    * Initialize the map using data retrieved from the previous fetch call.
    * If the user not accept, the map will see by default (country Spain)
    */
   useEffect(() => {
     const initMap = (latitude, longitude, zoomLevel) => {
-      if (!mapRef.current) {
+      if (mapContainerRef.current && !mapRef.current) {
         mapRef.current = L.map(mapContainerRef.current, {
           zoomControl: true,
           scrollWheelZoom: true,
@@ -252,7 +233,7 @@ const WeatherMapHome = () => {
       }
     }
     if (location) {
-      initMap(location.latitude, location.longitude, location.zoom)
+      initMap(location.latitude, location.longitude, 9)
       fetchLocationInfo(location.latitude, location.longitude)
     }
     return () => {
@@ -263,7 +244,14 @@ const WeatherMapHome = () => {
     }
   }, [loading, location, fetchLocationInfo])
 
-  // ------------------ Render ------------------
+  /**
+   * If !location show loading
+   */
+  useEffect(() => {
+    if (location || geoError) {
+      setLoading(false)
+    }
+  }, [location, geoError])
 
   return (
     <WeatherMapHomeStyled className='map__wrapper'>
