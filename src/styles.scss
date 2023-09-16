@@ -73,11 +73,11 @@ button, a{
                 opacity: .85;
             }
         }
-    }
-    &.btn-small{
-        font-size: var(--wa-font-size-sm);
-        min-height: 2rem;
-        padding: var(--wa-spacing-00) var(--wa-spacing-03);
+        &.btn-small{
+            font-size: var(--wa-font-size-sm);
+            min-height: 2rem;
+            padding: var(--wa-spacing-00) var(--wa-spacing-03);
+        }
     }
 }
 

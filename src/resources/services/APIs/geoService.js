@@ -22,15 +22,22 @@ export const getNameFromCoordinates = async (latitude, longitude) => {
 
 /**
  * Get coordinates based on a municipality name
- * @param {*} municipalityName 
+ * @param {string} municipalityName 
+ * @param {string} provinceName 
  * @returns Return coordinates
  */
-export const getCoordinatesFromName = async (municipalityName) => {
-    const url = `${NOMINATIM_BASE_URL}/search?q=${municipalityName},Spain&format=json&limit=1`
+export const getCoordinatesFromName = async (municipalityName, provinceName) => {
+    const encodedMunicipality = encodeURIComponent(municipalityName.replace(/,/g, ' '))
+    const encodedProvince = encodeURIComponent(provinceName)
+    const url = `${NOMINATIM_BASE_URL}/search?city=${encodedMunicipality}&county=${encodedProvince}&countrycodes=ES&format=json&limit=1`
     try {
         const response = await fetch(url)
         const data = await response.json()
-        return [data[0].lat, data[0].lon]
+        if (data && data.length > 0) {
+            return [data[0].lat, data[0].lon]
+        } else {
+            throw new Error('No data returned from Nominatim')
+        }
     } catch (error) {
         console.error('Error fetching coordinates:', error)
         throw error

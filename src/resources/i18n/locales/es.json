@@ -3,7 +3,8 @@
         "TITLE": "Weather app"
     },
     "FOOTER": {
-        "COPYRIGHT": "WEATHER APP. Todos los derechos reservados."
+        "COPYRIGHT": "WEATHER APP. Todos los derechos reservados.",
+        "SOURCE": "Fuente:"
     },
     "NAVBAR": {
         "HOME_PAGE": "Página de inicio",
@@ -40,7 +41,9 @@
         },
         "AD_PREDICTION": "Aviso",
         "MAP": {
-            "PROVINCE_OF": "Provincia de"
+            "PROVINCE_OF": "Provincia de",
+            "VIEW_PENINSULA": "Ver Peninsula",
+            "VIEW_CANARIES": "Ver Canarias"
         }
     },
     "ALERTS": {

@@ -8,7 +8,10 @@ export const WeatherMapHomeStyled = styled.div`
       height: 100%;
       z-index: 0;
       .leaflet-interactive{
-        cursor: grab;
+        cursor: default;
+      }
+      .leaflet-bottom.leaflet-right{
+        display: none;
       }
       .leaflet-marker-icon{
         &.leaflet-div-icon{
@@ -52,25 +55,19 @@ export const WeatherMapHomeStyled = styled.div`
         z-index: 1;
       }
     }
-    > .denied-map{
+    .canaries{
       position: absolute;
-      inset: var(--wa-spacing-00);
-      margin: auto;
-      > svg {
-        width: 50%;
-        height: 50%;
-        position: absolute;
-        inset: var(--wa-spacing-00);
-        margin: auto;
-        color: var(--wa-deep-blue);
-        &.fa-map-location-dot{
-          opacity: .2;
-        }
-        &.fa-slash{
-          opacity: .8;
-          width: 60%;
-          height: 50%;
-        }
-      }
+      bottom: var(--wa-spacing-02);
+      left: var(--wa-spacing-02);
+    }
+    .spain-top-right{
+      position: absolute;
+      top: var(--wa-spacing-02);
+      right: var(--wa-spacing-02);
+    }
+    .spain-top-left{
+      position: absolute;
+      top: var(--wa-spacing-02);
+      left: var(--wa-spacing-02);
     }
 `

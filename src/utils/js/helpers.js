@@ -79,3 +79,15 @@ export const transformDate = (dateStr, language) => {
 export const getDayOfWeek = (dateString) => {
     return moment(dateString).format('dddd');
 }
+
+/**
+ * Get the current timezone offset in the format +HH:MM or -HH:MM
+ * @returns {string} - The timezone offset.
+ */
+export const getTimezoneOffset = () => {
+    const offsetInMinutes = new Date().getTimezoneOffset();
+    const hours = Math.abs(Math.floor(offsetInMinutes / 60)).toString().padStart(2, '0');
+    const minutes = (Math.abs(offsetInMinutes) % 60).toString().padStart(2, '0');
+    const sign = offsetInMinutes < 0 ? '+' : '-';
+    return `${sign}${hours}:${minutes}`;
+}

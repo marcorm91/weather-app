@@ -5,27 +5,25 @@ import { WeatherMapHomeStyled } from './WeatherMapHomeStyled'
 import { fetchHourlyPrediction } from '../../resources/services/APIs/hourlyPrediction'
 import towns from '../../resources/services/code_towns.json'
 import { skyIconMap } from '../../utils/js/skyIcons'
-import { getCurrentDate, getCurrentHour } from '../../utils/js/helpers'
+import { getCurrentDate, getCurrentHour, getTimezoneOffset } from '../../utils/js/helpers'
 import { renderToString } from 'react-dom/server'
 import FuzzySet from 'fuzzyset.js'
 import { useTranslation } from 'react-i18next'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapLocationDot, faSlash } from '@fortawesome/free-solid-svg-icons'
 import { getNameFromCoordinates, getCoordinatesFromName } from '../../resources/services/APIs/geoService'
 import { fetchProvinceGeoData } from '../../resources/services/APIs/provinceService'
+import { fetchCurrentSkySpain } from '../../resources/services/APIs/currentSkySpain'
 import { useLocation } from '../../utils/js/LocationContext'
 
-const WeatherMapHome = () => {
+const WeatherMapHome = ({ CPRO, CMUN }) => {
   const mapRef = useRef(null)
   const [loading, setLoading] = useState(true)
-  // const [location, setLocation] = useState(null)
   const [provincia, setProvincia] = useState('')
   const { t } = useTranslation()
   const mapContainerRef = useRef(null)
-  const { location, geoError } = useLocation();
-  
-  const currentDate = getCurrentDate()
-  const currentHour = getCurrentHour()
+  const { location, geoError } = useLocation()
+  const [isViewingSpain, setIsViewingSpain] = useState(false)
+  const [isViewingCanary, setIsViewingCanary] = useState(false)
+  const [mapLoaded, setMapLoaded] = useState(false)
   
   // ------------------ Functions related to Towns and Weather Data ------------------
 
@@ -79,20 +77,20 @@ const WeatherMapHome = () => {
    */
   const getCurrentWeatherData = useCallback((properties, sourceData) => {
     if (!sourceData) return null
-    const currentDayData = sourceData.data[0].prediccion.dia.find(day => day.fecha === currentDate)
+    const currentDayData = sourceData.data[0].prediccion.dia.find(day => day.fecha === getCurrentDate())
     if (!currentDayData) return null
     const result = {}
     properties.forEach(property => {
         const propData = currentDayData[property]
         if (propData) {
-            const propValue = propData.find(data => data.periodo === currentHour)
+            const propValue = propData.find(data => data.periodo === getCurrentHour())
             result[property] = propValue ? propValue.value : null
         } else {
             result[property] = null
         }
     })
     return result
-  }, [currentDate, currentHour])
+  }, [])
 
 
   /**
@@ -151,12 +149,61 @@ const WeatherMapHome = () => {
   }
 
   /**
+   * Displays the default map view focused on Spain.
+   * Fetches the current weather data for Spain and adds it as markers on the map.
+   */
+  const showDefaultSpainMap = async () => {
+    if (!mapRef.current) return
+    
+    mapRef.current.setView([39.8168, -2.9000], 6)
+
+    const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00${getTimezoneOffset()}`
+    const data = await fetchCurrentSkySpain(6, formattedDateTime)
+
+    data[0].features.forEach(feature => {
+      const coordinates = feature.geometry.coordinates
+      const eCieloValue = feature.properties.eCielo
+      const iconComponent = skyIconMap[eCieloValue]
+      if (!iconComponent) return
+      const iconHTML = renderToString(iconComponent(32, 'var(--wa-deep-blue)'))
+      const customIcon = L.divIcon({ html: iconHTML })
+      L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current)
+    })
+  }
+
+  /**
+   * Sets the map view based on the given view type.
+   * @param {string} view - The view type ("peninsula" or "canarias").
+   */
+  const setMapView = async (view) => {
+    if (!mapRef.current) return
+
+    mapRef.current.eachLayer(layer => {
+      if (layer instanceof L.TileLayer) return
+      mapRef.current.removeLayer(layer)
+    })
+
+    switch (view) {
+      case "peninsula":
+        await showDefaultSpainMap()
+        setIsViewingSpain(true)
+        setIsViewingCanary(false)
+        break
+      case "canarias":
+        mapRef.current.setView([28.5916, -15.6291], 7)
+        setIsViewingSpain(false)
+        setIsViewingCanary(true)
+        break
+      default: break
+    }
+  }
+
+  /**
    * We call Nominatim using the coordinates to retrieve the name of the location. 
    * With this name, we identify three random neighboring municipalities to display on the map. 
    * Additionally, we fetch current weather data (such as temperatures, snow, etc.) to be displayed on the map as well.
    */
-  const fetchLocationInfo = useCallback(async (latitude, longitude) => {
-        
+  const fetchLocationInfo = useCallback(async (latitude, longitude) => {      
     try {
         const data = await getNameFromCoordinates(latitude, longitude)
         const municipalityName = data.address.city || data.address.town || data.address.village || 'Unknown'
@@ -167,7 +214,7 @@ const WeatherMapHome = () => {
         const mainTowns = getMainTowns(detectedTown)
 
         // Make request for the municipalities that have 'MAIN' as a parameter in the JSON from previously detected municipality
-        const mainTownsCoordsPromises = mainTowns.map(main => getCoordinatesFromName(main.NAME))
+        const mainTownsCoordsPromises = mainTowns.map(main => getCoordinatesFromName(main.NAME, main.PROV))
         const mainTownsCoords = await Promise.all(mainTownsCoordsPromises)
 
         const mainTownsPromises = mainTowns.map(main => {
@@ -210,6 +257,11 @@ const WeatherMapHome = () => {
     } catch (error) {
         console.error('Error getting location:', error)
     }
+
+    return new Promise((resolve) => {
+      mapRef.current.whenReady(resolve)
+    })
+
   }, [getCurrentWeatherData])
 
   // ------------------ useEffect Hooks ------------------
@@ -222,27 +274,48 @@ const WeatherMapHome = () => {
     const initMap = (latitude, longitude, zoomLevel) => {
       if (mapContainerRef.current && !mapRef.current) {
         mapRef.current = L.map(mapContainerRef.current, {
-          zoomControl: true,
-          scrollWheelZoom: true,
-          doubleClickZoom: true,
-          touchZoom: true,
-          dragging: true,
-          minZoom: 5
+          zoomControl: false,
+          scrollWheelZoom: false,
+          doubleClickZoom: false,
+          touchZoom: false,
+          dragging: false,
+          minZoom: 4
         }).setView([latitude, longitude], zoomLevel)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapRef.current)
       }
     }
     if (location) {
       initMap(location.latitude, location.longitude, 9)
-      fetchLocationInfo(location.latitude, location.longitude)
-    }
+      fetchLocationInfo(location.latitude, location.longitude).then(() => {
+        setMapLoaded(true)
+      })
+    }else 
+      // No allow geolocation.  Print default Spain map
+      if(geoError){
+        initMap(39.8168, -2.9000, 6)
+            const fetchDataAndDisplayOnMap = async () => {
+                const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00${getTimezoneOffset()}`
+                const data = await fetchCurrentSkySpain(6, formattedDateTime)
+                data[0].features.forEach(feature => {
+                  const coordinates = feature.geometry.coordinates
+                  const eCieloValue = feature.properties.eCielo
+                  const iconComponent = skyIconMap[eCieloValue]
+                  // If not found icon in skyMap
+                  if (!iconComponent) return 
+                  const iconHTML = renderToString(iconComponent(32, 'var(--wa-deep-blue)'))
+                  const customIcon = L.divIcon({ html: iconHTML })
+                  L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current)
+                })
+            }
+            fetchDataAndDisplayOnMap()
+      }
     return () => {
       if (mapRef.current) {
           mapRef.current.remove()
           mapRef.current = null
       }
     }
-  }, [loading, location, fetchLocationInfo])
+  }, [loading, location, fetchLocationInfo, geoError])
 
   /**
    * If !location show loading
@@ -253,23 +326,62 @@ const WeatherMapHome = () => {
     }
   }, [location, geoError])
 
+  /**
+   * If there's a geoError, show the default Spain map.
+   */
+  useEffect(() => {
+    if (geoError) {
+        showDefaultSpainMap()
+        setIsViewingSpain(true)
+    }
+  }, [geoError])
+
+  /**
+   * Action that goes to the municipality to get the weather details
+   */
+  useEffect(() => {
+    const centerMapToTown = async () => {
+        if (CPRO && CMUN) {
+            const town = towns.find(t => t.CPRO === CPRO && t.CMUN === CMUN)
+            if (town) {
+                try {
+                    const coords = await getCoordinatesFromName(town.NAME, town.PROV)
+                    if (coords && mapRef.current) {
+                        mapRef.current.setView(coords, 10)
+                    }
+                } catch (error) {
+                    console.error("Error obteniendo las coordenadas:", error)
+                }
+            }
+        }
+    }
+    centerMapToTown()
+  }, [CPRO, CMUN, mapRef])
+
   return (
     <WeatherMapHomeStyled className='map__wrapper'>
-        {loading ? (
-            <div className='loading-skeleton'></div>
-        ) : location ? (
-            <>
-              <div ref={mapContainerRef}></div>
-              <ul>
-                  <li>{t('HOME.MAP.PROVINCE_OF')} {provincia}</li>
-              </ul>
-            </>
-        ) : (
-            <div className='denied-map'>
-              <FontAwesomeIcon icon={faMapLocationDot} />
-              <FontAwesomeIcon icon={faSlash} />
-            </div>
-        )}
+      {loading ? (
+        <div className='loading-skeleton'></div>
+      ) : (
+        <>
+          <div ref={mapContainerRef}></div>
+          {location && !isViewingCanary && !isViewingSpain && mapLoaded ? (
+            <ul>
+                <li>{t('HOME.MAP.PROVINCE_OF')} {provincia}</li>
+            </ul>
+          ) : null}
+          {!isViewingSpain && (isViewingCanary || geoError || location) ? (
+            <button 
+              onClick={() => setMapView("peninsula")}
+              className='btn btn-small btn-primary spain-top-left'>{t('HOME.MAP.VIEW_PENINSULA')}</button>
+          ) : null}
+          {isViewingSpain || geoError ? (
+            <button 
+              onClick={() => setMapView("canarias")}
+              className='btn btn-small btn-primary canaries'>{t('HOME.MAP.VIEW_CANARIES')}</button>
+          ) : null}
+        </>
+      )}
     </WeatherMapHomeStyled>
   )
 
