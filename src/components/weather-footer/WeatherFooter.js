@@ -7,6 +7,7 @@ const WeatherFooter = () => {
   return (
     <WeatherFooterStyled>
       <p>© {currentYear} {t("FOOTER.COPYRIGHT")}</p>
+      <p>{t("FOOTER.SOURCE")} AEMET</p>
     </WeatherFooterStyled>
   )
 }

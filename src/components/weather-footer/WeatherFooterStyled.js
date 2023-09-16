@@ -7,6 +7,7 @@ export const WeatherFooterStyled = styled.footer`
   padding: var(--wa-spacing-03) var(--wa-spacing-04);
   box-sizing: border-box;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   p{
     margin: var(--wa-spacing-00);
