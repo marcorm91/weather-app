@@ -158,7 +158,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
     mapRef.current.setView([39.8168, -2.9000], 6)
 
     const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00${getTimezoneOffset()}`
-    const data = await fetchCurrentSkySpain(6, formattedDateTime)
+    const data = await fetchCurrentSkySpain('eCielo', 'PB', 6, formattedDateTime)
 
     data[0].features.forEach(feature => {
       const coordinates = feature.geometry.coordinates
@@ -169,6 +169,30 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
       const customIcon = L.divIcon({ html: iconHTML })
       L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current)
     })
+  }
+
+  /**
+   * Displays the map view focused on Canaries.
+   */
+  const showCanariesMap = async () => {
+    if (!mapRef.current) return
+    
+    mapRef.current.setView([28.5916, -15.6291], 7);
+
+    const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00+01:00`
+    const data = await fetchCurrentSkySpain('eCielo', 'CAN', 6, formattedDateTime);
+
+    console.log(data)
+
+    data[0].features.forEach(feature => {
+        const coordinates = feature.geometry.coordinates;
+        const eCieloValue = feature.properties.eCielo;
+        const iconComponent = skyIconMap[eCieloValue];
+        if (!iconComponent) return;
+        const iconHTML = renderToString(iconComponent(32, 'var(--wa-deep-blue)'));
+        const customIcon = L.divIcon({ html: iconHTML });
+        L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current);
+    });
   }
 
   /**
@@ -190,7 +214,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
         setIsViewingCanary(false)
         break
       case "canarias":
-        mapRef.current.setView([28.5916, -15.6291], 7)
+        await showCanariesMap()
         setIsViewingSpain(false)
         setIsViewingCanary(true)
         break
@@ -295,7 +319,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
         initMap(39.8168, -2.9000, 6)
             const fetchDataAndDisplayOnMap = async () => {
                 const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00${getTimezoneOffset()}`
-                const data = await fetchCurrentSkySpain(6, formattedDateTime)
+                const data = await fetchCurrentSkySpain('eCielo', 'PB', 6, formattedDateTime)
                 data[0].features.forEach(feature => {
                   const coordinates = feature.geometry.coordinates
                   const eCieloValue = feature.properties.eCielo
@@ -375,7 +399,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
               onClick={() => setMapView("peninsula")}
               className='btn btn-small btn-primary spain-top-left'>{t('HOME.MAP.VIEW_PENINSULA')}</button>
           ) : null}
-          {isViewingSpain || geoError ? (
+          {isViewingSpain && !isViewingCanary ? (
             <button 
               onClick={() => setMapView("canarias")}
               className='btn btn-small btn-primary canaries'>{t('HOME.MAP.VIEW_CANARIES')}</button>
