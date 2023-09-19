@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { WeatherTableRowActions } from './WeatherTableRowActionsStyled'
 import WeatherLoader from '../weather-loader/WeatherLoader'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar, faCircleInfo } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faCircleInfo, faMapLocation } from '@fortawesome/free-solid-svg-icons'
 import WeatherSlidingPanel from '../weather-sliding-panel/WeatherSlidingPanel'
 import { fetchHourlyPrediction } from '../../resources/services/APIs/hourlyPrediction'
 import { fetchDiaryPrediction } from '../../resources/services/APIs/diaryPrediction'
 import { getFavorites, removeFavorite, addFavorite } from '../../utils/js/localStorageUtils'
 
-const Actions = ({ row, onDeleteRow  }) => {
+const Actions = ({ row, onDeleteRow, setSelectedTown }) => {
   const rowId = `${row.original.CODAUTO}-${row.original.CPRO}-${row.original.CMUN}-${row.original.DC}`
   const [isLoading, setIsLoading] = useState(false)
   const [isPanelOpen, setIsPanelOpen] = useState(false)
@@ -18,7 +18,7 @@ const Actions = ({ row, onDeleteRow  }) => {
     
   // Get items from local storage
   useEffect(() => {
-    const favorites = getFavorites();
+    const favorites = getFavorites()
     setIsFavorite(favorites.includes(rowId))
   }, [rowId])
   
@@ -67,13 +67,20 @@ const Actions = ({ row, onDeleteRow  }) => {
           icon={faStar}
         />
       </button>
+      <button
+        onClick={() => setSelectedTown(row.original)}>
+        <FontAwesomeIcon 
+          color='var(--wa-deep-blue)'
+          icon={faMapLocation}
+        />
+      </button>
       <button onClick={handleMoreInfo}>
         {isLoading ? (
           <WeatherLoader />
         ) : (
           <FontAwesomeIcon
+            color='var(--wa-deep-blue)'
             icon={faCircleInfo}
-            style={{ color: 'var(--wa-deep-blue)' }}
           />
         )}
       </button>

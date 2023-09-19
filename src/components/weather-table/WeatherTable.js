@@ -9,7 +9,7 @@ import { getFavorites, removeAllFavorites } from '../../utils/js/localStorageUti
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 
-const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
+const WeatherTable = ({ showFavoritesOnly, arrayFavorites, setSelectedTown, }) => {
   const { t } = useTranslation()
   const [favorites, setFavorites] = useState([])
   const [filteredData, setFilteredData] = useState([])
@@ -205,6 +205,7 @@ const WeatherTable = ({ showFavoritesOnly, arrayFavorites }) => {
                     row={row}
                     onDeleteRow={handleDeleteRow}
                     isFavorite={isFavorite}
+                    setSelectedTown={setSelectedTown}
                   />
                 )
               })}

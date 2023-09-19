@@ -3,7 +3,15 @@ import styled from 'styled-components'
 export const WeatherMapHomeStyled = styled.div`
     position: relative;
     height: 100%;
-    > div, .loading-skeleton{
+    > .loading-skeleton{
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      > * {
+        display: none;
+      }
+    }
+    > div{
       width: 100%;
       height: 100%;
       z-index: 0;

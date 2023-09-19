@@ -64,3 +64,31 @@ export const getCoordinatesByLocation = async (location) => {
         throw error
     }
 }
+
+/**
+ * Fetches the details of a municipality based on its province (CPRO) and municipality (CMUN) codes.
+ * @param {string} CPRO - The province code. 
+ * @param {string} CMUN - The municipality code.
+ * @returns Returns the municipality details as an object if found.
+ */
+export const getMunicipalityByCPROCMUN = async (CPRO, CMUN) => {
+    let pageNumber = 0
+    const pageSize = 500 
+    let municipalityFound = null
+    const codigoINE = CPRO + CMUN
+    while (!municipalityFound) {
+        const url = `https://services1.arcgis.com/nCKYwcSONQTkPA4K/arcgis/rest/services/Municipios/FeatureServer/0/query?outFields=*&where=1%3D1&f=geojson&resultOffset=${pageNumber * pageSize}&resultRecordCount=${pageSize}`
+        const response = await fetch(url)
+        const data = await response.json()
+        const municipality = data.features.find(feature => feature.properties.CODIGOINE === codigoINE)
+        if (municipality) {
+            municipalityFound = municipality
+        } else {
+            pageNumber++
+            if (data.features.length < pageSize) {
+                break
+            }
+        }
+    }
+    return municipalityFound
+  }

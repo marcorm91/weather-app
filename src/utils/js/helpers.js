@@ -1,5 +1,8 @@
+// ------------------ Date functions ------------------
+
 import moment from 'moment'
 import 'moment/locale/es'
+import L from 'leaflet'
 
 /**
  * Finds the value of a given property for a specific period in a list of items
@@ -91,3 +94,53 @@ export const getTimezoneOffset = () => {
     const sign = offsetInMinutes < 0 ? '+' : '-';
     return `${sign}${hours}:${minutes}`;
 }
+
+// ------------------ Map functions ------------------
+
+/**
+ * Properties L map (lines, colors, ...)
+ * @param {*} geoShape 
+ * @param {*} mapInstance
+ */
+export const drawOnMap = (geoShape, mapInstance) => {
+    L.geoJSON(geoShape, {
+        style: {
+        color: 'var(--wa-deep-blue)',
+        weight: 2,
+        opacity: .2,
+        fillColor: 'var(--wa-deep-blue)',
+        fillOpacity: .1
+        }
+    }).addTo(mapInstance)
+}
+
+/**
+ * Get coordinates from geoJSON and paint limit line to object map
+ */
+export const getBoundsFromGeoJSON = (geoShape) => {
+    if (!geoShape || !geoShape.geometry || !geoShape.geometry.type) {
+        return null
+    }
+    let minLat = 90, maxLat = -90, minLon = 180, maxLon = -180
+    const processCoordinates = (coords) => {
+        coords.forEach(coord => {
+            const [lon, lat] = coord
+            minLat = Math.min(lat, minLat)
+            maxLat = Math.max(lat, maxLat)
+            minLon = Math.min(lon, minLon)
+            maxLon = Math.max(lon, maxLon)
+        })
+    }
+    if (geoShape.geometry.type === "Polygon") {
+        geoShape.geometry.coordinates.forEach(coordGroup => {
+            processCoordinates(coordGroup)
+        })
+    } else if (geoShape.geometry.type === "MultiPolygon") {
+        geoShape.geometry.coordinates.forEach(poly => {
+            poly.forEach(coordGroup => {
+                processCoordinates(coordGroup)
+            })
+        })
+    }
+    return [[minLat, minLon], [maxLat, maxLon]]
+ }

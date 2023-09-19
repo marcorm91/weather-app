@@ -5,11 +5,11 @@ import { WeatherMapHomeStyled } from './WeatherMapHomeStyled'
 import { fetchHourlyPrediction } from '../../resources/services/APIs/hourlyPrediction'
 import towns from '../../resources/services/code_towns.json'
 import { skyIconMap } from '../../utils/js/skyIcons'
-import { getCurrentDate, getCurrentHour, getTimezoneOffset } from '../../utils/js/helpers'
+import { getCurrentDate, getCurrentHour, getTimezoneOffset, drawOnMap, getBoundsFromGeoJSON } from '../../utils/js/helpers'
 import { renderToString } from 'react-dom/server'
 import FuzzySet from 'fuzzyset.js'
 import { useTranslation } from 'react-i18next'
-import { getNameFromCoordinates, getCoordinatesFromName } from '../../resources/services/APIs/geoService'
+import { getNameFromCoordinates, getCoordinatesFromName, getMunicipalityByCPROCMUN } from '../../resources/services/APIs/geoService'
 import { fetchProvinceGeoData } from '../../resources/services/APIs/provinceService'
 import { fetchCurrentSkySpain } from '../../resources/services/APIs/currentSkySpain'
 import { useLocation } from '../../utils/js/LocationContext'
@@ -23,7 +23,9 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
   const { location, geoError } = useLocation()
   const [isViewingSpain, setIsViewingSpain] = useState(false)
   const [isViewingCanary, setIsViewingCanary] = useState(false)
+  const [isViewingProvince, setIsViewingProvince] = useState(false)
   const [mapLoaded, setMapLoaded] = useState(false)
+  const [isFetchingMunicipality, setIsFetchingMunicipality] = useState(false)
   
   // ------------------ Functions related to Towns and Weather Data ------------------
 
@@ -105,50 +107,6 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
   // ------------------ Functions related to Mapping and Geolocation ------------------
 
   /**
-   * Properties L map (lines, colors, ...)
-   * @param {*} geoShape 
-   */
-  const drawProvinceOnMap = (geoShape) => {
-    L.geoJSON(geoShape, {
-      style: {
-        color: 'var(--wa-deep-blue)',
-        weight: 2,
-        opacity: .2,
-        fillColor: 'var(--wa-deep-blue)',
-        fillOpacity: .1
-      }
-    }).addTo(mapRef.current)
-  }
-
-  /**
-   * Get coordinates from geoJSON and paint limit line to province
-   */
-  const getBoundsFromGeoJSON = (geoShape) => {
-    let minLat = 90, maxLat = -90, minLon = 180, maxLon = -180
-    const processCoordinates = (coords) => {
-        coords.forEach(coord => {
-            const [lon, lat] = coord
-            minLat = Math.min(lat, minLat)
-            maxLat = Math.max(lat, maxLat)
-            minLon = Math.min(lon, minLon)
-            maxLon = Math.max(lon, maxLon)
-        })
-    }
-    if (geoShape.geometry.type === "Polygon") {
-        geoShape.geometry.coordinates.forEach(coordGroup => {
-            processCoordinates(coordGroup)
-        })
-    } else if (geoShape.geometry.type === "MultiPolygon") {
-        geoShape.geometry.coordinates.forEach(poly => {
-            poly.forEach(coordGroup => {
-                processCoordinates(coordGroup)
-            })
-        })
-    }
-    return [[minLat, minLon], [maxLat, maxLon]]
-  }
-
-  /**
    * Displays the default map view focused on Spain.
    * Fetches the current weather data for Spain and adds it as markers on the map.
    */
@@ -177,22 +135,20 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
   const showCanariesMap = async () => {
     if (!mapRef.current) return
     
-    mapRef.current.setView([28.5916, -15.6291], 7);
+    mapRef.current.setView([28.5916, -15.6291], 7)
 
     const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00+01:00`
-    const data = await fetchCurrentSkySpain('eCielo', 'CAN', 6, formattedDateTime);
-
-    console.log(data)
+    const data = await fetchCurrentSkySpain('eCielo', 'CAN', 6, formattedDateTime)
 
     data[0].features.forEach(feature => {
-        const coordinates = feature.geometry.coordinates;
-        const eCieloValue = feature.properties.eCielo;
-        const iconComponent = skyIconMap[eCieloValue];
-        if (!iconComponent) return;
-        const iconHTML = renderToString(iconComponent(32, 'var(--wa-deep-blue)'));
-        const customIcon = L.divIcon({ html: iconHTML });
-        L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current);
-    });
+        const coordinates = feature.geometry.coordinates
+        const eCieloValue = feature.properties.eCielo
+        const iconComponent = skyIconMap[eCieloValue]
+        if (!iconComponent) return
+        const iconHTML = renderToString(iconComponent(32, 'var(--wa-deep-blue)'))
+        const customIcon = L.divIcon({ html: iconHTML })
+        L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current)
+    })
   }
 
   /**
@@ -268,7 +224,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
         // From the detected coordinates and it's province, draw the province boundaries on the map to highlight it on the page 
         const provinceData = await fetchProvinceGeoData(provinceName)
         if (provinceData?.geo_shape) {
-            drawProvinceOnMap(provinceData.geo_shape)
+            drawOnMap(provinceData.geo_shape, mapRef.current)
             if (provinceData?.geo_shape && mapRef.current) {
                 const bounds = getBoundsFromGeoJSON(provinceData.geo_shape)
                 mapRef.current.fitBounds(bounds)
@@ -288,6 +244,17 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
 
   }, [getCurrentWeatherData])
 
+  /**
+   * Reset layer map
+   */
+  const clearMapIcons = () => {
+    if (!mapRef.current) return
+    mapRef.current.eachLayer(layer => {
+      if (layer instanceof L.TileLayer) return
+      mapRef.current.removeLayer(layer)
+    })
+  }
+  
   // ------------------ useEffect Hooks ------------------
 
   /**
@@ -309,6 +276,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
       }
     }
     if (location) {
+      setIsViewingProvince(true)
       initMap(location.latitude, location.longitude, 9)
       fetchLocationInfo(location.latitude, location.longitude).then(() => {
         setMapLoaded(true)
@@ -365,31 +333,38 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
    */
   useEffect(() => {
     const centerMapToTown = async () => {
-        if (CPRO && CMUN) {
-            const town = towns.find(t => t.CPRO === CPRO && t.CMUN === CMUN)
-            if (town) {
-                try {
-                    const coords = await getCoordinatesFromName(town.NAME, town.PROV)
-                    if (coords && mapRef.current) {
-                        mapRef.current.setView(coords, 10)
-                    }
-                } catch (error) {
-                    console.error("Error obteniendo las coordenadas:", error)
-                }
+      setIsFetchingMunicipality(true)
+      if (CPRO && CMUN) {
+        clearMapIcons()  
+        setIsViewingSpain(false)
+        setIsViewingProvince(false)
+        try {
+            const municipalityGeoJSON = await getMunicipalityByCPROCMUN(CPRO, CMUN)              
+            if (municipalityGeoJSON && mapRef.current) {
+              console.log(municipalityGeoJSON)
+              drawOnMap(municipalityGeoJSON, mapRef.current)
+              const bounds = getBoundsFromGeoJSON(municipalityGeoJSON)
+              mapRef.current.fitBounds(bounds)
+            } else {
+              console.log("Municipality outline not found.")
             }
+        } catch (error) {
+            console.error("Error obtaining the municipality outline:", error)
         }
+      }
+      setIsFetchingMunicipality(false)
     }
     centerMapToTown()
   }, [CPRO, CMUN, mapRef])
 
   return (
     <WeatherMapHomeStyled className='map__wrapper'>
-      {loading ? (
+      {loading || isFetchingMunicipality ? (
         <div className='loading-skeleton'></div>
       ) : (
         <>
-          <div ref={mapContainerRef}></div>
-          {location && !isViewingCanary && !isViewingSpain && mapLoaded ? (
+          <div className='leaflet-container leaflet-touch leaflet-fade-anim' ref={mapContainerRef}></div>
+          {location && !isViewingCanary && !isViewingSpain && isViewingProvince && mapLoaded ? (
             <ul>
                 <li>{t('HOME.MAP.PROVINCE_OF')} {provincia}</li>
             </ul>

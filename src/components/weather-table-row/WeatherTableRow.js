@@ -3,7 +3,7 @@ import { WeatherTableRowStyled } from './WeatherTableRowStyled'
 import Actions from '../weather-table-row-actions/WeatherTableRowActions'
 import { useTranslation } from 'react-i18next'
 
-const WeatherTableRow = ({ row, onDeleteRow  }) => {
+const WeatherTableRow = ({ row, onDeleteRow, setSelectedTown  }) => {
 
   const { t } = useTranslation()
   const { CODAUTO, CPRO, CMUN, DC, NAME, PROV, COMUNIDAD } = row.original
@@ -22,7 +22,10 @@ const WeatherTableRow = ({ row, onDeleteRow  }) => {
         <td>
           <label className='hide-desktop'>{t('HOME.TABLE.COMUNITY')}:</label>{COMUNIDAD}
         </td>
-        <td><Actions row={row} onDeleteRow={onDeleteRow}/></td>
+        <td><Actions 
+              row={row} 
+              onDeleteRow={onDeleteRow} 
+              setSelectedTown={setSelectedTown} /></td>
     </WeatherTableRowStyled>
   )
 }

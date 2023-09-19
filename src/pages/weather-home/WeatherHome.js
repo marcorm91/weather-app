@@ -23,6 +23,7 @@ const WeatherHome = () => {
   const [activeTab, setActiveTab] = useState('tab1')
   const favorites = getFavorites()
   const hasFavorites = favorites.length > 0
+  const [selectedTown, setSelectedTown] = useState(null)
 
   // Handle click for tabs (all and favs)
   const handleTabClick = (tab) => {
@@ -57,17 +58,26 @@ const WeatherHome = () => {
               className={activeTab === tab.id ? 'tab-content__wrapper' : 'tab-content__wrapper hidden'}
             >
               {tab.id === 'tab1' ? (
-                <WeatherTable key="all" showFavoritesOnly={false} />
+                <WeatherTable 
+                  key="all" 
+                  showFavoritesOnly={false} 
+                  setSelectedTown={setSelectedTown} />
               ) : (
                 hasFavorites > 0 ? (
-                  <WeatherTable key="favorites" showFavoritesOnly={true} arrayFavorites={favorites} />
+                  <WeatherTable 
+                    key="favorites" 
+                    showFavoritesOnly={true} 
+                    arrayFavorites={favorites} 
+                    setSelectedTown={setSelectedTown}/>
                 ) : <span>{t('HOME.TABLE.EMPTY_FAV')}</span>
               )}
             </div>
           ))}
         </div>
         <div>
-          <WeatherMapHome />
+          <WeatherMapHome 
+            CPRO={selectedTown?.CPRO} 
+            CMUN={selectedTown?.CMUN} />
         </div>
       </div>
     </WeatherHomeStyled>
