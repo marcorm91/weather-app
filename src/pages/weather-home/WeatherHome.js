@@ -8,7 +8,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons'
 import WeatherAd from '../../components/weather-ad/WeatherAd'
 import { getFavorites } from '../../utils/js/localStorageUtils'
 import WeatherMapHome from '../../components/weather-map-home/WeatherMapHome'
-// import backgroundImage from '../../resources/assets/images/background.jpg' 
+import { useLocation  } from '../../utils/js/LocationContext'
 
 const WeatherHome = () => {
   
@@ -24,6 +24,13 @@ const WeatherHome = () => {
   const favorites = getFavorites()
   const hasFavorites = favorites.length > 0
   const [selectedTown, setSelectedTown] = useState(null)
+  const { location } = useLocation()
+  const flexClass = location ? 'flex-45' : 'flex-50'
+
+  let geolocationContent
+  if (location) {
+      geolocationContent = <div className='flex-10'>geolocation</div>
+  }
 
   // Handle click for tabs (all and favs)
   const handleTabClick = (tab) => {
@@ -50,7 +57,7 @@ const WeatherHome = () => {
       <WeatherAd />
       <h1>{t('HOME.WELCOME_MSG', { day })}</h1>
       <div className='content__wrapper'>
-        <div>
+        <div className={flexClass}>
           <WeatherTabs activeTab={activeTab} handleTabClick={handleTabClick} tabs={tabs} />
           {tabs.map((tab) => (
             <div
@@ -59,13 +66,13 @@ const WeatherHome = () => {
             >
               {tab.id === 'tab1' ? (
                 <WeatherTable 
-                  key="all" 
+                  key='all' 
                   showFavoritesOnly={false} 
                   setSelectedTown={setSelectedTown} />
               ) : (
                 hasFavorites > 0 ? (
                   <WeatherTable 
-                    key="favorites" 
+                    key='favorites' 
                     showFavoritesOnly={true} 
                     arrayFavorites={favorites} 
                     setSelectedTown={setSelectedTown}/>
@@ -74,11 +81,12 @@ const WeatherHome = () => {
             </div>
           ))}
         </div>
-        <div>
+        <div className={flexClass}>
           <WeatherMapHome 
             CPRO={selectedTown?.CPRO} 
             CMUN={selectedTown?.CMUN} />
         </div>
+        {geolocationContent}
       </div>
     </WeatherHomeStyled>
   )

@@ -24,8 +24,7 @@
       "PROV": "Araba/Álava",
       "CMUN": "002",
       "DC": "9",
-      "NAME": "Amurrio",
-      "MAIN": true
+      "NAME": "Amurrio"
    },
    {
       "CODAUTO": "16",
@@ -295,8 +294,7 @@
       "PROV": "Araba/Álava",
       "CMUN": "036",
       "DC": "0",
-      "NAME": "Laudio\/Llodio",
-      "MAIN": true
+      "NAME": "Laudio\/Llodio"
    },
    {
       "CODAUTO": "16",
@@ -485,8 +483,7 @@
       "PROV": "Albacete",
       "CMUN": "003",
       "DC": "0",
-      "NAME": "Albacete",
-      "MAIN": true
+      "NAME": "Albacete"
    },
    {
       "CODAUTO": "08",
@@ -540,8 +537,7 @@
       "PROV": "Albacete",
       "CMUN": "009",
       "DC": "6",
-      "NAME": "Almansa",
-      "MAIN": true
+      "NAME": "Almansa"
    },
    {
       "CODAUTO": "08",
@@ -793,8 +789,7 @@
       "PROV": "Albacete",
       "CMUN": "037",
       "DC": "1",
-      "NAME": "Hellín",
-      "MAIN": true
+      "NAME": "Hellín"
    },
    {
       "CODAUTO": "08",
@@ -1199,8 +1194,7 @@
       "PROV": "Albacete",
       "CMUN": "081",
       "DC": "2",
-      "NAME": "Villarrobledo",
-      "MAIN": true
+      "NAME": "Villarrobledo"
    },
    {
       "CODAUTO": "08",
@@ -1281,8 +1275,7 @@
       "PROV": "Alicante/Alacant",
       "CMUN": "014",
       "DC": "9",
-      "NAME": "Alacant\/Alicante",
-      "MAIN": true
+      "NAME": "Alacant\/Alicante"
    },
    {
       "CODAUTO": "10",
@@ -1831,8 +1824,7 @@
       "PROV": "Alicante/Alacant",
       "CMUN": "065",
       "DC": "1",
-      "NAME": "Elx\/Elche",
-      "MAIN": true
+      "NAME": "Elx\/Elche"
    },
    {
       "CODAUTO": "10",
@@ -2075,8 +2067,7 @@
       "PROV": "Alicante/Alacant",
       "CMUN": "099",
       "DC": "3",
-      "NAME": "Orihuela",
-      "MAIN": true
+      "NAME": "Orihuela"
    },
    {
       "CODAUTO": "10",
@@ -2427,8 +2418,7 @@
       "PROV": "Alicante/Alacant",
       "CMUN": "133",
       "DC": "9",
-      "NAME": "Torrevieja",
-      "MAIN": true
+      "NAME": "Torrevieja"
    },
    {
       "CODAUTO": "10",
@@ -2572,8 +2562,7 @@
       "PROV": "Almería",
       "CMUN": "006",
       "DC": "2",
-      "NAME": "Albox",
-      "MAIN": true
+      "NAME": "Albox"
    },
    {
       "CODAUTO": "01",
@@ -2636,8 +2625,7 @@
       "PROV": "Almería",
       "CMUN": "013",
       "DC": "9",
-      "NAME": "Almería",
-      "MAIN": true
+      "NAME": "Almería"
    },
    {
       "CODAUTO": "01",
@@ -2781,8 +2769,7 @@
       "PROV": "Almería",
       "CMUN": "029",
       "DC": "3",
-      "NAME": "Berja",
-      "MAIN": true
+      "NAME": "Berja"
    },
    {
       "CODAUTO": "01",
@@ -2809,8 +2796,7 @@
       "PROV": "Almería",
       "CMUN": "032",
       "DC": "9",
-      "NAME": "Carboneras",
-      "MAIN": true
+      "NAME": "Carboneras"
    },
    {
       "CODAUTO": "01",
@@ -2873,8 +2859,7 @@
       "PROV": "Almería",
       "CMUN": "902",
       "DC": "6",
-      "NAME": "Ejido, El",
-      "MAIN": true
+      "NAME": "Ejido, El"
    },
    {
       "CODAUTO": "01",
@@ -3099,8 +3084,7 @@
       "PROV": "Almería",
       "CMUN": "065",
       "DC": "6",
-      "NAME": "Nacimiento",
-      "MAIN": true
+      "NAME": "Nacimiento"
    },
    {
       "CODAUTO": "01",
@@ -3415,8 +3399,7 @@
       "PROV": "Almería",
       "CMUN": "099",
       "DC": "8",
-      "NAME": "Vélez-Rubio",
-      "MAIN": true
+      "NAME": "Vélez-Rubio"
    },
    {
       "CODAUTO": "01",
@@ -3533,8 +3516,7 @@
       "PROV": "Ávila",
       "CMUN": "014",
       "DC": "7",
-      "NAME": "Arenas de San Pedro",
-      "MAIN": true
+      "NAME": "Arenas de San Pedro"
    },
    {
       "CODAUTO": "07",
@@ -3552,8 +3534,7 @@
       "PROV": "Ávila",
       "CMUN": "016",
       "DC": "3",
-      "NAME": "Arévalo",
-      "MAIN": true
+      "NAME": "Arévalo"
    },
    {
       "CODAUTO": "07",
@@ -3580,8 +3561,7 @@
       "PROV": "Ávila",
       "CMUN": "019",
       "DC": "8",
-      "NAME": "Ávila",
-      "MAIN": true
+      "NAME": "Ávila"
    },
    {
       "CODAUTO": "07",
@@ -5822,8 +5802,7 @@
       "PROV": "Badajoz",
       "CMUN": "015",
       "DC": "3",
-      "NAME": "Badajoz",
-      "MAIN": true
+      "NAME": "Badajoz"
    },
    {
       "CODAUTO": "11",
@@ -6084,8 +6063,7 @@
       "PROV": "Badajoz",
       "CMUN": "044",
       "DC": "4",
-      "NAME": "Don Benito",
-      "MAIN": true
+      "NAME": "Don Benito"
    },
    {
       "CODAUTO": "11",
@@ -6445,8 +6423,7 @@
       "PROV": "Badajoz",
       "CMUN": "083",
       "DC": "0",
-      "NAME": "Mérida",
-      "MAIN": true
+      "NAME": "Mérida"
    },
    {
       "CODAUTO": "11",
@@ -7139,8 +7116,7 @@
       "PROV": "Badajoz",
       "CMUN": "158",
       "DC": "8",
-      "NAME": "Zafra",
-      "MAIN": true
+      "NAME": "Zafra"
    },
    {
       "CODAUTO": "11",
@@ -7284,8 +7260,7 @@
       "PROV": "Balears, Illes",
       "CMUN": "011",
       "DC": "0",
-      "NAME": "Calvià",
-      "MAIN": true
+      "NAME": "Calvià"
    },
    {
       "CODAUTO": "04",
@@ -7366,8 +7341,7 @@
       "PROV": "Balears, Illes",
       "CMUN": "026",
       "DC": "0",
-      "NAME": "Eivissa",
-      "MAIN": true
+      "NAME": "Eivissa"
    },
    {
       "CODAUTO": "04",
@@ -7565,8 +7539,7 @@
       "PROV": "Balears, Illes",
       "CMUN": "040",
       "DC": "7",
-      "NAME": "Palma",
-      "MAIN": true
+      "NAME": "Palma"
    },
    {
       "CODAUTO": "04",
@@ -7917,8 +7890,7 @@
       "PROV": "Barcelona",
       "CMUN": "015",
       "DC": "5",
-      "NAME": "Badalona",
-      "MAIN": true
+      "NAME": "Badalona"
    },
    {
       "CODAUTO": "09",
@@ -7972,8 +7944,7 @@
       "PROV": "Barcelona",
       "CMUN": "019",
       "DC": "3",
-      "NAME": "Barcelona",
-      "MAIN": true
+      "NAME": "Barcelona"
    },
    {
       "CODAUTO": "09",
@@ -8738,8 +8709,7 @@
       "PROV": "Barcelona",
       "CMUN": "101",
       "DC": "7",
-      "NAME": "Hospitalet de Llobregat, L'",
-      "MAIN": true
+      "NAME": "Hospitalet de Llobregat, L'"
    },
    {
       "CODAUTO": "09",
@@ -10314,8 +10284,7 @@
       "PROV": "Barcelona",
       "CMUN": "279",
       "DC": "8",
-      "NAME": "Terrassa",
-      "MAIN": true
+      "NAME": "Terrassa"
    },
    {
       "CODAUTO": "09",
@@ -10711,8 +10680,7 @@
       "PROV": "Burgos",
       "CMUN": "018",
       "DC": "3",
-      "NAME": "Aranda de Duero",
-      "MAIN": true
+      "NAME": "Aranda de Duero"
    },
    {
       "CODAUTO": "07",
@@ -11027,8 +10995,7 @@
       "PROV": "Burgos",
       "CMUN": "059",
       "DC": "7",
-      "NAME": "Burgos",
-      "MAIN": true
+      "NAME": "Burgos"
    },
    {
       "CODAUTO": "07",
@@ -12126,8 +12093,7 @@
       "PROV": "Burgos",
       "CMUN": "219",
       "DC": "4",
-      "NAME": "Miranda de Ebro",
-      "MAIN": true
+      "NAME": "Miranda de Ebro"
    },
    {
       "CODAUTO": "07",
@@ -14269,8 +14235,7 @@
       "PROV": "Cáceres",
       "CMUN": "037",
       "DC": "7",
-      "NAME": "Cáceres",
-      "MAIN": true
+      "NAME": "Cáceres"
    },
    {
       "CODAUTO": "11",
@@ -15107,8 +15072,7 @@
       "PROV": "Cáceres",
       "CMUN": "131",
       "DC": "8",
-      "NAME": "Navalmoral de la Mata",
-      "MAIN": true
+      "NAME": "Navalmoral de la Mata"
    },
    {
       "CODAUTO": "11",
@@ -15261,8 +15225,7 @@
       "PROV": "Cáceres",
       "CMUN": "148",
       "DC": "0",
-      "NAME": "Plasencia",
-      "MAIN": true
+      "NAME": "Plasencia"
    },
    {
       "CODAUTO": "11",
@@ -15973,8 +15936,7 @@
       "PROV": "Cádiz",
       "CMUN": "004",
       "DC": "8",
-      "NAME": "Algeciras",
-      "MAIN": true
+      "NAME": "Algeciras"
    },
    {
       "CODAUTO": "01",
@@ -16091,8 +16053,7 @@
       "PROV": "Cádiz",
       "CMUN": "014",
       "DC": "6",
-      "NAME": "Conil de la Frontera",
-      "MAIN": true
+      "NAME": "Conil de la Frontera"
    },
    {
       "CODAUTO": "01",
@@ -16128,8 +16089,7 @@
       "PROV": "Cádiz",
       "CMUN": "020",
       "DC": "1",
-      "NAME": "Jerez de la Frontera",
-      "MAIN": true
+      "NAME": "Jerez de la Frontera"
    },
    {
       "CODAUTO": "01",
@@ -16165,8 +16125,7 @@
       "PROV": "Cádiz",
       "CMUN": "024",
       "DC": "4",
-      "NAME": "Olvera",
-      "MAIN": true
+      "NAME": "Olvera"
    },
    {
       "CODAUTO": "01",
@@ -16238,8 +16197,7 @@
       "PROV": "Cádiz",
       "CMUN": "902",
       "DC": "8",
-      "NAME": "San José del Valle",
-      "MAIN": true
+      "NAME": "San José del Valle"
    },
    {
       "CODAUTO": "01",
@@ -16311,8 +16269,7 @@
       "PROV": "Cádiz",
       "CMUN": "038",
       "DC": "0",
-      "NAME": "Ubrique",
-      "MAIN": true
+      "NAME": "Ubrique"
    },
    {
       "CODAUTO": "01",
@@ -16609,8 +16566,7 @@
       "PROV": "Castellón/Castelló",
       "CMUN": "032",
       "DC": "6",
-      "NAME": "Borriana\/Burriana",
-      "MAIN": true
+      "NAME": "Borriana\/Burriana"
    },
    {
       "CODAUTO": "10",
@@ -16682,8 +16638,7 @@
       "PROV": "Castellón/Castelló",
       "CMUN": "040",
       "DC": "2",
-      "NAME": "Castelló de la Plana",
-      "MAIN": true
+      "NAME": "Castelló de la Plana"
    },
    {
       "CODAUTO": "10",
@@ -17457,8 +17412,7 @@
       "PROV": "Castellón/Castelló",
       "CMUN": "135",
       "DC": "9",
-      "NAME": "Vila-real",
-      "MAIN": true
+      "NAME": "Vila-real"
    },
    {
       "CODAUTO": "10",
@@ -17611,8 +17565,7 @@
       "PROV": "Ciudad Real",
       "CMUN": "005",
       "DC": "2",
-      "NAME": "Alcázar de San Juan",
-      "MAIN": true
+      "NAME": "Alcázar de San Juan"
    },
    {
       "CODAUTO": "08",
@@ -17891,8 +17844,7 @@
       "PROV": "Ciudad Real",
       "CMUN": "034",
       "DC": "3",
-      "NAME": "Ciudad Real",
-      "MAIN": true
+      "NAME": "Ciudad Real"
    },
    {
       "CODAUTO": "08",
@@ -18225,8 +18177,7 @@
       "PROV": "Ciudad Real",
       "CMUN": "071",
       "DC": "8",
-      "NAME": "Puertollano",
-      "MAIN": true
+      "NAME": "Puertollano"
    },
    {
       "CODAUTO": "08",
@@ -18676,8 +18627,7 @@
       "PROV": "Córdoba",
       "CMUN": "021",
       "DC": "4",
-      "NAME": "Córdoba",
-      "MAIN": true
+      "NAME": "Córdoba"
    },
    {
       "CODAUTO": "01",
@@ -18974,8 +18924,7 @@
       "PROV": "Córdoba",
       "CMUN": "052",
       "DC": "2",
-      "NAME": "Peñarroya-Pueblonuevo",
-      "MAIN": true
+      "NAME": "Peñarroya-Pueblonuevo"
    },
    {
       "CODAUTO": "01",
@@ -19002,8 +18951,7 @@
       "PROV": "Córdoba",
       "CMUN": "055",
       "DC": "6",
-      "NAME": "Priego de Córdoba",
-      "MAIN": true
+      "NAME": "Priego de Córdoba"
    },
    {
       "CODAUTO": "01",
@@ -19129,8 +19077,7 @@
       "PROV": "Córdoba",
       "CMUN": "069",
       "DC": "2",
-      "NAME": "Villanueva de Córdoba",
-      "MAIN": true
+      "NAME": "Villanueva de Córdoba"
    },
    {
       "CODAUTO": "01",
@@ -19454,8 +19401,7 @@
       "PROV": "Coruña, A",
       "CMUN": "030",
       "DC": "8",
-      "NAME": "Coruña, A",
-      "MAIN": true
+      "NAME": "Coruña, A"
    },
    {
       "CODAUTO": "12",
@@ -19509,8 +19455,7 @@
       "PROV": "Coruña, A",
       "CMUN": "036",
       "DC": "7",
-      "NAME": "Ferrol",
-      "MAIN": true
+      "NAME": "Ferrol"
    },
    {
       "CODAUTO": "12",
@@ -19672,8 +19617,7 @@
       "PROV": "Coruña, A",
       "CMUN": "054",
       "DC": "6",
-      "NAME": "Narón",
-      "MAIN": true
+      "NAME": "Narón"
    },
    {
       "CODAUTO": "12",
@@ -19889,8 +19833,7 @@
       "PROV": "Coruña, A",
       "CMUN": "078",
       "DC": "0",
-      "NAME": "Santiago de Compostela",
-      "MAIN": true
+      "NAME": "Santiago de Compostela"
    },
    {
       "CODAUTO": "12",
@@ -20673,8 +20616,7 @@
       "PROV": "Cuenca",
       "CMUN": "078",
       "DC": "3",
-      "NAME": "Cuenca",
-      "MAIN": true
+      "NAME": "Cuenca"
    },
    {
       "CODAUTO": "08",
@@ -21448,8 +21390,7 @@
       "PROV": "Cuenca",
       "CMUN": "175",
       "DC": "7",
-      "NAME": "Quintanar del Rey",
-      "MAIN": true
+      "NAME": "Quintanar del Rey"
    },
    {
       "CODAUTO": "08",
@@ -21530,8 +21471,7 @@
       "PROV": "Cuenca",
       "CMUN": "190",
       "DC": "7",
-      "NAME": "San Clemente",
-      "MAIN": true
+      "NAME": "San Clemente"
    },
    {
       "CODAUTO": "08",
@@ -21639,8 +21579,7 @@
       "PROV": "Cuenca",
       "CMUN": "203",
       "DC": "3",
-      "NAME": "Tarancón",
-      "MAIN": true
+      "NAME": "Tarancón"
    },
    {
       "CODAUTO": "08",
@@ -22360,8 +22299,7 @@
       "PROV": "Girona",
       "CMUN": "023",
       "DC": "7",
-      "NAME": "Blanes",
-      "MAIN": true
+      "NAME": "Blanes"
    },
    {
       "CODAUTO": "09",
@@ -22730,8 +22668,7 @@
       "PROV": "Girona",
       "CMUN": "066",
       "DC": "9",
-      "NAME": "Figueres",
-      "MAIN": true
+      "NAME": "Figueres"
    },
    {
       "CODAUTO": "09",
@@ -22848,8 +22785,7 @@
       "PROV": "Girona",
       "CMUN": "079",
       "DC": "2",
-      "NAME": "Girona",
-      "MAIN": true
+      "NAME": "Girona"
    },
    {
       "CODAUTO": "09",
@@ -22993,8 +22929,7 @@
       "PROV": "Girona",
       "CMUN": "095",
       "DC": "0",
-      "NAME": "Lloret de Mar",
-      "MAIN": true
+      "NAME": "Lloret de Mar"
    },
    {
       "CODAUTO": "09",
@@ -24866,8 +24801,7 @@
       "PROV": "Granada",
       "CMUN": "087",
       "DC": "7",
-      "NAME": "Granada",
-      "MAIN": true
+      "NAME": "Granada"
    },
    {
       "CODAUTO": "01",
@@ -24885,8 +24819,7 @@
       "PROV": "Granada",
       "CMUN": "089",
       "DC": "6",
-      "NAME": "Guadix",
-      "MAIN": true
+      "NAME": "Guadix"
    },
    {
       "CODAUTO": "01",
@@ -24949,8 +24882,7 @@
       "PROV": "Granada",
       "CMUN": "098",
       "DC": "1",
-      "NAME": "Huéscar",
-      "MAIN": true
+      "NAME": "Huéscar"
    },
    {
       "CODAUTO": "01",
@@ -25121,8 +25053,7 @@
       "PROV": "Granada",
       "CMUN": "122",
       "DC": "6",
-      "NAME": "Loja",
-      "MAIN": true
+      "NAME": "Loja"
    },
    {
       "CODAUTO": "01",
@@ -25248,8 +25179,7 @@
       "PROV": "Granada",
       "CMUN": "140",
       "DC": "0",
-      "NAME": "Motril",
-      "MAIN": true
+      "NAME": "Motril"
    },
    {
       "CODAUTO": "01",
@@ -29164,8 +29094,7 @@
       "PROV": "Huelva",
       "CMUN": "005",
       "DC": "9",
-      "NAME": "Almonte",
-      "MAIN": true
+      "NAME": "Almonte"
    },
    {
       "CODAUTO": "01",
@@ -29183,8 +29112,7 @@
       "PROV": "Huelva",
       "CMUN": "007",
       "DC": "8",
-      "NAME": "Aracena",
-      "MAIN": true
+      "NAME": "Aracena"
    },
    {
       "CODAUTO": "01",
@@ -29490,8 +29418,7 @@
       "PROV": "Huelva",
       "CMUN": "041",
       "DC": "2",
-      "NAME": "Huelva",
-      "MAIN": true
+      "NAME": "Huelva"
    },
    {
       "CODAUTO": "01",
@@ -29644,8 +29571,7 @@
       "PROV": "Huelva",
       "CMUN": "058",
       "DC": "3",
-      "NAME": "Puebla de Guzmán",
-      "MAIN": true
+      "NAME": "Puebla de Guzmán"
    },
    {
       "CODAUTO": "01",
@@ -29681,8 +29607,7 @@
       "PROV": "Huelva",
       "CMUN": "062",
       "DC": "2",
-      "NAME": "Rosal de la Frontera",
-      "MAIN": true
+      "NAME": "Rosal de la Frontera"
    },
    {
       "CODAUTO": "01",
@@ -31689,8 +31614,7 @@
       "PROV": "Jaén",
       "CMUN": "003",
       "DC": "2",
-      "NAME": "Alcaudete",
-      "MAIN": true
+      "NAME": "Alcaudete"
    },
    {
       "CODAUTO": "01",
@@ -31699,8 +31623,7 @@
       "PROV": "Jaén",
       "CMUN": "004",
       "DC": "7",
-      "NAME": "Aldeaquemada",
-      "MAIN": true
+      "NAME": "Aldeaquemada"
    },
    {
       "CODAUTO": "01",
@@ -31709,8 +31632,7 @@
       "PROV": "Jaén",
       "CMUN": "005",
       "DC": "0",
-      "NAME": "Andújar",
-      "MAIN": true
+      "NAME": "Andújar"
    },
    {
       "CODAUTO": "01",
@@ -32097,8 +32019,7 @@
       "PROV": "Jaén",
       "CMUN": "050",
       "DC": "3",
-      "NAME": "Jaén",
-      "MAIN": true
+      "NAME": "Jaén"
    },
    {
       "CODAUTO": "01",
@@ -32377,8 +32298,7 @@
       "PROV": "Jaén",
       "CMUN": "081",
       "DC": "4",
-      "NAME": "Segura de la Sierra",
-      "MAIN": true
+      "NAME": "Segura de la Sierra"
    },
    {
       "CODAUTO": "01",
@@ -40433,8 +40353,7 @@
       "PROV": "Málaga",
       "CMUN": "015",
       "DC": "4",
-      "NAME": "Antequera",
-      "MAIN": true
+      "NAME": "Antequera"
    },
    {
       "CODAUTO": "01",
@@ -40902,8 +40821,7 @@
       "PROV": "Málaga",
       "CMUN": "067",
       "DC": "2",
-      "NAME": "Málaga",
-      "MAIN": true
+      "NAME": "Málaga"
    },
    {
       "CODAUTO": "01",
@@ -40921,8 +40839,7 @@
       "PROV": "Málaga",
       "CMUN": "069",
       "DC": "1",
-      "NAME": "Marbella",
-      "MAIN": true
+      "NAME": "Marbella"
    },
    {
       "CODAUTO": "01",
@@ -41057,8 +40974,7 @@
       "PROV": "Málaga",
       "CMUN": "084",
       "DC": "6",
-      "NAME": "Ronda",
-      "MAIN": true
+      "NAME": "Ronda"
    },
    {
       "CODAUTO": "01",
@@ -55179,8 +55095,7 @@
       "PROV": "Sevilla",
       "CMUN": "048",
       "DC": "2",
-      "NAME": "Guadalcanal",
-      "MAIN": true
+      "NAME": "Guadalcanal"
    },
    {
       "CODAUTO": "01",
@@ -55234,8 +55149,7 @@
       "PROV": "Sevilla",
       "CMUN": "053",
       "DC": "6",
-      "NAME": "Lebrija",
-      "MAIN": true
+      "NAME": "Lebrija"
    },
    {
       "CODAUTO": "01",
@@ -55253,8 +55167,7 @@
       "PROV": "Sevilla",
       "CMUN": "055",
       "DC": "4",
-      "NAME": "Lora del Río",
-      "MAIN": true
+      "NAME": "Lora del Río"
    },
    {
       "CODAUTO": "01",
@@ -55371,8 +55284,7 @@
       "PROV": "Sevilla",
       "CMUN": "068",
       "DC": "7",
-      "NAME": "Osuna",
-      "MAIN": true
+      "NAME": "Osuna"
    },
    {
       "CODAUTO": "01",
@@ -55588,8 +55500,7 @@
       "PROV": "Sevilla",
       "CMUN": "091",
       "DC": "7",
-      "NAME": "Sevilla",
-      "MAIN": true
+      "NAME": "Sevilla"
    },
    {
       "CODAUTO": "01",

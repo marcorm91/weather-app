@@ -1,43 +1,46 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
-import { renderToString } from 'react-dom/server'
 import { WeatherMapMunicipalityStyled } from './WeatherMapMunicipalityStyled'
-import { getCoordinatesByLocation } from '../../resources/services/APIs/geoService'
+import { drawOnMap, getBoundsFromGeoJSON } from '../../utils/js/helpers'
+import { getMunicipalityByCPROCMUN } from '../../resources/services/APIs/geoService'
 
 const WeatherMapMunicipality = ({ municipalityObject }) => {
-  const { NAME, PROV } = municipalityObject
+  const { CPRO, CMUN } = municipalityObject
   const mapRef = useRef(null)
-  const markerRef = useRef(null)
+  const mapContainerRef = useRef(null)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const location = `${NAME}, ${PROV}, Spain`
-    getCoordinatesByLocation(location)
-      .then(data => {
-        if (data.length > 0) {
-          const { lat, lon } = data[0]
-          if (!mapRef.current) {
-            mapRef.current = L.map('map').setView([lat, lon], 10)
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapRef.current)
-          } else {
-            mapRef.current.setView([lat, lon], 10)
-          }
-          if (markerRef.current) {
-            markerRef.current.remove()
-          }
-          const iconHtml = renderToString(<FontAwesomeIcon icon={faLocationDot} color='var(--wa-deep-blue)' size='2x' />)
-          const customIcon = L.divIcon({ html: iconHtml, iconAnchor: [16, 32] })
-          markerRef.current = L.marker([lat, lon], { icon: customIcon }).addTo(mapRef.current)
+    const fetchAndDrawMunicipalityOutline = async () => {
+      if (!mapRef.current && mapContainerRef.current) {
+        mapRef.current = L.map(mapContainerRef.current).setView([39.8168, -2.9000], 5);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapRef.current);
+      }    
+      try {
+        const municipalityGeoJSON = await getMunicipalityByCPROCMUN(CPRO, CMUN)           
+        if (municipalityGeoJSON && mapRef.current) {
+          drawOnMap(municipalityGeoJSON, mapRef.current)
+          const bounds = getBoundsFromGeoJSON(municipalityGeoJSON)
+          mapRef.current.fitBounds(bounds)
+        } else {
+          console.log("Municipality outline not found.")
         }
-      })
-  }, [NAME, PROV])
-
+      } catch (error) {
+        console.error("Error obtaining the municipality outline:", error)
+      }
+    }  
+    fetchAndDrawMunicipalityOutline().then(() => setIsLoading(false))
+  }, [CPRO, CMUN, isLoading])
+  
   return (
-      <WeatherMapMunicipalityStyled className='map__wrapper'>
-        <div id="map"></div>
-      </WeatherMapMunicipalityStyled>
+    <WeatherMapMunicipalityStyled className='map__wrapper'>
+        {isLoading ? (
+            <div className="loading-skeleton"></div>
+        ) : (
+            <div ref={mapContainerRef}></div>
+        )}
+    </WeatherMapMunicipalityStyled>
   )
 
 }
