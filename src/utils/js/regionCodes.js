@@ -16,6 +16,6 @@ const regionCodes = [
     { code: 'nav', community: 'Navarra, Comunidad Foral de' },
     { code: 'pva', community: 'País Vasco' },
     { code: 'rio', community: 'Rioja, La' }
-  ]
+]
   
-  export default regionCodes  
+export default regionCodes  

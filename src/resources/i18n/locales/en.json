@@ -88,5 +88,8 @@
             "AD_HIGH_WIND": "Strong wind gust alerts",
             "AD_HIGH_SNOW": "Snow alerts"
         }
+    },
+    "GEOLOCATION": {
+        "ZONE_WEATHER": "The weather in your area,"
     }
 }

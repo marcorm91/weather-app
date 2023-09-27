@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import WeatherTable from '../../components/weather-table/WeatherTable'
 import { WeatherHomeStyled } from './WeatherHomeStyled'
 import { useTranslation } from 'react-i18next'
@@ -9,6 +9,7 @@ import WeatherAd from '../../components/weather-ad/WeatherAd'
 import { getFavorites } from '../../utils/js/localStorageUtils'
 import WeatherMapHome from '../../components/weather-map-home/WeatherMapHome'
 import { useLocation  } from '../../utils/js/LocationContext'
+import WeatherCurrentGeolocation from '../../components/weather-current-geolocation/WeatherCurrentGeolocation'
 
 const WeatherHome = () => {
   
@@ -25,11 +26,40 @@ const WeatherHome = () => {
   const hasFavorites = favorites.length > 0
   const [selectedTown, setSelectedTown] = useState(null)
   const { location } = useLocation()
-  const flexClass = location ? 'flex-45' : 'flex-50'
+  const [geolocationError, setGeolocationError] = useState(false)
+  const [shouldDisplay, setShouldDisplay] = useState(false)
+  const flexClass = shouldDisplay ? 'flex-45' : 'flex-50'
 
-  let geolocationContent
-  if (location) {
-      geolocationContent = <div className='flex-10'>geolocation</div>
+  // Attach the error handling function as an event listener to the window object
+  // It listens for a custom 'GeolocationError' event
+  useEffect(() => {
+    const handleError = (e) => {
+        setGeolocationError(e.detail)
+    }
+    
+    window.addEventListener('GeolocationError', handleError)
+
+    if (location && !geolocationError) {
+        setShouldDisplay(true);
+    } else {
+        setShouldDisplay(false);
+    }
+
+    return () => {
+        window.removeEventListener('GeolocationError', handleError)
+    }
+  }, [location, geolocationError])
+
+  let geolocationContentStyle = shouldDisplay ? { display: 'flex' } : { display: 'none' };
+
+  // If location and geoLocationError it's OK... print the component
+  let geolocationContent = null
+  if (location && !geolocationError) {
+    geolocationContent = (
+        <div className='flex-10' style={geolocationContentStyle}>
+            <WeatherCurrentGeolocation location={location} onError={setGeolocationError} />
+        </div>
+    )
   }
 
   // Handle click for tabs (all and favs)

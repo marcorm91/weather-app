@@ -68,6 +68,7 @@ export const WeatherHomeStyled = styled.main`
         flex: 1 1 10%;
         max-width: 10%;
         width: 10%;
+        height: fit-content;
       }
       ${media('tablet')`
         &[class^='flex-']{

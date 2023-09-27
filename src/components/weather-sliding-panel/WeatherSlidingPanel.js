@@ -10,7 +10,7 @@ import WeatherBackdrop from '../weather-backdrop/WeatherBackdrop'
 import RecentSearchesContext from '../../utils/js/RecentSearchesContext'
 import { AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { storeSearchItem } from '../../utils/js/localStorageUtils';
+import { storeSearchItem } from '../../utils/js/localStorageUtils'
 
 const WeatherSlidingPanel = ({ data, onClose, isOpen, municipalityObject }) => {
   const { t } = useTranslation()

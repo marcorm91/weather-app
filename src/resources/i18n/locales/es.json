@@ -89,5 +89,8 @@
             "AD_HIGH_WIND": "Avisos por rachas de viento",
             "AD_HIGH_SNOW": "Avisos por nieve"
         }
+    },
+    "GEOLOCATION": {
+        "ZONE_WEATHER": "El tiempo en tu zona,"
     }
 }
