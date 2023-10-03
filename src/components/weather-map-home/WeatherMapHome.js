@@ -51,8 +51,12 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
    */
   const showCanariesMap = async () => {
     if (!mapRef.current) return
-    
-    mapRef.current.setView([28.5916, -15.6291], 7)
+    const width = window.innerWidth
+    let zoomLevel = 7
+    if (width <= 767) {
+      zoomLevel = 6
+    }
+    mapRef.current.setView([28.5916, -15.6291], zoomLevel)
 
     const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00+01:00`
     const data = await fetchCurrentSkySpain('eCielo', 'CAN', 6, formattedDateTime)
@@ -114,6 +118,12 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
   useEffect(() => {
     const initMap = (latitude, longitude, zoomLevel) => {
       if (mapContainerRef.current && !mapRef.current) {
+        const width = window.innerWidth
+        if (width <= 767) {
+          zoomLevel = 5
+        }else if (width <= 1024){
+          zoomLevel = 6
+        }
         mapRef.current = L.map(mapContainerRef.current, {
           zoomControl: false,
           scrollWheelZoom: false,

@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
+import { media } from '../../utils/mediaqueries'
 
 export const WeatherFooterStyled = styled.footer`
   height: var(--wa-footer-height);
@@ -13,5 +14,8 @@ export const WeatherFooterStyled = styled.footer`
     margin: var(--wa-spacing-00);
     font-size: var(--wa-font-size-xs);
     font-family: var(--wa-font-family-light);
+    ${media('mobile')`
+      font-size: var(--wa-font-size-2xs);
+    `}
   }
 `

@@ -28,13 +28,13 @@ export const WeatherHomeStyled = styled.main`
     top: var(--wa-spacing-08);
     left: var(--wa-spacing-00);
     right: var(--wa-spacing-00);
-    ${media('mobile')`
+    ${media('tablet')`
       display: none;
     `}
     & ~ h1{
       margin-top: var(--wa-spacing-06);
       margin-bottom: var(--wa-spacing-03);
-      ${media('mobile')`
+      ${media('tablet')`
         margin-top: var(--wa-spacing-00);
       `}
     }
@@ -69,6 +69,9 @@ export const WeatherHomeStyled = styled.main`
         max-width: 10%;
         width: 10%;
         height: fit-content;
+        ${media('tablet')`
+          order: -1;
+        `}
       }
       ${media('tablet')`
         &[class^='flex-']{

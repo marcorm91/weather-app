@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { media } from '../../utils/mediaqueries'
 
 export const WeatherMapHomeStyled = styled.div`
     position: relative;
@@ -15,6 +16,12 @@ export const WeatherMapHomeStyled = styled.div`
       width: 100%;
       height: 100%;
       z-index: 0;
+      ${media('tablet')`
+          min-height: 600px;
+      `}
+      ${media('mobile')`
+          min-height: 450px;
+      `}
       .leaflet-interactive{
         cursor: default;
       }
