@@ -1,5 +1,5 @@
 import React from 'react'
-import { HashRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import WeatherHeader from './components/weather-header/WeatherHeader'
 import WeatherFooter from './components/weather-footer/WeatherFooter'
 import WeatherHome from './pages/weather-home/WeatherHome'
@@ -22,7 +22,7 @@ const App = () => {
             <Route path="/alerts" element={<WeatherAlerts />} />
             <Route path="/contact" element={<WeatherContact />} />
             <Route path="/more-info" element={<WeatherMoreInfo />} />
-            <Route element={<Weather404 />} />
+            <Route path="*" element={<Weather404 />} />
           </Routes>
           <WeatherFooter />
         </Router>

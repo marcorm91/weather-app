@@ -92,5 +92,8 @@
     },
     "GEOLOCATION": {
         "ZONE_WEATHER": "El tiempo en tu zona,"
+    },
+    "ERROR": {
+        "404": "Página no encontrada"
     }
 }
