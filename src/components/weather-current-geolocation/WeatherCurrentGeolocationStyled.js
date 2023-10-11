@@ -34,7 +34,7 @@ export const WeatherCurrentGeolocationStyled = styled.div`
     ${media('tablet')`
           flex-direction: row;
           flex-wrap: wrap;
-          column-gap: 24px;
+          column-gap: var(--wa-spacing-05);
           justify-content: center;
     `}
     > li{

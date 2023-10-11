@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { WeatherMapHomeStyled } from './WeatherMapHomeStyled'
@@ -38,10 +38,9 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
       const coordinates = feature.geometry.coordinates
       const eCieloValue = feature.properties.eCielo
       const iconComponent = skyIconMap[eCieloValue]
+      const municipalityName = feature.properties.Municipio
       if (!iconComponent) return
-      const iconHTML = renderToString(iconComponent(32, 'var(--wa-deep-blue)'))
-      const customIcon = L.divIcon({ html: iconHTML })
-      L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current)
+      addMarkerWithTooltip(coordinates, iconComponent, municipalityName)
     })
     setLoading(false)
   }
@@ -65,10 +64,9 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
         const coordinates = feature.geometry.coordinates
         const eCieloValue = feature.properties.eCielo
         const iconComponent = skyIconMap[eCieloValue]
+        const municipalityName = feature.properties.Municipio 
         if (!iconComponent) return
-        const iconHTML = renderToString(iconComponent(32, 'var(--wa-deep-blue)'))
-        const customIcon = L.divIcon({ html: iconHTML })
-        L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current)
+        addMarkerWithTooltip(coordinates, iconComponent, municipalityName)
     })
   }
 
@@ -100,6 +98,39 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
   }
 
   /**
+   * Print tooltip to map with parameters coords, icon and municipality
+   */
+  const addMarkerWithTooltip = useCallback((coordinates, iconComponent, municipalityName) => {
+    const iconHTML = renderToString(iconComponent(32, 'var(--wa-deep-blue)'))
+    const customIcon = L.divIcon({ html: iconHTML })
+    const marker = L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current)
+    marker.on('mouseover', (e) => showMunicipioName(e, municipalityName))
+    marker.on('mouseout', hideMunicipioName)
+  }, [])
+ 
+  /**
+   * Show municipality tooltip
+   * @param {*} e 
+   * @param {*} municipioName 
+   */
+  const showMunicipioName = (e, municipioName) => {
+    const popupContent = `
+        <span>${municipioName}</span>
+    `
+    L.popup()
+      .setContent(popupContent)
+      .setLatLng(e.latlng)
+      .openOn(mapRef.current)
+  } 
+
+  /**
+   * Hide municipality
+   */
+  const hideMunicipioName = () => {
+      mapRef.current.closePopup()
+  }
+
+  /**
    * Reset layer map
    */
   const clearMapIcons = () => {
@@ -125,12 +156,9 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
           zoomLevel = 6
         }
         mapRef.current = L.map(mapContainerRef.current, {
-          zoomControl: false,
           scrollWheelZoom: false,
           doubleClickZoom: false,
-          touchZoom: false,
-          dragging: false,
-          minZoom: 4
+          touchZoom: false
         }).setView([latitude, longitude], zoomLevel)
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(mapRef.current)
       }
@@ -151,18 +179,17 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
         const coordinates = feature.geometry.coordinates
         const eCieloValue = feature.properties.eCielo
         const iconComponent = skyIconMap[eCieloValue]
+        const municipalityName = feature.properties.Municipio
         // If not found icon in skyMap
         if (!iconComponent) return 
-        const iconHTML = renderToString(iconComponent(32, 'var(--wa-deep-blue)'))
-        const customIcon = L.divIcon({ html: iconHTML })
-        L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current)
+        addMarkerWithTooltip(coordinates, iconComponent, municipalityName)
       })
     }
     if (!loading) {
       fetchDataAndDisplayOnMap()
       setIsViewingMunicipality(true)
     }
-  }, [loading])
+  }, [loading, addMarkerWithTooltip])
   
   /**
    * Action that goes to the municipality to get the weather details
@@ -203,7 +230,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
           {!isViewingSpain && (isViewingCanary || isViewingMunicipality) ? (
             <button 
               onClick={() => setMapView("peninsula")}
-              className='btn btn-small btn-primary spain-top-left'>{t('HOME.MAP.VIEW_PENINSULA')}</button>
+              className='btn btn-small btn-primary spain-top-right'>{t('HOME.MAP.VIEW_PENINSULA')}</button>
           ) : null}
           {isViewingSpain && !isViewingCanary ? (
             <button 

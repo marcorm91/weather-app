@@ -85,4 +85,21 @@ export const WeatherMapHomeStyled = styled.div`
       top: var(--wa-spacing-02);
       left: var(--wa-spacing-02);
     }
+    .leaflet-popup{
+      margin-bottom: var(--wa-spacing-03);
+      &-tip-container, &-close-button{
+        display: none;
+      }
+      &-content-wrapper{
+        border-radius: var(--wa-size-border-radius-01);
+        background-color: var(--wa-deep-blue);
+        .leaflet-popup-content{
+          margin: var(--wa-spacing-00);
+          padding: var(--wa-spacing-02);
+          text-align: center;
+          font-family: var(--wa-font-family-semibold);
+          color: var(--wa-white);
+        }
+      }
+    }
 `
