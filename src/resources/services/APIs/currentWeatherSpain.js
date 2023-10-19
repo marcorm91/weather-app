@@ -1,4 +1,4 @@
-export const fetchCurrentSkySpain = async (type, location, period, dateTime) => {
+export const fetchCurrentWeatherSpain = async (type, location, period, dateTime) => {
     let dayIncrement = 0
     const maxAttempts = 10
     let data

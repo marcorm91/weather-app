@@ -6,7 +6,7 @@ import { WeatherAdWarningStyled } from './WeatherAdWarningStyled'
 
 // Data alerts by AEMET
 const HIGH_TEMP = 40
-const HIGH_WIND = 70
+const HIGH_WIND = 45
 const HIGH_PREC = 15
 const HIGH_SNOW = 20
 

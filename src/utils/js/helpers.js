@@ -80,19 +80,24 @@ export const transformDate = (dateStr, language) => {
  * @returns {string} - The name of the day of the week.
  */
 export const getDayOfWeek = (dateString) => {
-    return moment(dateString).format('dddd');
+    return moment(dateString).format('dddd')
 }
 
 /**
- * Get the current timezone offset in the format +HH:MM or -HH:MM
- * @returns {string} - The timezone offset.
+ * Gets the timezone offset for a given region.
+ * If the region is 'CAN', it returns a fixed offset, otherwise calculates the current offset.
+ * @param {string} region - The region for which the timezone offset should be determined (default is 'PB').
+ * @returns {string} - The timezone offset in the format '+hh:mm'
  */
-export const getTimezoneOffset = () => {
-    const offsetInMinutes = new Date().getTimezoneOffset();
-    const hours = Math.abs(Math.floor(offsetInMinutes / 60)).toString().padStart(2, '0');
-    const minutes = (Math.abs(offsetInMinutes) % 60).toString().padStart(2, '0');
-    const sign = offsetInMinutes < 0 ? '+' : '-';
-    return `${sign}${hours}:${minutes}`;
+export const getTimezoneOffset = (region = 'PB') => {
+    if (region === 'CAN') {
+        return '+01:00'
+    }
+    const offsetInMinutes = new Date().getTimezoneOffset()
+    const hours = Math.abs(Math.floor(offsetInMinutes / 60)).toString().padStart(2, '0')
+    const minutes = (Math.abs(offsetInMinutes) % 60).toString().padStart(2, '0')
+    const sign = offsetInMinutes < 0 ? '+' : '-'
+    return `${sign}${hours}:${minutes}`
 }
 
 // ------------------ Map functions ------------------

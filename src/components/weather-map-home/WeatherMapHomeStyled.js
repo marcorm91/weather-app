@@ -33,11 +33,46 @@ export const WeatherMapHomeStyled = styled.div`
           background-color: transparent;
           border: none;
         }
+        .temperature-wrapper{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: var(--wa-deep-blue);
+          border-radius: var(--wa-size-border-radius-04);
+          padding: var(--wa-spacing-02);
+          width: 1rem;
+          height: 1rem;
+          font-size: var(--wa-font-size-xs);
+          color: var(--wa-white);
+          font-family: var(--wa-font-family-semibold);
+          box-shadow: var(--wa-box-shadow-02);
+          &.type-1{
+            background-color: var(--wa-temp-type-1);
+          }
+          &.type-2{
+            background-color: var(--wa-temp-type-2);
+          }
+          &.type-3{
+            background-color: var(--wa-temp-type-3);
+          }
+          &.type-4{
+            background-color: var(--wa-temp-type-4);
+          }
+          &.type-5{
+            background-color: var(--wa-temp-type-5);
+          }
+          &.type-6{
+            background-color: var(--wa-temp-type-6);
+          }
+          &.type-7{
+            background-color: var(--wa-temp-type-7);
+          }
+        }
       }
       .custom-marker{
         > span{
           background-color: var(--wa-deep-blue);
-          color: #fff;
+          color: var(--wa-white);
           font-family: var(--wa-font-family-semibold);
           padding: var(--wa-spacing-01) var(--wa-spacing-02);
           border-radius: var(--wa-size-border-radius-01);
@@ -45,29 +80,25 @@ export const WeatherMapHomeStyled = styled.div`
       }
     }
     > ul{
-      padding: var(--wa-spacing-03);
-      margin: var(--wa-spacing-00);
-      display: flex;
-      flex-direction: column;
-      gap: var(--wa-spacing-02);
-      font-size: var(--wa-font-size-xs);
-      list-style: none;
-      position: absolute;
-      top: var(--wa-spacing-02);
-      right: var(--wa-spacing-02);
-      z-index: 1;
-      &:after{
-        content: "";
+      &.list-options__wrapper{
+        background-color: var(--wa-deep-blue);
+        list-style: none;
+        padding: var(--wa-spacing-03) var(--wa-spacing-04);
+        margin: var(--wa-spacing-00);
         position: absolute;
-        inset: var(--wa-spacing-00);
-        margin: auto;
-        background: var(--wa-black-op99);
+        bottom: var(--wa-spacing-02);
+        right: var(--wa-spacing-02);
         border-radius: var(--wa-size-border-radius-01);
-      }
-      > li{
-        color: var(--wa-white);
-        position: relative;
-        z-index: 1;
+        display: flex;
+        gap: var(--wa-spacing-04);
+        > li{
+          pointer-events: none;
+          &.inactive-item{
+            pointer-events: auto;
+            opacity: .5;
+            cursor: pointer;
+          }
+        }
       }
     }
     .canaries{
@@ -95,10 +126,11 @@ export const WeatherMapHomeStyled = styled.div`
         background-color: var(--wa-deep-blue);
         .leaflet-popup-content{
           margin: var(--wa-spacing-00);
-          padding: var(--wa-spacing-02);
+          padding: var(--wa-spacing-01);
           text-align: center;
           font-family: var(--wa-font-family-semibold);
           color: var(--wa-white);
+          font-size: var(--wa-font-size-xs);
         }
       }
     }

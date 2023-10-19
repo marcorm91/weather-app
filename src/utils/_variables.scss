@@ -23,6 +23,15 @@
     --wa-ad: #FEFFBE;
     --wa-orange: #FFC86195;
 
+    // Temperature colors
+    --wa-temp-type-1: #123e59;
+    --wa-temp-type-2: #13628b;
+    --wa-temp-type-3: #02b3c6;
+    --wa-temp-type-4: #33bd9e;
+    --wa-temp-type-5: #f4a239;
+    --wa-temp-type-6: #ec350c;
+    --wa-temp-type-7: #951008;
+
     --wa-font-family-regular: 'OpenSans-Regular';
     --wa-font-family-semibold: 'OpenSans-SemiBold';
     --wa-font-family-semibolditalic: 'OpenSans-SemiBoldItalic';
@@ -58,6 +67,7 @@
     --wa-size-border-radius-01: 0.25rem;
     --wa-size-border-radius-02: 0.5rem;
     --wa-size-border-radius-03: 1rem;
+    --wa-size-border-radius-04: 50%;
 
     --wa-border-width-00: 0;
     --wa-border-width-01: 0.0625rem;
