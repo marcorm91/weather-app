@@ -68,6 +68,82 @@ export const WeatherMapHomeStyled = styled.div`
             background-color: var(--wa-temp-type-7);
           }
         }
+        .wind-wrapper{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: var(--wa-deep-blue);
+          border-radius: var(--wa-size-border-radius-04);
+          padding: var(--wa-spacing-02);
+          width: 1rem;
+          height: 1rem;
+          font-size: var(--wa-font-size-xs);
+          color: var(--wa-white);
+          font-family: var(--wa-font-family-semibold);
+          box-shadow: var(--wa-box-shadow-02);
+          position: relative;
+          z-index: 0;
+          &:after{
+            border-top: 0.375rem solid transparent;
+            border-bottom: 0.375rem solid transparent;
+            border-left: 0.5rem solid var(--wa-deep-blue);
+            display: inline-block;
+            content: "";
+            z-index: -1;
+            position: absolute;
+          }
+          &.direction-O{
+            &:after{
+              right: -0.5625rem;
+            }
+          }
+          &.direction-S{
+            &:after{
+              top: -0.6875rem;
+              transform: rotate(270deg);
+            }
+          }
+          &.direction-N{
+            &:after{
+              bottom: -0.6875rem;
+              transform: rotate(90deg);
+            }
+          }
+          &.direction-E{
+            &:after{
+              left: -0.5625rem;
+              transform: rotate(180deg);
+            }
+          }
+          &.direction-NO{
+            &:after{
+              right: -0.25rem;
+              bottom: -0.4375rem;
+              transform: rotate(45deg);
+            }
+          }
+          &.direction-NE{
+            &:after{
+              right: 1.3125rem;
+              bottom: -0.375rem;
+              transform: rotate(140deg);
+            }
+          }
+          &.direction-SO{
+            &:after{
+              left: 1.3125rem;
+              top: -0.375rem;
+              transform: rotate(320deg);
+            }
+          }
+          &.direction-SE{
+            &:after{
+              right: 1.3125rem;
+              top: -0.375rem;
+              transform: rotate(220deg);
+            }
+          }
+        }
       }
       .custom-marker{
         > span{

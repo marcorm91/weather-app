@@ -93,6 +93,45 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
     })
   }
 
+    /**
+   * Displays the wind map for a specific region (CA, PB)
+   * Fetches the current weather data for the given region and adds wind markers on the map.
+   * @param {string} region - The region for which the wind map should be displayed (default is 'PB')
+   * @returns {void}
+   */
+  const showWindMap = async (region = 'PB') => {
+    if (!mapRef.current) return
+  
+    const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00${getTimezoneOffset(region)}`
+    const data = await fetchCurrentWeatherSpain('diVien', region, 6, formattedDateTime)
+  
+    data[0].features.forEach(feature => {
+      console.log(feature)
+      const coordinates = feature.geometry.coordinates
+      const windValue = feature.properties.viVien.toString()
+      const municipalityName = feature.properties.Municipio
+      const windPosition = feature.properties.diVien.toString()
+      addMarkerWithWindValue(coordinates, windValue, windPosition, municipalityName)
+    })
+  }
+
+  /**
+   * Adds a marker to the map with a custom wind icon that represents a given wind value and direction.
+   * 
+   * @param {Array} coordinates - An array of latitude and longitude values where the marker will be placed.
+   * @param {Number} windValue - The numerical value of the wind speed to be displayed on the marker.
+   * @param {String} windPosition - A string indicating the wind direction, which is used to style the marker with a specific CSS class.
+   * @param {String} municipalityName - The name of the municipality associated with the marker, displayed on mouseover.
+   */
+  const addMarkerWithWindValue = useCallback((coordinates, windValue, windPosition, municipalityName) => {
+    const windClass = windPosition
+    const iconHTML = `<div class='wind-wrapper direction-${windClass}'>${windValue}</div>`
+    const customIcon = L.divIcon({ html: iconHTML })
+    const marker = L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current)
+    marker.on('mouseover', (e) => showMunicipioName(e, municipalityName))
+    marker.on('mouseout', hideMunicipioName)
+  }, [])
+  
   /**
    * Sets the map view based on the given view type.
    * @param {string} view - The view type ("peninsula" or "canarias").
@@ -218,7 +257,11 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
             }
             break
         case "wind":
-            // showWindMap() TODO
+            if (isViewingCanary) {
+              showWindMap('CAN')
+            } else {
+              showWindMap('PB')
+            }
             break
         default:
             break
@@ -330,7 +373,10 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
                 size='lg'
                 color='var(--wa-white)' />
             </li>
-            <li>
+            <li
+              data-view="wind"
+              onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'))}
+              className={activeItem !== 'wind' ? 'inactive-item' : null}>
               <FontAwesomeIcon
                 icon={faWind}
                 size='lg'
