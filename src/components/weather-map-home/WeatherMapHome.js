@@ -180,6 +180,20 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
   }, [])
 
   /**
+   * Adds a marker on the map with the snow value.
+   * @param {Array} coordinates - Array containing latitude and longitude
+   * @param {string} snowValue - The snow value as a string
+   * @param {string} municipalityName - The name of the municipality
+   */
+  const addMarkerWithSnowValue = useCallback((coordinates, snowValue, municipalityName) => {
+    const iconHTML = `<div class='snow-wrapper'>${snowValue}</div>` 
+    const customIcon = L.divIcon({ html: iconHTML })
+    const marker = L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current)
+    marker.on('mouseover', (e) => showMunicipioName(e, municipalityName))
+    marker.on('mouseout', hideMunicipioName)
+  }, [])
+
+  /**
    * Show municipality tooltip
    * @param {*} e 
    * @param {*} municipioName 
@@ -226,6 +240,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
     const data = await fetchCurrentWeatherSpain(type, region, 6, formattedDateTime)
 
     data[0].features.forEach(feature => {
+        console.log(feature)
         const coordinates = feature.geometry.coordinates
         const value = feature.properties[type].toString()
         const municipalityName = feature.properties.Municipio
@@ -233,9 +248,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
         switch (type) {
             case 'eCielo':
                 const iconComponent = skyIconMap[value]
-                if (iconComponent) {
-                    addMarkerWithTooltip(coordinates, iconComponent, municipalityName)
-                }
+                if (iconComponent) addMarkerWithTooltip(coordinates, iconComponent, municipalityName)
                 break
             case 'Tempta':
                 addMarkerWithTemperatureValue(coordinates, value, municipalityName)
@@ -247,6 +260,9 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
                 break
             case 'cPrecp':
                 addMarkerWithPrecipitationValue(coordinates, value, municipalityName)
+                break
+              case 'caNieve': 
+                addMarkerWithSnowValue(coordinates, value, municipalityName)
                 break
             default:
                 break
@@ -276,6 +292,9 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
         case "cloudRain":
             fetchDataAndDrawMarkers('cPrecp', region)
             break
+        case "snow":
+              fetchDataAndDrawMarkers('caNieve', region)
+              break
         default:
             break
     }
@@ -374,7 +393,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
               className={activeItem !== 'cloudSunRain' ? 'inactive-item' : null}>
               <FontAwesomeIcon
                 icon={faCloudSunRain}
-                size='lg'
+                size='md'
                 color='var(--wa-white)' />
             </li>
             <li 
@@ -383,7 +402,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
               className={activeItem !== 'temperatureQuarter' ? 'inactive-item' : null}>
               <FontAwesomeIcon
                 icon={faTemperatureQuarter}
-                size='lg'
+                size='md'
                 color='var(--wa-white)' />
             </li>
             <li
@@ -392,7 +411,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
               className={activeItem !== 'wind' ? 'inactive-item' : null}>
               <FontAwesomeIcon
                 icon={faWind}
-                size='lg'
+                size='md'
                 color='var(--wa-white)' />
             </li>
             <li
@@ -401,14 +420,17 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
               className={activeItem !== 'cloudRain' ? 'inactive-item' : null}>
               <FontAwesomeIcon
                   icon={faCloudRain}
-                  size='lg'
+                  size='md'
                   color='var(--wa-white)' />
             </li>
-            <li>
+            <li
+              data-view="snow"
+              onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'))}
+              className={activeItem !== 'snow' ? 'inactive-item' : null}>
               <FontAwesomeIcon
-                icon={faSnowflake}
-                size='lg'
-                color='var(--wa-white)' />
+                  icon={faSnowflake}
+                  size='md'
+                  color='var(--wa-white)' />
             </li>
           </ul>
           {!isViewingSpain && (isViewingCanary || isViewingMunicipality) ? (

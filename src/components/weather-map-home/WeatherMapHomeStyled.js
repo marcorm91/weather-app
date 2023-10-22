@@ -144,7 +144,7 @@ export const WeatherMapHomeStyled = styled.div`
             }
           }
         }
-        .precipitation-wrapper:not(:empty){
+        .precipitation-wrapper:not(:empty), .snow-wrapper:not(:empty){
           display: flex;
           justify-content: center;
           align-items: center;
@@ -171,15 +171,18 @@ export const WeatherMapHomeStyled = styled.div`
     }
     > ul{
       &.list-options__wrapper{
+        min-height: 2rem;
+        box-sizing: border-box;
         background-color: var(--wa-deep-blue);
         list-style: none;
-        padding: var(--wa-spacing-03) var(--wa-spacing-04);
+        padding: var(--wa-spacing-02) var(--wa-spacing-03);
         margin: var(--wa-spacing-00);
         position: absolute;
         bottom: var(--wa-spacing-02);
         right: var(--wa-spacing-02);
         border-radius: var(--wa-size-border-radius-01);
         display: flex;
+        align-items: center;
         gap: var(--wa-spacing-04);
         > li{
           pointer-events: none;
