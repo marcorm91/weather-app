@@ -25,94 +25,57 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
   // ------------------ Functions related to Mapping and Geolocation ------------------
 
   /**
-   * Displays the default map view focused on Spain.
-   * Fetches the current weather data for Spain and adds it as markers on the map.
+   * Displays a map view focused on the specified latitude, longitude, and region.
+   * Fetches the current weather data for the given region and adds it as markers on the map.
+   * @param {Number} lat - Latitude to center the map on.
+   * @param {Number} lng - Longitude to center the map on.
+   * @param {Number} defaultZoom - Initial zoom level for the map.
+   * @param {string} region - Region for which the weather data should be fetched.
+   * @param {string} timezoneOffset - Timezone offset for the specified region.
+   * @returns {void}
    */
-  const showDefaultSpainMap = async () => {
-
+  const showMap = async (lat, lng, defaultZoom, region, timezoneOffset) => {
     if (!mapRef.current) return
 
-    mapRef.current.setView([39.8168, -2.9000], 6)
+    const width = window.innerWidth
+    let zoomLevel = defaultZoom
+    if (width <= 767) {
+        zoomLevel = defaultZoom - 1
+    }
 
-    const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00${getTimezoneOffset()}`
-    const data = await fetchCurrentWeatherSpain('eCielo', 'PB', 6, formattedDateTime)
+    mapRef.current.setView([lat, lng], zoomLevel)
+
+    const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00${timezoneOffset}`
+    const data = await fetchCurrentWeatherSpain('eCielo', region, 6, formattedDateTime)
 
     data[0].features.forEach(feature => {
-      const coordinates = feature.geometry.coordinates
-      const eCieloValue = feature.properties.eCielo
-      const iconComponent = skyIconMap[eCieloValue]
-      const municipalityName = feature.properties.Municipio
-      if (!iconComponent) return
-      addMarkerWithTooltip(coordinates, iconComponent, municipalityName)
+        const coordinates = feature.geometry.coordinates
+        const eCieloValue = feature.properties.eCielo
+        const iconComponent = skyIconMap[eCieloValue]
+        const municipalityName = feature.properties.Municipio
+        if (!iconComponent) return
+        addMarkerWithTooltip(coordinates, iconComponent, municipalityName)
     })
+  }
+
+  /**
+   * Displays the default map view focused on Spain.
+   * Fetches the current weather data for Spain and adds it as markers on the map.
+   * Once data is fetched and displayed, loading state is set to false.
+   */
+  const showDefaultSpainMap = async () => {
+    await showMap(39.8168, -2.9000, 6, 'PB', getTimezoneOffset())
     setLoading(false)
   }
 
   /**
-   * Displays the map view focused on Canaries.
+   * Displays the map view focused on the Canary Islands.
+   * Fetches the current weather data for the Canary Islands and adds it as markers on the map.
+   * Uses a predefined timezone offset for the Canary Islands.
    */
   const showCanariesMap = async () => {
-    if (!mapRef.current) return
-    const width = window.innerWidth
-    let zoomLevel = 7
-    if (width <= 767) {
-      zoomLevel = 6
-    }
-    mapRef.current.setView([28.5916, -15.6291], zoomLevel)
-
-    const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00+01:00`
-    const data = await fetchCurrentWeatherSpain('eCielo', 'CAN', 6, formattedDateTime)
-
-    data[0].features.forEach(feature => {
-      const coordinates = feature.geometry.coordinates
-      const eCieloValue = feature.properties.eCielo
-      const iconComponent = skyIconMap[eCieloValue]
-      const municipalityName = feature.properties.Municipio
-      if (!iconComponent) return
-      addMarkerWithTooltip(coordinates, iconComponent, municipalityName)
-    })
-  }
-
-  /**
-   * Displays the temperature map for a specific region (CA, PB)
-   * Fetches the current weather data for the given region and adds temperature markers on the map.
-   * @param {string} region - The region for which the temperature map should be displayed (default is 'PB')
-   * @returns {void}
-   */
-  const showTemperatureMap = async (region = 'PB') => {
-    if (!mapRef.current) return
-  
-    const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00${getTimezoneOffset(region)}`
-    const data = await fetchCurrentWeatherSpain('Tempta', region, 6, formattedDateTime)
-
-    data[0].features.forEach(feature => {
-      const coordinates = feature.geometry.coordinates
-      const tempValue = feature.properties.Tempta.toString()
-      const municipalityName = feature.properties.Municipio
-      addMarkerWithTemperatureValue(coordinates, tempValue, municipalityName)
-    })
-  }
-
-    /**
-   * Displays the wind map for a specific region (CA, PB)
-   * Fetches the current weather data for the given region and adds wind markers on the map.
-   * @param {string} region - The region for which the wind map should be displayed (default is 'PB')
-   * @returns {void}
-   */
-  const showWindMap = async (region = 'PB') => {
-    if (!mapRef.current) return
-  
-    const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00${getTimezoneOffset(region)}`
-    const data = await fetchCurrentWeatherSpain('diVien', region, 6, formattedDateTime)
-  
-    data[0].features.forEach(feature => {
-      console.log(feature)
-      const coordinates = feature.geometry.coordinates
-      const windValue = feature.properties.viVien.toString()
-      const municipalityName = feature.properties.Municipio
-      const windPosition = feature.properties.diVien.toString()
-      addMarkerWithWindValue(coordinates, windValue, windPosition, municipalityName)
-    })
+    const timezoneOffset = "+01:00"
+    await showMap(28.5916, -15.6291, 7, 'CAN', timezoneOffset)
   }
 
   /**
@@ -123,9 +86,24 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
    * @param {String} windPosition - A string indicating the wind direction, which is used to style the marker with a specific CSS class.
    * @param {String} municipalityName - The name of the municipality associated with the marker, displayed on mouseover.
    */
-  const addMarkerWithWindValue = useCallback((coordinates, windValue, windPosition, municipalityName) => {
+  const addMarkerWithWindValue = useCallback((coordinates, windPosition, windVel, municipalityName) => {
     const windClass = windPosition
-    const iconHTML = `<div class='wind-wrapper direction-${windClass}'>${windValue}</div>`
+    const iconHTML = `<div class='wind-wrapper direction-${windClass}'>${windVel}</div>`
+    const customIcon = L.divIcon({ html: iconHTML })
+    const marker = L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current)
+    marker.on('mouseover', (e) => showMunicipioName(e, municipalityName))
+    marker.on('mouseout', hideMunicipioName)
+  }, [])
+
+  /**
+   * Adds a marker to the map with a custom icon representing the given precipitation value.
+   *
+   * @param {Array} coordinates - An array containing the latitude and longitude values where the marker will be placed.
+   * @param {string} precipitationValue - The value of precipitation to be displayed on the marker.
+   * @param {string} municipalityName - The name of the municipality associated with the marker, displayed on mouseover.
+   */
+  const addMarkerWithPrecipitationValue = useCallback((coordinates, precipitationValue, municipalityName) => {
+    const iconHTML = `<div class='precipitation-wrapper'>${precipitationValue}</div>`
     const customIcon = L.divIcon({ html: iconHTML })
     const marker = L.marker([coordinates[1], coordinates[0]], { icon: customIcon }).addTo(mapRef.current)
     marker.on('mouseover', (e) => showMunicipioName(e, municipalityName))
@@ -235,33 +213,68 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
   }
 
   /**
+   * Fetches weather data for a specified type and region and then adds corresponding markers to the map.
+   *
+   * @param {string} type - The type of weather data to fetch (e.g., 'eCielo', 'Tempta', 'diVien', 'cPrecp').
+   * @param {string} region - The region for which the data should be fetched (default is 'PB').
+   * @returns {void}
+   */
+  const fetchDataAndDrawMarkers = async (type, region = 'PB') => {
+    if (!mapRef.current) return
+
+    const formattedDateTime = `${getCurrentDate().slice(0, -9)}T${getCurrentHour()}:00:00${getTimezoneOffset(region)}`
+    const data = await fetchCurrentWeatherSpain(type, region, 6, formattedDateTime)
+
+    data[0].features.forEach(feature => {
+        const coordinates = feature.geometry.coordinates
+        const value = feature.properties[type].toString()
+        const municipalityName = feature.properties.Municipio
+
+        switch (type) {
+            case 'eCielo':
+                const iconComponent = skyIconMap[value]
+                if (iconComponent) {
+                    addMarkerWithTooltip(coordinates, iconComponent, municipalityName)
+                }
+                break
+            case 'Tempta':
+                addMarkerWithTemperatureValue(coordinates, value, municipalityName)
+                break
+            case 'diVien':
+                const windPosition = feature.properties.diVien.toString()
+                const windVel = feature.properties.viVien.toString()
+                addMarkerWithWindValue(coordinates, windPosition, windVel, municipalityName)
+                break
+            case 'cPrecp':
+                addMarkerWithPrecipitationValue(coordinates, value, municipalityName)
+                break
+            default:
+                break
+        }
+    })
+  }
+
+  /**
    * Handles the click event for the list items in the weather map view selector.
    * Updates the map view based on the selected weather view type
    * @param {string} viewType - The weather view type selected by the user (e.g., "cloudSunRain", "temperatureQuarter", ...)
    */
   const handleListItemClick = (viewType) => {
     clearMapIcons()
-    switch(viewType) {
+    const region = isViewingCanary ? 'CAN' : 'PB'
+
+    switch (viewType) {
         case "cloudSunRain":
-            if (isViewingCanary) {
-                showCanariesMap()
-            } else {
-                showDefaultSpainMap()
-            }
+            fetchDataAndDrawMarkers('eCielo', region)
             break
         case "temperatureQuarter":
-            if (isViewingCanary) {
-                showTemperatureMap('CAN')
-            } else {
-                showTemperatureMap('PB')
-            }
+            fetchDataAndDrawMarkers('Tempta', region)
             break
         case "wind":
-            if (isViewingCanary) {
-              showWindMap('CAN')
-            } else {
-              showWindMap('PB')
-            }
+            fetchDataAndDrawMarkers('diVien', region)
+            break
+        case "cloudRain":
+            fetchDataAndDrawMarkers('cPrecp', region)
             break
         default:
             break
@@ -382,11 +395,14 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
                 size='lg'
                 color='var(--wa-white)' />
             </li>
-            <li>
+            <li
+              data-view="cloudRain"
+              onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'))}
+              className={activeItem !== 'cloudRain' ? 'inactive-item' : null}>
               <FontAwesomeIcon
-                icon={faCloudRain}
-                size='lg'
-                color='var(--wa-white)' />
+                  icon={faCloudRain}
+                  size='lg'
+                  color='var(--wa-white)' />
             </li>
             <li>
               <FontAwesomeIcon

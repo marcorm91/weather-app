@@ -144,6 +144,20 @@ export const WeatherMapHomeStyled = styled.div`
             }
           }
         }
+        .precipitation-wrapper:not(:empty){
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: var(--wa-deep-blue);
+          border-radius: var(--wa-size-border-radius-04);
+          padding: var(--wa-spacing-02);
+          width: 1rem;
+          height: 1rem;
+          font-size: var(--wa-font-size-2xs);
+          color: var(--wa-white);
+          font-family: var(--wa-font-family-semibold);
+          box-shadow: var(--wa-box-shadow-02);
+        }
       }
       .custom-marker{
         > span{
