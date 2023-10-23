@@ -35,6 +35,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
    * @returns {void}
    */
   const showMap = async (lat, lng, defaultZoom, region, timezoneOffset) => {
+
     if (!mapRef.current) return
 
     const width = window.innerWidth
@@ -114,7 +115,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
    * Sets the map view based on the given view type.
    * @param {string} view - The view type ("peninsula" or "canarias").
    */
-  const setMapView = async (view) => {
+  const setMapView = async (view, region) => {
     if (!mapRef.current) return
 
     mapRef.current.eachLayer(layer => {
@@ -135,6 +136,9 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
         break
       default: break
     }
+
+    handleListItemClick(activeItem, region)
+
   }
 
   /**
@@ -240,7 +244,6 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
     const data = await fetchCurrentWeatherSpain(type, region, 6, formattedDateTime)
 
     data[0].features.forEach(feature => {
-        console.log(feature)
         const coordinates = feature.geometry.coordinates
         const value = feature.properties[type].toString()
         const municipalityName = feature.properties.Municipio
@@ -275,10 +278,8 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
    * Updates the map view based on the selected weather view type
    * @param {string} viewType - The weather view type selected by the user (e.g., "cloudSunRain", "temperatureQuarter", ...)
    */
-  const handleListItemClick = (viewType) => {
+  const handleListItemClick = (viewType, region) => {
     clearMapIcons()
-    const region = isViewingCanary ? 'CAN' : 'PB'
-
     switch (viewType) {
         case "cloudSunRain":
             fetchDataAndDrawMarkers('eCielo', region)
@@ -389,58 +390,58 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
           <ul className='list-options__wrapper'>
             <li
               data-view="cloudSunRain"
-              onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'))} 
+              onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'), isViewingCanary ? 'CAN' : 'PB')} 
               className={activeItem !== 'cloudSunRain' ? 'inactive-item' : null}>
               <FontAwesomeIcon
                 icon={faCloudSunRain}
-                size='md'
+                size='sm'
                 color='var(--wa-white)' />
             </li>
             <li 
               data-view="temperatureQuarter"
-              onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'))}
+              onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'), isViewingCanary ? 'CAN' : 'PB')}
               className={activeItem !== 'temperatureQuarter' ? 'inactive-item' : null}>
               <FontAwesomeIcon
                 icon={faTemperatureQuarter}
-                size='md'
+                size='1x'
                 color='var(--wa-white)' />
             </li>
             <li
               data-view="wind"
-              onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'))}
+              onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'), isViewingCanary ? 'CAN' : 'PB')}
               className={activeItem !== 'wind' ? 'inactive-item' : null}>
               <FontAwesomeIcon
                 icon={faWind}
-                size='md'
+                size='1x'
                 color='var(--wa-white)' />
             </li>
             <li
               data-view="cloudRain"
-              onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'))}
+              onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'), isViewingCanary ? 'CAN' : 'PB')}
               className={activeItem !== 'cloudRain' ? 'inactive-item' : null}>
               <FontAwesomeIcon
                   icon={faCloudRain}
-                  size='md'
+                  size='1x'
                   color='var(--wa-white)' />
             </li>
             <li
               data-view="snow"
-              onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'))}
+              onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'), isViewingCanary ? 'CAN' : 'PB')}
               className={activeItem !== 'snow' ? 'inactive-item' : null}>
               <FontAwesomeIcon
                   icon={faSnowflake}
-                  size='md'
+                  size='1x'
                   color='var(--wa-white)' />
             </li>
           </ul>
           {!isViewingSpain && (isViewingCanary || isViewingMunicipality) ? (
             <button
-              onClick={() => setMapView("peninsula")}
+              onClick={() => setMapView("peninsula", "PB")}
               className='btn btn-small btn-primary spain-top-right'>{t('HOME.MAP.VIEW_PENINSULA')}</button>
           ) : null}
           {isViewingSpain && !isViewingCanary ? (
             <button
-              onClick={() => setMapView("canarias")}
+              onClick={() => setMapView("canarias", "CAN")}
               className='btn btn-small btn-primary canaries'>{t('HOME.MAP.VIEW_CANARIES')}</button>
           ) : null}
         </>
