@@ -43,7 +43,12 @@
         "MAP": {
             "PROVINCE_OF": "Provincia de",
             "VIEW_PENINSULA": "Ver Peninsula",
-            "VIEW_CANARIES": "Ver Canarias"
+            "VIEW_CANARIES": "Ver Canarias",
+            "SKY_CONDITION": "Estado cielo",
+            "TEMPERATURE": "Temperatura",
+            "WIND": "Viento",
+            "PRECIPITATION": "Lluvia (mm.)",
+            "SNOW": "Nieve (mm.)"
         }
     },
     "ALERTS": {

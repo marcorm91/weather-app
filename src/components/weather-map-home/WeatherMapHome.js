@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudRain, faCloudSunRain, faSnowflake, faTemperatureQuarter, faWind } from '@fortawesome/free-solid-svg-icons'
 import { getMunicipalityByCPROCMUN } from '../../resources/services/APIs/geoService'
 import { fetchCurrentWeatherSpain } from '../../resources/services/APIs/currentWeatherSpain'
+import { Tooltip as ReactTooltip } from 'react-tooltip'
 
 const WeatherMapHome = ({ CPRO, CMUN }) => {
   const mapRef = useRef(null)
@@ -390,15 +391,18 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
           <ul className='list-options__wrapper'>
             <li
               data-view="cloudSunRain"
+              data-tooltip-id='cloudSunRain'
               onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'), isViewingCanary ? 'CAN' : 'PB')} 
               className={activeItem !== 'cloudSunRain' ? 'inactive-item' : null}>
               <FontAwesomeIcon
                 icon={faCloudSunRain}
                 size='sm'
                 color='var(--wa-white)' />
+              
             </li>
             <li 
               data-view="temperatureQuarter"
+              data-tooltip-id='temperatureQuarter'
               onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'), isViewingCanary ? 'CAN' : 'PB')}
               className={activeItem !== 'temperatureQuarter' ? 'inactive-item' : null}>
               <FontAwesomeIcon
@@ -408,24 +412,29 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
             </li>
             <li
               data-view="wind"
+              data-tooltip-id='wind'
               onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'), isViewingCanary ? 'CAN' : 'PB')}
               className={activeItem !== 'wind' ? 'inactive-item' : null}>
               <FontAwesomeIcon
                 icon={faWind}
                 size='1x'
                 color='var(--wa-white)' />
+
             </li>
             <li
               data-view="cloudRain"
+              data-tooltip-id='cloudRain'
               onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'), isViewingCanary ? 'CAN' : 'PB')}
               className={activeItem !== 'cloudRain' ? 'inactive-item' : null}>
               <FontAwesomeIcon
                   icon={faCloudRain}
                   size='1x'
                   color='var(--wa-white)' />
+
             </li>
             <li
               data-view="snow"
+              data-tooltip-id='snow'
               onClick={(e) => handleListItemClick(e.currentTarget.getAttribute('data-view'), isViewingCanary ? 'CAN' : 'PB')}
               className={activeItem !== 'snow' ? 'inactive-item' : null}>
               <FontAwesomeIcon
@@ -433,6 +442,21 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
                   size='1x'
                   color='var(--wa-white)' />
             </li>
+            <ReactTooltip id='cloudSunRain' place='top'>
+              {t('HOME.MAP.SKY_CONDITION')}
+            </ReactTooltip>
+            <ReactTooltip id='temperatureQuarter' place='top'>
+              {t('HOME.MAP.TEMPERATURE')}
+            </ReactTooltip>
+            <ReactTooltip id='wind' place='top'>
+              {t('HOME.MAP.WIND')}
+            </ReactTooltip>
+            <ReactTooltip id='cloudRain' place='top'>
+              {t('HOME.MAP.PRECIPITATION')}
+            </ReactTooltip>
+            <ReactTooltip id='snow' place='top'>
+            {t('HOME.MAP.SNOW')}
+            </ReactTooltip>
           </ul>
           {!isViewingSpain && (isViewingCanary || isViewingMunicipality) ? (
             <button

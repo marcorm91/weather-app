@@ -43,7 +43,12 @@
         "MAP": {
             "PROVINCE_OF": "Province of",
             "VIEW_PENINSULA": "View Peninsula",
-            "VIEW_CANARIES": "View Canaries"
+            "VIEW_CANARIES": "View Canaries",
+            "SKY_CONDITION": "Sky condition",
+            "TEMPERATURE": "Temperature",
+            "WIND": "Wind",
+            "PRECIPITATION": "Rainfall (mm.)",
+            "SNOW": "Snow (mm.)"
         }
     },
     "ALERTS": {
