@@ -73,6 +73,11 @@ export const WeatherHomeStyled = styled.main`
           order: -1;
         `}
       }
+      &.remaining-space{
+        flex: 1;
+        width: auto;
+        max-width: 100%;
+      }
       ${media('tablet')`
         &[class^='flex-']{
           flex: 1 1 100%;
@@ -80,6 +85,27 @@ export const WeatherHomeStyled = styled.main`
           width: 100%;
         }
       `}
+      .react-resizable-handle{
+        position: absolute;
+        top: var(--wa-spacing-00);
+        bottom: var(--wa-spacing-00);
+        width: 0.5rem;
+        background: var(--wa-black-op99);
+        right: calc(-1 * var(--wa-spacing-04));
+        margin: auto;
+        height: 25%;
+        border-radius: var(--wa-size-border-radius-01);
+        padding: var(--wa-spacing-00);
+        cursor: col-resize;
+        ${media('tablet')`
+          display: none;
+        `}
+      }
+      &.react-resizable{
+        ${media('tablet')`
+          min-width: 100%;
+        `}
+      }
     }
     ${media('tablet')`
         flex-direction: column;

@@ -10,6 +10,8 @@ import { getFavorites } from '../../utils/js/localStorageUtils'
 import WeatherMapHome from '../../components/weather-map-home/WeatherMapHome'
 import { useLocation  } from '../../utils/js/LocationContext'
 import WeatherCurrentGeolocation from '../../components/weather-current-geolocation/WeatherCurrentGeolocation'
+import { ResizableBox } from 'react-resizable'
+import "react-resizable/css/styles.css"
 
 const WeatherHome = () => {
   
@@ -87,31 +89,38 @@ const WeatherHome = () => {
       <WeatherAd />
       <h1>{t('HOME.WELCOME_MSG', { day })}</h1>
       <div className='content__wrapper'>
-        <div className={flexClass}>
-          <WeatherTabs activeTab={activeTab} handleTabClick={handleTabClick} tabs={tabs} />
-          {tabs.map((tab) => (
-            <div
-              key={tab.id}
-              className={activeTab === tab.id ? 'tab-content__wrapper' : 'tab-content__wrapper hidden'}
-            >
-              {tab.id === 'tab1' ? (
-                <WeatherTable 
-                  key='all' 
-                  showFavoritesOnly={false} 
-                  setSelectedTown={setSelectedTown} />
-              ) : (
-                hasFavorites > 0 ? (
+        <ResizableBox 
+          width={700}
+          height={Infinity} 
+          axis="x"
+          minConstraints={[400, Infinity]}
+          maxConstraints={[800, Infinity]} >
+          <div className={flexClass}>
+            <WeatherTabs activeTab={activeTab} handleTabClick={handleTabClick} tabs={tabs} />
+            {tabs.map((tab) => (
+              <div
+                key={tab.id}
+                className={activeTab === tab.id ? 'tab-content__wrapper' : 'tab-content__wrapper hidden'}
+              >
+                {tab.id === 'tab1' ? (
                   <WeatherTable 
-                    key='favorites' 
-                    showFavoritesOnly={true} 
-                    arrayFavorites={favorites} 
-                    setSelectedTown={setSelectedTown}/>
-                ) : <span>{t('HOME.TABLE.EMPTY_FAV')}</span>
-              )}
-            </div>
-          ))}
-        </div>
-        <div className={flexClass}>
+                    key='all' 
+                    showFavoritesOnly={false} 
+                    setSelectedTown={setSelectedTown} />
+                ) : (
+                  hasFavorites > 0 ? (
+                    <WeatherTable 
+                      key='favorites' 
+                      showFavoritesOnly={true} 
+                      arrayFavorites={favorites} 
+                      setSelectedTown={setSelectedTown}/>
+                  ) : <span>{t('HOME.TABLE.EMPTY_FAV')}</span>
+                )}
+              </div>
+            ))}
+          </div>
+        </ResizableBox>
+        <div className={`${flexClass} remaining-space`} >
           <WeatherMapHome 
             CPRO={selectedTown?.CPRO} 
             CMUN={selectedTown?.CMUN} />
