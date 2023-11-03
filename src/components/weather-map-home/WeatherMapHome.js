@@ -3,12 +3,12 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import { WeatherMapHomeStyled } from './WeatherMapHomeStyled'
 import { skyIconMap } from '../../utils/js/skyIcons'
-import { getCurrentDate, getCurrentHour, getTimezoneOffset, drawOnMap, getBoundsFromGeoJSON } from '../../utils/js/helpers'
+import { getCurrentDate, getCurrentHour, getTimezoneOffset, markerMap, getBoundsFromGeoJSON } from '../../utils/js/helpers'
 import { renderToString } from 'react-dom/server'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCloudRain, faCloudSunRain, faSnowflake, faTemperatureQuarter, faWind } from '@fortawesome/free-solid-svg-icons'
-import { getMunicipalityByCPROCMUN } from '../../resources/services/APIs/geoService'
+import { getCoordinatesByLocation, getMunicipalityByCPROCMUN } from '../../resources/services/APIs/geoService'
 import { fetchCurrentWeatherSpain } from '../../resources/services/APIs/currentWeatherSpain'
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 
@@ -22,6 +22,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
   const [isViewingMunicipality, setIsViewingMunicipality] = useState(false)
   const [isFetchingMunicipality, setIsFetchingMunicipality] = useState(false)
   const [activeItem, setActiveItem] = useState('cloudSunRain')
+  const [showOptions, setShowOptions] = useState(true)
 
   // ------------------ Functions related to Mapping and Geolocation ------------------
 
@@ -76,7 +77,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
    * Uses a predefined timezone offset for the Canary Islands.
    */
   const showCanariesMap = async () => {
-    const timezoneOffset = "+01:00"
+    const timezoneOffset = "+00:00"
     await showMap(28.5916, -15.6291, 7, 'CAN', timezoneOffset)
   }
 
@@ -118,11 +119,12 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
    */
   const setMapView = async (view, region) => {
     if (!mapRef.current) return
-
     mapRef.current.eachLayer(layer => {
       if (layer instanceof L.TileLayer) return
       mapRef.current.removeLayer(layer)
     })
+
+    setShowOptions(true)
 
     switch (view) {
       case "peninsula":
@@ -361,11 +363,19 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
         setIsFetchingMunicipality(true)
         if (CPRO && CMUN) {
           clearMapIcons()
+          setShowOptions(false)
           setIsViewingSpain(false)
           try {
             const municipalityGeoJSON = await getMunicipalityByCPROCMUN(CPRO, CMUN)
             if (municipalityGeoJSON && mapRef.current) {
-              drawOnMap(municipalityGeoJSON, mapRef.current)
+              const municipalityName = municipalityGeoJSON.properties.NAMEUNIT
+              const coordinatesData = await getCoordinatesByLocation(municipalityName)
+              if (coordinatesData && Array.isArray(coordinatesData) && coordinatesData.length > 0) {
+                const { lat, lon } = coordinatesData[0]
+                markerMap(lat, lon, mapRef.current)
+              } else {
+                console.error('Coordinates for the municipality were not found.')
+              }
               const bounds = getBoundsFromGeoJSON(municipalityGeoJSON)
               mapRef.current.fitBounds(bounds)
             } else {
@@ -388,7 +398,7 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
       ) : (
         <>
           <div className='leaflet-container leaflet-touch leaflet-fade-anim' ref={mapContainerRef}></div>
-          <ul className='list-options__wrapper'>
+          <ul className='list-options__wrapper' style={{ display: showOptions ? 'flex' : 'none' }}>
             <li
               data-view="cloudSunRain"
               data-tooltip-id='cloudSunRain'

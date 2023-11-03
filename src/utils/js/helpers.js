@@ -1,8 +1,12 @@
 // ------------------ Date functions ------------------
 
+import { renderToString } from 'react-dom/server'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment'
 import 'moment/locale/es'
 import L from 'leaflet'
+
 
 /**
  * Finds the value of a given property for a specific period in a list of items
@@ -91,7 +95,7 @@ export const getDayOfWeek = (dateString) => {
  */
 export const getTimezoneOffset = (region = 'PB') => {
     if (region === 'CAN') {
-        return '+01:00'
+        return '+00:00'
     }
     const offsetInMinutes = new Date().getTimezoneOffset()
     const hours = Math.abs(Math.floor(offsetInMinutes / 60)).toString().padStart(2, '0')
@@ -117,6 +121,21 @@ export const drawOnMap = (geoShape, mapInstance) => {
         fillOpacity: .1
         }
     }).addTo(mapInstance)
+}
+
+/**
+ * Add mark to map
+ * @param {*} lat 
+ * @param {*} lng
+ * @param {*} mapInstance 
+ */
+export const markerMap = (lat, lng, mapInstance) => {
+    const iconHtml = renderToString(<FontAwesomeIcon icon={faLocationDot} color='var(--wa-deep-blue)' size='3x' />)
+    const customIcon = L.divIcon({
+      html: iconHtml, 
+      iconSize: [16, 84]
+    })
+    L.marker([lat, lng], { icon: customIcon }).addTo(mapInstance)
 }
 
 /**
