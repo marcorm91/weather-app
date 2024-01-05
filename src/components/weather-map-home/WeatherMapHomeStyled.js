@@ -28,6 +28,14 @@ export const WeatherMapHomeStyled = styled.div`
       .leaflet-bottom.leaflet-right{
         display: none;
       }
+      .leaflet-control-container{
+        .leaflet-top.leaflet-left{
+          .leaflet-control-zoom{
+            margin-left: 4px;
+            margin-top: 4px;
+          }
+        }
+      }
       .leaflet-marker-icon{
         &.leaflet-div-icon{
           background-color: transparent;
@@ -166,6 +174,45 @@ export const WeatherMapHomeStyled = styled.div`
           font-family: var(--wa-font-family-semibold);
           padding: var(--wa-spacing-01) var(--wa-spacing-02);
           border-radius: var(--wa-size-border-radius-01);
+        }
+      }
+      &.municipality-list__wrapper{
+        position: absolute;
+        top: 84px;
+        bottom: 4px;
+        height: auto;
+        left: 4px;
+        background-color: var(--wa-black-op99);
+        width: 35%;
+        z-index: 1;
+        border-radius: 4px;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        h3{
+          font-size: 16px;
+          color: #fff;
+          margin: 0;
+          font-weight: normal;
+          margin-bottom: 8px;
+          border-bottom: 1px solid #fff;
+          padding-bottom: 8px;
+        }
+        ul{
+          margin: 0;
+          list-style: none;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          flex: 1;
+          li{
+            font-size: 14px;
+            color: #fff;
+            .item-title{
+              font-family: var(--wa-font-family-semibold);
+            }
+          }
         }
       }
     }

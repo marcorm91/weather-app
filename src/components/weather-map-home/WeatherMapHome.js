@@ -398,6 +398,16 @@ const WeatherMapHome = ({ CPRO, CMUN }) => {
       ) : (
         <>
           <div className='leaflet-container leaflet-touch leaflet-fade-anim' ref={mapContainerRef}></div>
+          <div className='municipality-list__wrapper'>
+            <h3>Jerez de la Frontera, Cádiz, Andalucía</h3>
+            <ul>
+              <li><span className='item-title'>Temperatura: </span>22º</li>
+              <li><span className='item-title'>Humedad relativa: </span>48%</li>
+              <li><span className='item-title'>Precipitación: </span>0.1 mm.</li>
+              <li><span className='item-title'>Viento: </span>36 Km/h (SO)</li>
+            </ul>
+            <button className='btn btn-small btn-primary'>Ver predicción</button>
+          </div>
           <ul className='list-options__wrapper' style={{ display: showOptions ? 'flex' : 'none' }}>
             <li
               data-view="cloudSunRain"
