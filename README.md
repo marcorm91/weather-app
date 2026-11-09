@@ -19,8 +19,13 @@ A browser build exposes its environment variables. This setup is suitable for a 
 
 ```sh
 npm test -- --watchAll=false --runInBand
+npm run test:proxy
 CI=true npm run build
 ```
+
+`npm start` installs a same-origin `/aemet` proxy via `src/setupProxy.js`: both the metadata and temporary data downloads go through the local server, so AEMET does not need to grant browser CORS access. Restart `npm start` after updating this file. The proxy forwards only the known municipal/regional routes and temporary `/opendata/sh/` downloads to the fixed HTTPS AEMET host, without forwarding browser cookies or Origin headers. It does not log API keys.
+
+**Production:** `setupProxy.js` is development-only and is not included in `build/`. Mount `server/aemetProxy.cjs` at `/aemet` in your Node/Express host (`app.use('/aemet', require('./server/aemetProxy.cjs')())`), or provide an equivalent restricted reverse proxy at that same path. A static-only host such as GitHub Pages cannot run this proxy by itself. Browser-stored keys remain public; a private production key should be loaded by the server instead, with access controls/rate limiting.
 
 CI runs these checks on pull requests. Production hosting must serve `index.html` for application routes; configure a rewrite for `/more-info`, `/alerts` and `/contact` (GitHub Pages does not provide SPA rewrites automatically).
 

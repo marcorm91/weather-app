@@ -18,6 +18,7 @@ jobs:
       - run: npm test -- --watchAll=false --runInBand
         env:
           CI: true
+      - run: npm run test:proxy
       - run: npm run build
         env:
           CI: true

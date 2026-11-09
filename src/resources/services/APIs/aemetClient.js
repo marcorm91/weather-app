@@ -4,7 +4,7 @@ import config from '../keys/config'
 const cache = new Map()
 const pending = new Map()
 const TTL = 10 * 60 * 1000
-const BASE = 'https://opendata.aemet.es/opendata/api'
+const BASE = '/aemet/opendata/api'
 
 export class WeatherError extends Error {
   constructor(code) {
@@ -30,8 +30,8 @@ export const requestProduct = (path, { text = false } = {}) => {
       if (status !== 200) throw new WeatherError(status === 429 ? 'limit' : status === 401 || status === 403 ? 'configuration' : 'unavailable')
       let url
       try { url = new URL(metadata.data.datos) } catch { throw new WeatherError('invalid') }
-      if (url.protocol !== 'https:' || url.hostname !== 'opendata.aemet.es') throw new WeatherError('invalid')
-      const response = await axios.get(url.href, { timeout: 15000, responseType: text ? 'text' : 'json' })
+      if (url.protocol !== 'https:' || url.hostname !== 'opendata.aemet.es' || url.port || url.username || url.password || url.search || url.hash || !/^\/opendata\/sh\/[a-zA-Z0-9_-]+\/?$/.test(url.pathname)) throw new WeatherError('invalid')
+      const response = await axios.get(`/aemet${url.pathname}`, { timeout: 15000, responseType: text ? 'text' : 'json' })
       const days = response.data?.[0]?.prediccion?.dia
       const validDays = Array.isArray(days) && days.length > 0 && days.every(day =>
         typeof day.fecha === 'string' && /^\d{4}-\d{2}-\d{2}/.test(day.fecha) &&

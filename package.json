@@ -31,7 +31,8 @@
     "eject": "react-scripts eject",
     "prestart": "node scripts/ensure-config.cjs",
     "prebuild": "node scripts/ensure-config.cjs",
-    "pretest": "node scripts/ensure-config.cjs"
+    "pretest": "node scripts/ensure-config.cjs",
+    "test:proxy": "node --test server/aemetProxy.test.cjs"
   },
   "eslintConfig": {
     "extends": [

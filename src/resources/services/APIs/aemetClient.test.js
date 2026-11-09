@@ -22,7 +22,7 @@ test('missing configuration fails without network requests', async () => {
   await expect(requestProduct('test')).rejects.toMatchObject({ code: 'configuration' })
   expect(axios.get).not.toHaveBeenCalled()
 })
-test.each(['http://opendata.aemet.es/data', 'https://example.com/data', 'broken'])('rejects untrusted datos URL %s', async url => {
+test.each(['http://opendata.aemet.es/data', 'https://example.com/data', 'https://opendata.aemet.es/other/path', 'https://opendata.aemet.es:8443/opendata/sh/id', 'https://user:pass@opendata.aemet.es/opendata/sh/id', 'https://opendata.aemet.es/opendata/sh/id?key=test', 'broken'])('rejects untrusted datos URL %s', async url => {
   axios.get.mockResolvedValueOnce({ data: { estado: 200, datos: url } })
   await expect(requestProduct('test')).rejects.toMatchObject({ code: 'invalid' })
   expect(axios.get).toHaveBeenCalledTimes(1)
@@ -47,9 +47,9 @@ test('uses the existing config.js key and the Swagger api_key header only on the
   axios.get.mockResolvedValueOnce(metadata).mockResolvedValueOnce({ data: product })
   await requestProduct('prediccion/especifica/municipio/horaria/28079')
   expect(axios.get).toHaveBeenNthCalledWith(1,
-    'https://opendata.aemet.es/opendata/api/prediccion/especifica/municipio/horaria/28079',
+    '/aemet/opendata/api/prediccion/especifica/municipio/horaria/28079',
     { headers: { api_key: 'local-config-key' }, timeout: 15000 })
-  expect(axios.get).toHaveBeenNthCalledWith(2, metadata.data.datos,
+  expect(axios.get).toHaveBeenNthCalledWith(2, '/aemet/opendata/sh/forecast',
     { timeout: 15000, responseType: 'json' })
 })
 test('uses the environment key when config.js is empty', async () => {
