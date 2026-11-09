@@ -1,0 +1,37 @@
+Administrative boundaries adapted and simplified from Click That Hood / CartoDB Common Data.
+https://github.com/codeforgermany/click_that_hood/tree/main/public/data
+Community/province names and province-community relationships matched to the application INE catalogue. Boundaries are for navigation, not cadastral use.
+
+MIT License
+
+Copyright (c) 2013-2021  Code for America
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+warning-zones.geojson: derived from AEMET Meteoalerta v6 boundary data,
+February 2018, retrieved 2026-11-09. Reprojected EPSG:32630 to EPSG:4326,
+simplified for display and rounded. Source: AEMET, based on BDLJE 2017-02-28,
+CC-BY ign.es © Instituto Geográfico Nacional de España.
+https://www.aemet.es/documentos/es/eltiempo/prediccion/avisos/plan_meteoalerta/AEMET-meteoalerta-delimitacion-zonas.zip
+https://www.aemet.es/es/nota_legal
+Municipal associations in server/data/warning-municipalities.json are extracted
+from AEMET's August 2017 municipal-zone catalogue, retrieved 2026-11-09.
+https://www.aemet.es/documentos/es/eltiempo/prediccion/avisos/plan_meteoalerta/detalle_municipios_zonas_meteorologicas.pdf
+Associations are a historical reference, not a guarantee of current boundaries.
+Unmatched municipalities/zones must remain explicitly unverified.

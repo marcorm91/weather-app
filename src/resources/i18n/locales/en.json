@@ -1,103 +1,209 @@
 {
-    "HEADER": {
-        "TITLE": "Weather app"
+  "HEADER": {
+    "TITLE": "Weather app"
+  },
+  "FOOTER": {
+    "COPYRIGHT": "WEATHER APP. All rights reserved.",
+    "SOURCE": "Source:"
+  },
+  "NAVBAR": {
+    "HOME_PAGE": "Home page",
+    "CONTACT": "Contact",
+    "ALERTS": "Watch",
+    "LAST_SEARCH": "Last search"
+  },
+  "HOME": {
+    "WELCOME_MSG": "Welcome, today is {{day}}",
+    "TABS": {
+      "ALL": "All",
+      "FAV": "Favorites"
     },
-    "FOOTER": {
-        "COPYRIGHT": "WEATHER APP. All rights reserved.",
-        "SOURCE": "Source:"
+    "TABLE": {
+      "FILTERBY": "Filter by:",
+      "SEARCH": "Search...",
+      "CODE": "Code",
+      "MUNICIPALITY": "Municipality",
+      "PROVINCE": "Province",
+      "COMUNITY": "Comunity",
+      "PAGE": "Page",
+      "GO_PAGE": "Go to page",
+      "SHOW": "Show",
+      "OF": "of",
+      "EMPTY_FAV": "You have no municipalities selected as favorites.",
+      "REMOVE_FAV": "Delete favorites",
+      "NO_RESULTS": "No results found.",
+      "SELECT_COMMUNITY": "Select a Community",
+      "SELECT_PROVINCE": "Select a Province"
     },
-    "NAVBAR": {
-        "HOME_PAGE": "Home page",
-        "CONTACT": "Contact",
-        "ALERTS": "Alerts",
-        "LAST_SEARCH": "Last search"
+    "PANEL_INFO": {
+      "MORE_INFO": "More information",
+      "PREDICTON_NEXT_HOURS": "Prediction for the next hours:"
     },
-    "HOME": {
-        "WELCOME_MSG": "Welcome, today is {{day}}",
-        "TABS": {
-            "ALL": "All",
-            "FAV": "Favorites"
-        },
-        "TABLE": {
-            "FILTERBY": "Filter by:",
-            "SEARCH": "Search...",
-            "CODE": "Code",
-            "MUNICIPALITY": "Municipality",
-            "PROVINCE": "Province",
-            "COMUNITY": "Comunity",
-            "PAGE": "Page",
-            "GO_PAGE": "Go to page",
-            "SHOW": "Show",
-            "OF": "of",
-            "EMPTY_FAV": "You have no municipalities selected as favorites.",
-            "REMOVE_FAV": "Delete favorites",
-            "NO_RESULTS": "No results found.",
-            "SELECT_COMMUNITY": "Select a Community",
-            "SELECT_PROVINCE": "Select a Province"
-        },
-        "PANEL_INFO": {
-            "MORE_INFO": "More information",
-            "PREDICTON_NEXT_HOURS": "Prediction for the next hours:"
-        },
-        "AD_PREDICTION": "Notice",
-        "MAP": {
-            "PROVINCE_OF": "Province of",
-            "VIEW_PENINSULA": "View Peninsula",
-            "VIEW_CANARIES": "View Canaries",
-            "SKY_CONDITION": "Sky condition",
-            "TEMPERATURE": "Temperature",
-            "WIND": "Wind",
-            "PRECIPITATION": "Rainfall (mm.)",
-            "SNOW": "Snow (mm.)"
-        }
-    },
-    "ALERTS": {
-        "INFO": "Weather alerts and hazards query for the Autonomous Communities on specific dates. Please note that there may be outdated information for certain Communities."
-    },
-    "ABOUTME": {
-        "COL1": {
-            "COL1_1": {
-                "TITLE": "About Me",
-                "P1": "My name is Marco and since 2017, I have been working as a Frontend Web Developer at ATSistemas, where I have gained experience in various frontend development environments. I have participated in projects integrated with DXP technologies such as Liferay and Magnolia, as well as building component libraries using Storybook with frontend frameworks like Angular, React, and VueJS.",
-                "P2": "I have a strong understanding of interface development methodologies, including 'Design Tokens' and 'Atomic Design'.",
-                "P3": "I have extensive experience working with Agile methodologies and I am familiar with collaboration tools such as GIT version control systems, which are essential for collaborative software development.",
-                "P4": "Highlighted Services:"
-            },
-            "COL1_2": {
-                "TITLE": "About Weather APP",
-                "P1": "In our web application for weather forecasting, we have designed an intuitive and user-friendly interface that allows you to easily and quickly explore weather information for different locations. To achieve this, we have utilized React, a highly efficient and popular JavaScript framework.",
-                "P2": "We have focused on optimizing the application's loading speed, ensuring that weather information is quickly updated and users can obtain accurate and real-time data. This provides a seamless user experience and a sense of immediacy when accessing weather forecasts.",
-                "P3": "In our web application for weather forecasting, we collect data from the AEMET API solely for informative purposes. Our main priority is to provide users with precise and up-to-date information about weather conditions in different locations.",
-                "P4": "Through integration with the AEMET API, we can access reliable and comprehensive data on temperatures, humidity, wind speed, precipitation, and more. We utilize this data to present detailed weather forecasts and assist you in making informed decisions based on weather conditions."
-            }
-        },
-        "COL2": {
-            "TITLE": "Contact"
-        }
-    },
-    "MORE_INFO": {
-        "PANEL_RIGHT_INFO": {
-            "MUNICIPALITY": "Municipality",
-            "PROVINCE": "Province",
-            "COMUNITY": "Comunity"
-        },
-        "MAIN": {
-            "TABS": {
-                "HOURLY_FORECAST": "Hourly forecast",
-                "DAILY_FORECAST": "Daily forecast"
-            }
-        },
-        "AD": {
-            "AD_HIGH_TEMP": "High temperature alerts",
-            "AD_HIGH_PREC": "Heavy rainfall alerts",
-            "AD_HIGH_WIND": "Strong wind gust alerts",
-            "AD_HIGH_SNOW": "Snow alerts"
-        }
-    },
-    "GEOLOCATION": {
-        "ZONE_WEATHER": "The weather in your area,"
-    },
-    "ERROR": {
-        "404": "Page not found"
+    "AD_PREDICTION": "Notice",
+    "MAP": {
+      "PROVINCE_OF": "Province of",
+      "VIEW_PENINSULA": "View Peninsula",
+      "VIEW_CANARIES": "View Canaries",
+      "SKY_CONDITION": "Sky condition",
+      "TEMPERATURE": "Temperature",
+      "WIND": "Wind",
+      "PRECIPITATION": "Rainfall (mm.)",
+      "SNOW": "Snow (mm.)"
     }
+  },
+  "ALERTS": {
+    "INFO": "Weather alerts and hazards query for the Autonomous Communities on specific dates. Please note that there may be outdated information for certain Communities."
+  },
+  "ABOUTME": {
+    "COL1": {
+      "COL1_1": {
+        "TITLE": "About Me",
+        "P1": "My name is Marco and since 2017, I have been working as a Frontend Web Developer at ATSistemas, where I have gained experience in various frontend development environments. I have participated in projects integrated with DXP technologies such as Liferay and Magnolia, as well as building component libraries using Storybook with frontend frameworks like Angular, React, and VueJS.",
+        "P2": "I have a strong understanding of interface development methodologies, including 'Design Tokens' and 'Atomic Design'.",
+        "P3": "I have extensive experience working with Agile methodologies and I am familiar with collaboration tools such as GIT version control systems, which are essential for collaborative software development.",
+        "P4": "Highlighted Services:"
+      },
+      "COL1_2": {
+        "TITLE": "About Weather APP",
+        "P1": "In our web application for weather forecasting, we have designed an intuitive and user-friendly interface that allows you to easily and quickly explore weather information for different locations. To achieve this, we have utilized React, a highly efficient and popular JavaScript framework.",
+        "P2": "The app displays AEMET forecasts with their issue dates and validity periods. These are not real-time observations.",
+        "P3": "In our web application for weather forecasting, we collect data from the AEMET API solely for informative purposes. Our main priority is to provide users with precise and up-to-date information about weather conditions in different locations.",
+        "P4": "Through integration with the AEMET API, we can access reliable and comprehensive data on temperatures, humidity, wind speed, precipitation, and more. We utilize this data to present detailed weather forecasts and assist you in making informed decisions based on weather conditions."
+      }
+    },
+    "COL2": {
+      "TITLE": "Contact"
+    }
+  },
+  "MORE_INFO": {
+    "PANEL_RIGHT_INFO": {
+      "MUNICIPALITY": "Municipality",
+      "PROVINCE": "Province",
+      "COMUNITY": "Comunity"
+    },
+    "MAIN": {
+      "TABS": {
+        "HOURLY_FORECAST": "Hourly forecast",
+        "DAILY_FORECAST": "Daily forecast"
+      }
+    },
+    "AD": {
+      "AD_HIGH_TEMP": "High temperature alerts",
+      "AD_HIGH_PREC": "Heavy rainfall alerts",
+      "AD_HIGH_WIND": "Strong wind gust alerts",
+      "AD_HIGH_SNOW": "Snow alerts"
+    }
+  },
+  "GEOLOCATION": {
+    "ZONE_WEATHER": "The weather in your area,"
+  },
+  "ERROR": {
+    "404": "Page not found"
+  },
+  "FORECAST": {
+    "title": "Weather, town by town",
+    "subtitle": "Explore AEMET hourly and daily forecasts.",
+    "choose": "Choose a municipality",
+    "intro": "Search for your municipality or use your location. You can also save favourites.",
+    "forecast": "Forecast",
+    "refresh": "Refresh",
+    "loading": "Loading forecast…",
+    "partial": "The available product is shown.",
+    "note": "Forecast for the municipal capital, not a live observation. Local municipality times",
+    "valid": "Forecast for",
+    "noData": "No data",
+    "noHours": "No current hourly forecast is available.",
+    "noDays": "No current daily forecast is available.",
+    "range": "Today: high / low",
+    "feels": "Feels like",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "rain": "Hourly precipitation",
+    "snow": "Snow (water equivalent)",
+    "gust": "Maximum gust",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "hours": "Next hours",
+    "hourCaption": "Hourly forecast. — means unavailable; Ip means trace precipitation (< 0.1 mm).",
+    "date": "Date and time",
+    "sky": "Sky",
+    "temp": "Temperature",
+    "days": "Next days",
+    "uv": "Maximum UV",
+    "periods": "Period details",
+    "utc": "Original AEMET intervals in UTC. Probabilities apply to each interval; they are not added or averaged.",
+    "probability": "Precipitation probability",
+    "issuedHours": "Hourly forecast issued",
+    "issuedDays": "Daily forecast issued",
+    "source": "View forecast on AEMET",
+    "search": "Search municipality",
+    "results": "municipalities found",
+    "favorite": "Favourite:",
+    "previous": "Previous",
+    "next": "Next",
+    "locate": "Use my location",
+    "locating": "Finding your municipality…",
+    "geoError": "Your municipality could not be identified. You can search by name.",
+    "full": "View full forecast",
+    "map": "Location",
+    "mapNote": "Municipal boundary; no weather data is displayed.",
+    "mapError": "The map could not be loaded.",
+    "officialAlerts": "View official AEMET warnings",
+    "alertsNote": "Check the warning level, area and validity period on AEMET.",
+    "regional": "Regional forecast",
+    "regionalNote": "This bulletin is a general forecast, not a weather warning. If today’s product has not been issued, AEMET returns the latest available one; check the date in the text.",
+    "menu": "Open menu",
+    "close": "Close menu",
+    "errors": {
+      "configuration": "Configure a valid server AEMET_API_KEY (or your config.js key) and restart the application.",
+      "limit": "The AEMET request limit has been reached. Please try again later.",
+      "unavailable": "This AEMET forecast could not be retrieved. You can try again.",
+      "invalid": "AEMET did not return a valid forecast for this request."
+    },
+    "stale": "Showing the last saved forecast while we try to update it. Check its issue time."
+  },
+  "MAP": {
+    "heroEyebrow": "Weather in Spain",
+    "heroTitle": "Weather at a glance.",
+    "heroCopy": "From Spain to your town. Zoom in and explore the forecast.",
+    "searchPlaceholder": "Find your municipality…",
+    "results": "Municipalities",
+    "searchHint": "Type at least two letters to search.",
+    "breadcrumb": "Map area",
+    "mapLabel": "Interactive weather forecast map",
+    "dailyForecast": "Daily forecast",
+    "day": "Forecast day",
+    "day0": "Today",
+    "day1": "Tomorrow",
+    "day2": "In two days",
+    "country": "Overview",
+    "community": "Autonomous community",
+    "province": "Province",
+    "town": "Municipality",
+    "spain": "Spain",
+    "canaries": "Canary Islands",
+    "exploreCanaries": "Explore the Canaries",
+    "high": "High",
+    "low": "Low",
+    "clickHint": "Select an area to zoom in",
+    "representative": "Forecasts for the named municipalities, not regional averages. Hover over a marker for the sky forecast interval.",
+    "noDataLegend": "— unavailable · ··· waiting to load.",
+    "loadingMap": "Preparing the map…",
+    "loadingWeather": "Preparing the map…",
+    "noForecast": "Forecast unavailable",
+    "issued": "Issued",
+    "explore": "Explore the map",
+    "where": "Where shall we look?",
+    "choose_community": "Choose a community on the map or in this list.",
+    "choose_province": "A little closer: choose a province.",
+    "choose_town": "Select a municipality to see its forecast.",
+    "plural_community": "Communities and cities",
+    "plural_province": "Provinces",
+    "plural_town": "Municipalities",
+    "filter": "Filter by name…",
+    "exploreTip": "Use the map or this list. The breadcrumb above lets you go back.",
+    "pathHint": "Spain → Community → Province → Municipality",
+    "alertsLink": "Rain and flood watch",
+    "yourForecast": "Your forecast"
+  }
 }

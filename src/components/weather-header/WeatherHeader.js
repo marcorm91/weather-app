@@ -28,7 +28,7 @@ const WeatherHeader = () => {
       icon: faClockRotateLeft,
       subItems: recentSearches.map((search) => ({
         label: search.nombre,
-        to: '/more-info',
+        to: `/more-info?municipio=${search.state.CPRO}${search.state.CMUN}`,
         state: search.state,
       })),
     },
@@ -66,11 +66,11 @@ const WeatherHeader = () => {
     <WeatherHeaderStyled>
       <Link to="/" className="title__wrapper">
         <div className="wa-icon-logo-white"></div>
-        <h1>{t('HEADER.TITLE')}</h1>
+        <span>{t('HEADER.TITLE')}</span>
       </Link>
       <div className="actions__wrapper">
         <WeatherLangSelector />
-        <button onClick={toggleMenu}>
+        <button onClick={toggleMenu} aria-label={t('FORECAST.menu')} aria-expanded={isMenuOpen}>
           <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
         </button>
       </div>

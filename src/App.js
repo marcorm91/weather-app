@@ -8,14 +8,12 @@ import WeatherContact from './pages/weather-contact/WeatherContact'
 import WeatherMoreInfo from './pages/weather-more-info/WeatherMoreInfo'
 import Weather404 from './pages/weather-404/Weather404'
 import { RecentSearchesProvider } from './utils/js/RecentSearchesContext'
-import { LocationProvider } from './utils/js/LocationContext'
 
 const App = () => {
 
   return (
     <RecentSearchesProvider>
-      <LocationProvider>
-        <Router>
+      <Router>
           <WeatherHeader />
           <Routes>
             <Route path="/" element={<WeatherHome />} />
@@ -25,8 +23,7 @@ const App = () => {
             <Route path="*" element={<Weather404 />} />
           </Routes>
           <WeatherFooter />
-        </Router>
-      </LocationProvider>
+      </Router>
     </RecentSearchesProvider>
   )
 }

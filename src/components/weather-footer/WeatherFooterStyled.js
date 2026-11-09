@@ -3,7 +3,7 @@ import { media } from '../../utils/mediaqueries'
 
 export const WeatherFooterStyled = styled.footer`
   height: var(--wa-footer-height);
-  background-color: var(--wa-deep-blue);
+  background-color: #153b50;
   color: var(--wa-white);
   padding: var(--wa-spacing-03) var(--wa-spacing-04);
   box-sizing: border-box;

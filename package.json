@@ -10,32 +10,31 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
+    "fast-xml-parser": "5.12.0",
     "framer-motion": "^10.15.1",
-    "fuzzyset.js": "^1.0.7",
     "i18next": "^22.5.1",
     "leaflet": "^1.9.4",
-    "moment-timezone": "^0.5.43",
-    "polished": "^4.2.2",
     "react": "^18.2.0",
-    "react-accessible-accordion": "^5.0.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.3.1",
-    "react-resizable": "^3.0.5",
     "react-router-dom": "^6.14.1",
     "react-scripts": "5.0.1",
-    "react-table": "^7.8.0",
     "react-tooltip": "^5.20.0",
     "recharts": "^2.7.2",
     "sass": "^1.69.5",
     "styled-components": "^5.3.0",
-    "weather-icons-react": "^1.2.0",
-    "web-vitals": "^2.1.4"
+    "weather-icons-react": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prestart": "node scripts/ensure-config.cjs",
+    "prebuild": "node scripts/ensure-config.cjs",
+    "pretest": "node scripts/ensure-config.cjs",
+    "test:proxy": "node --test server/*.test.cjs",
+    "serve": "node --env-file-if-exists=.env.local server/start.cjs"
   },
   "eslintConfig": {
     "extends": [
@@ -54,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
   }
 }
