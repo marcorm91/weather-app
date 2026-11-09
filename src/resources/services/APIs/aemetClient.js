@@ -1,11 +1,10 @@
 import axios from 'axios'
 import config from '../keys/config'
-import { scheduleProduct } from './requestScheduler'
 
 const cache = new Map()
 const pending = new Map()
 const TTL = 10 * 60 * 1000
-const BASE = '/aemet/opendata/api'
+const BASE = '/aemet'
 
 export class WeatherError extends Error {
   constructor(code) {
@@ -22,18 +21,11 @@ export const requestProduct = (path, { text = false } = {}) => {
   if (pending.has(path)) return pending.get(path)
   const request = (async () => {
     const apiKey = config?.apiKey?.trim() || process.env.REACT_APP_AEMET_API_KEY?.trim()
-    if (!apiKey) throw new WeatherError('configuration')
     try {
-      await scheduleProduct()
-      const metadata = await axios.get(`${BASE}/${path}`, {
-        headers: { api_key: apiKey }, timeout: 15000,
+      const result = await axios.get(`${BASE}/product`, {
+        params: { path }, headers: apiKey ? { api_key: apiKey } : {}, timeout: 240000,
       })
-      const status = Number(metadata.data?.estado)
-      if (status !== 200) throw new WeatherError(status === 429 ? 'limit' : status === 401 || status === 403 ? 'configuration' : 'unavailable')
-      let url
-      try { url = new URL(metadata.data.datos) } catch { throw new WeatherError('invalid') }
-      if (url.protocol !== 'https:' || url.hostname !== 'opendata.aemet.es' || url.port || url.username || url.password || url.search || url.hash || !/^\/opendata\/sh\/[a-zA-Z0-9_-]+\/?$/.test(url.pathname)) throw new WeatherError('invalid')
-      const response = await axios.get(`/aemet${url.pathname}`, { timeout: 15000, responseType: text ? 'text' : 'json' })
+      const response = { data: result.data.data, stale: result.data.stale, fetchedAt: result.data.fetchedAt }
       const days = response.data?.[0]?.prediccion?.dia
       const validDays = Array.isArray(days) && days.length > 0 && days.every(day =>
         typeof day.fecha === 'string' && /^\d{4}-\d{2}-\d{2}/.test(day.fecha) &&
@@ -42,7 +34,7 @@ export const requestProduct = (path, { text = false } = {}) => {
         throw new WeatherError('invalid')
       }
       if (cache.size >= 100) cache.delete(cache.keys().next().value)
-      cache.set(path, { response, expires: Date.now() + TTL })
+      cache.set(path, { response, expires: Date.now() + (response.stale ? 30000 : TTL) })
       return response
     } catch (error) {
       if (error instanceof WeatherError) throw error
@@ -58,4 +50,19 @@ export const requestProduct = (path, { text = false } = {}) => {
 export const municipalityCode = code => {
   if (!/^\d{5}$/.test(String(code))) throw new WeatherError('invalid')
   return String(code)
+}
+
+export const requestMap = async codes => {
+  const apiKey = config?.apiKey?.trim() || process.env.REACT_APP_AEMET_API_KEY?.trim()
+  try {
+    const response = await axios.get(`${BASE}/map`, {
+      params: { codes: [...new Set(codes)].sort().join(',') },
+      headers: apiKey ? { api_key: apiKey } : {}, timeout: 240000,
+    })
+    if (!response.data?.products) throw new WeatherError('invalid')
+    return response.data.products
+  } catch (error) {
+    if (error instanceof WeatherError) throw error
+    throw new WeatherError(error.response?.data?.code || 'unavailable')
+  }
 }

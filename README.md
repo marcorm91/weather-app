@@ -13,9 +13,9 @@ npm ci
 npm start
 ```
 
-Request a key at https://opendata.aemet.es/. The existing ignored `src/resources/services/keys/config.js` remains supported (`export default { apiKey: "your-key" }`) and takes priority. The npm start/build/test hooks create an empty config from `config.example.js` only if it does not exist; they never overwrite an existing file. Alternatively, set `REACT_APP_AEMET_API_KEY` in `.env.local`. Restart the development server after changing configuration. Builds work without a key and show a configuration message when a forecast is requested.
+Request a key at https://opendata.aemet.es/. Recommended: put `AEMET_API_KEY=your-key` in the ignored `.env.local` and leave `src/resources/services/keys/config.js` empty (`export default { apiKey: "" }`). Remove any `REACT_APP_AEMET_API_KEY` value too, then restart/rebuild. `AEMET_API_KEY` is read only by the server and is never embedded in the React bundle.
 
-A browser build exposes its environment variables. This setup is suitable for a personal demo; a private production key requires a server-side proxy, authentication/rate limits and server-side caching. Do not commit API keys. No credentials are needed for automated tests.
+Existing `config.js` keys and `REACT_APP_AEMET_API_KEY` remain supported for compatibility; these legacy keys are still public in browser builds. The server key takes priority over browser-supplied keys. npm hooks create an empty config only if it does not exist and never overwrite an existing file. No credentials are needed for automated tests.
 
 ```sh
 npm test -- --watchAll=false --runInBand
@@ -23,11 +23,28 @@ npm run test:proxy
 CI=true npm run build
 ```
 
-`npm start` installs a same-origin `/aemet` proxy via `src/setupProxy.js`: both the metadata and temporary data downloads go through the local server, so AEMET does not need to grant browser CORS access. Restart `npm start` after updating this file. The proxy forwards only the known municipal/regional routes and temporary `/opendata/sh/` downloads to the fixed HTTPS AEMET host, without forwarding browser cookies or Origin headers. It does not log API keys.
+`npm start` mounts the shared weather backend at `/aemet` through `src/setupProxy.js`; no additional process is needed for development. Restart it after updating server code.
 
-**Production:** `setupProxy.js` is development-only and is not included in `build/`. Mount `server/aemetProxy.cjs` at `/aemet` in your Node/Express host (`app.use('/aemet', require('./server/aemetProxy.cjs')())`), or provide an equivalent restricted reverse proxy at that same path. A static-only host such as GitHub Pages cannot run this proxy by itself. Browser-stored keys remain public; a private production key should be loaded by the server instead, with access controls/rate limiting.
+For a single-process production deployment:
 
-CI runs these checks on pull requests. Production hosting must serve `index.html` for application routes; configure a rewrite for `/more-info`, `/alerts` and `/contact` (GitHub Pages does not provide SPA rewrites automatically).
+```sh
+npm run build
+npm run serve
+```
+
+`npm run serve` requires Node.js 22.9+ and loads `.env.local` if present. It serves both `build/` and the same weather backend (default `127.0.0.1:3000`, configurable through `HOST`/`PORT`). In hosting environments, inject `AEMET_API_KEY` as a server secret. A static-only host such as GitHub Pages cannot run this backend. Alternatively mount one `createAemetProxy()` instance at `/aemet` in Express.
+
+## Shared cache and request protection
+
+- `/aemet/map?codes=28079,44001` returns up to 20 municipalities in one browser request, including per-municipality errors and freshness. All map scopes and the detail page reuse the same product cache.
+- `/aemet/product?path=prediccion/especifica/municipio/diaria/28079` returns the final forecast directly. The server performs AEMET's two-stage download; raw proxy routes are closed to prevent bypassing the queue.
+- Fresh products are reused for **20 minutes**. Expired products are served immediately while one background refresh runs. Valid old products are retained for at most **24 hours**, labelled as stale with their original fetch/issue times. Date selectors still exclude past forecast days/hours.
+- Concurrent requests for the same product share one download. A **single global queue spaces every upstream HTTP call by 1.6 seconds**, including metadata and data downloads. Browser refresh cannot bypass it or invalidate the shared cache.
+- HTTP or envelope `429` responses pause the entire queue for at least 60 seconds and respect longer `Retry-After` values. Failed products have a 60-second retry cooldown. No automatic retry storm; future requests/polls retry after the cooldown.
+- Memory is bounded to 256 cached products, 256 failure records and 64 pending products. New work beyond the queue limit returns a controlled error. A cold nationwide map takes roughly a minute with a responsive upstream; subsequent visitors reuse it. The browser polls once a minute, without overlapping its own polls; this does not force an AEMET refresh.
+- Refresh is demand-driven: unused locations generate no background traffic. The cache is in memory and resets on restart. **Run one backend process** for this deployment; multiple replicas would need a shared cache and distributed queue (e.g. Redis) to retain a global limit. Other applications using the same API key also consume its quota.
+
+CI runs unit, HTTP/backend and production-build checks. No live API key is used by tests.
 
 ## Data and interpretation
 
@@ -37,9 +54,8 @@ CI runs these checks on pull requests. Production hosting must serve `index.html
 - Hourly values are joined by `periodo`, not array index. Wind and gust entries are separate. Missing values show `—`; zero and trace precipitation (`Ip`) are retained.
 - Today's minimum/maximum come from the daily product, not from the remaining hourly temperatures. Daily intervals and precipitation probabilities are shown separately in their original UTC periods; overlapping probabilities are never averaged or added.
 - AEMET's public help pages differ on whether hourly accumulations describe the previous or following hour. The UI therefore labels them as hourly precipitation without asserting an interval direction. Confirm this with AEMET before adding interval arrows.
-- Each product displays its own issue timestamp. Successful products are cached for 10 minutes (up to 100 entries), concurrent requests are shared, and the active forecast refreshes every 10 minutes. Refresh bypasses cache. Failed requests are not cached; hourly and daily failures are independent.
+- Each product displays its own issue timestamp. The browser additionally caches successful detail products for 10 minutes (stale responses for 30 seconds). The active detail refreshes every 10 minutes; its refresh button clears only the browser cache. Hourly and daily failures remain independent.
 - The home map uses official municipal daily products for today, tomorrow and the following day. Symbols describe the widest available sky interval (containing the current UTC hour for today); tooltips show that interval and the issue time. Temperatures belong to the named municipalities, not regional averages. Missing forecasts remain blank. A national sample, provincial capitals at community level and up to eight municipalities at province level keep requests bounded. Every municipality remains selectable.
-- Two-stage AEMET products start at least three seconds apart across the client, alongside caching and request deduplication. Initial map readings therefore appear progressively; a map can take about a minute to fill on an empty cache.
 - Community/province boundaries are simplified bundled Click That Hood / CartoDB geometries (attribution and MIT license in `public/maps/NOTICE.txt`). Municipal boundaries are loaded per province from the IGN-derived ArcGIS service and cached for the session. These display boundaries are not cadastral data and may lag administrative changes. Search/list navigation remains available if the geographic service fails. The detail location map retains OpenStreetMap attribution.
 - Regional bulletins are general forecasts, not official warnings. The regional endpoint can return the last issued bulletin when today’s product is not available; check its embedded date. `/alerts` links to official AEMET warnings and separately offers regional text forecasts. No invented alert levels or hard-coded weather readings are displayed.
 - Geolocation is requested only on user action. Ambiguous/unsupported reverse-geocoding results leave manual search available. Existing favourites and recent-search storage formats are retained.
@@ -48,6 +64,7 @@ Sources: [OpenAPI specification](https://opendata.aemet.es/AEMET_OpenData_specif
 
 ## Structure
 
+- `server`: shared cache, global upstream queue, restricted backend endpoints and production HTTP host.
 - `src/resources/services/APIs`: validated AEMET requests, bounded cache, timeouts, geographic services.
 - `src/hooks`: forecast loading lifecycle and reactive favourites.
 - `src/features/forecast`: pure data selectors, shared forecast presentation, search, geolocation and location map.

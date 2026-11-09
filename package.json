@@ -32,7 +32,8 @@
     "prestart": "node scripts/ensure-config.cjs",
     "prebuild": "node scripts/ensure-config.cjs",
     "pretest": "node scripts/ensure-config.cjs",
-    "test:proxy": "node --test server/aemetProxy.test.cjs"
+    "test:proxy": "node --test server/*.test.cjs",
+    "serve": "node --env-file-if-exists=.env.local server/start.cjs"
   },
   "eslintConfig": {
     "extends": [

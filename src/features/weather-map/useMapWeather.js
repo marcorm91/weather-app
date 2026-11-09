@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { fetchDiaryPrediction } from '../../resources/services/APIs/diaryPrediction'
+import { requestMap } from '../../resources/services/APIs/aemetClient'
 import { localClock, numberOrNull } from '../forecast/model'
 
 export function mapForecast(product, code, offset, now = new Date()) {
@@ -25,23 +25,23 @@ export default function useMapWeather(samples) {
   useEffect(() => {
     let active = true
     setData({}); setStatus(samples.length ? 'loadingWeather' : '')
+    let running = false
     const run = async () => {
-      for (const sample of samples) {
+      if (!samples.length || running) return
+      running = true
+      try {
+        const products = await requestMap(samples.map(sample => sample.code))
         if (!active) return
-        try {
-          const response = await fetchDiaryPrediction(sample.code)
-          if (!active) return
-          setData(previous => ({ ...previous, [sample.code]: response.data[0] }))
-        } catch (error) {
-          if (!active) return
-          setData(previous => ({ ...previous, [sample.code]: null }))
-          if (error.code === 'configuration' || error.code === 'limit') { setStatus(error.code); return }
-        }
-      }
-      if (active) setStatus('')
+        setData(Object.fromEntries(samples.map(sample => [sample.code, products[sample.code]?.data?.[0] || null])))
+        setStatus(Object.values(products).some(product => product.stale) ? 'stale' :
+          Object.values(products).some(product => product.error === 'configuration') ? 'configuration' :
+          Object.values(products).some(product => product.error === 'limit') ? 'limit' : Object.values(products).some(product => product.error) ? 'unavailable' : '')
+      } catch (error) { if (active) setStatus(error.code === 'configuration' || error.code === 'limit' ? error.code : 'unavailable') }
+      finally { running = false }
     }
     run()
-    return () => { active = false }
+    const timer = setInterval(run, 60000)
+    return () => { active = false; clearInterval(timer) }
   }, [samples, revision])
   return { data, status, retry: () => setRevision(value => value + 1) }
 }

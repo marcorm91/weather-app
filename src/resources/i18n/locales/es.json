@@ -155,11 +155,12 @@
     "menu": "Abrir menú",
     "close": "Cerrar menú",
     "errors": {
-      "configuration": "Configura una clave válida de AEMET en config.js (apiKey) o REACT_APP_AEMET_API_KEY y reinicia la aplicación.",
+      "configuration": "Configura una clave válida en AEMET_API_KEY del servidor (o en tu config.js) y reinicia la aplicación.",
       "limit": "AEMET ha alcanzado el límite de consultas. Inténtalo más tarde.",
       "unavailable": "No se ha podido obtener esta previsión de AEMET. Puedes volver a intentarlo.",
       "invalid": "AEMET no ha devuelto una previsión válida para esta consulta."
-    }
+    },
+    "stale": "Mostramos la última previsión guardada mientras intentamos actualizarla. Consulta su fecha de elaboración."
   },
   "MAP": {
     "heroEyebrow": "El tiempo en España",
@@ -188,7 +189,7 @@
     "representative": "Predicciones de los municipios indicados, no medias de la zona. El cielo corresponde al intervalo que aparece al pasar sobre el marcador.",
     "noDataLegend": "— sin dato · ··· pendiente de cargar.",
     "loadingMap": "Preparando el mapa…",
-    "loadingWeather": "Cargando previsiones",
+    "loadingWeather": "Preparando el mapa…",
     "noForecast": "Previsión no disponible",
     "issued": "Elaborada",
     "explore": "Explora el mapa",

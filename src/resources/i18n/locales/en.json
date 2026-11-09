@@ -155,11 +155,12 @@
     "menu": "Open menu",
     "close": "Close menu",
     "errors": {
-      "configuration": "Set a valid AEMET key in config.js (apiKey) or REACT_APP_AEMET_API_KEY and restart the application.",
+      "configuration": "Configure a valid server AEMET_API_KEY (or your config.js key) and restart the application.",
       "limit": "The AEMET request limit has been reached. Please try again later.",
       "unavailable": "This AEMET forecast could not be retrieved. You can try again.",
       "invalid": "AEMET did not return a valid forecast for this request."
-    }
+    },
+    "stale": "Showing the last saved forecast while we try to update it. Check its issue time."
   },
   "MAP": {
     "heroEyebrow": "Weather in Spain",
@@ -188,7 +189,7 @@
     "representative": "Forecasts for the named municipalities, not regional averages. Hover over a marker for the sky forecast interval.",
     "noDataLegend": "— unavailable · ··· waiting to load.",
     "loadingMap": "Preparing the map…",
-    "loadingWeather": "Loading forecasts",
+    "loadingWeather": "Preparing the map…",
     "noForecast": "Forecast unavailable",
     "issued": "Issued",
     "explore": "Explore the map",

@@ -9,7 +9,7 @@ import './forecast.css'
 export default function Forecast({ town, compact = false }) {
   const { t } = useTranslation()
   const code = town ? `${town.CPRO}${town.CMUN}` : null
-  const { hourly, daily, loading, errors, refresh } = useForecast(code)
+  const { hourly, daily, loading, errors, refresh, stale, fetchedAt } = useForecast(code)
   const [now, setNow] = useState(() => new Date())
   useEffect(() => { const timer = setInterval(() => setNow(new Date()), 60000); return () => clearInterval(timer) }, [])
   if (!town) return <section className="forecast-card"><h2>{t('FORECAST.choose')}</h2><p>{t('FORECAST.intro')}</p></section>
@@ -19,6 +19,7 @@ export default function Forecast({ town, compact = false }) {
     <div className="forecast-heading"><div><p className="eyebrow">AEMET · {t('FORECAST.forecast')}</p><h2>{town.NAME}</h2><p>{town.PROV} · {town.COMUNIDAD}</p></div>
       <button className="weather-button" onClick={refresh} disabled={loading}>{t('FORECAST.refresh')}</button></div>
     {loading && <p role="status">{t('FORECAST.loading')}</p>}
+    {stale && <p role="status" className="forecast-note">{t('FORECAST.stale')} {Number.isFinite(fetchedAt) && new Date(fetchedAt).toLocaleString()}</p>}
     {errors.length > 0 && <p role="alert">{t(`FORECAST.errors.${errors[0]}`)} {hourly || daily ? t('FORECAST.partial') : ''}</p>}
     {!loading && (hourly || daily) && <>
       <p className="forecast-note">{t('FORECAST.note')} · {timezoneFor(code)}</p>

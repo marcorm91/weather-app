@@ -1,6 +1,6 @@
 import { communities, provinces, referenceCities, townByCode, resolveScope, scopeParams, searchTowns } from './catalogue'
 import { mapForecast } from './useMapWeather'
-jest.mock('../../resources/services/APIs/diaryPrediction', () => ({ fetchDiaryPrediction: jest.fn() }))
+jest.mock('../../resources/services/APIs/aemetClient', () => ({ requestMap: jest.fn() }))
 test('all reference cities and administrative levels resolve through INE codes', () => {
   expect(communities).toHaveLength(19); expect(provinces).toHaveLength(52); expect(referenceCities).toHaveLength(52)
   for (const province of provinces) expect(communities.some(c => c.code === province.community)).toBe(true)

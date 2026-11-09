@@ -124,7 +124,6 @@ export default function WeatherExplorer({ scope, onNavigate, offset, onOffset })
       })
     })
   }, [samples, weather.data, offset, now, level, t, layoutRevision])
-  const complete = Object.keys(weather.data).length
   return <section className="tv-map-card" aria-label={t('MAP.mapLabel')}>
     <div className="map-topbar"><div><span className="map-live-dot" /> AEMET <span className="map-top-separator">/</span> {t('MAP.dailyForecast')}</div><div className="map-day-switch" aria-label={t('MAP.day')}>{[0, 1, 2].map(day => <button key={day} aria-pressed={offset === day} onClick={() => onOffset(day)}>{t(`MAP.day${day}`)}</button>)}</div></div>
     <div className="map-stage">
@@ -134,8 +133,9 @@ export default function WeatherExplorer({ scope, onNavigate, offset, onOffset })
       {loading && <div className="map-message" role="status">{t('MAP.loadingMap')}</div>}
       {error && <div className="map-message" role="alert">{t('FORECAST.mapError')} <button onClick={() => setRetry(v => v + 1)}>{t('FORECAST.refresh')}</button></div>}
     </div>
-    <div className="map-bottom"><span><b className="legend-high">●</b> {t('MAP.high')} <b className="legend-low">●</b> {t('MAP.low')}</span><span role="status">{weather.status === 'loadingWeather' ? `${t('MAP.loadingWeather')} ${complete}/${samples.length}` : t('MAP.clickHint')}</span></div>
-    {(weather.status === 'configuration' || weather.status === 'limit') && <p className="map-error" role="alert">{t(`FORECAST.errors.${weather.status}`)} <button onClick={weather.retry}>{t('FORECAST.refresh')}</button></p>}
+    <div className="map-bottom"><span><b className="legend-high">●</b> {t('MAP.high')} <b className="legend-low">●</b> {t('MAP.low')}</span><span role="status">{weather.status === 'loadingWeather' ? t('MAP.loadingWeather') : t('MAP.clickHint')}</span></div>
+    {(['configuration', 'limit', 'unavailable'].includes(weather.status)) && <p className="map-error" role="alert">{t(`FORECAST.errors.${weather.status}`)} <button onClick={weather.retry}>{t('FORECAST.refresh')}</button></p>}
+    {weather.status === 'stale' && <p className="map-error" role="status">{t('FORECAST.stale')}</p>}
     <p className="map-disclaimer">{t('MAP.representative')} {t('MAP.noDataLegend')}</p>
   </section>
 }

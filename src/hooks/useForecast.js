@@ -16,6 +16,8 @@ export default function useForecast(code) {
       setState({ code, loading: false,
         hourly: results[0].status === 'fulfilled' ? results[0].value.data[0] : null,
         daily: results[1].status === 'fulfilled' ? results[1].value.data[0] : null,
+        stale: results.some(result => result.status === 'fulfilled' && result.value.stale),
+        fetchedAt: Math.min(...results.filter(result => result.status === 'fulfilled').map(result => result.value.fetchedAt).filter(Number.isFinite)),
         errors: results.filter(result => result.status === 'rejected').map(result => result.reason.code || 'unavailable'),
       })
     })
