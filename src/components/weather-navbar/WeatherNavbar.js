@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useRef} from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { WeatherNavbarStyled } from './WeatherNavbarStyled'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,6 +10,22 @@ import { storeSearchItem } from '../../utils/js/localStorageUtils'
 import RecentSearchesContext from '../../utils/js/RecentSearchesContext'
 
 const WeatherNavbar = ({ items, onClose, isOpen }) => {
+  const panel = useRef(null)
+  useEffect(() => {
+    if (!isOpen) return
+    const previous = document.activeElement
+    const elements = () => [...panel.current.querySelectorAll('a[href], button')]
+    elements()[0]?.focus()
+    const trap = event => {
+      if (event.key !== 'Tab') return
+      const items = elements(), first = items[0], last = items[items.length - 1]
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
+    }
+    const node = panel.current
+    node.addEventListener('keydown', trap)
+    return () => { node.removeEventListener('keydown', trap); previous?.focus() }
+  }, [isOpen])
   const { t } = useTranslation()
   const location = useLocation()
   const { setRecentSearches } = useContext(RecentSearchesContext);
@@ -57,7 +73,7 @@ const WeatherNavbar = ({ items, onClose, isOpen }) => {
           <WeatherBackdrop 
             isOpen={isOpen} 
             onClick={onClose} />
-          <WeatherNavbarStyled
+          <WeatherNavbarStyled ref={panel} role="dialog" aria-modal="true" aria-label={t('FORECAST.menu')}
             key="slidingNavbar"
             initial="closed" 
             animate={isOpen ? "open" : "closed"} 
@@ -68,7 +84,7 @@ const WeatherNavbar = ({ items, onClose, isOpen }) => {
               <div className="wa-icon-logo-blue"></div>
               <span>{t('HEADER.TITLE')}</span>
             </div>
-            <button className="button-close" onClick={handleMenuClose}>
+            <button className="button-close" aria-label={t('FORECAST.close')} onClick={handleMenuClose}>
               <FontAwesomeIcon icon={faTimes} />
             </button>
             <div className="content__wrapper">

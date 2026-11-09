@@ -18,7 +18,7 @@ const WeatherLangSelector = () => {
   }
 
   return (
-    <WeatherLangSelectorStyled value={i18n.language} onChange={handleChangeLanguage}>
+    <WeatherLangSelectorStyled aria-label="Idioma / Language" value={i18n.language} onChange={handleChangeLanguage}>
         <option value="es">ESP</option>
         <option value="en">EN</option>
     </WeatherLangSelectorStyled>

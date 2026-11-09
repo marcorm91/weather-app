@@ -1,0 +1,48 @@
+.weather-page { max-width: 1500px; margin: auto; padding: clamp(16px, 3vw, 40px); color: #193d50; min-height: calc(100vh - 160px); box-sizing: border-box; }
+.weather-page h1 { font-size: clamp(26px, 3vw, 40px); margin: 0 0 12px; }
+.weather-page h2 { margin: 0; font-size: 26px; }
+.weather-page h3 { margin-top: 28px; }
+.weather-layout { display: grid; grid-template-columns: minmax(260px, 340px) minmax(0, 1fr); gap: 24px; align-items: flex-start; margin-top: 24px; }
+.weather-page button, .weather-page input, .weather-page select { font: inherit; }
+.weather-page button { cursor: pointer; }
+.weather-page :focus-visible, button:focus-visible, a:focus-visible { outline: 3px solid #b56b00; outline-offset: 3px; }
+.weather-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #b8ccd6; background: #fff; border-radius: 8px; color: #193d50; min-height: 44px; padding: 8px 12px; text-decoration: none; }
+.weather-button[aria-pressed='true'] { background: #164b67; color: white; }
+.weather-button:disabled { opacity: .6; cursor: wait; }
+.weather-toolbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 16px; }
+.forecast-card, .town-picker, .weather-map-card { background: #fff; border: 1px solid #d5e0e6; border-radius: 14px; padding: clamp(16px, 2vw, 28px); min-width: 0; margin-bottom: 20px; }
+.forecast-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.forecast-heading p { margin: 6px 0; }
+.eyebrow { text-transform: uppercase; letter-spacing: .07em; font-size: 12px; }
+.forecast-note, .forecast-source, .forecast-scroll caption { font-size: 13px; line-height: 1.6; color: #49606b; }
+.forecast-current { display: flex; gap: 24px; align-items: center; }
+.forecast-temperature { font-size: clamp(40px, 6vw, 64px); line-height: 1.15; font-weight: 600; }
+.forecast-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; border-top: 1px solid #d5e0e6; padding-top: 20px; }
+.forecast-metrics dt { font-size: 13px; color: #49606b; }
+.forecast-metrics dd { margin: 6px 0 0; font-weight: bold; }
+.forecast-scroll { overflow-x: auto; max-width: 100%; }
+.forecast-scroll table { border-collapse: collapse; width: 100%; font-size: 14px; }
+.forecast-scroll th, .forecast-scroll td { padding: 12px; text-align: left; border-bottom: 1px solid #e0e7eb; white-space: nowrap; }
+.forecast-scroll caption { text-align: left; padding: 8px 0; }
+.forecast-scroll thead { background: #f0f5f7; }
+.forecast-days { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.forecast-days article { background: #f0f5f7; padding: 16px; border-radius: 8px; }
+.forecast-days h4 { margin: 0; }
+.forecast-days details { font-size: 13px; }
+.forecast-days summary { cursor: pointer; padding: 8px 0; }
+.forecast-source { margin-top: 24px; }
+.town-picker label { display: block; font-size: 14px; margin: 14px 0 6px; }
+.town-picker input, .town-picker select { width: 100%; min-height: 44px; }
+.town-picker ul { list-style: none; padding: 0; margin: 16px 0; }
+.town-picker li { display: flex; gap: 6px; border-bottom: 1px solid #d5e0e6; }
+.town-picker .town-select { flex: 1; text-align: left; border: 0; background: transparent; padding: 12px 4px; color: #193d50; }
+.town-picker .town-select[aria-pressed='true'] { background: #edf4f7; font-weight: bold; }
+.town-select small { display: block; font-weight: normal; margin-top: 4px; }
+.town-picker .town-star { border: 0; background: none; font-size: 22px; min-width: 44px; color: #735400; }
+.weather-map { height: 330px; border-radius: 8px; z-index: 0; }
+.weather-region-text { white-space: pre-wrap; line-height: 1.7; }
+.forecast-chart { margin-bottom: 16px; }
+@media (max-width: 850px) { .weather-layout { grid-template-columns: 1fr; } .forecast-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+body { background: #f3f7f9; }

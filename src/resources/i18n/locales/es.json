@@ -1,104 +1,164 @@
 {
-    "HEADER": {
-        "TITLE": "Weather app"
+  "HEADER": {
+    "TITLE": "Weather app"
+  },
+  "FOOTER": {
+    "COPYRIGHT": "WEATHER APP. Todos los derechos reservados.",
+    "SOURCE": "Fuente:"
+  },
+  "NAVBAR": {
+    "HOME_PAGE": "Página de inicio",
+    "LAST_SEARCH": "Últimas búsquedas",
+    "CONTACT": "Contacto",
+    "ALERTS": "Alertas"
+  },
+  "HOME": {
+    "WELCOME_MSG": "Bienvenido, hoy es {{day}}",
+    "TABS": {
+      "ALL": "Todos",
+      "FAV": "Favoritos"
     },
-    "FOOTER": {
-        "COPYRIGHT": "WEATHER APP. Todos los derechos reservados.",
-        "SOURCE": "Fuente:"
+    "TABLE": {
+      "FILTERBY": "Filtrar por:",
+      "SEARCH": "Buscar...",
+      "CODE": "Código",
+      "MUNICIPALITY": "Municipio",
+      "PROVINCE": "Provincia",
+      "COMUNITY": "Comunidad",
+      "PAGE": "Página",
+      "GO_PAGE": "Ir a página",
+      "SHOW": "Mostrar",
+      "OF": "de",
+      "EMPTY_FAV": "No tienes ningún municipio seleccionado como favorito.",
+      "REMOVE_FAV": "Borrar favoritos",
+      "NO_RESULTS": "No se encontraron resultados.",
+      "SELECT_COMMUNITY": "Selecciona una Comunidad",
+      "SELECT_PROVINCE": "Selecciona una Provincia"
     },
-    "NAVBAR": {
-        "HOME_PAGE": "Página de inicio",
-        "LAST_SEARCH": "Últimas búsquedas",
-        "CONTACT": "Contacto",
-        "ALERTS": "Alertas"
+    "PANEL_INFO": {
+      "MORE_INFO": "Más información",
+      "PREDICTON_NEXT_HOURS": "Previsión para las próximas horas:"
     },
-    "HOME": {
-        "WELCOME_MSG": "Bienvenido, hoy es {{day}}",
-        "TABS": {
-            "ALL": "Todos",
-            "FAV": "Favoritos"
-        },
-        "TABLE": {
-            "FILTERBY": "Filtrar por:",
-            "SEARCH": "Buscar...",
-            "CODE": "Código",
-            "MUNICIPALITY": "Municipio",
-            "PROVINCE": "Provincia",
-            "COMUNITY": "Comunidad",
-            "PAGE": "Página",
-            "GO_PAGE": "Ir a página",
-            "SHOW": "Mostrar",
-            "OF": "de",
-            "EMPTY_FAV": "No tienes ningún municipio seleccionado como favorito.",
-            "REMOVE_FAV": "Borrar favoritos",
-            "NO_RESULTS": "No se encontraron resultados.",
-            "SELECT_COMMUNITY": "Selecciona una Comunidad",
-            "SELECT_PROVINCE": "Selecciona una Provincia"
-        },
-        "PANEL_INFO": {
-            "MORE_INFO": "Más información",
-            "PREDICTON_NEXT_HOURS": "Previsión para las próximas horas:"
-        },
-        "AD_PREDICTION": "Aviso",
-        "MAP": {
-            "PROVINCE_OF": "Provincia de",
-            "VIEW_PENINSULA": "Ver Peninsula",
-            "VIEW_CANARIES": "Ver Canarias",
-            "SKY_CONDITION": "Estado cielo",
-            "TEMPERATURE": "Temperatura",
-            "WIND": "Viento",
-            "PRECIPITATION": "Lluvia (mm.)",
-            "SNOW": "Nieve (mm.)"
-        }
-    },
-    "ALERTS": {
-        "INFO": "Consulta de alertas y peligros meteorológicos para las Comunidades Autónomas en fechas específicas. Ten en cuenta que puede haber información desactualizada para algunas Comunidades."
-    },
-    "ABOUTME": {
-        "COL1": {
-            "COL1_1": {
-                "TITLE": "Acerca de mí",
-                "P1": "Mi nombre es Marco y desde 2017 trabajo como Maquetador / Frontend Web en ATSistemas, donde he adquirido experiencia en diferentes entornos de desarrollo desde el lado Front. He participado en proyectos integrados con tecnologías DXP como Liferay y Magnolia, así como en la realización de librerías de componentes utilizando Storybook en Frameworks Front para Angular, React y VueJS.",
-                "P2": "Metodología y definición en el desarrollo de interfaces utilizando los sistemas de diseño 'Design Tokens' y 'Atomic Design'.",
-                "P3": "Amplia experiencia trabajando con metodologías de trabajo Agile. También estoy familiarizado con herramientas de trabajo en equipo, como los sistemas de control de versiones GIT, que son esenciales para el desarrollo de software colaborativo.",
-                "P4": "Servicios destacados:"
-            },
-            "COL1_2": {
-                "TITLE": "Acerca de Weather APP",
-                "P1": "En nuestra aplicación web de previsión meteorológica, hemos diseñado una interfaz intuitiva y amigable que te permite explorar de manera sencilla y rápida la información meteorológica de diferentes ubicaciones. Para lograrlo, hemos utilizado React, un framework de JavaScript altamente eficiente y popular.",
-                "P2": "Nos hemos enfocado en optimizar la velocidad de carga de la aplicación, asegurándonos de que la información meteorológica se actualice rápidamente y que los usuarios puedan obtener datos precisos y actualizados en tiempo real. Esto nos permite brindarte una experiencia de usuario fluida y una sensación de inmediatez al acceder a la previsión meteorológica.",
-                "P3": "En nuestra aplicación web de previsión meteorológica, recopilamos datos de la API de la AEMET exclusivamente con fines informativos. Nuestra principal prioridad es proporcionar a los usuarios información precisa y actualizada sobre las condiciones climáticas en diferentes ubicaciones.",
-                "P4": "A través de la integración de la API de la AEMET, podemos acceder a datos confiables y completos sobre temperaturas, humedad, velocidad del viento, precipitaciones y más. Utilizamos estos datos para presentar una previsión meteorológica detallada y ayudarte a tomar decisiones informadas basadas en las condiciones climáticas."
-    
-            }
-        },
-        "COL2": {
-            "TITLE": "Contacto"
-        }
-    },
-    "MORE_INFO": {
-        "PANEL_RIGHT_INFO": {
-            "MUNICIPALITY": "Municipio",
-            "PROVINCE": "Provincia",
-            "COMUNITY": "Comunidad"
-        },
-        "MAIN": {
-            "TABS": {
-                "HOURLY_FORECAST": "Predicción por horas",
-                "DAILY_FORECAST": "Predicción por días"
-            }
-        },
-        "AD": {
-            "AD_HIGH_TEMP": "Avisos por altas temperaturas",
-            "AD_HIGH_PREC": "Avisos por lluvia intensa",
-            "AD_HIGH_WIND": "Avisos por rachas de viento",
-            "AD_HIGH_SNOW": "Avisos por nieve"
-        }
-    },
-    "GEOLOCATION": {
-        "ZONE_WEATHER": "El tiempo en tu zona,"
-    },
-    "ERROR": {
-        "404": "Página no encontrada"
+    "AD_PREDICTION": "Aviso",
+    "MAP": {
+      "PROVINCE_OF": "Provincia de",
+      "VIEW_PENINSULA": "Ver Peninsula",
+      "VIEW_CANARIES": "Ver Canarias",
+      "SKY_CONDITION": "Estado cielo",
+      "TEMPERATURE": "Temperatura",
+      "WIND": "Viento",
+      "PRECIPITATION": "Lluvia (mm.)",
+      "SNOW": "Nieve (mm.)"
     }
+  },
+  "ALERTS": {
+    "INFO": "Consulta de alertas y peligros meteorológicos para las Comunidades Autónomas en fechas específicas. Ten en cuenta que puede haber información desactualizada para algunas Comunidades."
+  },
+  "ABOUTME": {
+    "COL1": {
+      "COL1_1": {
+        "TITLE": "Acerca de mí",
+        "P1": "Mi nombre es Marco y desde 2017 trabajo como Maquetador / Frontend Web en ATSistemas, donde he adquirido experiencia en diferentes entornos de desarrollo desde el lado Front. He participado en proyectos integrados con tecnologías DXP como Liferay y Magnolia, así como en la realización de librerías de componentes utilizando Storybook en Frameworks Front para Angular, React y VueJS.",
+        "P2": "Metodología y definición en el desarrollo de interfaces utilizando los sistemas de diseño 'Design Tokens' y 'Atomic Design'.",
+        "P3": "Amplia experiencia trabajando con metodologías de trabajo Agile. También estoy familiarizado con herramientas de trabajo en equipo, como los sistemas de control de versiones GIT, que son esenciales para el desarrollo de software colaborativo.",
+        "P4": "Servicios destacados:"
+      },
+      "COL1_2": {
+        "TITLE": "Acerca de Weather APP",
+        "P1": "En nuestra aplicación web de previsión meteorológica, hemos diseñado una interfaz intuitiva y amigable que te permite explorar de manera sencilla y rápida la información meteorológica de diferentes ubicaciones. Para lograrlo, hemos utilizado React, un framework de JavaScript altamente eficiente y popular.",
+        "P2": "La aplicación muestra predicciones de AEMET con su fecha de elaboración y sus periodos de validez. No son observaciones en tiempo real.",
+        "P3": "En nuestra aplicación web de previsión meteorológica, recopilamos datos de la API de la AEMET exclusivamente con fines informativos. Nuestra principal prioridad es proporcionar a los usuarios información precisa y actualizada sobre las condiciones climáticas en diferentes ubicaciones.",
+        "P4": "A través de la integración de la API de la AEMET, podemos acceder a datos confiables y completos sobre temperaturas, humedad, velocidad del viento, precipitaciones y más. Utilizamos estos datos para presentar una previsión meteorológica detallada y ayudarte a tomar decisiones informadas basadas en las condiciones climáticas."
+      }
+    },
+    "COL2": {
+      "TITLE": "Contacto"
+    }
+  },
+  "MORE_INFO": {
+    "PANEL_RIGHT_INFO": {
+      "MUNICIPALITY": "Municipio",
+      "PROVINCE": "Provincia",
+      "COMUNITY": "Comunidad"
+    },
+    "MAIN": {
+      "TABS": {
+        "HOURLY_FORECAST": "Predicción por horas",
+        "DAILY_FORECAST": "Predicción por días"
+      }
+    },
+    "AD": {
+      "AD_HIGH_TEMP": "Avisos por altas temperaturas",
+      "AD_HIGH_PREC": "Avisos por lluvia intensa",
+      "AD_HIGH_WIND": "Avisos por rachas de viento",
+      "AD_HIGH_SNOW": "Avisos por nieve"
+    }
+  },
+  "GEOLOCATION": {
+    "ZONE_WEATHER": "El tiempo en tu zona,"
+  },
+  "ERROR": {
+    "404": "Página no encontrada"
+  },
+  "FORECAST": {
+    "title": "El tiempo, municipio a municipio",
+    "subtitle": "Consulta la previsión de AEMET por horas y para los próximos días.",
+    "choose": "Elige un municipio",
+    "intro": "Busca tu municipio o utiliza tu ubicación para consultar su previsión. También puedes guardar favoritos.",
+    "forecast": "Predicción",
+    "refresh": "Actualizar",
+    "loading": "Cargando previsión…",
+    "partial": "Se muestra el producto disponible.",
+    "note": "Previsión para la capital del municipio, no una observación en tiempo real. Horas locales del municipio",
+    "valid": "Previsión para",
+    "noData": "Sin dato",
+    "noHours": "No hay previsión horaria vigente disponible.",
+    "noDays": "No hay previsión diaria vigente disponible.",
+    "range": "Hoy: máxima / mínima",
+    "feels": "Sensación térmica",
+    "humidity": "Humedad",
+    "wind": "Viento",
+    "rain": "Precipitación horaria",
+    "snow": "Nieve (agua equivalente)",
+    "gust": "Racha máxima",
+    "sunrise": "Amanecer",
+    "sunset": "Atardecer",
+    "hours": "Próximas horas",
+    "hourCaption": "Previsión horaria. — indica dato no disponible; Ip, precipitación inapreciable (< 0,1 mm).",
+    "date": "Fecha y hora",
+    "sky": "Cielo",
+    "temp": "Temperatura",
+    "days": "Próximos días",
+    "uv": "UV máximo",
+    "periods": "Detalle por periodos",
+    "utc": "Intervalos originales de AEMET en UTC. La probabilidad corresponde a cada intervalo; no se suma ni se promedia.",
+    "probability": "Probabilidad de precipitación",
+    "issuedHours": "Previsión horaria elaborada",
+    "issuedDays": "Previsión diaria elaborada",
+    "source": "Ver predicción en AEMET",
+    "search": "Buscar municipio",
+    "results": "municipios encontrados",
+    "favorite": "Favorito:",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "locate": "Usar mi ubicación",
+    "locating": "Buscando tu municipio…",
+    "geoError": "No se ha podido identificar tu municipio. Puedes buscarlo por nombre.",
+    "full": "Ver toda la predicción",
+    "map": "Localización",
+    "mapNote": "Límite municipal; no representa datos meteorológicos.",
+    "mapError": "No se ha podido cargar el mapa.",
+    "officialAlerts": "Consultar avisos oficiales de AEMET",
+    "alertsNote": "Consulta el nivel, la zona y el periodo de validez en AEMET.",
+    "regional": "Predicción por comunidad autónoma",
+    "regionalNote": "Este boletín es una predicción general para hoy, no un aviso meteorológico.",
+    "menu": "Abrir menú",
+    "close": "Cerrar menú",
+    "errors": {
+      "configuration": "Configura una clave válida de AEMET en REACT_APP_AEMET_API_KEY y vuelve a compilar la aplicación.",
+      "limit": "AEMET ha alcanzado el límite de consultas. Inténtalo más tarde.",
+      "unavailable": "No se ha podido obtener esta previsión de AEMET. Puedes volver a intentarlo.",
+      "invalid": "AEMET no ha devuelto una previsión válida para esta consulta."
+    }
+  }
 }
