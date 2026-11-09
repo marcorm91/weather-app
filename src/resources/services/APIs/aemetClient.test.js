@@ -1,9 +1,11 @@
 import axios from 'axios'
+import config from '../keys/config'
 import { clearWeatherCache, requestProduct, municipalityCode } from './aemetClient'
+jest.mock('../keys/config', () => ({ __esModule: true, default: { apiKey: '' } }))
 jest.mock('axios', () => ({ get: jest.fn() }))
 const product = [{ prediccion: { dia: [{ fecha: '2026-11-09' }] } }]
 const metadata = { data: { estado: 200, datos: 'https://opendata.aemet.es/opendata/sh/forecast' } }
-beforeEach(() => { clearWeatherCache(); jest.resetAllMocks(); process.env.REACT_APP_AEMET_API_KEY = 'test-key' })
+beforeEach(() => { clearWeatherCache(); jest.resetAllMocks(); config.apiKey = ''; process.env.REACT_APP_AEMET_API_KEY = 'test-key' })
 test('shares concurrent requests, follows datos once, then reuses cached product', async () => {
   axios.get.mockResolvedValueOnce(metadata).mockResolvedValueOnce({ data: product })
   const [a, b] = await Promise.all([requestProduct('test'), requestProduct('test')])
@@ -38,4 +40,25 @@ test('expires cached products after ten minutes', async () => {
   axios.get.mockResolvedValueOnce(metadata).mockResolvedValueOnce({ data: product })
   await requestProduct('test'); expect(axios.get).toHaveBeenCalledTimes(4)
   clock.mockRestore()
+})
+
+test('uses the existing config.js key and the Swagger api_key header only on the first request', async () => {
+  config.apiKey = ' local-config-key '
+  axios.get.mockResolvedValueOnce(metadata).mockResolvedValueOnce({ data: product })
+  await requestProduct('prediccion/especifica/municipio/horaria/28079')
+  expect(axios.get).toHaveBeenNthCalledWith(1,
+    'https://opendata.aemet.es/opendata/api/prediccion/especifica/municipio/horaria/28079',
+    { headers: { api_key: 'local-config-key' }, timeout: 15000 })
+  expect(axios.get).toHaveBeenNthCalledWith(2, metadata.data.datos,
+    { timeout: 15000, responseType: 'json' })
+})
+test('uses the environment key when config.js is empty', async () => {
+  axios.get.mockResolvedValueOnce(metadata).mockResolvedValueOnce({ data: product })
+  await requestProduct('test')
+  expect(axios.get.mock.calls[0][1].headers.api_key).toBe('test-key')
+})
+test.each([401, 403])('classifies AEMET envelope status %i as a configuration error', async status => {
+  axios.get.mockResolvedValueOnce({ data: { estado: status } })
+  await expect(requestProduct('test')).rejects.toMatchObject({ code: 'configuration' })
+  expect(axios.get).toHaveBeenCalledTimes(1)
 })

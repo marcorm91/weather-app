@@ -151,11 +151,11 @@
     "officialAlerts": "Consultar avisos oficiales de AEMET",
     "alertsNote": "Consulta el nivel, la zona y el periodo de validez en AEMET.",
     "regional": "Predicción por comunidad autónoma",
-    "regionalNote": "Este boletín es una predicción general para hoy, no un aviso meteorológico.",
+    "regionalNote": "Este boletín es una predicción general, no un aviso meteorológico. Si AEMET todavía no ha elaborado el de hoy, devuelve el último disponible; comprueba la fecha del texto.",
     "menu": "Abrir menú",
     "close": "Cerrar menú",
     "errors": {
-      "configuration": "Configura una clave válida de AEMET en REACT_APP_AEMET_API_KEY y vuelve a compilar la aplicación.",
+      "configuration": "Configura una clave válida de AEMET en config.js (apiKey) o REACT_APP_AEMET_API_KEY y reinicia la aplicación.",
       "limit": "AEMET ha alcanzado el límite de consultas. Inténtalo más tarde.",
       "unavailable": "No se ha podido obtener esta previsión de AEMET. Puedes volver a intentarlo.",
       "invalid": "AEMET no ha devuelto una previsión válida para esta consulta."

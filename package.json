@@ -28,7 +28,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prestart": "node scripts/ensure-config.cjs",
+    "prebuild": "node scripts/ensure-config.cjs",
+    "pretest": "node scripts/ensure-config.cjs"
   },
   "eslintConfig": {
     "extends": [

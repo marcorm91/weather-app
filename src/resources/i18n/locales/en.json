@@ -151,11 +151,11 @@
     "officialAlerts": "View official AEMET warnings",
     "alertsNote": "Check the warning level, area and validity period on AEMET.",
     "regional": "Regional forecast",
-    "regionalNote": "This is a general forecast for today, not a weather warning.",
+    "regionalNote": "This bulletin is a general forecast, not a weather warning. If today’s product has not been issued, AEMET returns the latest available one; check the date in the text.",
     "menu": "Open menu",
     "close": "Close menu",
     "errors": {
-      "configuration": "Set a valid AEMET key in REACT_APP_AEMET_API_KEY and rebuild the application.",
+      "configuration": "Set a valid AEMET key in config.js (apiKey) or REACT_APP_AEMET_API_KEY and restart the application.",
       "limit": "The AEMET request limit has been reached. Please try again later.",
       "unavailable": "This AEMET forecast could not be retrieved. You can try again.",
       "invalid": "AEMET did not return a valid forecast for this request."

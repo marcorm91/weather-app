@@ -1,4 +1,5 @@
 import axios from 'axios'
+import config from '../keys/config'
 
 const cache = new Map()
 const pending = new Map()
@@ -19,14 +20,14 @@ export const requestProduct = (path, { text = false } = {}) => {
   if (cached && cached.expires > Date.now()) return Promise.resolve(cached.response)
   if (pending.has(path)) return pending.get(path)
   const request = (async () => {
-    const apiKey = process.env.REACT_APP_AEMET_API_KEY?.trim()
+    const apiKey = config?.apiKey?.trim() || process.env.REACT_APP_AEMET_API_KEY?.trim()
     if (!apiKey) throw new WeatherError('configuration')
     try {
       const metadata = await axios.get(`${BASE}/${path}`, {
-        params: { api_key: apiKey }, timeout: 15000,
+        headers: { api_key: apiKey }, timeout: 15000,
       })
       const status = Number(metadata.data?.estado)
-      if (status !== 200) throw new WeatherError(status === 429 ? 'limit' : 'unavailable')
+      if (status !== 200) throw new WeatherError(status === 429 ? 'limit' : status === 401 || status === 403 ? 'configuration' : 'unavailable')
       let url
       try { url = new URL(metadata.data.datos) } catch { throw new WeatherError('invalid') }
       if (url.protocol !== 'https:' || url.hostname !== 'opendata.aemet.es') throw new WeatherError('invalid')
