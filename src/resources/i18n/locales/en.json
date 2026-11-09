@@ -9,7 +9,7 @@
   "NAVBAR": {
     "HOME_PAGE": "Home page",
     "CONTACT": "Contact",
-    "ALERTS": "Alerts",
+    "ALERTS": "Watch",
     "LAST_SEARCH": "Last search"
   },
   "HOME": {
@@ -203,7 +203,7 @@
     "filter": "Filter by name…",
     "exploreTip": "Use the map or this list. The breadcrumb above lets you go back.",
     "pathHint": "Spain → Community → Province → Municipality",
-    "alertsLink": "Official AEMET warnings",
+    "alertsLink": "Rain and flood watch",
     "yourForecast": "Your forecast"
   }
 }

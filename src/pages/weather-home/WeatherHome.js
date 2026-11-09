@@ -48,6 +48,6 @@ export default function WeatherHome() {
         </section>}
       </aside>
     </div>
-    <div className="map-footer-note"><span>↳ {t('MAP.pathHint')}</span><a href="https://www.aemet.es/es/eltiempo/prediccion/avisos" target="_blank" rel="noreferrer">{t('MAP.alertsLink')} ↗</a></div>
+    <div className="map-footer-note"><span>↳ {t('MAP.pathHint')}</span><Link to="/alerts">{t('MAP.alertsLink')} →</Link></div>
   </main>
 }

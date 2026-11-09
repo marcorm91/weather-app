@@ -10,7 +10,7 @@
     "HOME_PAGE": "Página de inicio",
     "LAST_SEARCH": "Últimas búsquedas",
     "CONTACT": "Contacto",
-    "ALERTS": "Alertas"
+    "ALERTS": "Vigilancia"
   },
   "HOME": {
     "WELCOME_MSG": "Bienvenido, hoy es {{day}}",
@@ -203,7 +203,7 @@
     "filter": "Filtrar por nombre…",
     "exploreTip": "Puedes moverte por el mapa o utilizar esta lista. La ruta superior te permite volver atrás.",
     "pathHint": "España → Comunidad → Provincia → Municipio",
-    "alertsLink": "Avisos oficiales de AEMET",
+    "alertsLink": "Vigilancia de lluvias e inundaciones",
     "yourForecast": "Tu previsión"
   }
 }

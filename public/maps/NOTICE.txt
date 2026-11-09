@@ -23,3 +23,15 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+warning-zones.geojson: derived from AEMET Meteoalerta v6 boundary data,
+February 2018, retrieved 2026-11-09. Reprojected EPSG:32630 to EPSG:4326,
+simplified for display and rounded. Source: AEMET, based on BDLJE 2017-02-28,
+CC-BY ign.es © Instituto Geográfico Nacional de España.
+https://www.aemet.es/documentos/es/eltiempo/prediccion/avisos/plan_meteoalerta/AEMET-meteoalerta-delimitacion-zonas.zip
+https://www.aemet.es/es/nota_legal
+Municipal associations in server/data/warning-municipalities.json are extracted
+from AEMET's August 2017 municipal-zone catalogue, retrieved 2026-11-09.
+https://www.aemet.es/documentos/es/eltiempo/prediccion/avisos/plan_meteoalerta/detalle_municipios_zonas_meteorologicas.pdf
+Associations are a historical reference, not a guarantee of current boundaries.
+Unmatched municipalities/zones must remain explicitly unverified.

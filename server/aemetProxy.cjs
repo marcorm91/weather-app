@@ -1,8 +1,10 @@
+const { createWatchService } = require('./watchService.cjs')
 const { createService } = require('./aemetService.cjs')
 
 // One instance per server, shared by all browsers. Raw forwarding is deliberately unavailable.
 module.exports = function createAemetProxy(options = {}) {
   const service = createService(options)
+  const getWatch = createWatchService()
   return async function aemetProxy(req, res) {
     const send = (status, body) => {
       if (res.writableEnded || res.destroyed) return
@@ -12,6 +14,7 @@ module.exports = function createAemetProxy(options = {}) {
     try {
       if (req.method !== 'GET') return send(405, { code: 'invalid' })
       const url = new URL(req.url, 'http://localhost')
+      if (url.pathname === '/watch' && !url.search) return send(200, await getWatch())
       if (url.pathname === '/product' && [...url.searchParams.keys()].join(',') === 'path') return send(200, await service.product(url.searchParams.get('path'), req.headers.api_key))
       if (url.pathname === '/map' && [...url.searchParams.keys()].join(',') === 'codes') return send(200, await service.map(url.searchParams.get('codes').split(','), req.headers.api_key))
       send(400, { code: 'invalid' })

@@ -14,7 +14,7 @@ export default function WeatherMoreInfo() {
   return <main className="weather-page" id="main-content">
     <Link className="weather-button" to={town ? `/?municipio=${townCode(town)}` : '/'}>{t('NAVBAR.HOME_PAGE')}</Link>
     <h1>{town ? `${t('FORECAST.forecast')} · ${town.NAME}` : t('FORECAST.choose')}</h1>
-    <Forecast town={town} />{town && <details><summary>{t('FORECAST.map')}</summary><DetailMap town={town} /></details>}
+    <Forecast town={town} />{town && <Link className="weather-button" to={`/alerts?municipio=${town.CPRO}${town.CMUN}`}>{t('MAP.alertsLink')}</Link>}{town && <details><summary>{t('FORECAST.map')}</summary><DetailMap town={town} /></details>}
   </main>
 }
 // The map is only requested when its disclosure is opened.
