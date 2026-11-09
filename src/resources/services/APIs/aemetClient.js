@@ -1,5 +1,6 @@
 import axios from 'axios'
 import config from '../keys/config'
+import { scheduleProduct } from './requestScheduler'
 
 const cache = new Map()
 const pending = new Map()
@@ -23,6 +24,7 @@ export const requestProduct = (path, { text = false } = {}) => {
     const apiKey = config?.apiKey?.trim() || process.env.REACT_APP_AEMET_API_KEY?.trim()
     if (!apiKey) throw new WeatherError('configuration')
     try {
+      await scheduleProduct()
       const metadata = await axios.get(`${BASE}/${path}`, {
         headers: { api_key: apiKey }, timeout: 15000,
       })

@@ -2,6 +2,7 @@ import axios from 'axios'
 import config from '../keys/config'
 import { clearWeatherCache, requestProduct, municipalityCode } from './aemetClient'
 jest.mock('../keys/config', () => ({ __esModule: true, default: { apiKey: '' } }))
+jest.mock('./requestScheduler', () => ({ scheduleProduct: () => Promise.resolve() }))
 jest.mock('axios', () => ({ get: jest.fn() }))
 const product = [{ prediccion: { dia: [{ fecha: '2026-11-09' }] } }]
 const metadata = { data: { estado: 200, datos: 'https://opendata.aemet.es/opendata/sh/forecast' } }

@@ -4,6 +4,7 @@ import Forecast from './Forecast'
 import useForecast from '../../hooks/useForecast'
 import '../../resources/i18n/i18n'
 jest.mock('../../hooks/useForecast', () => ({ __esModule: true, default: jest.fn() }))
+jest.mock('recharts', () => ({ ...jest.requireActual('recharts'), ResponsiveContainer: () => null }))
 jest.mock('../../utils/js/skyIcons', () => ({ skyIconMap: {} }))
 const town = { CPRO: '28', CMUN: '079', NAME: 'Madrid', PROV: 'Madrid', COMUNIDAD: 'Madrid' }
 beforeEach(() => { useForecast.mockReturnValue({ hourly: null, daily: null, loading: false, errors: [], refresh: jest.fn() }) })
@@ -25,8 +26,9 @@ test('renders zeros, missing humidity and real daily extrema with period-labelle
     hourly: { prediccion: { dia: [{ fecha: date, temperatura: [{ periodo: hour, value: '0' }] }] } },
     daily: { prediccion: { dia: [{ fecha: date, temperatura: { maxima: 10, minima: -3 }, probPrecipitacion: [{ periodo: '12-24', value: 0 }] }] } },
   })
-  render(<Forecast town={town} compact />)
+  const { rerender } = render(<Forecast town={town} compact />)
   expect(screen.getAllByText('0 °C').length).toBeGreaterThan(0)
   expect(screen.getAllByText('10° / -3°').length).toBeGreaterThan(0)
+  rerender(<Forecast town={town} />)
   expect(screen.getByText('Probabilidad de precipitación 12-24: 0 %')).toBeTruthy()
 })

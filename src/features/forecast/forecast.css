@@ -45,4 +45,4 @@
 @media (max-width: 850px) { .weather-layout { grid-template-columns: 1fr; } .forecast-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 
-body { background: #f3f7f9; }
+body { background: #f5f8f9; }

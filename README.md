@@ -1,6 +1,6 @@
 # Weather App
 
-Municipality forecasts from AEMET OpenData, built with React. The home page combines municipality search, favourites and a forecast summary. Detail URLs (`/more-info?municipio=28079`) display hourly data, a temperature chart and daily forecasts. Spanish and English interface; source forecast descriptions remain in Spanish.
+Municipality forecasts from AEMET OpenData, built with React. The home page opens with a TV-style weather map: Spain → autonomous community → province → municipality, with daily weather symbols, minimum/maximum temperatures, a Canary Islands inset, search and favourites. Selecting a municipality opens its forecast summary beside the map. Detail URLs (`/more-info?municipio=28079`) display hourly data, a temperature chart and daily forecasts. Spanish and English interface; source forecast descriptions remain in Spanish.
 
 ## Run locally
 
@@ -38,7 +38,9 @@ CI runs these checks on pull requests. Production hosting must serve `index.html
 - Today's minimum/maximum come from the daily product, not from the remaining hourly temperatures. Daily intervals and precipitation probabilities are shown separately in their original UTC periods; overlapping probabilities are never averaged or added.
 - AEMET's public help pages differ on whether hourly accumulations describe the previous or following hour. The UI therefore labels them as hourly precipitation without asserting an interval direction. Confirm this with AEMET before adding interval arrows.
 - Each product displays its own issue timestamp. Successful products are cached for 10 minutes (up to 100 entries), concurrent requests are shared, and the active forecast refreshes every 10 minutes. Refresh bypasses cache. Failed requests are not cached; hourly and daily failures are independent.
-- The former home map used an internal AEMET website endpoint and silently tried later days on errors. It has been replaced by an on-demand geographical municipality map, with OpenStreetMap attribution. Municipal boundaries are queried directly by INE code instead of downloading every municipality.
+- The home map uses official municipal daily products for today, tomorrow and the following day. Symbols describe the widest available sky interval (containing the current UTC hour for today); tooltips show that interval and the issue time. Temperatures belong to the named municipalities, not regional averages. Missing forecasts remain blank. A national sample, provincial capitals at community level and up to eight municipalities at province level keep requests bounded. Every municipality remains selectable.
+- Two-stage AEMET products start at least three seconds apart across the client, alongside caching and request deduplication. Initial map readings therefore appear progressively; a map can take about a minute to fill on an empty cache.
+- Community/province boundaries are simplified bundled Click That Hood / CartoDB geometries (attribution and MIT license in `public/maps/NOTICE.txt`). Municipal boundaries are loaded per province from the IGN-derived ArcGIS service and cached for the session. These display boundaries are not cadastral data and may lag administrative changes. Search/list navigation remains available if the geographic service fails. The detail location map retains OpenStreetMap attribution.
 - Regional bulletins are general forecasts, not official warnings. The regional endpoint can return the last issued bulletin when today’s product is not available; check its embedded date. `/alerts` links to official AEMET warnings and separately offers regional text forecasts. No invented alert levels or hard-coded weather readings are displayed.
 - Geolocation is requested only on user action. Ambiguous/unsupported reverse-geocoding results leave manual search available. Existing favourites and recent-search storage formats are retained.
 
@@ -48,9 +50,10 @@ Sources: [OpenAPI specification](https://opendata.aemet.es/AEMET_OpenData_specif
 
 - `src/resources/services/APIs`: validated AEMET requests, bounded cache, timeouts, geographic services.
 - `src/hooks`: forecast loading lifecycle and reactive favourites.
-- `src/features/forecast`: pure data selectors, shared forecast presentation, search, geolocation and map.
+- `src/features/forecast`: pure data selectors, shared forecast presentation, search, geolocation and location map.
+- `src/features/weather-map`: geographic navigation, daily weather markers, map search and responsive home presentation.
 - `src/pages`: routing and composition. Home and detail share the same forecast code.
 
 Tests cover request failures, malformed responses, concurrent/cache behaviour, timezone/date boundaries, missing values, stale asynchronous responses, partial forecasts, favourites and search. Live AEMET access requires a valid key and network/CORS availability; synthetic tests do not establish live API availability. The bundled municipality catalogue may need periodic updates from INE/AEMET.
 
-Create React App remains the build system in this refactor; migrating it is a separate tooling change. The runtime contains no nationwide weather-overlay map or legacy per-variable chart tabs; equivalent hourly values and daily periods are available as tables, with an hourly temperature chart.
+Create React App remains the build system in this refactor; migrating it is a separate tooling change. The nationwide map uses documented OpenData municipal forecasts rather than the former internal website overlay. Legacy per-variable chart tabs are replaced by hourly values and daily-period tables, with an hourly temperature chart.

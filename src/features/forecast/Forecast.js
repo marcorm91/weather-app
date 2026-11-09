@@ -15,12 +15,12 @@ export default function Forecast({ town, compact = false }) {
   if (!town) return <section className="forecast-card"><h2>{t('FORECAST.choose')}</h2><p>{t('FORECAST.intro')}</p></section>
   const { current, rows, days, today } = forecastModel(hourly, daily, code, now)
   const icon = skyIconMap[current?.sky]
-  return <section className="forecast-card" aria-label={`${t('FORECAST.forecast')} ${town.NAME}`} aria-busy={loading}>
+  return <section className={`forecast-card ${compact ? 'forecast-compact' : ''}`} aria-label={`${t('FORECAST.forecast')} ${town.NAME}`} aria-busy={loading}>
     <div className="forecast-heading"><div><p className="eyebrow">AEMET · {t('FORECAST.forecast')}</p><h2>{town.NAME}</h2><p>{town.PROV} · {town.COMUNIDAD}</p></div>
       <button className="weather-button" onClick={refresh} disabled={loading}>{t('FORECAST.refresh')}</button></div>
     {loading && <p role="status">{t('FORECAST.loading')}</p>}
     {errors.length > 0 && <p role="alert">{t(`FORECAST.errors.${errors[0]}`)} {hourly || daily ? t('FORECAST.partial') : ''}</p>}
-    {!loading && <>
+    {!loading && (hourly || daily) && <>
       <p className="forecast-note">{t('FORECAST.note')} · {timezoneFor(code)}</p>
       {current ? <>
         <div className="forecast-current">
@@ -42,22 +42,25 @@ export default function Forecast({ town, compact = false }) {
           <LineChart data={rows}><CartesianGrid strokeDasharray="3 3" /><XAxis dataKey="key" tickFormatter={key => `${key.slice(8, 10)} / ${key.slice(11)}h`} minTickGap={45} /><YAxis unit="°" /><Tooltip labelFormatter={key => key.replace('T', ' · ') + ':00'} />
             <Line dataKey="temperature" name={t('HOME.MAP.TEMPERATURE')} unit=" °C" stroke="#164b67" dot={false} connectNulls={false} />
           </LineChart></ResponsiveContainer></div>}
-        <div className="forecast-scroll" tabIndex="0" role="region" aria-label={t('FORECAST.hours')}><table>
+        {compact ? <div className="forecast-hour-cards">{rows.slice(0, 6).map(row => {
+          const sky = skyIconMap[row.sky]
+          return <article key={row.key}><time>{row.date.slice(5)}<b>{row.hour}:00</b></time><span aria-label={row.description || t('FORECAST.noData')}>{sky ? sky(28, '#436a82') : '—'}</span><strong>{value(row.temperature, '°')}</strong><small>{value(row.rain, ' mm')}</small></article>
+        })}</div> : <div className="forecast-scroll" tabIndex="0" role="region" aria-label={t('FORECAST.hours')}><table>
           <caption>{t('FORECAST.hourCaption')}</caption>
           <thead><tr>{['date', 'sky', 'temp', 'feels', 'humidity', 'rain', 'snow', 'wind', 'gust'].map(key => <th key={key} scope="col">{t(`FORECAST.${key}`)}</th>)}</tr></thead>
           <tbody>{rows.slice(0, compact ? 6 : rows.length).map(row => <tr key={row.key}>
             <th scope="row">{row.date.slice(5)} · {row.hour}:00</th><td>{row.description || '—'}</td><td>{value(row.temperature, ' °C')}</td><td>{value(row.feelsLike, ' °C')}</td><td>{value(row.humidity, ' %')}</td><td>{value(row.rain, ' mm')}</td><td>{value(row.snow, ' mm')}</td><td>{value(row.wind, ' km/h')} {row.direction}</td><td>{value(row.gust, ' km/h')}</td>
           </tr>)}</tbody>
-        </table></div>
+        </table></div>}
       </>}
       {days.length > 0 && <><h3>{t('FORECAST.days')}</h3><div className="forecast-days">{days.slice(0, compact ? 3 : 7).map(day => <article key={day.fecha}>
         <h4>{day.fecha.slice(0, 10)}</h4><p><b>{value(day.temperatura?.maxima, '°')} / {value(day.temperatura?.minima, '°')}</b></p>
-        <p>{t('FORECAST.uv')}: {value(day.uvMax)}</p>
-        <details><summary>{t('FORECAST.periods')}</summary>
+        {!compact && <p>{t('FORECAST.uv')}: {value(day.uvMax)}</p>}
+        {!compact && <details><summary>{t('FORECAST.periods')}</summary>
           <p>{t('FORECAST.utc')}</p>
           {(day.estadoCielo || []).filter(sky => sky.descripcion).map(sky => <p key={sky.periodo}>{sky.periodo || '00-24'}: {sky.descripcion}</p>)}
           {dailyPeriods(day).map(period => <p key={period.periodo}>{t('FORECAST.probability')} {period.periodo || '00-24'}: {value(period.value, ' %')}</p>)}
-        </details>
+        </details>}
       </article>)}</div></>}
       {!days.length && <p>{t('FORECAST.noDays')}</p>}
       <div className="forecast-source">
